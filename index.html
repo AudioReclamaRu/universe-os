@@ -89,6 +89,22 @@ async function main() {
   const canvas = document.querySelector("canvas.mpl-canvas") || document.querySelector("canvas");
   if (!canvas) throw new Error("canvas не найден");
 
+  // webagg-бэкенд в Pyodide считает координаты мыши как (clientX - rect.left) * ratio,
+  // но ratio остаётся равным 1, хотя холст растянут CSS-трансформацией.
+  // Из-за этого клики попадали мимо слайдеров и кнопок — пересчитываем по реальному
+  // отношению пикселей холста к его отображаемому размеру.
+  mpl.figure.prototype.mouse_event = function (event, name) {
+    if (name === "button_press") { this.canvas.focus(); this.canvas_div.focus(); }
+    const rect = this.canvas.getBoundingClientRect();
+    const x = (event.clientX - rect.left) * (this.canvas.width / rect.width);
+    const y = (event.clientY - rect.top) * (this.canvas.height / rect.height);
+    this.send_message(name, {
+      x: x, y: y, button: event.button, step: event.step, buttons: event.buttons,
+      modifiers: getModifiers(event), guiEvent: simpleKeys(event),
+    });
+    return false;
+  };
+
   // webagg создаёт canvas размером 300x150 и не растягивает его под фигуру —
   // выставляем реальный пиксельный размер фигуры и перерисовываем.
   const size = pyodide.runPython(
