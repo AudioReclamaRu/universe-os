@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UNIVERSE OS 2.0 — ТОРВ / ТабАк</title>
+<meta name="description" content="UNIVERSE OS 2.0 — интерактивная модель ТОРВ/ТабАк. Работает прямо в браузере, без установки.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="UNIVERSE OS 2.0 — ТОРВ / ТабАк">
+<meta property="og:description" content="Граф Кэли 4D→3D, матрица масс, фазовый монитор Ψ. Интерактивная модель прямо в браузере.">
+<meta name="theme-color" content="#05060a">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='13' fill='%2305060a' stroke='%23d4af37' stroke-width='2'/><circle cx='16' cy='16' r='4' fill='%233fb6ff'/></svg>">
+<script src="https://cdn.jsdelivr.net/pyodide/v314.0.7/full/pyodide.js"></script>
+<style>
+  :root { color-scheme: dark; }
+  html, body { margin: 0; height: 100%; background: #05060a; color: #dfe6f5;
+               font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+               overflow: hidden; -webkit-tap-highlight-color: transparent; }
+  #stage { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+  #stage > div { transform-origin: center center; border: none !important; }
+  #stage canvas { display: block; }
+  #boot { position: absolute; inset: 0; display: flex; flex-direction: column; gap: 14px;
+          align-items: center; justify-content: center; background: #05060a; z-index: 10;
+          transition: opacity .6s ease; text-align: center; padding: 24px; }
+  #boot h1 { font-size: 17px; letter-spacing: .26em; color: #d4af37; font-weight: 600; margin: 0; }
+  #boot .sub { font-size: 11px; color: #6b7690; letter-spacing: .14em; margin: 0; }
+  #status { font-size: 12px; color: #8b96ad; letter-spacing: .06em; margin: 0; min-height: 1.4em; }
+  #bar { width: min(420px, 78vw); height: 3px; background: #12161f; overflow: hidden; border-radius: 2px; }
+  #bar > i { display: block; height: 100%; width: 0%; background: linear-gradient(90deg, #d4af37, #3fb6ff);
+             transition: width .45s ease; }
+  #hint { position: absolute; right: 12px; bottom: 9px; font-size: 10px; color: #3f4a5c;
+          letter-spacing: .06em; z-index: 5; pointer-events: none; }
+  #err { color: #ff6b35; font-size: 12px; max-width: 70ch; white-space: pre-wrap; text-align: left; }
+  .mpl-toolbar, .mpl-message, .mpl-widget, .mpl-button { display: none !important; }
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<div id="hint">слайдеры и кнопки работают · RESET · PAUSE</div>
+<noscript><p style="color:#ff6b35;padding:24px;font-family:monospace">
+Для запуска модели нужен JavaScript.</p></noscript>
+<div id="boot">
+  <h1>UNIVERSE OS 2.0</h1>
+  <p class="sub">ТОРВ / ТабАк · p = 3¹²/2¹⁹</p>
+  <div id="bar"><i></i></div>
+  <p id="status">инициализация…</p>
+  <p id="err"></p>
+</div>
+<script>
+const statusEl = document.getElementById("status");
+const barEl = document.querySelector("#bar > i");
+const stage = document.getElementById("stage");
+const boot = document.getElementById("boot");
+const errEl = document.getElementById("err");
+
+const say = (msg, pct) => {
+  statusEl.textContent = msg;
+  if (pct != null) barEl.style.width = pct + "%";
+  console.log("[boot]", msg);
+};
+
+let holder = null, figW = 0, figH = 0;
+
+function fitStage() {
+  if (!holder) return;
+  const k = Math.min(window.innerWidth / figW, window.innerHeight / figH);
+  holder.style.transform = "scale(" + k.toFixed(4) + ")";
+}
+
+async function main() {
+  say("загрузка Python (Pyodide)…", 6);
+  const pyodide = await loadPyodide();
+  window.pyodide = pyodide;
+
+  say("numpy + matplotlib…", 26);
+  await pyodide.loadPackage(["numpy", "matplotlib"]);
+
+  pyodide.setStdout({ batched: (s) => console.log("[py]", s) });
+  pyodide.setStderr({ batched: (s) => console.warn("[py]", s) });
+
+  say("код модели…", 58);
+  const src = await (await fetch("app.py", { cache: "no-store" })).text();
+  await pyodide.runPythonAsync(src);
+
+  say("сборка панелей…", 78);
+  pyodide.runPython("_app = start_web()");
+  window.uni = pyodide.globals.get("_app");
+
+  const canvas = document.querySelector("canvas.mpl-canvas") || document.querySelector("canvas");
+  if (!canvas) throw new Error("canvas не найден");
+
+  // webagg создаёт canvas размером 300x150 и не растягивает его под фигуру —
+  // выставляем реальный пиксельный размер фигуры и перерисовываем.
+  const size = pyodide.runPython(
+    "import matplotlib.pyplot as _plt; _f = _plt.gcf(); " +
+    "[int(_f.get_figwidth() * _f.dpi), int(_f.get_figheight() * _f.dpi)]").toJs();
+  figW = size[0]; figH = size[1];
+  canvas.width = figW;
+  canvas.height = figH;
+  pyodide.runPython("_plt.gcf().canvas.draw()");
+
+  holder = canvas.parentElement || canvas;
+  holder.style.border = "none";
+  holder.style.overflow = "hidden";
+  stage.appendChild(holder);
+  fitStage();
+
+  window.addEventListener("resize", fitStage);
+  window.addEventListener("orientationchange", () => setTimeout(fitStage, 300));
+
+  barEl.style.width = "100%";
+  say("готово", 100);
+  boot.style.opacity = "0";
+  setTimeout(() => { boot.style.display = "none"; }, 650);
+}
+
+main().catch((e) => {
+  console.error(e);
+  statusEl.textContent = "не удалось запустить";
+  errEl.textContent = (e && (e.stack || e.message)) || String(e);
+  barEl.style.width = "100%";
+});
+</script>
+</body>
+</html>
