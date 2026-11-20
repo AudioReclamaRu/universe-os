@@ -62,3 +62,25 @@ python build.py
 ```
 
 Оригинальный `UNIVERSE_2.0.py` при этом не изменяется.
+
+
+## Нативный запуск Python
+
+Из корня репозитория:
+
+```powershell
+python -m pip install -r requirements.txt
+python run_universe.py
+```
+
+Это запускает исходный `build/UNIVERSE_2.0.py` без изменения ядра модели.
+
+## Снимок графической модели без открытия окна
+
+Чтобы получить PNG исходной шестипанельной визуализации и сводку графа:
+
+```powershell
+python inspect_universe.py --frames 1 --output universe_os_preview.png
+```
+
+Параметр `--frames` позволяет посмотреть состояние после нескольких шагов симуляции.
