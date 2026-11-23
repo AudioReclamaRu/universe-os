@@ -164,3 +164,9 @@ The comparator preserves candidate formulas outside floating-point range, suppor
 Phase 11 maps Phase 10 candidate exponent vectors back to the original Phase 09 variables and propagates their joint log-relative covariance using (u=A k) and (operatorname{Var}(ln|R|)=u^T C_{ln q}u). It validates covariance symmetry and positive semidefiniteness, respects supplied correlations, reorders covariance axes by variable names, and groups formulas across alternative bases only when their exact source-variable exponent vectors agree.
 
 The implementation, tests and synthetic five-basis demonstration are in [RELATION_UNCERTAINTY_AND_BASIS_INVARIANCE.md](phase-11/RELATION_UNCERTAINTY_AND_BASIS_INVARIANCE.md). The covariance is external evidence, not inferred by dimensional analysis. Lognormal relative spread is conditional; no confidence coverage or physical causality is claimed.
+
+## Phase 12 — scale-flow, crossover and discrete-scale-invariance analysis
+
+Phase 12 adds a standard-library analyzer for global log-log power laws, continuous two-regime hinge crossovers and candidate discrete-scale log-periodicity. Each dataset is analysed independently. The DSI scan is performed only after selecting the best non-periodic trend, so a strong crossover is not automatically misread as a log-periodic signal. The analyzer compares fitted exponents and accepted scale-factor candidates with the numeric machine-readable Atlas subset.
+
+The implementation and eleven tests are in [SCALE_FLOW_AND_DISCRETE_SCALE_INVARIANCE.md](phase-12/SCALE_FLOW_AND_DISCRETE_SCALE_INVARIANCE.md). Synthetic controls recover a global exponent of two, a one-to-two crossover, and a constructed discrete scale factor near 1.70035. Breakpoint/DSI selection remains exploratory; x-error, correlated residuals, surrogate nulls and frequency-grid multiple-testing corrections are future work.
