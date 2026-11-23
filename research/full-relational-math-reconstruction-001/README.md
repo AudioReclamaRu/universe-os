@@ -158,3 +158,9 @@ The implementation, tests and Reynolds-number demonstration are in [phase-09/BUC
 Phase 10 searches each Phase 09 dimensionless basis independently for bounded products, quotients and integer powers, then compares the resulting values against the machine-readable numeric subset of the Canonical Mathematical Pattern Atlas. Canonical and alternative bases are never mixed; all bounded exponent vectors are retained, including non-primitive powers, and bases with missing numeric groups are explicitly labelled as partial numeric projections.
 
 The comparator preserves candidate formulas outside floating-point range, supports signed dimensionless groups, retains zero-denominator candidates as explicitly undefined, keeps wholly non-numeric bases visible, enforces a per-basis combinatorial cap and labels numerical matches as an uncorrected exploratory screen—not symbolic proof, significance or physical causation. The implementation, tests and synthetic example are in [ATLAS_RELATION_COMPARATOR.md](phase-10/ATLAS_RELATION_COMPARATOR.md).
+
+## Phase 11 — covariance propagation and basis-invariant relation families
+
+Phase 11 maps Phase 10 candidate exponent vectors back to the original Phase 09 variables and propagates their joint log-relative covariance using (u=A k) and (operatorname{Var}(ln|R|)=u^T C_{ln q}u). It validates covariance symmetry and positive semidefiniteness, respects supplied correlations, reorders covariance axes by variable names, and groups formulas across alternative bases only when their exact source-variable exponent vectors agree.
+
+The implementation, tests and synthetic five-basis demonstration are in [RELATION_UNCERTAINTY_AND_BASIS_INVARIANCE.md](phase-11/RELATION_UNCERTAINTY_AND_BASIS_INVARIANCE.md). The covariance is external evidence, not inferred by dimensional analysis. Lognormal relative spread is conditional; no confidence coverage or physical causality is claimed.
