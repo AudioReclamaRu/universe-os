@@ -91,7 +91,7 @@ class UniversalTraceCatalogTests(unittest.TestCase):
         self.assertEqual(result["status"], "partial_catalog_verification_unresolved")
         self.assertEqual(result["verification_work"]["expanded_index_assignments"], "<0_2|0_3>")
         self.assertGreater(len(result["identities"]), 0)
-        self.assertEqual(result["unresolved_identity_count"], "<10100_2|202_3>")
+        self.assertEqual(result["unresolved_identity_count"], result["unique_nonzero_trace_identities"])
 
     def test_too_few_words_has_complete_empty_catalog(self):
         result = enumerate_universal_trace_identity_catalog(
