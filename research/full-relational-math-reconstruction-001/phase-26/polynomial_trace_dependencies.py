@@ -200,7 +200,6 @@ def classify_polynomial_dependency(
             residual = core.add(
                 residual,
                 core.mul(term["coefficient"], values_by_name[term["feature"]][row], radical),
-                radical,
             )
         if not core.zero(residual):
             raise ArithmeticError(
