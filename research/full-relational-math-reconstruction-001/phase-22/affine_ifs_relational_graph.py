@@ -15,7 +15,8 @@ PHASE20 = ROOT / "phase-20"
 PHASE21 = ROOT / "phase-21"
 PHASE23 = ROOT / "phase-23"
 PHASE24 = ROOT / "phase-24"
-for path in (PHASE16, PHASE18, PHASE20, PHASE21, PHASE23, PHASE24):
+PHASE25 = ROOT / "phase-25"
+for path in (PHASE16, PHASE18, PHASE20, PHASE21, PHASE23, PHASE24, PHASE25):
     if str(path) not in sys.path:
         sys.path.insert(0, str(path))
 
@@ -172,7 +173,11 @@ def compare_ifs_pair_relational_graph(
     )
     if refinement["candidate_edges_before_refinement"] != initial_candidate_edges:
         raise ArithmeticError(
-            "Phase 24 initial colour classes disagree with the Phase 22 vertex filter"
+            "Phase 25 exact trace reduction changed Phase 22 candidate-edge count"
+        )
+    if refinement["initial_candidate_map_indices"] != initial_candidates:
+        raise ArithmeticError(
+            "Phase 25 exact trace reduction changed Phase 22 initial candidate correspondence"
         )
     candidates = refinement["candidate_map_indices"]
     candidate_edges = sum(len(row) for row in candidates)
@@ -192,7 +197,7 @@ def compare_ifs_pair_relational_graph(
             "source_coordinate_system": source_coordinates,
             "target_coordinate_system": target_coordinates,
             "exact_field": f"Q(√{d})",
-            "candidate_filter": "phase24_adaptive_exact_matrix_word_trace_refinement",
+            "candidate_filter": "phase25_exact_dependency_reduced_adaptive_matrix_word_refinement",
             "candidate_edge_count": core.paired(candidate_edges),
             "unrestricted_permutation_count": core.paired(unrestricted),
             "candidate_map_indices": [[core.paired(j) for j in row] for row in candidates],
@@ -411,7 +416,7 @@ def analyze_payload(payload):
         for item in pairs
     ]
     return {
-        "schema": "universe.ifs-relational-graph-conjugacy.v2",
+        "schema": "universe.ifs-relational-graph-conjugacy.v3",
         "pair_count": core.paired(len(results)),
         "results": results,
         "global_guard": (
