@@ -276,7 +276,20 @@ This is an exact synthetic algebra control, not evidence of physical origin or a
 
 See [ADAPTIVE_MATRIX_WORD_REFINEMENT.md](phase-24/ADAPTIVE_MATRIX_WORD_REFINEMENT.md), the implementation and six tests. The adaptive Phase 19 controller exposes the matrix-product budget and maximum word length.
 
-### Validation status — phases 16–24
 
-The dedicated GitHub Actions workflow [ifs-exact-comparator-tests.yml](../.github/workflows/ifs-exact-comparator-tests.yml) completed successfully on the clean PR checkout in [run 45256541620](https://github.com/AudioReclamaRu/universe-os/actions/runs/45256541620), head `c529a17844fa2d56ba0e35e541e8728516789fa7`: Phase 16 — 17 tests; Phase 17 — 9; Phase 18 — 6; Phase 19 — 9; Phase 20 — 6; Phase 21 — 7; Phase 22 — 9; Phase 23 — 6; Phase 24 — 6. **75 tests passed in total.** This is a clean-checkout CI result for the nine affine-IFS phase packages only. It does not claim that the complete repository or every earlier research phase passed CI.
+## Phase 25 — exact algebraic dependency detection and trace-feature reduction
+
+Phase 25 separates universal matrix trace identities from relations that hold only on the current finite comparison. First, it verifies and removes one universal redundancy in the six Phase 21 coordinates:
+`tr([A,B]^2) = 2 tr(ABAB) - 2 tr(A^2B^2)`.
+The five remaining baseline binary-word traces are retained.
+
+For each adaptive Phase 24 tier, candidate word traces are evaluated exactly on the currently ambiguous ordered-pair support of both source and target families. An incremental exact row-echelon basis over the common rational/quadratic field tests each feature column. A candidate is retained only when independent; a dependent feature is omitted from the current active edge labels and its exact coefficient equation is reported. One shared coefficient vector must hold across all source and target sample rows. These local relations are not promoted to universal matrix identities and are not extrapolated beyond the current finite comparison support.
+
+The search still charges every candidate trace evaluation to the matrix-product budget, including words later found dependent. The immediate effect is exact reduction of redundant feature dimensions and graph constraints, not a claim of reduced cost for discovering the current tier. Whole tiers remain atomic if the budget is insufficient.
+
+Six Phase 25 tests cover the universal commutator identity, exact dependency coefficients, local-vs-universal scope, independent features and validation. See [EXACT_TRACE_FEATURE_DEPENDENCY_REDUCTION.md](phase-25/EXACT_TRACE_FEATURE_DEPENDENCY_REDUCTION.md).
+
+### Validation status — phases 16–25
+
+The dedicated GitHub Actions workflow [ifs-exact-comparator-tests.yml](../.github/workflows/ifs-exact-comparator-tests.yml) completed successfully on the clean PR checkout in [run 45258174141](https://github.com/AudioReclamaRu/universe-os/actions/runs/45258174141), head `8e0df810100609e94067b087d4ec0ce9992504d0`: Phase 16 — 17 tests; Phase 17 — 9; Phase 18 — 6; Phase 19 — 9; Phase 20 — 6; Phase 21 — 7; Phase 22 — 9; Phase 23 — 6; Phase 24 — 6; Phase 25 — 6. **81 tests passed in total.** This is a clean-checkout CI result for the ten affine-IFS phase packages only. It does not claim that the complete repository or every earlier research phase passed CI.
 
