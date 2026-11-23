@@ -90,7 +90,7 @@ A complete negative result applies only to the supplied finite affine map famili
 
 Six standard-library tests are included. They cover an exact three-dimensional characteristic polynomial, a four-map reduction from 24 unrestricted permutations to four candidate edges, a coincident-fixed-point affine witness, an invariant-based negative result, a capped ambiguous matching graph, and empty-payload validation.
 
-The committed Phase 20 test module has not been executed from a clean checkout in this continuation. The implementation and expected outputs are not represented as repository-wide CI-passed.
+All six Phase 20 tests passed in the clean GitHub Actions pull-request checkout, workflow run [45243433007](https://github.com/AudioReclamaRu/universe-os/actions/runs/45243433007), using Python 3.12. The workflow is limited to the affine IFS phases 16–21 and does not establish repository-wide CI.
 
 ## H. Relation to the Canonical Mathematical Pattern Atlas
 
