@@ -212,6 +212,69 @@ class AdaptiveAffineIFSComparatorTests(unittest.TestCase):
         self.assertEqual(result["selected_method"],
                          "phase22_edge_labelled_relational_graph_plus_exact_affine_solver")
 
+    def test_phase26_polynomial_controls_forward_through_adaptive_controller(self):
+        source_a = [
+            ["3/4", "3/4", "1/2"],
+            [0, "1/2", 0],
+            [0, "-1/2", "1/4"],
+        ]
+        source_b = [
+            ["3/4", 0, 0],
+            ["-1/4", "1/2", 0],
+            ["-1/2", 0, "1/4"],
+        ]
+        target_a = [
+            ["3/4", 0, "-1/2"],
+            [0, "1/2", "1/4"],
+            [0, 0, "1/4"],
+        ]
+        target_b = [
+            ["1/4", 0, 0],
+            ["-1/4", "1/2", 0],
+            ["1/4", "-1/4", "3/4"],
+        ]
+        zero = [0, 0, 0]
+        source = {
+            "dimension": 3, "radical": 3,
+            "coordinate_system": "phase26_source_control",
+            "maps": [
+                {"matrix": source_a, "translation": zero},
+                {"matrix": source_a, "translation": zero},
+                {"matrix": source_b, "translation": zero},
+            ],
+        }
+        target = {
+            "dimension": 3, "radical": 3,
+            "coordinate_system": "phase26_target_control",
+            "maps": [
+                {"matrix": target_a, "translation": zero},
+                {"matrix": target_a, "translation": zero},
+                {"matrix": target_b, "translation": zero},
+            ],
+        }
+        result = compare_ifs_pair_adaptive(
+            source, target, max_matrix_products=5000, max_word_length=6,
+            max_polynomial_monomials=1,
+        )
+        self.assertEqual(
+            result["selected_method"],
+            "phase22_edge_labelled_relational_graph_plus_exact_affine_solver",
+        )
+        report = result["final_result"]["adaptive_matrix_word_refinement"]
+        self.assertEqual(
+            report["polynomial_trace_dependency_reduction"]["max_polynomial_monomials"],
+            "<1_2|1_3>",
+        )
+        unresolved = [
+            item
+            for tier in report["additional_word_tiers"]
+            for item in tier["polynomial_unresolved_words"]
+        ]
+        self.assertTrue(unresolved)
+        self.assertTrue(all(
+            item["status"] == "unresolved_monomial_cap" for item in unresolved
+        ))
+
     def test_empty_payload_rejected(self):
         with self.assertRaises(ValueError):
             analyze_payload({})
