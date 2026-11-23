@@ -63,7 +63,7 @@ class AdaptiveAffineIFSComparatorTests(unittest.TestCase):
         result = compare_ifs_pair_adaptive(source, target)
         self.assertEqual(result["status"], "affine_conjugacy_verified")
         self.assertEqual(result["selected_method"], "phase17_exact_fixed_point_frames")
-        self.assertEqual(result["attempt_count"], 1)
+        self.assertEqual(result["attempt_count"], "<1_2|1_3>")
         self.assertEqual(
             result["final_result"]["search"]["target_frames_tested"],
             "<10111_2|212_3>",
@@ -74,7 +74,7 @@ class AdaptiveAffineIFSComparatorTests(unittest.TestCase):
         result = compare_ifs_pair_adaptive(source, target)
         self.assertEqual(result["status"], "affine_conjugacy_verified")
         self.assertEqual(result["selected_method"], "phase18_exact_determinant_family")
-        self.assertEqual(result["attempt_count"], 2)
+        self.assertEqual(result["attempt_count"], "<10_2|2_3>")
         self.assertEqual(
             result["attempts"][0]["status"],
             "source_fixed_points_do_not_span_ambient_space",
