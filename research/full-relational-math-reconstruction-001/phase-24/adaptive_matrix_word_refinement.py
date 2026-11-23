@@ -15,7 +15,8 @@ PHASE16 = ROOT / "phase-16"
 PHASE21 = ROOT / "phase-21"
 PHASE23 = ROOT / "phase-23"
 PHASE25 = ROOT / "phase-25"
-for path in (PHASE16, PHASE21, PHASE23, PHASE25):
+PHASE26 = ROOT / "phase-26"
+for path in (PHASE16, PHASE21, PHASE23, PHASE25, PHASE26):
     if str(path) not in sys.path:
         sys.path.insert(0, str(path))
 
@@ -27,7 +28,9 @@ from trace_feature_dependencies import (
     compress_phase21_edges,
     dependency_basis_from_edges,
     insert_feature,
+    feature_vector,
 )
+from polynomial_trace_dependencies import classify_polynomial_dependency
 
 
 BASELINE_CYCLIC_WORDS = frozenset({"01", "001", "011", "0101", "0011"})
@@ -184,6 +187,9 @@ def refine_ambiguous_matrix_word_graph(
     radical: int,
     max_matrix_products: int = 250000,
     max_word_length: int = 8,
+    max_polynomial_degree: int = 2,
+    max_polynomial_monomials: int = 512,
+    min_polynomial_sample_rows: int = 4,
 ):
     """Adaptively append exact trace words and rerun joint directed refinement.
 
@@ -193,6 +199,21 @@ def refine_ambiguous_matrix_word_graph(
     """
     if isinstance(max_matrix_products, bool) or not isinstance(max_matrix_products, int) or max_matrix_products < 1:
         raise ValueError("max_matrix_products must be a positive integer")
+    if isinstance(max_polynomial_degree, bool) or not isinstance(max_polynomial_degree, int) or not 1 <= max_polynomial_degree <= 3:
+        raise ValueError("max_polynomial_degree must be an integer from 1 through 3")
+    if isinstance(max_polynomial_monomials, bool) or not isinstance(max_polynomial_monomials, int) or max_polynomial_monomials < 1:
+        raise ValueError("max_polynomial_monomials must be a positive integer")
+    if isinstance(min_polynomial_sample_rows, bool) or not isinstance(min_polynomial_sample_rows, int) or min_polynomial_sample_rows < 2:
+        raise ValueError("min_polynomial_sample_rows must be an integer >= 2")
+    polynomial_config = {
+        "enabled": True,
+        "max_total_degree": core.paired(max_polynomial_degree),
+        "max_polynomial_monomials": core.paired(max_polynomial_monomials),
+        "minimum_sample_rows": core.paired(min_polynomial_sample_rows),
+        "shared_source_target_coefficients": True,
+        "unresolved_policy": "retain_candidate_feature_and_report_unresolved",
+        "scope": "combined active source/target finite support only",
+    }
     tiers = matrix_word_tiers(max_word_length=max_word_length)
     n = len(source_matrices)
     if n == 0 or len(target_matrices) != n:
@@ -225,7 +246,7 @@ def refine_ambiguous_matrix_word_graph(
             "no_compatible_initial_colour_bijection", source_edges, target_edges,
             refinement, tier_reports, used_products, used_evaluations,
             max_matrix_products, max_word_length, initial_candidate_edges,
-            initial_candidate_map_indices,
+            initial_candidate_map_indices, polynomial_config,
         )
 
     initial_refinement = refinement
@@ -298,14 +319,56 @@ def refine_ambiguous_matrix_word_graph(
 
         retained_words = []
         dependent_words = []
+        polynomial_dependent_words = []
+        polynomial_unresolved_words = []
         for word in words:
+            # Work on a copy: a polynomially dependent candidate must not enter
+            # the linear basis used to classify later words.
+            trial_basis = [
+                {
+                    "pivot": entry["pivot"],
+                    "vector": list(entry["vector"]),
+                    "expression": dict(entry["expression"]),
+                    "feature": entry["feature"],
+                }
+                for entry in basis
+            ]
             independent, relation = insert_feature(
-                basis, f"trace:{word}", candidate_values[word], radical
+                trial_basis, f"trace:{word}", candidate_values[word], radical
             )
-            if independent:
-                retained_words.append(word)
-            else:
+            if not independent:
                 dependent_words.append(relation)
+                continue
+
+            prior_names = list(BASELINE_WORDS) + list(applied_words) + list(retained_words)
+            prior_columns = []
+            for feature_index, _name in enumerate(prior_names):
+                prior_columns.append(
+                    feature_vector(source_edges, source_pairs, feature_index)
+                    + feature_vector(target_edges, target_pairs, feature_index)
+                )
+            polynomial_result = classify_polynomial_dependency(
+                prior_columns,
+                [f"trace:{name}" for name in prior_names],
+                candidate_values[word],
+                f"trace:{word}",
+                radical,
+                max_degree=max_polynomial_degree,
+                max_polynomial_monomials=max_polynomial_monomials,
+                min_sample_rows=min_polynomial_sample_rows,
+            )
+            if polynomial_result["status"] == "polynomially_dependent_on_finite_support":
+                polynomial_dependent_words.append(polynomial_result)
+                continue
+            if polynomial_result["status"].startswith("unresolved_"):
+                polynomial_unresolved_words.append(polynomial_result)
+            elif polynomial_result["status"] != "independent_on_finite_support":
+                raise ArithmeticError(
+                    f"unknown Phase 26 candidate status: {polynomial_result['status']}"
+                )
+
+            basis = trial_basis
+            retained_words.append(word)
 
         source_append = {}
         target_append = {}
@@ -341,6 +404,8 @@ def refine_ambiguous_matrix_word_graph(
             "tested_words": list(words),
             "retained_words": list(retained_words),
             "dependent_words": dependent_words,
+            "polynomial_dependent_words": polynomial_dependent_words,
+            "polynomial_unresolved_words": polynomial_unresolved_words,
             "prior_feature_dependencies": prior_dependencies,
             "source_ambiguous_vertices": [core.paired(i) for i in sorted(ambiguous_source)],
             "target_ambiguous_vertices": [core.paired(i) for i in sorted(ambiguous_target)],
@@ -363,7 +428,7 @@ def refine_ambiguous_matrix_word_graph(
             break
 
     report = {
-        "method": "phase25_exact_dependency_reduced_adaptive_matrix_word_refinement",
+        "method": "phase26_exact_polynomial_and_phase25_linear_dependency_reduced_matrix_word_refinement",
         "expansion_status": expansion_status,
         "universal_trace_reductions": [
             {
@@ -382,6 +447,7 @@ def refine_ambiguous_matrix_word_graph(
             "tr([A_i,A_j]^2) = 2*tr(A_i A_j A_i A_j) - 2*tr(A_i^2 A_j^2) [exactly reduced]",
         ],
         "additional_word_tiers": tier_reports,
+        "polynomial_trace_dependency_reduction": polynomial_config,
         "initial_colour_refinement": _refinement_summary(initial_refinement),
         "final_colour_refinement": _refinement_summary(refinement),
         "matrix_product_budget": {
@@ -397,11 +463,13 @@ def refine_ambiguous_matrix_word_graph(
         },
         "max_word_length": core.paired(max_word_length),
         "logical_status": (
-            "Universal trace identities are removed exactly. Finite-comparison "
-            "dependencies are detected with one shared exact coefficient vector "
-            "over all active source and target ordered-pair rows; those dependent "
-            "features are omitted only on that support. Candidate word evaluation "
-            "is still charged to the matrix-product budget. Complete graph matching "
+            "Universal identities, finite-support linear dependencies and "
+            "bounded-degree polynomial dependencies are kept separate. Phase 26 "
+            "uses one exact polynomial coefficient vector across combined source "
+            "and target rows; unresolved candidates are retained. A polynomially "
+            "dependent feature is omitted only on that active finite support. "
+            "Candidate word evaluation is still charged to the matrix-product "
+            "budget. Complete graph matching "
             "and exact affine equations remain decisive."
         ),
     }
@@ -420,9 +488,9 @@ def refine_ambiguous_matrix_word_graph(
 
 def _result(status, source_edges, target_edges, refinement, tier_reports,
             used_products, used_evaluations, budget, max_word_length, initial_edges,
-            initial_candidate_map_indices):
+            initial_candidate_map_indices, polynomial_config):
     report = {
-        "method": "phase25_exact_dependency_reduced_adaptive_matrix_word_refinement",
+        "method": "phase26_exact_polynomial_and_phase25_linear_dependency_reduced_matrix_word_refinement",
         "expansion_status": status,
         "universal_trace_reductions": [
             {
@@ -432,6 +500,7 @@ def _result(status, source_edges, target_edges, refinement, tier_reports,
             }
         ],
         "additional_word_tiers": tier_reports,
+        "polynomial_trace_dependency_reduction": polynomial_config,
         "initial_colour_refinement": _refinement_summary(refinement),
         "final_colour_refinement": _refinement_summary(refinement),
         "matrix_product_budget": {
