@@ -94,10 +94,21 @@ This is a real, long-duration feature of human history across societies and gene
 
 ### How this governs Giza research
 
-Giza is investigated within that real history of human measurement and design. The starting framework is cumulative and multi-stage: natural landscape observation, reference selection, setting-out, comparison, correction, quarrying, shaping, construction, modification, reuse and transmission of knowledge across generations.
+**We do not investigate whether people measured, tried out, aimed, checked and corrected the Giza layout. That is an accepted fact and starting point of this research. We investigate WHY they did it.**
 
-Do not default to a single isolated construction episode or treat long-term human aiming as a fictional optional scenario. Reconstruct predecessor states, inherited references and successive geometric refinements as a main research line.
+The inquiry begins from sustained human activity: observing natural masses and terrain; selecting and transferring reference points; laying out and checking axes, baselines, sight lines, distances, angles and proportions; comparing candidate positions; adjusting the layout; quarrying, shaping and constructing; and transmitting geometric knowledge across generations.
 
-The exact chronology, number of stages, identities of the participating communities and continuity of particular surveying traditions remain questions to resolve from evidence. That uncertainty concerns *which stages occurred and how they were connected*; it does not erase the historical fact that human beings have measured and aimed for millennia.
+Do not turn the existence of this human measuring and aiming into an open hypothesis, and do not spend research effort trying to prove that it happened. Do not default to a single isolated construction episode.
 
-When evidence is missing, return to the canonical motto and search for predecessor layouts, surviving reference marks, reused alignments, quarry boundaries, construction phases and transformed natural features. Do not replace the long human history of measurement with a default assumption of one-time placement.
+The questions to reconstruct are:
+- What overall result were people aiming to achieve?
+- What function or functions were the objects and the complete arrangement intended to perform?
+- What geometric, geological, astronomical, hydrological, acoustic, mechanical or other constraints governed their choices?
+- Why were these specific locations, orientations, proportions, separations and relationships selected?
+- What principles and reference systems were inherited and refined?
+- How did individual structures and natural masses contribute to the whole?
+- What sequence of measurements, adjustments, quarrying, shaping, construction and reuse produced the final arrangement?
+
+The exact chronology, participants, number of stages and continuity of particular techniques are details to reconstruct. They do not reopen the settled starting point that people carried out prolonged measurement, aiming and correction.
+
+When evidence is missing, return to the canonical motto and search for predecessor layouts, surviving reference marks, reused alignments, quarry boundaries, construction phases and transformed natural features. Do not replace cumulative human design with a default assumption of one-time placement.
