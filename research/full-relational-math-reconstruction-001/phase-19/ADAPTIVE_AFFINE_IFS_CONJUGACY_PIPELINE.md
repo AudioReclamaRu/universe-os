@@ -58,7 +58,7 @@ A search cap is not a mathematical negative result.
 
 Nine standard-library routing tests are included. They cover the Menger fast path, the Phase 22 fallback, a frame-search cap, a complete Phase 17 negative result, an input mismatch, relational rejection of an incompatible family, a Phase 22 graph-search cap, Phase 24 budget propagation and empty-payload validation.
 
-The Phase 19 package is checked in the dedicated Python 3.12 matrix alongside Phases 16–24. The latest clean-checkout totals are recorded in the root research README after the final CI run.
+All nine Phase 19 routing tests passed in the clean GitHub Actions PR checkout in [run 45256541620](https://github.com/AudioReclamaRu/universe-os/actions/runs/45256541620), using Python 3.12. The dedicated matrix includes Phases 16–24 only, not full-repository CI.
 
 ## G. Relation to the Canonical Mathematical Pattern Atlas
 
