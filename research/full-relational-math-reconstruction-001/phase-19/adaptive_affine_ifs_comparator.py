@@ -39,6 +39,9 @@ def compare_ifs_pair_adaptive(
     max_candidate_isomorphisms=100000,
     max_matrix_products=250000,
     max_word_length=8,
+    max_polynomial_degree=2,
+    max_polynomial_monomials=512,
+    min_polynomial_sample_rows=4,
 ):
     """Use fixed-point frames first, then exact whole-family relational graph search.
 
@@ -51,9 +54,15 @@ def compare_ifs_pair_adaptive(
         (max_graph_nodes, "max_graph_nodes"),
         (max_candidate_isomorphisms, "max_candidate_isomorphisms"),
         (max_matrix_products, "max_matrix_products"),
+        (max_polynomial_monomials, "max_polynomial_monomials"),
+        (min_polynomial_sample_rows, "min_polynomial_sample_rows"),
     ):
         if isinstance(value, bool) or not isinstance(value, int) or value < 1:
             raise ValueError(f"{name} must be a positive integer")
+    if isinstance(max_polynomial_degree, bool) or not isinstance(max_polynomial_degree, int) or not 1 <= max_polynomial_degree <= 3:
+        raise ValueError("max_polynomial_degree must be an integer from 1 through 3")
+    if min_polynomial_sample_rows < 2:
+        raise ValueError("min_polynomial_sample_rows must be at least 2")
 
     frame_result = compare_ifs_pair_scalable(
         source, target, max_target_frames=max_target_frames
@@ -73,6 +82,9 @@ def compare_ifs_pair_adaptive(
             max_candidate_isomorphisms=max_candidate_isomorphisms,
             max_matrix_products=max_matrix_products,
             max_word_length=max_word_length,
+            max_polynomial_degree=max_polynomial_degree,
+            max_polynomial_monomials=max_polynomial_monomials,
+            min_polynomial_sample_rows=min_polynomial_sample_rows,
         )
         method = "phase22_edge_labelled_relational_graph_plus_exact_affine_solver"
         attempts.append({
@@ -106,7 +118,7 @@ def compare_ifs_pair_adaptive(
             )
 
     return {
-        "schema": "universe.affine-ifs-adaptive-conjugacy.v5",
+        "schema": "universe.affine-ifs-adaptive-conjugacy.v6",
         "selected_method": selected_method,
         "status": final_result["status"],
         "decision": decision,
@@ -143,10 +155,13 @@ def analyze_payload(payload):
                 ),
                 max_matrix_products=int(item.get("max_matrix_products", 250000)),
                 max_word_length=int(item.get("max_word_length", 8)),
+                max_polynomial_degree=int(item.get("max_polynomial_degree", 2)),
+                max_polynomial_monomials=int(item.get("max_polynomial_monomials", 512)),
+                min_polynomial_sample_rows=int(item.get("min_polynomial_sample_rows", 4)),
             ),
         })
     return {
-        "schema": "universe.affine-ifs-adaptive-conjugacy.batch.v5",
+        "schema": "universe.affine-ifs-adaptive-conjugacy.batch.v6",
         "pair_count": paired(len(results)),
         "results": results,
         "method_policy": (
