@@ -1,0 +1,42 @@
+{
+  "schema": "universe.ifs-underdetermined-affine-witness.v1",
+  "pair_count": "<1_2|1_3>",
+  "results": [
+    {
+      "name": "Two affine maps with coincident fixed points and an underdetermined coordinate transform",
+      "status": "affine_conjugacy_verified",
+      "source_coordinate_system": "same_fixed_point_at_origin",
+      "target_coordinate_system": "affine_transformed_same_fixed_point_cloud",
+      "exact_field": "Q(√3)",
+      "affine_coordinate_change": {
+        "convention": "y = P*x + t",
+        "matrix_P": [
+          ["<10_2|2_3>", "<1_2|1_3>/<10_2|2_3>"],
+          ["<1_2|1_3>", "<1_2|1_3>"]
+        ],
+        "translation_t": ["<11_2|10_3>", "-<1_2|1_3>"],
+        "determinant_P": "<11_2|10_3>/<10_2|2_3>"
+      },
+      "map_permutation_target_index_for_each_source": [
+        "<0_2|0_3>", "<1_2|1_3>"
+      ],
+      "linear_solution_family": {
+        "rank": "<100_2|11_3>",
+        "free_parameter_count": "<10_2|2_3>",
+        "parameter_assignment": ["<1_2|1_3>", "<1_2|1_3>"],
+        "determinant_polynomial_term_count": "<1_2|1_3>",
+        "nonzero_witness_method": "Exact determinant polynomial; deterministic specialization over {0,1,...,n}."
+      },
+      "search": {
+        "permutations_tested": "<1_2|1_3>",
+        "total_permutations": "<10_2|2_3>",
+        "search_complete": false,
+        "stopped_on_verified_match": true
+      },
+      "verification": "Every affine map equation and det(P) ≠ 0 were checked exactly.",
+      "interpretation": "An invertible affine conjugacy was recovered from an underdetermined exact linear solution family. This is mathematical structural equivalence, not physical causation."
+    }
+  ],
+  "scope": "Exact affine conjugacy of finite IFS map families in dimensions 1–3 over a common squarefree real quadratic field; map permutation search remains bounded.",
+  "global_guard": "A verified affine conjugacy proves structural equivalence only; it does not prove common physical origin, energy transfer or causal coupling."
+}
