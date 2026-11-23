@@ -118,3 +118,12 @@ Reproduce the paired-numeral calculations with [phase-05/giza_ideal_system.py](p
 The Phase 05 driver now ingests all ten GLSS B01–B10 markers on the top of the natural bedrock base, including their elevations, in GPMP coordinates. It derives the marker centroid, convex-hull envelope, principal plan axis and fitted upper-surface plane, and replaces the Khentkaus map pin in the updated cross-pair calculation with the GLSS B-marker datum. The Great Sphinx remains explicitly a map proxy until its ARCE local grid is tied horizontally to GPMP using common survey control.
 
 See [Phase 05 Sections 16–18](phase-05/GIZA_PURPOSE_ARCHITECTURE_AND_IDEAL_NETWORK.md).
+
+
+## Phase 06 — multiscale resonance architecture
+
+The new phase defines the common mathematical grammar for oscillatory systems from atomic and lattice vibrations through grains, structures, geological masses, atmosphere/ocean, Earth normal modes, Earth–ionosphere electromagnetic modes, planetary resonances, stellar oscillations, plasma waves and primordial acoustic imprints.
+
+Its central object is the **scale-bridge transfer operator** \(\mathcal T_{j\leftarrow i}(\omega)\), with source, carrier, path, interface, receiver, mode overlap, coupling, phase, attenuation, energy and falsifier. It separates distinct physical carriers and rejects frequency resemblance alone as proof of coupling.
+
+The phase positions Giza as one candidate subsystem within this wider network, rather than the whole investigation: [MULTISCALE_RESONANCE_ARCHITECTURE.md](phase-06/MULTISCALE_RESONANCE_ARCHITECTURE.md).
