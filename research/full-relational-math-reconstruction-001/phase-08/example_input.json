@@ -1,0 +1,49 @@
+{
+  "relative_tolerance": 1e-7,
+  "include_cross_ratios": false,
+  "quantities": [
+    {
+      "name": "reference_length",
+      "value": "1",
+      "dimension": {
+        "L": 1
+      },
+      "status": "idealized",
+      "source": "synthetic demonstration"
+    },
+    {
+      "name": "candidate_length",
+      "value": "1.618033988749895",
+      "dimension": {
+        "L": 1
+      },
+      "status": "derived",
+      "source": "synthetic demonstration"
+    },
+    {
+      "name": "travel_time",
+      "value": "2",
+      "dimension": {
+        "T": 1
+      },
+      "status": "idealized",
+      "source": "synthetic demonstration"
+    }
+  ],
+  "power_law": {
+    "x_label": "characteristic_length",
+    "y_label": "characteristic_time",
+    "x": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "y": [
+      1,
+      4,
+      16,
+      64
+    ]
+  }
+}
