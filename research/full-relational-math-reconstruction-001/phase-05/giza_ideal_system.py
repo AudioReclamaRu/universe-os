@@ -6,7 +6,7 @@ No legacy UNIVERSE code is imported.
 """
 from __future__ import annotations
 from itertools import combinations
-from math import acos, atan, cos, degrees, hypot, radians, sqrt, tan
+from math import acos, atan, atan2, cos, degrees, hypot, radians, sqrt, tan
 from fractions import Fraction
 
 def decode(b: str, t: str) -> int:
@@ -92,6 +92,43 @@ DELTAS = [
     decode("100101","1101"),
 ]
 
+
+# GLSS Table 10 — ten B01..B10 markers on the top of the lower natural
+# Khentkaus bedrock base. Northing/easting are GPMP metres stored as cm;
+# height is GPMP metres stored as mm. All three integers are paired.
+KHENTKAUS_B_MARKERS = [
+    (decode("100101111010000110011010","200200212102101"),
+     decode("10111110110010001101001001","10111002220221101"),
+     decode("1001110011100000","2001002102")),
+    (decode("100101111010001000100000","200200212121100"),
+     decode("10111110110010011001010001","10111002222000010"),
+     decode("1001101011110110","2000102021")),
+    (decode("100101111001101101001111","200200210012201"),
+     decode("10111110110010011001101001","10111002222001000"),
+     decode("1001110001111100","2000221201")),
+    (decode("100101111001010110110000","200200201020102"),
+     decode("10111110110010010001001111","10111002221022002"),
+     decode("1001110001101000","2000220222")),
+    (decode("100101111001010001101000","200200200210021"),
+     decode("10111110110010000010010100","10111002212222201"),
+     decode("1001100101011100","1222212002")),
+    (decode("100101111001010000110011","200200200201022"),
+     decode("10111110110001111000100010","10111002212010112"),
+     decode("1001101001111110","2000020211")),
+    (decode("100101111001010010110110","200200200220011"),
+     decode("10111110110001101001111111","10111002210212001"),
+     decode("1001110000101100","2000211202")),
+    (decode("100101111001101010000101","200200202221020"),
+     decode("10111110110001101010011000","10111002210212222"),
+     decode("1001110001011110","2000220121")),
+    (decode("100101111010000001111111","200200212000220"),
+     decode("10111110110001110000000111","10111002211101120"),
+     decode("1001110100110000","2001012101")),
+    (decode("100101111010000011101010","200200212011212"),
+     decode("10111110110001111100100111","10111002212111012"),
+     decode("1001110001111100","2000221201")),
+]
+
 def gpmp_local():
     n0, e0 = GPMP["Khufu"]
     return {k: ((e-e0)/10, (n-n0)/10) for k,(n,e) in GPMP.items()}
@@ -100,6 +137,142 @@ def angle_at(a, v, c):
     u=(a[0]-v[0],a[1]-v[1]); w=(c[0]-v[0],c[1]-v[1])
     z=(u[0]*w[0]+u[1]*w[1])/(hypot(*u)*hypot(*w))
     return degrees(acos(max(-1,min(1,z))))
+
+
+def khentkaus_glss_b_geometry():
+    """Reconstruct a provisional plan envelope and top-surface datum from GLSS B markers."""
+    markers = [
+        (north_cm/100, east_cm/100, z_mm/1000)
+        for north_cm, east_cm, z_mm in KHENTKAUS_B_MARKERS
+    ]
+    mean_n = sum(p[0] for p in markers) / len(markers)
+    mean_e = sum(p[1] for p in markers) / len(markers)
+    mean_z = sum(p[2] for p in markers) / len(markers)
+
+    # Convex hull of the measured plan points (x=E, y=N).
+    pts = sorted(set((p[1], p[0]) for p in markers))
+    def turn(o, a, b):
+        return (a[0]-o[0])*(b[1]-o[1]) - (a[1]-o[1])*(b[0]-o[0])
+
+    lower = []
+    for q in pts:
+        while len(lower) >= 2 and turn(lower[-2], lower[-1], q) <= 0:
+            lower.pop()
+        lower.append(q)
+    upper = []
+    for q in reversed(pts):
+        while len(upper) >= 2 and turn(upper[-2], upper[-1], q) <= 0:
+            upper.pop()
+        upper.append(q)
+    hull = lower[:-1] + upper[:-1]
+    hull_area = abs(sum(
+        hull[i][0]*hull[(i+1) % len(hull)][1] -
+        hull[(i+1) % len(hull)][0]*hull[i][1]
+        for i in range(len(hull))
+    ) / 2)
+    hull_perimeter = sum(
+        hypot(hull[i][0]-hull[(i+1) % len(hull)][0],
+              hull[i][1]-hull[(i+1) % len(hull)][1])
+        for i in range(len(hull))
+    )
+
+    # Principal horizontal axis of the measured B-marker cloud.
+    nvals = [p[0] for p in markers]
+    evals = [p[1] for p in markers]
+    var_n = sum((n-mean_n)**2 for n in nvals)/len(markers)
+    var_e = sum((e-mean_e)**2 for e in evals)/len(markers)
+    cov_ne = sum((n-mean_n)*(e-mean_e) for n,e in zip(nvals,evals))/len(markers)
+    principal_bearing = (degrees(0.5*atan2(2*cov_ne, var_n-var_e)) + 180) % 180
+
+    # Least-squares plane z = a + gE*(E-Ebar) + gN*(N-Nbar).
+    # Solve the 2x2 centred normal equations explicitly.
+    sEE = sum((e-mean_e)**2 for e in evals)
+    sNN = sum((n-mean_n)**2 for n in nvals)
+    sEN = sum((e-mean_e)*(n-mean_n) for n,e in zip(nvals,evals))
+    sEZ = sum((e-mean_e)*(z-mean_z) for e,(_,_,z) in zip(evals,markers))
+    sNZ = sum((n-mean_n)*(z-mean_z) for n,(_,_,z) in zip(nvals,markers))
+    det = sEE*sNN-sEN*sEN
+    grad_e = (sEZ*sNN-sNZ*sEN)/det
+    grad_n = (sNZ*sEE-sEZ*sEN)/det
+    residuals = [
+        z-(mean_z+grad_e*(e-mean_e)+grad_n*(n-mean_n))
+        for n,e,z in markers
+    ]
+    rms = sqrt(sum(r*r for r in residuals)/len(residuals))
+    dip = degrees(atan(hypot(grad_e,grad_n)))
+    dip_direction = (degrees(atan2(-grad_e,-grad_n))+360) % 360
+
+    print("\nKHENTKAUS — DIRECT GLSS B01..B10 NATURAL-BEDROCK MARKERS")
+    print(f"marker count: {pair(len(markers))}")
+    print("marker class: GLSS Table 10, B01..B10, top of lower natural bedrock")
+    print(f"mean B-marker datum N/E/Z: {fmt(mean_n,'m')} / {fmt(mean_e,'m')} / {fmt(mean_z,'m')}")
+    print(f"provisional convex-hull vertices: {pair(len(hull))}")
+    print(f"marker-hull plan area: {fmt(hull_area,'m²',10)}")
+    print(f"marker-hull perimeter: {fmt(hull_perimeter,'m')}")
+    print(f"marker-hull N/E spans: {fmt(max(nvals)-min(nvals),'m')} / {fmt(max(evals)-min(evals),'m')}")
+    print(f"principal marker-axis bearing: {fmt(principal_bearing,'°',1_000_000)}")
+    print(f"top-surface fitted-plane dip: {fmt(dip,'°',1_000_000)}")
+    print(f"fitted-plane down-dip bearing: {fmt(dip_direction,'°',1_000_000)}")
+    print(f"fitted-plane residual RMS: {fmt(rms,'m')}")
+    print(f"measured marker-height span: {fmt(max(p[2] for p in markers)-min(p[2] for p in markers),'m')}")
+    print("The convex hull is the envelope of ten GLSS markers, not the full geological outcrop boundary or the original parent-mass boundary.")
+
+    # Convert the measured B-marker centroid directly into the local GPMP plane.
+    g=gpmp_local()
+    kx=mean_e-500000
+    ky=mean_n-100000
+    khent=(kx,ky)
+    print("DISTANCES FROM THE DIRECT GLSS B-MARKER DATUM TO THE PYRAMID CENTRES")
+    for name in ("Khufu","Khafre","Menkaure"):
+        print(f"{name}--Khentkaus B centroid: {fmt(hypot(khent[0]-g[name][0],khent[1]-g[name][1]),'m')}")
+
+    # Keep the Great Sphinx as a named map-proxy until its local ARCE grid is
+    # transformed into GPMP by common control points. Never call this the parent-mass centre.
+    kh_lat=MAP_E5["Khufu"][0]/100000
+    kh_lon=MAP_E5["Khufu"][1]/100000
+    sph_lat=MAP_E5["Great_Sphinx"][0]/100000
+    sph_lon=MAP_E5["Great_Sphinx"][1]/100000
+    lat0=radians(kh_lat)
+    n_per_deg=111132.92
+    e_per_deg=111412.84*cos(lat0)-93.5*cos(3*lat0)
+    sphinx=(
+        (sph_lon-kh_lon)*e_per_deg,
+        (sph_lat-kh_lat)*n_per_deg
+    )
+    khufu=g["Khufu"]
+    khafre=g["Khafre"]
+    menkaure=g["Menkaure"]
+    dA=hypot(sphinx[0]-khufu[0],sphinx[1]-khufu[1])
+    dB=hypot(khent[0]-khafre[0],khent[1]-khafre[1])
+    lstar=sqrt(dA*dB)
+    rel=abs(dA-dB)/((dA+dB)/2)
+    print("\nUPDATED CROSS-PAIR DESIGN INVARIANT")
+    print("d(P_Khufu, Sphinx-map proxy) = d(P_Khafre, Khentkaus-GLSS B datum) = L*")
+    print(f"dA Khufu--Sphinx map proxy: {fmt(dA,'m')}")
+    print(f"dB Khafre--Khentkaus measured B datum: {fmt(dB,'m')}")
+    print(f"current proxy residual: {fmt(abs(dA-dB),'m')}")
+    print(f"relative discrepancy: {fmt(rel,'',1_000_000)}")
+    print(f"symmetric ideal length L*=sqrt(dA*dB): {fmt(lstar,'m')}")
+    print("The equality itself is exact in the ideal-design layer. The Sphinx endpoint remains a map proxy pending a GPMP/ARCE grid transformation.")
+
+    # Relative positions on the Khufu--Menkaure centre axis.
+    vx=menkaure[0]-khufu[0]
+    vy=menkaure[1]-khufu[1]
+    axis_len=hypot(vx,vy)
+    ux,uy=vx/axis_len,vy/axis_len
+    px,py=-uy,ux
+    def project(point):
+        wx,wy=point[0]-khufu[0],point[1]-khufu[1]
+        return wx*ux+wy*uy, wx*px+wy*py
+    p_khafre=project(khafre)
+    p_sphinx=project(sphinx)
+    p_khent=project(khent)
+    print("\nFIVE-NODE POSITIONS ON THE KHUfu--MENKAURE AXIS")
+    for name,pr in (("Khafre",p_khafre),("Sphinx map proxy",p_sphinx),("Khentkaus B centroid",p_khent)):
+        print(f"{name}: along={fmt(pr[0],'m')}; cross={fmt(pr[1],'m')}")
+    print(f"Sphinx--Khentkaus along-axis gap: {fmt(p_khent[0]-p_sphinx[0],'m')}")
+    print(f"Sphinx--Khentkaus cross-axis gap: {fmt(abs(p_khent[1]-p_sphinx[1]),'m')}")
+    print(f"Sphinx--Khentkaus direct distance: {fmt(hypot(sphinx[0]-khent[0],sphinx[1]-khent[1]),'m')}")
 
 def main():
     print("GIZA PRIME — PHASE 05 IDEAL SYSTEM AUDIT")
