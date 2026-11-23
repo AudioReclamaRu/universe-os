@@ -123,6 +123,10 @@ Phase 21 moves from individual operator invariants to relations among operators.
 
 It remains mathematical structural filtering. It does not identify a natural source, carrier, receiver, propagation path, energy transfer, common history or causal coupling.
 
+
+
+Phase 22 retains the identity of the ordered map pair that generated each trace record. It combines these records with individual characteristic-polynomial vertex colours and searches for one full edge-labelled graph isomorphism, rather than relying solely on independent per-map multisets. Every candidate then passes the exact affine equations. See [Phase 22](../phase-22/RELATIONAL_GRAPH_ISOMORPHISM_FOR_AFFINE_IFS.md).
+
 ## J. Next increments
 
 1. Expand the word family adaptively when low-order profiles leave large candidate classes, with an explicit complexity budget and no false-negative claims from truncation.
