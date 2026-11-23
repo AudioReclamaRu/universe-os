@@ -450,3 +450,132 @@ The most coherent purpose layer now visible is a **large-scale geometrical opera
 This explains why the site contains not only enormous finished structures, but also carefully selected natural masses, quarry cuts, external reference features, causeway ramps, alignments and correlated stratigraphic surfaces.
 
 The larger purpose of the entire system remains the next problem. Continue from this integrated architecture into the full functional network; do not collapse the whole system into “tombs” or into quarry logistics alone.
+
+
+## 16. Direct GLSS upgrade — Khentkaus is now a measured bedrock datum, not a map pin
+
+The GLSS Table 10 records 10 points B01–B10 **on the top of the lower natural bedrock base**. The report explicitly says the B points were measured in UTM36 and converted to the GPMP local coordinate system. This places the Khentkaus bedrock markers and the three pyramid centres in one common survey grid.
+
+### 16.1. Original B-marker observations
+
+Each row below is \(\langle N_{\rm cm}\mid E_{\rm cm}\rangle\), followed by GPMP height \(Z_{\rm mm}\). All pairs denote exact integers; the divisor is centimetres or millimetres as labelled.
+
+| Marker | Northing | Easting | Height |
+|---|---:|---:|---:|
+| B01 | \(\langle100101111010000110011010_2\mid200200212102101_3\rangle\) | \(\langle10111110110010001101001001_2\mid10111002220221101_3\rangle\) | \(\langle1001110011100000_2\mid2001002102_3\rangle\) |
+| B02 | \(\langle100101111010001000100000_2\mid200200212121100_3\rangle\) | \(\langle10111110110010011001010001_2\mid10111002222000010_3\rangle\) | \(\langle1001101011110110_2\mid2000102021_3\rangle\) |
+| B03 | \(\langle100101111001101101001111_2\mid200200210012201_3\rangle\) | \(\langle10111110110010011001101001_2\mid10111002222001000_3\rangle\) | \(\langle1001110001111100_2\mid2000221201_3\rangle\) |
+| B04 | \(\langle100101111001010110110000_2\mid200200201020102_3\rangle\) | \(\langle10111110110010010001001111_2\mid10111002221022002_3\rangle\) | \(\langle1001110001101000_2\mid2000220222_3\rangle\) |
+| B05 | \(\langle100101111001010001101000_2\mid200200200210021_3\rangle\) | \(\langle10111110110010000010010100_2\mid10111002212222201_3\rangle\) | \(\langle1001100101011100_2\mid1222212002_3\rangle\) |
+| B06 | \(\langle100101111001010000110011_2\mid200200200201022_3\rangle\) | \(\langle10111110110001111000100010_2\mid10111002212010112_3\rangle\) | \(\langle1001101001111110_2\mid2000020211_3\rangle\) |
+| B07 | \(\langle100101111001010010110110_2\mid200200200220011_3\rangle\) | \(\langle10111110110001101001111111_2\mid10111002210212001_3\rangle\) | \(\langle1001110000101100_2\mid2000211202_3\rangle\) |
+| B08 | \(\langle100101111001101010000101_2\mid200200202221020_3\rangle\) | \(\langle10111110110001101010011000_2\mid10111002210212222_3\rangle\) | \(\langle1001110001011110_2\mid2000220121_3\rangle\) |
+| B09 | \(\langle100101111010000001111111_2\mid200200212000220_3\rangle\) | \(\langle10111110110001110000000111_2\mid10111002211101120_3\rangle\) | \(\langle1001110100110000_2\mid2001012101_3\rangle\) |
+| B10 | \(\langle100101111010000011101010_2\mid200200212011212_3\rangle\) | \(\langle10111110110001111100100111_2\mid10111002212111012_3\rangle\) | \(\langle1001110001111100_2\mid2000221201_3\rangle\) |
+
+Northing and easting divisors are \(\langle11001000_2\mid21102_3\rangle\) cm per metre; height divisor is \(\langle1111101000_2\mid1101001_3\rangle\) mm per metre.
+
+### 16.2. Measured B-marker envelope and top surface
+
+The ten GLSS markers produce these derived quantities:
+
+| Quantity | Result |
+|---|---:|
+| B-marker count | \(\langle1010_2\mid101_3\rangle\) |
+| Mean northing | \(\frac{\langle101111011000000110111111_2\mid212100222101012_3\rangle}{\langle1111101_2\mid11122_3\rangle}\) m |
+| Mean easting | \(\frac{\langle101111101100100000010101001_2\mid20222012202210201_3\rangle}{\langle11001000_2\mid21102_3\rangle}\) m |
+| Mean height | \(\frac{\langle1111100101101_2\mid101221121_3\rangle}{\langle11001000_2\mid21102_3\rangle}\) m |
+| Convex-hull vertex count | \(\langle1000_2\mid22_3\rangle\) |
+| Marker-hull plan area | \(\frac{\langle11011001111001100111_2\mid1200100022021_3\rangle}{\langle1111101000_2\mid1101001_3\rangle}\) m² |
+| Marker-hull perimeter | \(\frac{\langle10110101000011_2\mid120220011_3\rangle}{\langle1100100_2\mid10201_3\rangle}\) m |
+| Northing span | \(\frac{\langle1011001001_2\mid222102_3\rangle}{\langle10100_2\mid202_3\rangle}\) m |
+| Easting span | \(\frac{\langle111101_2\mid2021_3\rangle}{\langle10_2\mid2_3\rangle}\) m |
+| Principal marker-axis bearing | \(\frac{\langle10110001010111_2\mid120120102_3\rangle}{\langle111110100_2\mid200112_3\rangle}\) degrees |
+| Fitted top-surface dip | \(\frac{\langle1011111011_2\mid1001021_3\rangle}{\langle1111101000_2\mid1101001_3\rangle}\) degrees |
+| Down-dip bearing | \(\frac{\langle10010010001111101_2\mid10210201020_3\rangle}{\langle111110100_2\mid200112_3\rangle}\) degrees |
+| Fitted-plane residual RMS | \(\frac{\langle111101_2\mid2021_3\rangle}{\langle11111010_2\mid100021_3\rangle}\) m |
+| Height span among B markers | \(\langle1111101010_2\mid10020101_3\rangle/\langle1111101000_2\mid1101001_3\rangle\) m |
+
+The eight-vertex convex hull is the envelope of the **measured marker set only**. It is not claimed to be the complete geological boundary. Likewise, the fitted plane is a first-order summary of the top surface; the residual shows that the actual bedrock top is not perfectly planar.
+
+### 16.3. Direct distances from the bedrock datum to the pyramid centres
+
+Using the arithmetic mean of B01–B10 as a provisional datum:
+
+| Pair | Distance |
+|---|---:|
+| Khentkaus B centroid — Khufu centre | \(\frac{\langle101000000000000111_2\mid22022202102_3\rangle}{\langle11111010_2\mid100021_3\rangle}\) m |
+| Khentkaus B centroid — Khafre centre | \(\frac{\langle10000011111101000011_2\mid1000110101220_3\rangle}{\langle1111101000_2\mid1101001_3\rangle}\) m |
+| Khentkaus B centroid — Menkaure centre | \(\frac{\langle10101011100001101001_2\mid1022200202002_3\rangle}{\langle1111101000_2\mid1101001_3\rangle}\) m |
+
+This supersedes the earlier Khentkaus map-pin distances in the main network. The map pin remains an archival comparison only.
+
+### 16.4. Updated cross-pair design relation
+
+The Sphinx side still uses a map reference point, explicitly labelled as a temporary proxy. The Khentkaus side now uses direct GLSS bedrock markers in GPMP coordinates.
+
+\[
+D_A=d(P_{\rm Khufu},M_{\rm Sphinx,map}),
+\qquad
+D_B=d(P_{\rm Khafre},M_{\rm Khentkaus,GLSS-B}).
+\]
+
+| Parameter | Paired value |
+|---|---:|
+| \(D_A\) | \(\frac{\langle10000100010111010001_2\mid1000112201001_3\rangle}{\langle1111101000_2\mid1101001_3\rangle}\) m |
+| \(D_B\) | \(\frac{\langle10000011111101000011_2\mid1000110101220_3\rangle}{\langle1111101000_2\mid1101001_3\rangle}\) m |
+| Difference | \(\frac{\langle11010001101_2\mid2022010_3\rangle}{\langle1111101000_2\mid1101001_3\rangle}\) m |
+| Relative discrepancy | \(\frac{\langle11000001101_2\mid2010101_3\rangle}{\langle1111010000100100000_2\mid221101212112_3\rangle}\) |
+| Symmetric ideal length \(L_0^*=\sqrt{D_AD_B}\) | \(\frac{\langle10000100001010001001_2\mid1000111112221_3\rangle}{\langle1111101000_2\mid1101001_3\rangle}\) m |
+
+The direct GLSS upgrade makes the cross-pair relation more useful: one endpoint is now a survey-derived natural-bedrock datum rather than a tomb map pin. The Sphinx endpoint is still a map proxy, so the next operation is to transform the ARCE Sphinx grid into GPMP using common horizontal control.
+
+## 17. The Sphinx grid is a recoverable geometric dataset
+
+The ARCE Sphinx Project established a local Sphinx grid:
+- origin at \(N3000,E500\), defined 3.5m in front of the Sphinx south forepaw;
+- grid orientation based on magnetic north observed on 20 February 1978;
+- 63 points were triangulated to plot the head;
+- profiles through the statue were recorded at 5m intervals;
+- bedrock contours were drawn at 25cm intervals, and the surrounding back/top contours at 10cm;
+- geological maps cover Members I, II and III, including a dip-plane map of Member II through the Sphinx amphitheatre;
+- the vertical datum was tied to survey pins at the Khufu pyramid corners: adding 9.331m to the local Sphinx elevation gives height above mean sea level.
+
+This means the Sphinx is not limited to the current map proxy. The archive includes precisely the data needed to reconstruct the present bedrock core and then infer a family of parent-outcrop envelopes.
+
+### Required horizontal transformation
+
+Do not assume the Sphinx grid is already identical to GPMP. Its origin is local and its initial orientation is magnetic north. Compute a two-dimensional similarity/rigid transformation using common survey control points:
+
+\[
+\begin{pmatrix}E_{\rm GPMP}\\N_{\rm GPMP}\end{pmatrix}
+=
+\begin{pmatrix}t_E\\t_N\end{pmatrix}
++
+s
+\begin{pmatrix}
+\cos\theta&-\sin\theta\\
+\sin\theta&\cos\theta
+\end{pmatrix}
+\begin{pmatrix}u_{\rm Sphinx}\\v_{\rm Sphinx}\end{pmatrix}.
+\]
+
+Estimate \(t_E,t_N,\theta,s\) from at least two common horizontal control points (preferably more, with a least-squares residual), preserve the magnetic-to-true orientation correction, and verify the fit against independent holdout points. The vertical transformation is already tied to the Khufu corner pins, but must retain the source datum and offset.
+
+Once tied, replace the Sphinx map proxy with multiple geometric datums: head centre, head base, neck strata, body bedrock envelope, quarry enclosure boundary and selected parent-mass reference points.
+
+## 18. Reproduction update
+
+The updated driver now:
+- reads all ten GLSS B markers as paired binary/ternary integers;
+- reconstructs their centroid, convex hull, plan dimensions and fitted surface plane;
+- computes direct B-centroid distances to all three pyramid centres;
+- recalculates the Khufu–Sphinx / Khafre–Khentkaus cross-pair relation with the GLSS datum;
+- projects Sphinx and Khentkaus onto the Khufu–Menkaure axis;
+- retains the Sphinx map proxy separately until the ARCE-to-GPMP transformation is solved.
+
+Source:
+- GLSS Table 10, B01–B10 coordinates and heights: https://www.academia.edu/671162/Giza_Laser_Scanning_Survey_2006
+- Mark Lehner, “Documentation of the Sphinx,” 1992 proceedings, local grid and 3D survey: https://gizamedia.rc.fas.harvard.edu/images/MFA-images/Giza/GizaImage/full/library/lehner_sphinx_1992.pdf
+- AERA GPMP survey-control system: https://aeraweb.org/projects/gpmp/
+- Mark Lehner, “Giza, Meter by Meter,” control network and Khufu origin: https://aeraweb.org/giza-meter-by-meter/
