@@ -122,7 +122,7 @@ The Phase 23 directed colour-refinement module is now applied before Phase 22 ba
 
 The result includes the refinement round count, combined class-count sequence and candidate-edge counts before and after refinement. A stable colour mismatch is a valid negative for these selected graph invariants; a non-discrete stable partition is not a positive result. Phase 22 still performs full directed-edge graph search, and Phase 18 still verifies the complete affine equations.
 
-Five Phase 23 unit tests exercise the refinement engine itself. They do not claim an additional measured pruning gain on an affine-IFS dataset. See [ADAPTIVE_DIRECTED_COLOUR_REFINEMENT.md](../phase-23/ADAPTIVE_DIRECTED_COLOUR_REFINEMENT.md).
+Six Phase 23 unit tests exercise the refinement engine itself. They do not claim an additional measured pruning gain on an affine-IFS dataset. See [ADAPTIVE_DIRECTED_COLOUR_REFINEMENT.md](../phase-23/ADAPTIVE_DIRECTED_COLOUR_REFINEMENT.md).
 
 ## J. Next increments
 
