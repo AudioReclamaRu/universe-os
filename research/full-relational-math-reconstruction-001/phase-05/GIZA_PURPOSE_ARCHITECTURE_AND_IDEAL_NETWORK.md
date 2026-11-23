@@ -473,7 +473,7 @@ Each row below is \(\langle N_{\rm cm}\mid E_{\rm cm}\rangle\), followed by GPMP
 | B09 | \(\langle100101111010000001111111_2\mid200200212000220_3\rangle\) | \(\langle10111110110001110000000111_2\mid10111002211101120_3\rangle\) | \(\langle1001110100110000_2\mid2001012101_3\rangle\) |
 | B10 | \(\langle100101111010000011101010_2\mid200200212011212_3\rangle\) | \(\langle10111110110001111100100111_2\mid10111002212111012_3\rangle\) | \(\langle1001110001111100_2\mid2000221201_3\rangle\) |
 
-Northing and easting divisors are \(\langle11001000_2\mid21102_3\rangle\) cm per metre; height divisor is \(\langle1111101000_2\mid1101001_3\rangle\) mm per metre.
+Northing and easting divisors are \(\langle1100100_2\mid10201_3\rangle\) cm per metre; height divisor is \(\langle1111101000_2\mid1101001_3\rangle\) mm per metre.
 
 ### 16.2. Measured B-marker envelope and top surface
 
@@ -494,7 +494,7 @@ The ten GLSS markers produce these derived quantities:
 | Fitted top-surface dip | \(\frac{\langle1011111011_2\mid1001021_3\rangle}{\langle1111101000_2\mid1101001_3\rangle}\) degrees |
 | Down-dip bearing | \(\frac{\langle10010010001111101_2\mid10210201020_3\rangle}{\langle111110100_2\mid200112_3\rangle}\) degrees |
 | Fitted-plane residual RMS | \(\frac{\langle111101_2\mid2021_3\rangle}{\langle11111010_2\mid100021_3\rangle}\) m |
-| Height span among B markers | \(\langle1111101010_2\mid10020101_3\rangle/\langle1111101000_2\mid1101001_3\rangle\) m |
+| Height span among B markers | \(\langle110001_2\mid1211_3\rangle/\langle110010_2\mid1212_3\rangle\) m |
 
 The eight-vertex convex hull is the envelope of the **measured marker set only**. It is not claimed to be the complete geological boundary. Likewise, the fitted plane is a first-order summary of the top surface; the residual shows that the actual bedrock top is not perfectly planar.
 
