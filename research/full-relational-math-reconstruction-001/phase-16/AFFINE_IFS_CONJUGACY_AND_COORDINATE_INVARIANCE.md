@@ -120,7 +120,7 @@ The result belongs to the **structural-equivalence** layer of the Canonical Math
 
 The standard-library implementation is `affine_ifs_conjugacy.py`; its unit tests are `test_affine_ifs_conjugacy.py`.
 
-Seventeen local tests pass. They cover:
+Seventeen standard-library tests are included. They cover:
 
 - exact recovery of an affine transformation across distinct coordinate-system labels;
 - map-order independence;
@@ -131,7 +131,7 @@ Seventeen local tests pass. They cover:
 - singular and malformed coordinate changes;
 - squarefree-field validation and paired binary/ternary input parsing.
 
-The synthetic CLI example also runs and emits `example_summary.json`. This is local verification of the Phase 16 implementation only. It is not a fresh-checkout validation of the whole repository and is not a repository CI claim.
+The synthetic CLI input and expected summary are stored with the phase. The Phase 16 test module and CLI were not executed from the committed branch in this continuation; the exact-arithmetic control was inspected independently. This is not a fresh-checkout validation of the whole repository and is not a repository CI claim.
 
 ## H. Remaining work
 
