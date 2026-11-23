@@ -82,9 +82,11 @@ The synthetic input/output are generator descriptors and quadratic maps, not mea
 
 ## E. Next increments
 
-1. Support general exact number fields beyond \(\mathbb Q(\sqrt3)\).
-2. Add affine-conjugacy and similarity-conjugacy detection between different coordinate encodings.
+1. **Partly advanced in Phase 16:** exact affine-conjugacy detection now supports dimensions 1–3 over a common real quadratic field \\(\\mathbb Q(\\sqrt d)\\), where \\(d\\) is positive, squarefree and nonsquare. It is not yet a general arbitrary-number-field engine, and mixed-field composita remain unsupported.
+2. **Partly advanced in Phase 16:** coordinate-invariant matching is implemented for finite affine IFS map families by solving \\(H\\circ F_i=G_{\\pi(i)}\\circ H\\) with an invertible affine map. The finite permutation search is capped and reports unresolved status when it cannot exhaust the search; similarity conjugacy is covered only when it is an affine coordinate change in the supported exact field.
 3. Add nonuniform IFS, map weights, overlaps and multifractal spectra.
 4. Add symbolic substitutions for Penrose/Ammann–Beenker tilings and other self-similar structures.
 5. Add critical-orbit and parameter-plane tests for Mandelbrot/Julia families, with explicit finite-iteration limitations.
 6. Add formal grammar descriptors for cellular automata, L-systems and other generator families from the full Atlas.
+
+See also [Phase 16](../phase-16/AFFINE_IFS_CONJUGACY_AND_COORDINATE_INVARIANCE.md), which implements and tests the affine-conjugacy increment without claiming a physical origin or mechanism.
