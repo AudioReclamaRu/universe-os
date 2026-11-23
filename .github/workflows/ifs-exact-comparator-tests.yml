@@ -16,6 +16,7 @@ on:
       - "research/full-relational-math-reconstruction-001/phase-21/**"
       - "research/full-relational-math-reconstruction-001/phase-22/**"
       - "research/full-relational-math-reconstruction-001/phase-23/**"
+      - "research/full-relational-math-reconstruction-001/README.md"
       - ".github/workflows/ifs-exact-comparator-tests.yml"
 
 permissions:
