@@ -49,16 +49,16 @@ A search cap is not a mathematical negative result.
 - Exact affine IFS map families in dimensions 1–3.
 - Common real quadratic coefficient field, using Phase 16 exact arithmetic.
 - Phase 17 requires a unique fixed point for every map and full affine span of source fixed points.
-- Phase 22 uses exact characteristic polynomials and six selected directed pairwise trace words. They are necessary, not complete invariants for simultaneous similarity.
+- Phase 22 uses exact characteristic polynomials and directed edge-labelled pairwise traces; Phase 24 adaptively appends longer exact two-generator matrix-word traces when stable classes remain ambiguous. These are necessary, not complete invariants for simultaneous similarity.
 - The exact affine equations and determinant feasibility remain decisive.
-- Search is bounded by frame, graph-node and candidate-isomorphism limits.
+- Search is bounded by frame, graph-node and candidate-isomorphism limits. Adaptive matrix-word expansion has a separate matrix-product budget and a maximum word length.
 - No nonlinear conjugacy, mixed-field composita, higher-degree number fields or physical causal interpretation is inferred.
 
 ## F. Validation
 
-Eight standard-library routing tests are included. They cover the Menger fast path, the Phase 22 fallback, a frame-search cap, a complete Phase 17 negative result, an input mismatch, relational rejection of an incompatible family, a Phase 22 graph-search cap and empty-payload validation.
+Nine standard-library routing tests are included. They cover the Menger fast path, the Phase 22 fallback, a frame-search cap, a complete Phase 17 negative result, an input mismatch, relational rejection of an incompatible family, a Phase 22 graph-search cap, Phase 24 budget propagation and empty-payload validation.
 
-All eight Phase 19 routing tests passed in the clean GitHub Actions PR checkout, workflow run [45245272098](https://github.com/AudioReclamaRu/universe-os/actions/runs/45245272098), using Python 3.12. The workflow covers phases 16–22 only; this is not a repository-wide CI claim.
+The Phase 19 package is checked in the dedicated Python 3.12 matrix alongside Phases 16–24. The latest clean-checkout totals are recorded in the root research README after the final CI run.
 
 ## G. Relation to the Canonical Mathematical Pattern Atlas
 
@@ -66,11 +66,28 @@ Phase 19 combines geometric coordinate recovery with exact structural relations 
 
 A verified match does not establish a shared natural origin, historical direction, energy transfer, source/receiver path or physical causal bridge.
 
-## H. Next increments
+## H. Phase 24 integration
 
-1. Extend Phase 22 with adaptive longer matrix words where current vertex/edge labels leave large equivalence classes.
-2. Use exact partition refinement and branch-and-bound to improve search on highly symmetric relational graphs.
-3. Combine fixed-point frame constraints with edge-labelled relational graph search before residual map assignment.
-4. Extend exact fields and connect verified structural candidates to measured data with provenance, uncertainty and falsifiable mechanisms.
+The Phase 22 fallback now calls Phase 24 after the initial exact Phase 21
+profiles and Phase 23 directed colour refinement. Phase 24 expands the
+noncommutative trace-word family only for pairs touching unresolved colour
+classes, then reruns Phase 23 jointly. A complete word tier is charged against
+the explicit matrix-product budget and is either fully applied or skipped.
+Phase 22 still performs complete directed graph search where its budget
+allows; Phase 18's affine equations and determinant witness remain decisive.
+
+The adaptive controller exposes max_matrix_products and max_word_length in
+both direct calls and batch payloads. Frame-search, graph-search and word
+budgets remain separate; a cap in one layer is not silently treated as a
+negative result in another.
+
+## I. Next increments
+
+1. Add exact algebraic dependency detection between matrix words to avoid
+   spending budget on trace expressions already implied by shorter words.
+2. Explore higher-degree word invariants and mixed coefficient fields under
+   explicit resource controls.
+3. Connect verified structural candidates to measured systems with provenance,
+   uncertainty, physical carrier paths and falsifiable mechanisms.
 
 The Phase 22 fallback now applies Phase 23 joint directed colour refinement before its graph search. The initial exact colours still combine the Phase 20 characteristic polynomial and Phase 21 relational profile; Phase 23 then refines by incoming/outgoing edge labels against neighbour classes. The adaptive controller contract and cap semantics are unchanged. The integrated implementation is validated by the Phase 19 and Phase 22 jobs in the Phase 23-era workflow.
