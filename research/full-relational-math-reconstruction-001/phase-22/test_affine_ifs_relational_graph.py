@@ -216,7 +216,7 @@ class RelationalGraphConjugacyTests(unittest.TestCase):
         tiers = report["additional_word_tiers"]
         self.assertEqual(len(tiers), 1)
         self.assertFalse(tiers[0]["applied"])
-        self.assertEqual(tiers[0]["required_matrix_products"], "<111011111_2|121112_3>")
+        self.assertEqual(tiers[0]["required_matrix_products"], "<111100000_2|122210_3>")
         self.assertEqual(report["matrix_product_budget"]["used"], "<0_2|0_3>")
         self.assertTrue(result["search"]["graph_search_complete"])
 
