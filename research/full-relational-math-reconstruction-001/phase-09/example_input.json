@@ -1,0 +1,48 @@
+{
+  "variables": [
+    {
+      "name": "density",
+      "dimension": {
+        "M": 1,
+        "L": -3
+      },
+      "value": 1000,
+      "unit": "kg/m^3",
+      "source": "synthetic example",
+      "status": "idealized"
+    },
+    {
+      "name": "velocity",
+      "dimension": {
+        "L": 1,
+        "T": -1
+      },
+      "value": 2,
+      "unit": "m/s",
+      "source": "synthetic example",
+      "status": "idealized"
+    },
+    {
+      "name": "length",
+      "dimension": {
+        "L": 1
+      },
+      "value": 0.5,
+      "unit": "m",
+      "source": "synthetic example",
+      "status": "idealized"
+    },
+    {
+      "name": "dynamic_viscosity",
+      "dimension": {
+        "M": 1,
+        "L": -1,
+        "T": -1
+      },
+      "value": 0.001,
+      "unit": "Pa*s",
+      "source": "synthetic example",
+      "status": "idealized"
+    }
+  ]
+}
