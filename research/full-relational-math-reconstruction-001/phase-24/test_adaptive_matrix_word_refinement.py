@@ -127,6 +127,46 @@ class AdaptiveMatrixWordRefinementTests(unittest.TestCase):
         self.assertEqual(result["candidate_edges_after_refinement"], 0)
         self.assertEqual(applied[0]["candidate_edges_after"], applied[1]["candidate_edges_before"])
 
+    def test_polynomial_cap_is_unresolved_and_candidate_features_are_retained(self):
+        source_a, source_b, target_a, target_b = discriminating_matrices()
+        matrices_s = [source_a, source_a, source_b]
+        matrices_t = [target_a, target_a, target_b]
+        chars_s = [characteristic_polynomial(A, 3) for A in matrices_s]
+        chars_t = [characteristic_polynomial(A, 3) for A in matrices_t]
+        result = refine_ambiguous_matrix_word_graph(
+            matrices_s, matrices_t, chars_s, chars_t,
+            baseline_edges(matrices_s), baseline_edges(matrices_t), 3,
+            max_matrix_products=5000, max_word_length=5,
+            max_polynomial_monomials=1,
+        )
+        report = result["adaptive_matrix_word_refinement"]
+        tier = report["additional_word_tiers"][0]
+        unresolved = tier["polynomial_unresolved_words"]
+        self.assertTrue(unresolved)
+        self.assertTrue(all(
+            item["status"] == "unresolved_monomial_cap" for item in unresolved
+        ))
+        unresolved_names = {
+            item["candidate_feature"].removeprefix("trace:")
+            for item in unresolved
+        }
+        self.assertTrue(unresolved_names.issubset(set(tier["retained_words"])))
+        self.assertEqual(
+            report["polynomial_trace_dependency_reduction"]["unresolved_policy"],
+            "retain_candidate_feature_and_report_unresolved",
+        )
+
+    def test_invalid_polynomial_degree_rejected(self):
+        source_a, source_b, _, _ = discriminating_matrices()
+        matrices = [source_a, source_a, source_b]
+        chars = [characteristic_polynomial(A, 3) for A in matrices]
+        edges = baseline_edges(matrices)
+        with self.assertRaises(ValueError):
+            refine_ambiguous_matrix_word_graph(
+                matrices, matrices, chars, chars, edges, edges, 3,
+                max_polynomial_degree=4,
+            )
+
     def test_invalid_budgets_and_word_lengths_rejected(self):
         with self.assertRaises(ValueError):
             matrix_word_tiers(13)
