@@ -1,0 +1,39 @@
+{
+  "pairs": [
+    {
+      "name": "Same individual characteristic polynomials but incompatible directed pair-relations",
+      "source": {
+        "dimension": 2,
+        "radical": 3,
+        "coordinate_system": "two_source_operators",
+        "maps": [
+          {
+            "matrix": [["1/2", 0], [0, "1/3"]],
+            "translation": [0, 0]
+          },
+          {
+            "matrix": [["1/3", 0], [0, "1/2"]],
+            "translation": [0, 0]
+          }
+        ]
+      },
+      "target": {
+        "dimension": 2,
+        "radical": 3,
+        "coordinate_system": "repeated_target_operator",
+        "maps": [
+          {
+            "matrix": [["1/2", 0], [0, "1/3"]],
+            "translation": [0, 0]
+          },
+          {
+            "matrix": [["1/2", 0], [0, "1/3"]],
+            "translation": [0, 0]
+          }
+        ]
+      },
+      "max_graph_nodes": 250000,
+      "max_candidate_isomorphisms": 100000
+    }
+  ]
+}
