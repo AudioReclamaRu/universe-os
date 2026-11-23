@@ -170,3 +170,9 @@ The implementation, tests and synthetic five-basis demonstration are in [RELATIO
 Phase 12 adds a standard-library analyzer for global log-log power laws, continuous two-regime hinge crossovers and candidate discrete-scale log-periodicity. Each dataset is analysed independently. The DSI scan is performed only after selecting the best non-periodic trend, so a strong crossover is not automatically misread as a log-periodic signal. The analyzer compares fitted exponents and accepted scale-factor candidates with the numeric machine-readable Atlas subset.
 
 The implementation and eleven tests are in [SCALE_FLOW_AND_DISCRETE_SCALE_INVARIANCE.md](phase-12/SCALE_FLOW_AND_DISCRETE_SCALE_INVARIANCE.md). Synthetic controls recover a global exponent of two, a one-to-two crossover, and a constructed discrete scale factor near 1.70035. Breakpoint/DSI selection remains exploratory; x-error, correlated residuals, surrogate nulls and frequency-grid multiple-testing corrections are future work.
+
+## Phase 13 — paired space-time scaling and dynamic exponents
+
+Phase 13 estimates dynamic exponents from explicitly paired characteristic length/time observations. It preserves the pairing, checks unit-rescaling invariance, and supports ordinary least squares, time-uncertainty weighted least squares and an iterative effective-variance errors-in-variables approximation with within-pair error correlation. It compares the estimated exponent against the machine-readable numeric Atlas subset.
+
+The implementation, tests and synthetic paired-data example are in [PAIRED_SPACE_TIME_DYNAMIC_SCALING.md](phase-13/PAIRED_SPACE_TIME_DYNAMIC_SCALING.md). The method does not pair unrelated spatial and temporal datasets, and it does not assume a universal dynamic exponent. Full latent-variable likelihoods, cross-observation systematic covariance and hierarchical multi-process models remain future work.
