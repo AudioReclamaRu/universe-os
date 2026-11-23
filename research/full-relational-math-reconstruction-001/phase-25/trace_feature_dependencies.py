@@ -72,7 +72,7 @@ def new_dependency_basis():
     return []
 
 
-def insert_feature(basis, feature_name: str, values, radical: int):
+def insert_feature(basis, feature_name: str, values, radical: int, include_exact: bool = False):
     """Insert a feature column into exact row-echelon form.
 
     Returns (independent, relation). For a dependent candidate, relation is
@@ -81,6 +81,8 @@ def insert_feature(basis, feature_name: str, values, radical: int):
     """
     if isinstance(radical, bool) or not isinstance(radical, int) or radical < 2:
         raise ValueError("radical must be an integer >= 2")
+    if not isinstance(include_exact, bool):
+        raise TypeError("include_exact must be a boolean")
     vector = list(values)
     if not vector:
         raise ValueError("dependency feature vector must contain at least one sample row")
@@ -105,7 +107,7 @@ def insert_feature(basis, feature_name: str, values, radical: int):
             {"feature": name, "coefficient": core.fmt(value)}
             for name, value in sorted(expression.items())
         ]
-        return False, {
+        result = {
             "candidate_feature": feature_name,
             "equation_terms": relation,
             "equation": " + ".join(
@@ -118,6 +120,12 @@ def insert_feature(basis, feature_name: str, values, radical: int):
                 "ordered-pair support; not asserted as a universal matrix identity."
             ),
         }
+        if include_exact:
+            result["exact_equation_terms"] = [
+                {"feature": name, "coefficient": value}
+                for name, value in sorted(expression.items())
+            ]
+        return False, result
 
     pivot_value = vector[pivot]
     normalized_vector = [
