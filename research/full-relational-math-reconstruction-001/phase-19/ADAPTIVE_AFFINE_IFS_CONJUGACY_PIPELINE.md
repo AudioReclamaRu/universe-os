@@ -75,7 +75,8 @@ This is a methodological integration inside the structural-equivalence layer. A 
 
 ## H. Next increments
 
-1. Replace the remaining factorial map-permutation search in Phase 18 with invariant-based candidate partitions and exact assignment search.
-2. Add exact handling of compatible coefficient-field extensions and composita.
-3. Extend the adaptive controller beyond affine IFS to substitution tilings, cellular automata, L-systems and nonlinear operators.
-4. Connect the structural engine to measured geometries and dynamical datasets with coordinate provenance, uncertainty and physical falsifiers.
+1. **Partly advanced in Phase 20:** the Phase 18 fallback now has an exact characteristic-polynomial candidate partition and searches only compatible perfect matchings. Repeated linear-part signatures can still produce a factorial number of candidate matchings; see [Phase 20](../phase-20/CHARACTERISTIC_POLYNOMIAL_PARTITIONING_FOR_AFFINE_IFS.md).
+2. Integrate the Phase 20 invariant partitions more tightly into the Phase 19 adaptive controller, while preserving its cap and negative-result policy.
+3. Add exact handling of compatible coefficient-field extensions and composita.
+4. Extend the adaptive controller beyond affine IFS to substitution tilings, cellular automata, L-systems and nonlinear operators.
+5. Connect the structural engine to measured geometries and dynamical datasets with coordinate provenance, uncertainty and physical falsifiers.
