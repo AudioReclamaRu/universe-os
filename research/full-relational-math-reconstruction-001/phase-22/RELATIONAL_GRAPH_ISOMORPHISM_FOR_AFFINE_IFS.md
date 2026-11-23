@@ -97,18 +97,18 @@ The caps apply to graph search and candidate isomorphisms. They do not authorize
 
 - Dimensions 1–3.
 - Exact rational / common real-quadratic field arithmetic inherited from Phases 16 and 18.
-- Exact characteristic polynomials and six selected directed pairwise trace words inherited from Phases 20–21.
+- Exact characteristic polynomials, the six Phase 21 directed pairwise trace words, Phase 23 directed colour refinement, and Phase 24 adaptive binary matrix-word traces.
 - Deterministic constrained backtracking with residual perfect-matching feasibility checks.
-- Search is bounded by graph-node and complete-isomorphism caps.
+- Search is bounded by graph-node and complete-isomorphism caps; optional word expansion has a separate matrix-product budget and maximum word length.
 - These selected vertex/edge labels are necessary, not complete invariants for simultaneous similarity.
 - Full affine operator equations and determinant feasibility remain decisive.
 - Higher-degree number fields, longer word algebras, nonlinear conjugacy and physical causal identification remain outside scope.
 
 ## G. Validation
 
-Seven standard-library tests are included. They cover exact common-transform recovery, target map-order reversal, relational rejection when isolated vertex spectra are insufficient, complete negative search, graph-search cap semantics, a three-map gasket control and payload validation.
+Nine standard-library tests are included. They cover exact common-transform recovery, target map-order reversal, relational rejection when isolated vertex spectra are insufficient, complete negative search, graph-search cap semantics, a three-map gasket control, payload validation, Phase 24 higher-word pruning and atomic word-budget behaviour.
 
-All seven Phase 22 tests passed in the clean GitHub Actions PR checkout, workflow run [45245272098](https://github.com/AudioReclamaRu/universe-os/actions/runs/45245272098), using Python 3.12. The workflow covers phases 16–22, not the full repository.
+Phase 22 is run together with Phase 24 in the dedicated Python 3.12 workflow matrix. The current implementation's clean-checkout validation is recorded in the root research README after the final nine-phase CI run completes.
 
 ## H. Relation to the Canonical Mathematical Pattern Atlas
 
@@ -124,8 +124,32 @@ The result includes the refinement round count, combined class-count sequence an
 
 Six Phase 23 unit tests exercise the refinement engine itself. They do not claim an additional measured pruning gain on an affine-IFS dataset. See [ADAPTIVE_DIRECTED_COLOUR_REFINEMENT.md](../phase-23/ADAPTIVE_DIRECTED_COLOUR_REFINEMENT.md).
 
-## J. Next increments
+## J. Phase 24 adaptive word integration
 
-1. Add adaptive longer matrix words when the refined labelled graph leaves large equivalence classes, with explicit search budgets.
-2. Combine fixed-point frame constraints with edge-labelled relational graph search before map correspondence enumeration.
-3. Extend exact fields and connect verified structural candidates to measured natural-system data with provenance, uncertainty and falsifiable physical mechanisms.
+Before Phase 22 graph backtracking, Phase 24 evaluates additional exact traces of
+two-generator matrix words, beginning at length 5 and extending by complete
+length tiers. It computes these traces only on ordered pairs incident to
+vertices that remain ambiguous after the current joint colour refinement.
+Cyclic rotations are deduplicated; generator order is retained.
+
+After each tier, the extended edge labels feed back into a new joint Phase 23
+directed refinement. Prior stable colours are retained, so candidate classes
+can only split. The tier is atomic under a separate exact matrix-product
+budget; no partial tier labels are allowed. The report contains every applied
+or budget-skipped tier, its word list, ambiguous vertices, ordered-pair count,
+candidate-edge reduction and budget accounting.
+
+A six-test Phase 24 package tests exact trace invariance, a concrete length-six
+discriminator, selective ambiguity-driven calculation and atomic budget
+handling. The Phase 22 package now also tests the integrated discriminator and
+the case where the optional trace budget is exhausted but the exact affine
+solver still determines the finite-family result.
+
+## K. Next increments
+
+1. Extend the trace-word search with algebraic dependency detection and exact
+   reduction of words before spending further matrix-product budget.
+2. Combine fixed-point frame constraints with edge-labelled graph search
+   before residual map assignment.
+3. Extend exact fields and connect verified structural candidates to measured
+   natural-system data with provenance, uncertainty and falsifiable mechanisms.
