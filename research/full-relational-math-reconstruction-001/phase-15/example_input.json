@@ -1,0 +1,1819 @@
+{
+  "ifs_candidates": [
+    {
+      "name": "cantor_set",
+      "dimension": 1,
+      "radical": 3,
+      "coordinate_system": "euclidean_1d",
+      "maps": [
+        {
+          "matrix": [
+            [
+              {
+                "rational": "1/3",
+                "radical": "0"
+              }
+            ]
+          ],
+          "translation": [
+            {
+              "rational": "0",
+              "radical": "0"
+            }
+          ]
+        },
+        {
+          "matrix": [
+            [
+              {
+                "rational": "1/3",
+                "radical": "0"
+              }
+            ]
+          ],
+          "translation": [
+            {
+              "rational": "2/3",
+              "radical": "0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "sierpinski_gasket",
+      "dimension": 2,
+      "radical": 3,
+      "coordinate_system": "barycentric_triangle",
+      "maps": [
+        {
+          "matrix": [
+            [
+              {
+                "rational": "1/2",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/2",
+                "radical": "0"
+              }
+            ]
+          ],
+          "translation": [
+            {
+              "rational": "0",
+              "radical": "0"
+            },
+            {
+              "rational": "0",
+              "radical": "0"
+            }
+          ]
+        },
+        {
+          "matrix": [
+            [
+              {
+                "rational": "1/2",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/2",
+                "radical": "0"
+              }
+            ]
+          ],
+          "translation": [
+            {
+              "rational": "1/2",
+              "radical": "0"
+            },
+            {
+              "rational": "0",
+              "radical": "0"
+            }
+          ]
+        },
+        {
+          "matrix": [
+            [
+              {
+                "rational": "1/2",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/2",
+                "radical": "0"
+              }
+            ]
+          ],
+          "translation": [
+            {
+              "rational": "0",
+              "radical": "0"
+            },
+            {
+              "rational": "1/2",
+              "radical": "0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "sierpinski_carpet",
+      "dimension": 2,
+      "radical": 3,
+      "coordinate_system": "euclidean_xy",
+      "maps": [
+        {
+          "matrix": [
+            [
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              }
+            ]
+          ],
+          "translation": [
+            {
+              "rational": "0/3",
+              "radical": "0"
+            },
+            {
+              "rational": "0/3",
+              "radical": "0"
+            }
+          ]
+        },
+        {
+          "matrix": [
+            [
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              }
+            ]
+          ],
+          "translation": [
+            {
+              "rational": "0/3",
+              "radical": "0"
+            },
+            {
+              "rational": "1/3",
+              "radical": "0"
+            }
+          ]
+        },
+        {
+          "matrix": [
+            [
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              }
+            ]
+          ],
+          "translation": [
+            {
+              "rational": "0/3",
+              "radical": "0"
+            },
+            {
+              "rational": "2/3",
+              "radical": "0"
+            }
+          ]
+        },
+        {
+          "matrix": [
+            [
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              }
+            ]
+          ],
+          "translation": [
+            {
+              "rational": "1/3",
+              "radical": "0"
+            },
+            {
+              "rational": "0/3",
+              "radical": "0"
+            }
+          ]
+        },
+        {
+          "matrix": [
+            [
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              }
+            ]
+          ],
+          "translation": [
+            {
+              "rational": "1/3",
+              "radical": "0"
+            },
+            {
+              "rational": "2/3",
+              "radical": "0"
+            }
+          ]
+        },
+        {
+          "matrix": [
+            [
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              }
+            ]
+          ],
+          "translation": [
+            {
+              "rational": "2/3",
+              "radical": "0"
+            },
+            {
+              "rational": "0/3",
+              "radical": "0"
+            }
+          ]
+        },
+        {
+          "matrix": [
+            [
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              }
+            ]
+          ],
+          "translation": [
+            {
+              "rational": "2/3",
+              "radical": "0"
+            },
+            {
+              "rational": "1/3",
+              "radical": "0"
+            }
+          ]
+        },
+        {
+          "matrix": [
+            [
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              }
+            ]
+          ],
+          "translation": [
+            {
+              "rational": "2/3",
+              "radical": "0"
+            },
+            {
+              "rational": "2/3",
+              "radical": "0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "menger_sponge",
+      "dimension": 3,
+      "radical": 3,
+      "coordinate_system": "euclidean_xyz",
+      "maps": [
+        {
+          "matrix": [
+            [
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              }
+            ]
+          ],
+          "translation": [
+            {
+              "rational": "0/3",
+              "radical": "0"
+            },
+            {
+              "rational": "0/3",
+              "radical": "0"
+            },
+            {
+              "rational": "0/3",
+              "radical": "0"
+            }
+          ]
+        },
+        {
+          "matrix": [
+            [
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              }
+            ]
+          ],
+          "translation": [
+            {
+              "rational": "0/3",
+              "radical": "0"
+            },
+            {
+              "rational": "0/3",
+              "radical": "0"
+            },
+            {
+              "rational": "1/3",
+              "radical": "0"
+            }
+          ]
+        },
+        {
+          "matrix": [
+            [
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              }
+            ]
+          ],
+          "translation": [
+            {
+              "rational": "0/3",
+              "radical": "0"
+            },
+            {
+              "rational": "0/3",
+              "radical": "0"
+            },
+            {
+              "rational": "2/3",
+              "radical": "0"
+            }
+          ]
+        },
+        {
+          "matrix": [
+            [
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              }
+            ]
+          ],
+          "translation": [
+            {
+              "rational": "0/3",
+              "radical": "0"
+            },
+            {
+              "rational": "1/3",
+              "radical": "0"
+            },
+            {
+              "rational": "0/3",
+              "radical": "0"
+            }
+          ]
+        },
+        {
+          "matrix": [
+            [
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              }
+            ]
+          ],
+          "translation": [
+            {
+              "rational": "0/3",
+              "radical": "0"
+            },
+            {
+              "rational": "1/3",
+              "radical": "0"
+            },
+            {
+              "rational": "2/3",
+              "radical": "0"
+            }
+          ]
+        },
+        {
+          "matrix": [
+            [
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              }
+            ]
+          ],
+          "translation": [
+            {
+              "rational": "0/3",
+              "radical": "0"
+            },
+            {
+              "rational": "2/3",
+              "radical": "0"
+            },
+            {
+              "rational": "0/3",
+              "radical": "0"
+            }
+          ]
+        },
+        {
+          "matrix": [
+            [
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              }
+            ]
+          ],
+          "translation": [
+            {
+              "rational": "0/3",
+              "radical": "0"
+            },
+            {
+              "rational": "2/3",
+              "radical": "0"
+            },
+            {
+              "rational": "1/3",
+              "radical": "0"
+            }
+          ]
+        },
+        {
+          "matrix": [
+            [
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              }
+            ]
+          ],
+          "translation": [
+            {
+              "rational": "0/3",
+              "radical": "0"
+            },
+            {
+              "rational": "2/3",
+              "radical": "0"
+            },
+            {
+              "rational": "2/3",
+              "radical": "0"
+            }
+          ]
+        },
+        {
+          "matrix": [
+            [
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              }
+            ]
+          ],
+          "translation": [
+            {
+              "rational": "1/3",
+              "radical": "0"
+            },
+            {
+              "rational": "0/3",
+              "radical": "0"
+            },
+            {
+              "rational": "0/3",
+              "radical": "0"
+            }
+          ]
+        },
+        {
+          "matrix": [
+            [
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              }
+            ]
+          ],
+          "translation": [
+            {
+              "rational": "1/3",
+              "radical": "0"
+            },
+            {
+              "rational": "0/3",
+              "radical": "0"
+            },
+            {
+              "rational": "2/3",
+              "radical": "0"
+            }
+          ]
+        },
+        {
+          "matrix": [
+            [
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              }
+            ]
+          ],
+          "translation": [
+            {
+              "rational": "1/3",
+              "radical": "0"
+            },
+            {
+              "rational": "2/3",
+              "radical": "0"
+            },
+            {
+              "rational": "0/3",
+              "radical": "0"
+            }
+          ]
+        },
+        {
+          "matrix": [
+            [
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              }
+            ]
+          ],
+          "translation": [
+            {
+              "rational": "1/3",
+              "radical": "0"
+            },
+            {
+              "rational": "2/3",
+              "radical": "0"
+            },
+            {
+              "rational": "2/3",
+              "radical": "0"
+            }
+          ]
+        },
+        {
+          "matrix": [
+            [
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              }
+            ]
+          ],
+          "translation": [
+            {
+              "rational": "2/3",
+              "radical": "0"
+            },
+            {
+              "rational": "0/3",
+              "radical": "0"
+            },
+            {
+              "rational": "0/3",
+              "radical": "0"
+            }
+          ]
+        },
+        {
+          "matrix": [
+            [
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              }
+            ]
+          ],
+          "translation": [
+            {
+              "rational": "2/3",
+              "radical": "0"
+            },
+            {
+              "rational": "0/3",
+              "radical": "0"
+            },
+            {
+              "rational": "1/3",
+              "radical": "0"
+            }
+          ]
+        },
+        {
+          "matrix": [
+            [
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              }
+            ]
+          ],
+          "translation": [
+            {
+              "rational": "2/3",
+              "radical": "0"
+            },
+            {
+              "rational": "0/3",
+              "radical": "0"
+            },
+            {
+              "rational": "2/3",
+              "radical": "0"
+            }
+          ]
+        },
+        {
+          "matrix": [
+            [
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              }
+            ]
+          ],
+          "translation": [
+            {
+              "rational": "2/3",
+              "radical": "0"
+            },
+            {
+              "rational": "1/3",
+              "radical": "0"
+            },
+            {
+              "rational": "0/3",
+              "radical": "0"
+            }
+          ]
+        },
+        {
+          "matrix": [
+            [
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              }
+            ]
+          ],
+          "translation": [
+            {
+              "rational": "2/3",
+              "radical": "0"
+            },
+            {
+              "rational": "1/3",
+              "radical": "0"
+            },
+            {
+              "rational": "2/3",
+              "radical": "0"
+            }
+          ]
+        },
+        {
+          "matrix": [
+            [
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              }
+            ]
+          ],
+          "translation": [
+            {
+              "rational": "2/3",
+              "radical": "0"
+            },
+            {
+              "rational": "2/3",
+              "radical": "0"
+            },
+            {
+              "rational": "0/3",
+              "radical": "0"
+            }
+          ]
+        },
+        {
+          "matrix": [
+            [
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              }
+            ]
+          ],
+          "translation": [
+            {
+              "rational": "2/3",
+              "radical": "0"
+            },
+            {
+              "rational": "2/3",
+              "radical": "0"
+            },
+            {
+              "rational": "1/3",
+              "radical": "0"
+            }
+          ]
+        },
+        {
+          "matrix": [
+            [
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              }
+            ]
+          ],
+          "translation": [
+            {
+              "rational": "2/3",
+              "radical": "0"
+            },
+            {
+              "rational": "2/3",
+              "radical": "0"
+            },
+            {
+              "rational": "2/3",
+              "radical": "0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "koch_curve",
+      "dimension": 2,
+      "radical": 3,
+      "coordinate_system": "euclidean_xy",
+      "maps": [
+        {
+          "matrix": [
+            [
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              }
+            ]
+          ],
+          "translation": [
+            {
+              "rational": "0",
+              "radical": "0"
+            },
+            {
+              "rational": "0",
+              "radical": "0"
+            }
+          ]
+        },
+        {
+          "matrix": [
+            [
+              {
+                "rational": "1/6",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "-1/6"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "1/6"
+              },
+              {
+                "rational": "1/6",
+                "radical": "0"
+              }
+            ]
+          ],
+          "translation": [
+            {
+              "rational": "1/3",
+              "radical": "0"
+            },
+            {
+              "rational": "0",
+              "radical": "0"
+            }
+          ]
+        },
+        {
+          "matrix": [
+            [
+              {
+                "rational": "1/6",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "1/6"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "-1/6"
+              },
+              {
+                "rational": "1/6",
+                "radical": "0"
+              }
+            ]
+          ],
+          "translation": [
+            {
+              "rational": "1/2",
+              "radical": "0"
+            },
+            {
+              "rational": "0",
+              "radical": "1/6"
+            }
+          ]
+        },
+        {
+          "matrix": [
+            [
+              {
+                "rational": "1/3",
+                "radical": "0"
+              },
+              {
+                "rational": "0",
+                "radical": "0"
+              }
+            ],
+            [
+              {
+                "rational": "0",
+                "radical": "0"
+              },
+              {
+                "rational": "1/3",
+                "radical": "0"
+              }
+            ]
+          ],
+          "translation": [
+            {
+              "rational": "2/3",
+              "radical": "0"
+            },
+            {
+              "rational": "0",
+              "radical": "0"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "quadratic_dynamics": [
+    {
+      "name": "mandelbrot_parameter_family",
+      "parameter_mode": "variable",
+      "coefficients": [
+        0,
+        0,
+        1
+      ],
+      "parameter_coefficient": 1
+    },
+    {
+      "name": "julia_fixed_c_minus_one",
+      "parameter_mode": "fixed",
+      "coefficients": [
+        -1,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "affinely_conjugate_quadratic_example",
+      "parameter_mode": "fixed",
+      "coefficients": [
+        {
+          "real": "1/2",
+          "imag": 0
+        },
+        4,
+        2
+      ]
+    }
+  ]
+}
