@@ -16,7 +16,8 @@ PHASE21 = ROOT / "phase-21"
 PHASE23 = ROOT / "phase-23"
 PHASE24 = ROOT / "phase-24"
 PHASE25 = ROOT / "phase-25"
-for path in (PHASE16, PHASE18, PHASE20, PHASE21, PHASE23, PHASE24, PHASE25):
+PHASE26 = ROOT / "phase-26"
+for path in (PHASE16, PHASE18, PHASE20, PHASE21, PHASE23, PHASE24, PHASE25, PHASE26):
     if str(path) not in sys.path:
         sys.path.insert(0, str(path))
 
@@ -125,6 +126,9 @@ def compare_ifs_pair_relational_graph(
     max_candidate_isomorphisms=100000,
     max_matrix_products=250000,
     max_word_length=8,
+    max_polynomial_degree=2,
+    max_polynomial_monomials=512,
+    min_polynomial_sample_rows=4,
 ):
     n, d, source_coordinates, source_maps = core._parse(source)
     m, e, target_coordinates, target_maps = core._parse(target)
@@ -150,9 +154,15 @@ def compare_ifs_pair_relational_graph(
         (max_graph_nodes, "max_graph_nodes"),
         (max_candidate_isomorphisms, "max_candidate_isomorphisms"),
         (max_matrix_products, "max_matrix_products"),
+        (max_polynomial_monomials, "max_polynomial_monomials"),
+        (min_polynomial_sample_rows, "min_polynomial_sample_rows"),
     ):
         if isinstance(value, bool) or not isinstance(value, int) or value < 1:
             raise ValueError(f"{name} must be a positive integer")
+    if isinstance(max_polynomial_degree, bool) or not isinstance(max_polynomial_degree, int) or not 1 <= max_polynomial_degree <= 3:
+        raise ValueError("max_polynomial_degree must be an integer from 1 through 3")
+    if min_polynomial_sample_rows < 2:
+        raise ValueError("min_polynomial_sample_rows must be at least 2")
 
     graphs = _relational_graphs(source_maps, target_maps, d)
     initial_candidates = graphs["candidates"]
@@ -170,14 +180,17 @@ def compare_ifs_pair_relational_graph(
         d,
         max_matrix_products=max_matrix_products,
         max_word_length=max_word_length,
+        max_polynomial_degree=max_polynomial_degree,
+        max_polynomial_monomials=max_polynomial_monomials,
+        min_polynomial_sample_rows=min_polynomial_sample_rows,
     )
     if refinement["candidate_edges_before_refinement"] != initial_candidate_edges:
         raise ArithmeticError(
-            "Phase 25 exact trace reduction changed Phase 22 candidate-edge count"
+            "Phase 25/26 exact trace reduction changed Phase 22 candidate-edge count"
         )
     if refinement["initial_candidate_map_indices"] != initial_candidates:
         raise ArithmeticError(
-            "Phase 25 exact trace reduction changed Phase 22 initial candidate correspondence"
+            "Phase 25/26 exact trace reduction changed Phase 22 initial candidate correspondence"
         )
     candidates = refinement["candidate_map_indices"]
     candidate_edges = sum(len(row) for row in candidates)
@@ -197,7 +210,7 @@ def compare_ifs_pair_relational_graph(
             "source_coordinate_system": source_coordinates,
             "target_coordinate_system": target_coordinates,
             "exact_field": f"Q(√{d})",
-            "candidate_filter": "phase25_exact_dependency_reduced_adaptive_matrix_word_refinement",
+            "candidate_filter": "phase26_exact_polynomial_and_phase25_linear_dependency_reduced_matrix_word_refinement",
             "candidate_edge_count": core.paired(candidate_edges),
             "unrestricted_permutation_count": core.paired(unrestricted),
             "candidate_map_indices": [[core.paired(j) for j in row] for row in candidates],
@@ -416,13 +429,15 @@ def analyze_payload(payload):
         for item in pairs
     ]
     return {
-        "schema": "universe.ifs-relational-graph-conjugacy.v3",
+        "schema": "universe.ifs-relational-graph-conjugacy.v4",
         "pair_count": core.paired(len(results)),
         "results": results,
         "global_guard": (
-            "Adaptive exact matrix-word traces and directed colour refinement are "
-            "necessary invariants only. Every final witness is verified against "
-            "every original affine map equation; work budgets and search caps are explicit."
+            "Adaptive exact matrix-word traces, exact linear reductions and "
+            "bounded-degree polynomial reductions on combined finite support are "
+            "necessary filters only. Unresolved polynomial candidates are retained. "
+            "Every final witness is verified against every original affine map "
+            "equation; work budgets and search caps are explicit."
         ),
     }
 
