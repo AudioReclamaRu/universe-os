@@ -98,7 +98,20 @@ dependency semantics, independent feature retention and field validation.
 Phase 24's integration tests additionally verify higher-word pruning and the
 atomic evaluation budget.
 
-## F. Relation to the Canonical Mathematical Pattern Atlas
+## F. Phase 26 polynomial extension
+
+Phase 26 extends this exact linear feature-space test with bounded-degree
+polynomial monomials of previously retained trace features. Its output is a
+separate finite-support relation type with explicit monomial factors, exact
+coefficients and row-by-row verification. It does not change the meaning of
+the Phase 25 linear relations or the universal commutator identity.
+
+See [EXACT_POLYNOMIAL_TRACE_DEPENDENCIES.md](../phase-26/EXACT_POLYNOMIAL_TRACE_DEPENDENCIES.md).
+Only a fully verified polynomial relation on the combined source/target
+support is eligible for omission; sample-span saturation and configured caps
+remain unresolved.
+
+## G. Relation to the Canonical Mathematical Pattern Atlas
 
 Phase 25 adds an exact relation-space layer: the question is no longer only
 whether two operators share a trace value, but whether one relation-feature
