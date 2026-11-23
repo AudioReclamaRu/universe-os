@@ -9,6 +9,7 @@ for sibling in ("phase-16", "phase-18", "phase-20", "phase-21"):
     if str(path) not in sys.path:
         sys.path.insert(0, str(path))
 
+import affine_ifs_conjugacy as core
 from affine_ifs_conjugacy import apply_affine_coordinate_change
 from affine_ifs_joint_trace_partition import (
     compare_ifs_pair_trace_partitioned,
@@ -117,8 +118,10 @@ class JointTracePartitionTests(unittest.TestCase):
 
     def test_profile_multiset_preserves_map_multiplicity(self):
         source, target = shared_fixed_point_nonconjugate_pair()
-        source_profiles = relational_trace_profiles(source["maps"], 3)
-        target_profiles = relational_trace_profiles(target["maps"], 3)
+        _, source_radical, _, source_maps = core._parse(source)
+        _, target_radical, _, target_maps = core._parse(target)
+        source_profiles = relational_trace_profiles(source_maps, source_radical)
+        target_profiles = relational_trace_profiles(target_maps, target_radical)
         self.assertEqual(len(source_profiles), 2)
         self.assertEqual(len(target_profiles), 2)
         self.assertNotEqual(source_profiles[0], target_profiles[0])
