@@ -203,6 +203,8 @@ Use the Khufu--Menkaure centre line as the reference axis. Project the two compa
 | Great Sphinx head point | \(\langle1010100100_2\mid221001_3\rangle/\langle101_2\mid12_3\rangle\ {\rm m}\) | \(\langle1010011011111_2\mid21022220_3\rangle/\langle1010_2\mid101_3\rangle\ {\rm m}\) |
 | Khentkaus I mapped site point | \(\langle100001001110_2\mid2220202_3\rangle/\langle101_2\mid12_3\rangle\ {\rm m}\) | \(\langle1111001111_2\mid1100010_3\rangle/\langle10_2\mid2_3\rangle\ {\rm m}\) |
 
+**Coordinate-frame limitation:** the pyramid axis is derived from the GPMP local survey grid, while the two target points are map-derived geodetic coordinates. The current projection uses a local east/north approximation and does not yet apply a surveyed transformation between the GPMP grid and the target-point datum. Therefore the small residual below is an exploratory output of a mixed-frame calculation, not a valid precision match; a proper common-control transformation may change it materially.
+
 The two target points differ along the axis by approximately
 
 \[
@@ -216,14 +218,14 @@ while their cross-axis separation is approximately
 {\langle101_2\mid12_3\rangle}\ {\rm m}.
 \]
 
-That cross-axis separation is numerically close to Khafre's cross-axis offset. The current computed difference between the two rounded magnitudes is approximately
+That cross-axis separation is numerically close to Khafre's cross-axis offset in the present mixed-frame exploratory calculation. The current computed difference between the two rounded magnitudes is approximately
 
 \[
 \frac{\langle1_2\mid1_3\rangle}
 {\langle101_2\mid12_3\rangle}\ {\rm m}.
 \]
 
-**Interpretation:** this is a candidate geometric relation worth testing with new survey data. It is not yet a meaningful precision match. The two target points come from different map sources and have no survey-grade joint uncertainty budget. The mapped Khentkaus point may not represent the geometric centre of its full complex; the selected Sphinx point represents the head, not the monument's centroid. The apparent sub-metre residual is below the actual uncertainty of the target references.
+**Interpretation:** this is not yet a validated geometric relation. The target points come from different map sources, are not tied to the GPMP control grid through a common surveyed transformation, and have no joint uncertainty budget. The mapped Khentkaus point may not represent the geometric centre of its full complex; the selected Sphinx point represents the head, not the monument's centroid. The apparent sub-metre residual is below the uncertainty implied by this heterogeneous coordinate basis. The only defensible result at this stage is that the geometry suggests a testable candidate; the numerical match itself must be treated as an artifact until common-frame survey data confirm it.
 
 ## F. Where “dynamics” begins — and what is not yet known
 
@@ -302,6 +304,7 @@ The retracted Biondi--Malanga SAR article is not used as evidence for any extern
 ### Great Sphinx and Khentkaus I target references
 
 - AERA Sphinx mapping and survey archive: https://aeraweb.org/
+- Henk Reints' map-based Giza geometry page gives selected centre-to-head distances and explicitly warns that points were placed from Google Maps imagery and that oblique satellite perspective may distort locations; these are low-confidence cross-checks, not survey control: https://henk-reints.nl/pyramidsAnalysis.html
 - Mapcarta / OpenStreetMap reference point for the Pyramid of Khentkaus I: https://mapcarta.com/32903442
 - Nell and Ruggles' discussion of Khentkaus I's tomb, quarry context, town and distinct orientation is in the paper cited above.
 - A current report quoting Egyptologists on the lack of archaeological evidence for a second sculpted Sphinx: https://english.ahram.org.eg/
