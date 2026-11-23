@@ -79,3 +79,14 @@ Therefore:
 ## 7. Open-scale rule
 
 No spatial, temporal or energetic scale is excluded in advance. This does not assert that all scales are connected or that one invariant must persist across them. A relation may be invariant, scale-dependent, regime-dependent, emergent, absent or not yet measurable.
+
+
+## 8. Canonical motto — absence of evidence
+
+> **Отсутствие доказательства не является доказательством отсутствия.**
+
+This is a governing research principle, not permission to treat every unsupported possibility as true. Non-detection leaves a hypothesis unresolved unless the test had adequate coverage, sensitivity, preservation conditions and power to detect the predicted feature. Lack of disproof is not proof of existence.
+
+When the next step is unclear, explicitly inspect missing evidence, preservation, erosion, burial, later modification, access, sampling, instrument sensitivity, measurement resolution, noise and method suitability. Build and retain the maximum defensible set of candidate models, including idealized reconstructions for missing measurements. Label each value as measured, source-reported, reconstructed, idealized, inferred, assumed or unknown. Then design an independent test and state its discriminating outcomes and falsifiers.
+
+The full governing policy is in [00_CANONICAL_RESEARCH_PRINCIPLES.md](00_CANONICAL_RESEARCH_PRINCIPLES.md).
