@@ -342,11 +342,17 @@ def refine_ambiguous_matrix_word_graph(
 
             prior_names = list(BASELINE_WORDS) + list(applied_words) + list(retained_words)
             prior_columns = []
-            for feature_index, _name in enumerate(prior_names):
-                prior_columns.append(
-                    feature_vector(source_edges, source_pairs, feature_index)
-                    + feature_vector(target_edges, target_pairs, feature_index)
-                )
+            for feature_index, prior_name in enumerate(prior_names):
+                if prior_name in candidate_values:
+                    # Earlier retained words in this tier are not appended to
+                    # the graph yet, but their exact active-support columns
+                    # are already available in candidate_values.
+                    prior_columns.append(candidate_values[prior_name])
+                else:
+                    prior_columns.append(
+                        feature_vector(source_edges, source_pairs, feature_index)
+                        + feature_vector(target_edges, target_pairs, feature_index)
+                    )
             polynomial_result = classify_polynomial_dependency(
                 prior_columns,
                 [f"trace:{name}" for name in prior_names],
