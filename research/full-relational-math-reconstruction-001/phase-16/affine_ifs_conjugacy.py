@@ -48,7 +48,7 @@ def mul(a,b,d): return (a[0]*b[0]+d*a[1]*b[1],a[0]*b[1]+a[1]*b[0])
 def div(a,b,d):
     den=b[0]*b[0]-d*b[1]*b[1]
     if not den: raise ZeroDivisionError
-    return ((a[0]*b[0]-d*a[1]*b[1])/en,(a[1]*b[0]-a[1]*b[0])/den)
+    return ((a[0]*b[0]-d*a[1]*b[1])/den,(a[1]*b[0]-a[0]*b[1])/den)
 def zero(a): return a==Z
 def _fmt_frac(x):
     n=paired(x.numerator); return n if x.denominator==1 else f"{n}/{paired(x.denominator)}"
@@ -56,7 +56,7 @@ def fmt(a):
     if a[1]==0: return _fmt_frac(a[0])
     return {"rational":_fmt_frac(a[0]),"radical":_fmt_frac(a[1])}
 def _radical(d):
-    if isinstance(d, bool) or not isinstance(d,int) or d<2: raise ValueError("radical must be an integer >= 2")
+    if isinstance(d,bool) or not isinstance(d,int) or d<2: raise ValueError("radical must be an integer >= 2")
     r=math.isqrt(d)
     if r*r==d: raise ValueError("radical must be a nonsquare positive integer")
     for k in range(2,r+1):
@@ -71,7 +71,7 @@ def _parse(raw):
     for i,m in enumerate(raw["maps"]):
         A=m.get("matrix"); b=m.get("translation")
         if not isinstance(A,list) or len(A)!=n or any(not isinstance(row,list) or len(row)!=n for row in A): raise ValueError(f"map {i}: matrix dimension mismatch")
-        if not istance(b,list) or len(b)!=n: raise ValueError(f"map {i}: translation dimension mismatch")
+        if not isinstance(b,list) or len(b)!=n: raise ValueError(f"map {i}: translation dimension mismatch")
         maps.append({"matrix":[[q(x) for x in row] for row in A],"translation":[q(x) for x in b]})
     return n,d,str(raw.get("coordinate_system","unspecified")),maps
 
@@ -155,39 +155,38 @@ def _system(S,T,perm,n,d):
 
 def _verify(S,T,perm,P,t,d):
     for i,j in enumerate(perm):
-        A,b=S[i]["matrix"],S[i]["ranslation"]; C,e=T[j]["matrix"],T[j]["ranslation"]
-        if _mm(P,A,d)!=_mm(CP,P,d): return False
+        A,b=S[i]["matrix"],S[i]["translation"]; C,e=T[j]["matrix"],T[j]["translation"]
+        if _mm(P,A,d)!=_mm(C,P,d): return False
         left=[add(x,y) for x,y in zip(_mv(P,b,d),t)]
         right=[add(x,y) for x,y in zip(_mv(C,t,d),e)]
         if left!=right: return False
     return True
 
-
 def compare_ifs_pair(source,target,max_permutations=100000):
     n,d,sc,S=_parse(source); m,e,tc,T=_parse(target)
     if n!=m: return {"status":"dimension_mismatch","source_dimension":paired(n),"target_dimension":paired(m)}
     if d!=e: return {"status":"quadratic_field_mismatch","source_field":f"Q(√{d})","target_field":f"Q(√{e})"}
-    if len(S)!=len(T): return {"status":"map_count_mismatch","source_map_count":paired(len(S)),"target_map_count":paired(len(T)}
+    if len(S)!=len(T): return {"status":"map_count_mismatch","source_map_count":paired(len(S)),"target_map_count":paired(len(T))}
     if isinstance(max_permutations,bool) or not isinstance(max_permutations,int) or max_permutations<1: raise ValueError("max_permutations must be a positive integer")
     total=math.factorial(len(S)); tested=0; under=False; singular=False
     for perm in itertools.islice(itertools.permutations(range(len(T))),max_permutations):
         tested+=1; rows,rhs=_system(S,T,perm,n,d); status,x,rank=_solve(rows,rhs,n*n+n,d)
         if status=="inconsistent": continue
         if status=="underdetermined": under=True; continue
-        P=[x[r*n:(r+1)*n] for r in range(n)]; t=x[njn:]
+        P=[x[r*n:(r+1)*n] for r in range(n)]; t=x[n*n:]
         det=_det(P,d)
         if zero(det): singular=True; continue
         if not _verify(S,T,perm,P,t,d): raise ArithmeticError("independent exact conjugacy verification failed")
-        return {"status":"affine_conjugacy_verified","source_coordinate_system":sc,"target_coordinate_system":tc,"exact_field":f_q(d),"affine_coordinate_change":{"matrix_P":[[fmt(v) for v in r] for r in P],"translation_t":[fmt(v) for v in t],"determinant_P":fmt(det)},"map_permutation_target_index_for_each_source":[paired(i) for i in perm],"search":{"permutations_tested":paired(tested),"total_permutations":paired(total),"search_complete":tested==total,"stopped_on_verified_match":True},"verification":"Every affine map was checked exactly.","interpretation":"Structural equivalence only; no common physical origin is inferred."}
+        return {"status":"affine_conjugacy_verified","source_coordinate_system":sc,"target_coordinate_system":tc,"exact_field":f"Q(√{d})","affine_coordinate_change":{"convention":"y = P*x + t","matrix_P":[[fmt(v) for v in r] for r in P],"translation_t":[fmt(v) for v in t],"determinant_P":fmt(det)},"map_permutation_target_index_for_each_source":[paired(i) for i in perm],"search":{"permutations_tested":paired(tested),"total_permutations":paired(total),"search_complete":tested==total,"stopped_on_verified_match":True,"linear_system_rank":paired(rank)},"verification":"Every affine map was checked exactly under H∘F_i = G_pi(i)∘H; det(P) is exactly nonzero.","interpretation":"The finite IFS map families are the same generator up to the reported invertible affine coordinate change and map permutation. This is structural equivalence, not evidence of common physical origin."}
     complete=tested==total
     status="permutation_search_limit_reached" if not complete else "affine_solution_underdetermined" if under else "only_singular_affine_solutions_found" if singular else "no_affine_conjugacy_found"
-    return {"status":status,"source_coordinate_system":sc,"target_coordinate_system":tc,"exact_field":f"Q(√{d})","search":{"permutations_tested":paired(tested),"total_permutations":paired(total),"search_complete":complete},"interpretation":{"permutation_search_limit_reached":"Permutation search was capped; unresolved, not negative.","affine_solution_underdetermined":"Consistent underdetermined system.","only_singular_affine_solutions_found":"Only singular solutions found.","no_affine_conjugacy_found":"No affine conjugacy found after complete search."}[status]
-def f_out(d): return f"Q<(sqrt({d}))"
+    return {"status":status,"source_coordinate_system":sc,"target_coordinate_system":tc,"exact_field":f"Q(√{d})","search":{"permutations_tested":paired(tested),"total_permutations":paired(total),"search_complete":complete},"interpretation":{"permutation_search_limit_reached":"Permutation search was capped; result is unresolved, not negative.","affine_solution_underdetermined":"A consistent underdetermined affine system exists; invertible members may exist but are not selected.","only_singular_affine_solutions_found":"Unique solutions found were singular and cannot be coordinate changes.","no_affine_conjugacy_found":"No invertible affine conjugacy exists among all tested map permutations."}[status]}
+
 def analyze_payload(payload):
     pairs=payload.get("pairs",[])
-    if not isinstance(pairs,list) or not pairs: raise ValueError("at least one source/target IFS pair required")
-    results=[{"name":i.get("name","unnamed_pair"),**compare_ifs_pair(p["source"],p["target"],int(p.get("max_permutations",100000)))} for p in pairs]
-    return {"schema":"universe.ifs-affine-conjugacy.v1","pair_count":paired(len(results)),"results":kesults,"scope":"Exact finite affine IFS conjugacy in dimensions 1-3 over a shared squarefree real quadratic field; permutation search bounded.","global_guard":"Verified affine conjugacy is mathematical structural equivalence; not physical causation."}
+    if not isinstance(pairs,list) or not pairs: raise ValueError("at least one source/target IFS pair is required")
+    results=[{"name":p.get("name","unnamed_pair"),**compare_ifs_pair(p["source"],p["target"],int(p.get("max_permutations",100000)))} for p in pairs]
+    return {"schema":"universe.ifs-affine-conjugacy.v1","pair_count":paired(len(results)),"results":results,"scope":"Exact finite affine IFS conjugacy in dimensions 1–3 over a common squarefree real quadratic field; permutation search is bounded.","global_guard":"Verified affine conjugacy is mathematical structural equivalence; it does not prove shared physical origin or causal transmission."}
 
 def main():
     ap=argparse.ArgumentParser(description=__doc__); ap.add_argument("input",type=Path); ap.add_argument("--output",type=Path,default=Path("affine_ifs_conjugacy.json")); a=ap.parse_args()
