@@ -1,0 +1,13 @@
+{
+  "H3": {
+    "root_count": 30,
+    "exact_field": "Q(sqrt(5))",
+    "all_norm_squared_one": true
+  },
+  "D4_SO8": {
+    "root_count": 24,
+    "lie_algebra_dimension": 28,
+    "triality_group": "S3",
+    "group_order": 6
+  }
+}

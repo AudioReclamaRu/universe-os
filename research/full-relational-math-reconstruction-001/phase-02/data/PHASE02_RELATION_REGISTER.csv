@@ -1,0 +1,14 @@
+RELATION_ID,RELATION,DERIVATION_OR_DEFINITION,DOMAIN,STATUS,INTERPRETATION_LIMIT
+R040,nonempty geometric faces Q7,3^7,Q7,EXACT_IDENTITY,Abstract face lattice adds empty bottom element: 2188 total elements
+R041,Q7 Hasse covers,sum f_d*(7-d),Q7 face poset,COMBINATORIAL_THEOREM,10206 covers excluding empty bottom
+R042,Q7 same-dimension facet adjacencies,"sum f_(d-1)*C(8-d,2)",Q7 face poset,COMBINATORIAL_THEOREM,20412 pairs; vertices handled as graph edges
+R043,Q7 hyperoctahedral automorphism order,2^7*7!,Q7 graph,ESTABLISHED_MATH,"Preserves graph structure, not decimal labels"
+R044,H3 reflection group order,exact Q(sqrt(5)) closure,H3,ESTABLISHED_MATH,"120 total, 60 determinant +1"
+R045,Spin(8) triality generators,"T2^2=I, T3^3=I, <T2,T3>=S3",D4 / Spin(8),ESTABLISHED_MATH,Finite representation checks do not connect to v2 physical model
+R046,mass coefficient 224,28*8=448/2,v2 mass matrix/Q7/D4,CROSS_STRUCTURE_CORRESPONDENCE,No unique physical decomposition
+R047,mass coefficient 672,42*16=f2(Q7),v2 mass matrix/Q7,CROSS_STRUCTURE_CORRESPONDENCE,No independent mass calibration
+R048,baseline reset run,100000-step scalar recurrence,v2 dynamics,REPRODUCED_NUMERIC,1344 events; model units only
+R049,reset lock boundary,1-theta/p,hybrid recurrence,MODEL_PROPERTY,Approx 0.98663136 for constant increment theta
+R050,0.2939775 Hz over 4370 km,v=fL or v=2fL,Giza/Richat proposal,DIMENSIONAL_DIAGNOSTIC,Not a measured carrier or proof of coupling
+R051,Richat geological baseline,published igneous/hydrothermal dome interpretation,Richat,ESTABLISHED_GEOLOGY,Natural processes are baseline alternatives
+R052,Giza Sphinx host rock,Mokattam limestone,Giza,ESTABLISHED_GEOLOGY,Does not prove designed resonator function
