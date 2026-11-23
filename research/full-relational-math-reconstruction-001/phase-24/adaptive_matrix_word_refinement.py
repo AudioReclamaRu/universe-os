@@ -267,8 +267,12 @@ def refine_ambiguous_matrix_word_graph(
             source_edges, target_edges,
             source_colours, target_colours,
         )
-        if next_refinement["candidate_edges_before_refinement"] != refinement["candidate_edges_after_refinement"]:
-            raise ArithmeticError("adding exact words merged a previously distinguished candidate partition")
+        if next_refinement["candidate_edges_before_refinement"] > refinement["candidate_edges_after_refinement"]:
+            raise ArithmeticError(
+                "adding exact words merged a previously distinguished candidate partition: "
+                f"initial={next_refinement['candidate_edges_before_refinement']} "
+                f"previous_final={refinement['candidate_edges_after_refinement']}"
+            )
         tier_reports.append({
             "length": core.paired(tier["length"]),
             "words": list(words),
