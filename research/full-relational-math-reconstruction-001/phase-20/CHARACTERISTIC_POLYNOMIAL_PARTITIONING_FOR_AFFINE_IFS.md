@@ -98,9 +98,13 @@ Phase 20 adds an exact similarity invariant to the structural-comparison layer. 
 
 The result is mathematical structural correspondence only. It does not establish a shared physical origin, source/receiver path, energy transfer, causal coupling or natural implementation.
 
+
+
+Phase 19 now calls this exact partition as its fallback when fixed-point-frame assumptions are inapplicable. The 20-map Menger control remains on the Phase 17 route because all its maps share the same scalar linear part and the characteristic-polynomial filter would not reduce its candidate graph. See [the adaptive Phase 19 pipeline](../phase-19/ADAPTIVE_AFFINE_IFS_CONJUGACY_PIPELINE.md).
+
 ## I. Next increments
 
 1. Add stronger exact similarity invariants for dimensions two and three, while retaining full affine-equation verification.
-2. Combine invariant partitions with the Phase 17 fixed-point method and Phase 18 determinant solver under the Phase 19 controller.
+2. Strengthen the invariant partition with relational traces of products of multiple generators, especially when individual characteristic polynomials repeat.
 3. Add operator- and graph-level partitions for substitution tilings, cellular automata, L-systems and other Atlas generators.
 4. Connect candidate relations to measured geometries and dynamical datasets, with uncertainty and falsifiers.
