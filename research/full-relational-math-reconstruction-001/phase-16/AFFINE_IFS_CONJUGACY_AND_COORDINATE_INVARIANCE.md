@@ -135,7 +135,7 @@ The synthetic CLI example also runs and emits `example_summary.json`. This is lo
 
 ## H. Remaining work
 
-1. Replace factorial permutation enumeration with invariant-based candidate partitioning and a scalable assignment/backtracking strategy, especially for the 20-map Menger generator.
+1. **Advanced in Phase 17:** factorial map-permutation enumeration is replaced, when unique map fixed points span the ambient affine space, by exact fixed-point-frame search and bipartite perfect matching. The 20-map Menger control verifies all maps without enumerating map permutations. See [Phase 17](../phase-17/AFFINE_IFS_FIXED_POINT_FRAMES_AND_SCALABLE_MATCHING.md). The new method has explicit applicability limits and a capped target-frame search.
 2. Solve underdetermined affine families with exact determinant-nonzero feasibility, rather than stopping at the underdetermined status.
 3. Support affine and similarity conjugacy across different but compatible number fields, including composita.
 4. Generalize from quadratic fields to exact algebraic number fields of higher degree.
