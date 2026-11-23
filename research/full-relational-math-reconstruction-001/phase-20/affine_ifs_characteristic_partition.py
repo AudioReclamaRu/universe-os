@@ -104,7 +104,7 @@ def _iter_matchings(candidates):
     yield from visit(list(range(n)))
 
 
-def compare_ifs_pair_partitioned(source, target, max_candidate_matchings=100000):
+def compare_ifs_pair_partitioned(source, target, max_candidate_matchings=100000, candidate_refinement=None, refinement_name=None):
     n, d, src_coords, src_maps = core._parse(source)
     m, e, tgt_coords, tgt_maps = core._parse(target)
     if n != m:
@@ -122,9 +122,30 @@ def compare_ifs_pair_partitioned(source, target, max_candidate_matchings=100000)
         raise ValueError("max_candidate_matchings must be a positive integer")
 
     src_sig, tgt_sig, candidates = _candidate_graph(src_maps, tgt_maps, d)
+    characteristic_edge_count = sum(map(len, candidates))
+    if candidate_refinement is not None:
+        if not isinstance(candidate_refinement, list) or len(candidate_refinement) != len(src_maps):
+            raise ValueError("candidate_refinement must provide one target-index list per source map")
+        refined = []
+        for source_index, options in enumerate(candidate_refinement):
+            if not isinstance(options, list):
+                raise ValueError(f"candidate_refinement row {source_index} must be a list")
+            allowed = set()
+            for target_index in options:
+                if (isinstance(target_index, bool) or not isinstance(target_index, int)
+                        or not 0 <= target_index < len(tgt_maps)):
+                    raise ValueError("candidate_refinement contains an invalid target-map index")
+                allowed.add(target_index)
+            refined.append([j for j in candidates[source_index] if j in allowed])
+        candidates = refined
     edge_count = sum(map(len, candidates))
     unrestricted = math.factorial(len(src_maps))
     candidate_indices = [[core.paired(j) for j in row] for row in candidates]
+    candidate_filter = {
+        "characteristic_polynomial_edges": core.paired(characteristic_edge_count),
+        "edges_after_refinement": core.paired(edge_count),
+        "additional_filter": refinement_name,
+    }
 
     if any(not row for row in candidates) or not _has_perfect_matching(
         candidates, list(range(len(src_maps))), set()
@@ -134,6 +155,7 @@ def compare_ifs_pair_partitioned(source, target, max_candidate_matchings=100000)
             "source_coordinate_system": src_coords,
             "target_coordinate_system": tgt_coords,
             "filter": "exact_characteristic_polynomial_of_each_linear_part",
+            "candidate_filter": candidate_filter,
             "candidate_edge_count": core.paired(edge_count),
             "unrestricted_permutation_count": core.paired(unrestricted),
             "candidate_map_indices": candidate_indices,
@@ -217,6 +239,7 @@ def compare_ifs_pair_partitioned(source, target, max_candidate_matchings=100000)
         "target_coordinate_system": tgt_coords,
         "exact_field": f"Q(√{d})",
         "filter": "exact_characteristic_polynomial_of_each_linear_part",
+        "candidate_filter": candidate_filter,
         "candidate_edge_count": core.paired(edge_count),
         "unrestricted_permutation_count": core.paired(unrestricted),
         "candidate_map_indices": candidate_indices,
