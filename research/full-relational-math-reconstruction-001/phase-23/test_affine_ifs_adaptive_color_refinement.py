@@ -55,23 +55,29 @@ class AdaptiveDirectedColourRefinementTests(unittest.TestCase):
         self.assertTrue(all(result["candidate_map_indices"]))
 
     def test_direction_is_retained(self):
-        source_colours = ["same", "same", "same"]
-        target_colours = ["same", "same", "same"]
+        source_colours = ["A", "B"]
+        target_colours = ["A", "B"]
         source_edges = [
-            ["loop", "a", "b"],
-            ["b", "loop", "a"],
-            ["a", "b", "loop"],
+            ["loop-A", "A-to-B"],
+            ["B-to-A", "loop-B"],
         ]
         target_edges = [
-            ["loop", "b", "a"],
-            ["a", "loop", "b"],
-            ["b", "a", "loop"],
+            ["loop-A", "B-to-A"],
+            ["A-to-B", "loop-B"],
         ]
         result = refine_joint_directed_colours(
             source_colours, target_colours, source_edges, target_edges
         )
-        # This regular control can remain inconclusive; refinement must not
-        # invent a negative result where its colour classes remain broad.
+        self.assertEqual(result["candidate_edges_after_refinement"], 0)
+
+    def test_regular_graph_can_remain_inconclusive(self):
+        colours = ["same", "same", "same"]
+        edges = [
+            ["loop", "a", "b"],
+            ["b", "loop", "a"],
+            ["a", "b", "loop"],
+        ]
+        result = refine_joint_directed_colours(colours, colours, edges, edges)
         self.assertTrue(result["stable"])
         self.assertTrue(all(result["candidate_map_indices"]))
 
