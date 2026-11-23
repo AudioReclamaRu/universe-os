@@ -105,9 +105,13 @@ Phase 19 now calls this exact partition as its fallback when fixed-point-frame a
 
 Phase 19 now applies Phase 21 joint pairwise trace profiles before this characteristic-polynomial filter. The Menger control remains on the Phase 17 fast path because the uniform-contraction generator does not gain useful pruning from either fallback invariant. See [Phase 21](../phase-21/JOINT_TRACE_PROFILES_FOR_AFFINE_IFS.md) and [the adaptive Phase 19 pipeline](../phase-19/ADAPTIVE_AFFINE_IFS_CONJUGACY_PIPELINE.md).
 
+
+
+Phase 22 combines this necessary individual spectral invariant with Phase 21's relational profiles as vertex colours in one directed, edge-labelled graph. It checks all ordered pair labels under a single map bijection before solving the full affine equations. See [Phase 22](../phase-22/RELATIONAL_GRAPH_ISOMORPHISM_FOR_AFFINE_IFS.md).
+
 ## I. Next increments
 
 1. Add stronger exact similarity invariants for dimensions two and three, while retaining full affine-equation verification.
-2. Strengthen the invariant partition with relational traces of products of multiple generators, especially when individual characteristic polynomials repeat.
+2. Preserve the incidence of relational traces across the full operator family, as implemented by the Phase 22 directed relational graph.
 3. Add operator- and graph-level partitions for substitution tilings, cellular automata, L-systems and other Atlas generators.
 4. Connect candidate relations to measured geometries and dynamical datasets, with uncertainty and falsifiers.
