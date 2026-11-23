@@ -37,10 +37,7 @@ R_{\mathbf k}=\prod_{i=1}^{n}\Pi_i^{k_i},
 \qquad k_i\in\mathbb Z,
 \]
 
-with:
-- at most max-terms nonzero exponents;
-- each exponent bounded by -exponent-bound through +exponent-bound, excluding zero on selected coordinates;
-- no more than max-candidates candidates per basis.
+with at most max-terms nonzero exponents and each exponent bounded by the selected exponent limit, excluding zero on selected coordinates.
 
 All bounded integer-power vectors are retained, including non-primitive vectors. A power such as \(\Pi^2\) may match a canonical constant even when \(\Pi\) itself does not.
 
@@ -56,15 +53,11 @@ The cap prevents accidental combinatorial explosion. Cross-basis products are ne
 
 The null-space basis from Phase 09 is not unique. Its canonical basis and every reported alternative basis are separate complete coordinate descriptions of the same rational dimensionless-exponent subspace.
 
-Phase 10:
-1. loads each basis as a separate BasisSet;
-2. enumerates candidate monomials within that basis only;
-3. emits a separate result section for each basis;
-4. never combines a group from one basis with a group from another.
+Phase 10 loads each basis as a separate BasisSet, enumerates candidate monomials within that basis only and emits a separate result section. It never combines a group from one basis with a group from another.
 
 The same abstract relation may have different exponent vectors or formulas in different bases. A stable Atlas match across alternative bases is a basis-robustness check, not multiple independent discoveries.
 
-If any group lacks a numeric value, it is listed as omitted and the search is labelled partial_numeric_projection. The engine does not silently claim to have searched the complete basis.
+If any group lacks a numeric value, it is listed as omitted and the search is labelled partial_numeric_projection. A basis with no numeric values remains listed with no candidates; the search does not silently delete it.
 
 ## Atlas matching
 
@@ -77,9 +70,10 @@ A numeric match is a candidate correspondence, not an exact symbolic identity, e
 ## Numerical and evidence safeguards
 
 - Candidate values are evaluated in the logarithmic domain to avoid intermediate overflow.
-- If a candidate falls outside finite floating-point range, its symbolic exponent vector is retained, its numeric value is null and it is not screened numerically.
-- Inputs must be positive finite dimensionless group values for this multiplicative search.
-- Units, sources and evidence statuses are inherited from Phase 09 where available.
+- Negative dimensionless groups are supported with integer-power sign rules.
+- A zero group with a positive exponent evaluates to zero; a zero group with a negative exponent is retained as undefined rather than silently dropped.
+- Candidates outside finite floating-point range are retained symbolically with numeric value null.
+- Inputs may carry units, sources and evidence statuses from Phase 09.
 - Uncertainty is not yet propagated through Phase 09 basis transformations and this monomial search. Missing uncertainty is not zero.
 - The search uses a finite exponent and term window; it does not enumerate every rational, real, algebraic or transcendental exponent.
 
@@ -97,16 +91,7 @@ The included match summary shows the five basis representations. This demonstrat
 
 ## Validation
 
-Nine standard-library unit tests pass locally. They cover:
-- product match to \(\varphi\);
-- strict separation of canonical and alternative bases;
-- retention of non-primitive integer powers;
-- recovery of a constant from a power even when its base does not match;
-- overflow-safe symbolic retention;
-- tolerance validation;
-- partial-basis labelling when numeric values are missing;
-- candidate-cap enforcement;
-- paired binary/ternary report counts.
+Twelve standard-library unit tests pass locally. They cover product matching, basis separation, retention of non-primitive powers, power-to-constant matches, floating-point overflow, signed integer powers, zero denominators, fully non-numeric and partially numeric bases, tolerance validation, candidate caps and paired integer keys.
 
 The Phase 09 → Phase 10 synthetic pipeline ran successfully in a repository-shaped test directory. This is local module-level verification, not a full-repository CI or fresh-checkout claim.
 
