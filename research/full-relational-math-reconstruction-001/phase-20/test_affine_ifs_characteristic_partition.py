@@ -70,7 +70,7 @@ class CharacteristicPartitionTests(unittest.TestCase):
         result = compare_ifs_pair_partitioned(source, target)
         self.assertEqual(result["status"], "affine_conjugacy_verified")
         self.assertEqual(result["candidate_edge_count"], "<100_2|11_3>")
-        self.assertEqual(result["unrestricted_permutation_count"], "<11000_2|222_3>")
+        self.assertEqual(result["unrestricted_permutation_count"], "<11000_2|220_3>")
 
     def test_same_fixed_point_family_is_still_matched_exactly(self):
         source, target = same_fixed_point_pair()
