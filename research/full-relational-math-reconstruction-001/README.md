@@ -228,7 +228,7 @@ Phase 19 unifies the Phase 17 fixed-point-frame search with a Phase 22 whole-fam
 
 Dimension/field/map-count mismatches, complete Phase 17 negative results and search caps retain their explicit terminal or unresolved statuses. The controller records every method attempt and the selected final method.
 
-The Phase 19 controller's earlier seven tests passed in clean GitHub Actions run [45243886069](https://github.com/AudioReclamaRu/universe-os/actions/runs/45243886069). The expanded Phase 22 integration is awaiting its first CI run. See [ADAPTIVE_AFFINE_IFS_CONJUGACY_PIPELINE.md](phase-19/ADAPTIVE_AFFINE_IFS_CONJUGACY_PIPELINE.md), the implementation, tests and synthetic examples.
+All eight Phase 19 routing tests passed in clean GitHub Actions PR run [45245272098](https://github.com/AudioReclamaRu/universe-os/actions/runs/45245272098). See [ADAPTIVE_AFFINE_IFS_CONJUGACY_PIPELINE.md](phase-19/ADAPTIVE_AFFINE_IFS_CONJUGACY_PIPELINE.md), the implementation, tests and synthetic examples.
 
 ## Phase 20 — exact characteristic-polynomial partitions for affine IFS matching
 
@@ -254,9 +254,9 @@ Phase 22 represents the whole finite affine-map family as a directed, edge-label
 
 A deterministic constrained backtracking search tests partial map assignments in both directions and uses residual bipartite matching to prune impossible continuations. Only complete relational graph isomorphisms are passed to Phase 18's exact affine equations and determinant-family solver; the graph match itself is never reported as affine conjugacy. Search-node and candidate-isomorphism caps are unresolved, not negative.
 
-Seven standard-library tests are included. The Phase 22 test module and expanded Phase 19 integration are pending their first clean-checkout CI run. See [RELATIONAL_GRAPH_ISOMORPHISM_FOR_AFFINE_IFS.md](phase-22/RELATIONAL_GRAPH_ISOMORPHISM_FOR_AFFINE_IFS.md), the implementation, tests and synthetic example.
+All seven Phase 22 standard-library tests passed in clean GitHub Actions PR run [45245272098](https://github.com/AudioReclamaRu/universe-os/actions/runs/45245272098). See [RELATIONAL_GRAPH_ISOMORPHISM_FOR_AFFINE_IFS.md](phase-22/RELATIONAL_GRAPH_ISOMORPHISM_FOR_AFFINE_IFS.md), the implementation, tests and synthetic example.
 
 ### Validation status — phases 16–22
 
-The dedicated GitHub Actions workflow [ifs-exact-comparator-tests.yml](../.github/workflows/ifs-exact-comparator-tests.yml) completed successfully on clean PR checkouts for phases 16–21: [run 45243886069](https://github.com/AudioReclamaRu/universe-os/actions/runs/45243886069) passed 52 tests. Phase 22 adds seven tests and expands the Phase 19 controller; its first CI run is pending. The workflow covers these affine-IFS packages only, not the complete repository or every earlier research phase.
+The dedicated GitHub Actions workflow [ifs-exact-comparator-tests.yml](../.github/workflows/ifs-exact-comparator-tests.yml) completed successfully on the clean PR merge checkout in [run 45245272098](https://github.com/AudioReclamaRu/universe-os/actions/runs/45245272098): Phase 16 — 17 tests; Phase 17 — 9; Phase 18 — 6; Phase 19 — 8; Phase 20 — 6; Phase 21 — 7; Phase 22 — 7. **60 tests passed in total.** This is a clean-checkout CI result for the seven affine-IFS phase packages only. It does not claim that the complete repository or every earlier research phase passed CI.
 
