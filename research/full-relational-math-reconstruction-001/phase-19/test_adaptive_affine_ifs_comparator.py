@@ -98,6 +98,28 @@ def ambiguous_nonconjugate_translation_pair():
     return source, target
 
 
+def nonunique_fixed_point_nonconjugate_pair():
+    identity = [[1, 0], [0, 1]]
+    jordan = [[1, 1], [0, 1]]
+    source = {
+        "dimension": 2, "radical": 3, "coordinate_system": "identity_operator_family",
+        "maps": [
+            {"matrix": identity, "translation": [0, 0]},
+            {"matrix": copy.deepcopy(identity), "translation": [0, 0]},
+            {"matrix": copy.deepcopy(identity), "translation": [0, 0]},
+        ],
+    }
+    target = {
+        "dimension": 2, "radical": 3, "coordinate_system": "jordan_operator_family",
+        "maps": [
+            {"matrix": jordan, "translation": [0, 0]},
+            {"matrix": copy.deepcopy(jordan), "translation": [0, 0]},
+            {"matrix": copy.deepcopy(jordan), "translation": [0, 0]},
+        ],
+    }
+    return source, target
+
+
 class AdaptiveAffineIFSComparatorTests(unittest.TestCase):
     def test_uses_phase17_for_full_rank_menger_fixed_point_cloud(self):
         source, target = menger_control()
@@ -169,8 +191,12 @@ class AdaptiveAffineIFSComparatorTests(unittest.TestCase):
         self.assertEqual(result["final_result"]["candidate_edge_count"], "<0_2|0_3>")
 
     def test_phase22_graph_cap_remains_unresolved(self):
-        source, target = ambiguous_nonconjugate_translation_pair()
+        source, target = nonunique_fixed_point_nonconjugate_pair()
         result = compare_ifs_pair_adaptive(source, target, max_graph_nodes=1)
+        self.assertEqual(
+            result["attempts"][0]["status"],
+            "unique_fixed_point_method_not_applicable",
+        )
         self.assertEqual(result["status"], "relational_graph_search_limit_reached")
         self.assertFalse(result["final_result"]["search"]["graph_search_complete"])
 
