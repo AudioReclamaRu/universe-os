@@ -45,6 +45,32 @@ class AtlasRelationComparatorTests(unittest.TestCase):
         candidates = search_basis(basis, max_terms=1, exponent_bound=2)
         self.assertTrue(any(c.numeric_status == "outside_finite_float_range" and c.value is None for c in candidates))
 
+    def test_negative_group_integer_powers_keep_sign_correctly(self):
+        phi = (1 + math.sqrt(5)) / 2
+        basis = BasisSet("test", "canonical", (PiEntry("G1", -math.sqrt(phi), "Π₁", "canonical"),))
+        candidates = search_basis(basis, max_terms=1, exponent_bound=2)
+        squared = next(c for c in candidates if c.exponents == (2,))
+        self.assertAlmostEqual(squared.value, phi)
+        self.assertEqual(squared.matches[0]["atlas_key"], "constant.phi")
+        odd = next(c for c in candidates if c.exponents == (1,))
+        self.assertLess(odd.value, 0)
+
+    def test_zero_group_with_negative_power_is_retained_as_undefined(self):
+        basis = BasisSet("test", "canonical", (PiEntry("G1", 0.0, "Π₁", "canonical"),))
+        candidates = search_basis(basis, max_terms=1, exponent_bound=1)
+        inverse = next(c for c in candidates if c.exponents == (-1,))
+        self.assertIsNone(inverse.value)
+        self.assertEqual(inverse.numeric_status, "undefined_zero_denominator")
+
+    def test_entirely_non_numeric_basis_is_retained(self):
+        payload = {"canonical_basis": [{
+            "basis_id": "<1_2|1_3>", "expression": "A", "numeric_value_secondary": None
+        }]}
+        result = compare_report(payload)
+        basis = result["basis_results"][0]
+        self.assertEqual(basis["basis_completeness"], "no_numeric_values")
+        self.assertEqual(basis["candidate_count"], "<0_2|0_3>")
+
     def test_invalid_tolerance_rejected(self):
         basis = BasisSet("test", "canonical", (PiEntry("G1", 2.0, "Π₁", "canonical"),))
         with self.assertRaises(ValueError):
