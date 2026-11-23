@@ -131,7 +131,7 @@ Seventeen standard-library tests are included. They cover:
 - singular and malformed coordinate changes;
 - squarefree-field validation and paired binary/ternary input parsing.
 
-The synthetic CLI input and expected summary are stored with the phase. The Phase 16 test module and CLI were not executed from the committed branch in this continuation; the exact-arithmetic control was inspected independently. This is not a fresh-checkout validation of the whole repository and is not a repository CI claim.
+The Phase 16 module was executed by the clean GitHub Actions pull-request checkout in workflow run [45243433007](https://github.com/AudioReclamaRu/universe-os/actions/runs/45243433007): all 17 tests passed. The test job used Python 3.12. This is a phase-scoped CI result, not a repository-wide test-suite claim.
 
 ## H. Remaining work
 
