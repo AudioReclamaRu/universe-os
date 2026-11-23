@@ -373,3 +373,24 @@ Every unique nonzero polynomial is independently verified by the Phase 27 generi
 The completion claim is bounded to the declared dimension, alphabet, word-length limit and FTI substitution family. It is not a complete basis of all trace identities, does not yet include substitutions by arbitrary linear combinations of words, and is not yet integrated into the Phase 24–26 adaptive comparator.
 
 See [Phase 28 report](phase-28/BOUNDED_UNIVERSAL_TRACE_IDENTITY_CATALOG.md), the [catalog generator](phase-28/universal_trace_catalog.py) and the [14 catalog tests](phase-28/test_universal_trace_catalog.py).
+
+
+### Validation status — phases 16–28
+
+The dedicated GitHub Actions pull-request workflow completed successfully on the clean checkout in [run 45283828089](https://github.com/AudioReclamaRu/universe-os/actions/runs/45283828089), testing branch head \`401da0631176d9d3e7651c4566b2b08132368c77\). All **13 of 13 jobs passed**.
+
+- Phase 16 — 17 tests
+- Phase 17 — 9 tests
+- Phase 18 — 6 tests
+- Phase 19 — 10 tests
+- Phase 20 — 6 tests
+- Phase 21 — 7 tests
+- Phase 22 — 9 tests
+- Phase 23 — 6 tests
+- Phase 24 — 8 tests
+- Phase 25 — 6 tests
+- Phase 26 — 7 tests
+- Phase 27 — 14 tests
+- Phase 28 — 14 tests
+
+**119 tests passed across all 13 affine-IFS phase packages.** This is a clean-checkout CI result for these thirteen packages only. It does not claim that the complete repository or every earlier research phase passed CI.
