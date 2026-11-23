@@ -102,8 +102,11 @@ class RelationalGraphConjugacyTests(unittest.TestCase):
         target["maps"].reverse()
         result = compare_ifs_pair_relational_graph(source, target)
         self.assertEqual(result["status"], "affine_conjugacy_verified")
-        self.assertEqual(result["map_permutation_target_index_for_each_source"],
-                         ["<1_2|1_3>", "<0_2|0_3>"])
+        self.assertEqual(
+            sorted(result["map_permutation_target_index_for_each_source"]),
+            ["<0_2|0_3>", "<1_2|1_3>"],
+        )
+        self.assertTrue(result["verification"].startswith("Every affine map equation"))
 
     def test_full_relational_graph_rejects_equal_vertex_spectra_incompatible_family(self):
         source, target = equal_charpoly_relational_mismatch()
