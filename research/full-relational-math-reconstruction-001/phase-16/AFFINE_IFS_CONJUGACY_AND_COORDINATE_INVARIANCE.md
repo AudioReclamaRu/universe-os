@@ -136,7 +136,7 @@ The synthetic CLI example also runs and emits `example_summary.json`. This is lo
 ## H. Remaining work
 
 1. **Advanced in Phase 17:** factorial map-permutation enumeration is replaced, when unique map fixed points span the ambient affine space, by exact fixed-point-frame search and bipartite perfect matching. The 20-map Menger control verifies all maps without enumerating map permutations. See [Phase 17](../phase-17/AFFINE_IFS_FIXED_POINT_FRAMES_AND_SCALABLE_MATCHING.md). The new method has explicit applicability limits and a capped target-frame search.
-2. Solve underdetermined affine families with exact determinant-nonzero feasibility, rather than stopping at the underdetermined status.
+2. **Partly advanced in Phase 18:** consistent underdetermined affine families are parameterized exactly; the determinant becomes an exact polynomial. The implementation distinguishes an identically singular family from one containing invertible transformations, and constructs an exact nonzero-determinant witness by deterministic specialization. See [Phase 18](../phase-18/UNDERDETERMINED_AFFINE_IFS_AND_EXACT_INVERTIBILITY.md). Map-permutation search is still capped.
 3. Support affine and similarity conjugacy across different but compatible number fields, including composita.
 4. Generalize from quadratic fields to exact algebraic number fields of higher degree.
 5. Extend generator equivalence beyond affine IFS to substitutions, tilings, cellular automata, L-systems and nonlinear operators in the full Atlas.
