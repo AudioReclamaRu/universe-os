@@ -152,3 +152,9 @@ The implementation, tests and synthetic input/output are in [phase-08/RELATION_D
 Phase 09 adds exact rational null-space analysis for Buckingham–Π groups. The engine builds the seven-dimensional SI exponent matrix, calculates rank/nullity and pivot/free variables, then emits a canonical basis plus complete alternative bases with exact exponent vectors. It preserves variable source/unit/status metadata and can evaluate groups when positive numeric values are supplied.
 
 The implementation, tests and Reynolds-number demonstration are in [phase-09/BUCKINGHAM_PI_ENGINE.md](phase-09/BUCKINGHAM_PI_ENGINE.md). The example recovers Π = ρUL/μ; a test also derives the pendulum dimensionless group T²g/L. Alternative bases are explicitly non-unique representations of the same null space. Dimensional compatibility is not a physical law or causal mechanism.
+
+## Phase 10 — whole-atlas comparison of dimensionless relations
+
+Phase 10 searches each Phase 09 dimensionless basis independently for bounded products, quotients and integer powers, then compares the resulting values against the machine-readable numeric subset of the Canonical Mathematical Pattern Atlas. Canonical and alternative bases are never mixed; all bounded exponent vectors are retained, including non-primitive powers, and bases with missing numeric groups are explicitly labelled as partial numeric projections.
+
+The comparator preserves candidate formulas outside floating-point range, enforces a per-basis combinatorial cap and labels numerical matches as an uncorrected exploratory screen—not symbolic proof, significance or physical causation. The implementation, tests and synthetic example are in [ATLAS_RELATION_COMPARATOR.md](phase-10/ATLAS_RELATION_COMPARATOR.md).
