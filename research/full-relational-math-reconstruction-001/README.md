@@ -212,3 +212,13 @@ Nine Phase 17 tests and the separate 17 Phase 16 tests pass locally. The method 
 
 See [AFFINE_IFS_FIXED_POINT_FRAMES_AND_SCALABLE_MATCHING.md](phase-17/AFFINE_IFS_FIXED_POINT_FRAMES_AND_SCALABLE_MATCHING.md). The implementation and reproducible 20-map synthetic input/output are stored alongside the phase report.
 
+## Phase 18 — exact invertibility witnesses for underdetermined affine families
+
+Phase 18 addresses affine IFS pairs whose conjugacy equations are consistent but underdetermined, including cases where the maps' fixed points coincide and cannot define a full affine frame. For each tested finite map correspondence, exact RREF parameterizes the complete affine solution family. The determinant of the unknown coordinate matrix becomes an exact polynomial in its free parameters.
+
+If that determinant polynomial is identically zero, the family contains no invertible coordinate transformation. If it is nonzero, the algorithm constructs a nonzero witness deterministically: because its degree in each free parameter is at most the ambient dimension (n), successive exact specializations over \\(\\{0,1,\\ldots,n\\}\\) preserve a nonzero polynomial and yield an invertible member. Every map equation and the final determinant are checked exactly.
+
+The synthetic two-map, two-dimensional control has coincident source fixed points, so Phase 17's fixed-point-frame method cannot apply. Phase 18 finds an exact invertible affine witness from a two-parameter solution family. Six tests are included. This phase still enumerates map correspondences with a cap; a capped search is unresolved, not negative. The example is mathematical, not physical evidence.
+
+See [UNDERDETERMINED_AFFINE_IFS_AND_EXACT_INVERTIBILITY.md](phase-18/UNDERDETERMINED_AFFINE_IFS_AND_EXACT_INVERTIBILITY.md). It does not prove common physical origin or causal coupling.
+
