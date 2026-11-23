@@ -34,6 +34,33 @@ def roots_h3():
 def refl(a):
  assert dot(a,a)==o()
  return tuple(tuple(sub(o() if i==j else z(),sc(mul(a[i],a[j]),F(2))) for j in range(3)) for i in range(3))
+def sign_q5(x):
+ a,b=x
+ if a==0:return 0 if b==0 else (1 if b>0 else -1)
+ if b==0:return 1 if a>0 else -1
+ d=a*a-5*b*b
+ if d>0:return 1 if a>0 else -1
+ return 1 if b>0 else -1
+def cross(a,b):
+ return (sub(mul(a[1],b[2]),mul(a[2],b[1])),
+         sub(mul(a[2],b[0]),mul(a[0],b[2])),
+         sub(mul(a[0],b[1]),mul(a[1],b[0])))
+def vsub(a,b):return tuple(sub(x,y) for x,y in zip(a,b))
+def h3_facets(R):
+ roots=sorted(R,key=lambda r:tuple(float(a)+float(b)*5**.5 for a,b in r));facets=set()
+ for i,j,k in itertools.combinations(range(len(roots)),3):
+  a,b,c=roots[i],roots[j],roots[k];n=cross(vsub(b,a),vsub(c,a))
+  if all(x==z() for x in n):continue
+  signs=[];cop=[]
+  for t,x in enumerate(roots):
+   sg=sign_q5(dot(n,vsub(x,a)))
+   if sg:signs.append(sg)
+   else:cop.append(t)
+  if not(1 in signs and -1 in signs) and len(cop)>=3:facets.add(tuple(cop))
+ counts=Counter(len(f) for f in facets)
+ assert len(facets)==32 and counts==Counter({3:20,5:12})
+ return counts
+
 def check_h3():
  R=roots_h3();assert len(R)==30 and all(dot(x,x)==o() for x in R)
  S=[refl(a) for a in R]

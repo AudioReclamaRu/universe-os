@@ -1,0 +1,25 @@
+{
+  "status": "PASS_EXACT_Q_SQRT5_H3_CONVEX_HULL_AND_RATIONAL_D4_TRIALITY",
+  "H3": {
+    "roots": 30,
+    "exact_unit_norms": true,
+    "reflection_group_order": 120,
+    "det_plus": 60,
+    "det_minus": 60,
+    "distinct_inner_products": 9,
+    "root_polytope_edges": 60,
+    "root_polytope_faces": 32,
+    "triangular_faces": 20,
+    "pentagonal_faces": 12,
+    "facet_support_tests": "exact Q(sqrt(5))"
+  },
+  "D4_Spin8": {
+    "D4_roots": 24,
+    "dim_so8": 28,
+    "three_8d_rep_sets": true,
+    "T2_order": 2,
+    "T3_order": 3,
+    "triality_group": "S3",
+    "generated_order": 6
+  }
+}
