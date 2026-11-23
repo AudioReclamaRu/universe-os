@@ -6,9 +6,7 @@ matrix-product budget. The filters are necessary, never sufficient.
 """
 from __future__ import annotations
 
-import argparse
 import itertools
-import json
 import sys
 from pathlib import Path
 
