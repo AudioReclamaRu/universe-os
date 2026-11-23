@@ -52,3 +52,33 @@ A negative result is meaningful only relative to a defined test, detection thres
 ## Status
 
 This document is canonical methodological policy for the research programme. It is not a claim that any particular unconfirmed object, ancient technology, geological interpretation or physical coupling mechanism exists.
+
+
+## Design-intent reconstruction rule — Giza
+
+For the Giza maximum-picture model, selected cross-object geometric relations are treated as **intentional design relations within the reconstruction**, not repeatedly downgraded to “possible coincidences” whenever the surviving measurements are imperfect.
+
+The current working relation is:
+
+\[
+d(P_{\rm Khufu},M_{\rm Great\ Sphinx})
+=
+d(P_{\rm Khafre},M_{\rm Khentkaus})
+=
+L^*.
+\]
+
+This equality is an explicit ideal target of the reconstruction. The task is to recover the ideal reference points, original parent-mass geometry, axes, dimensions and transformations that realise it. Do not dismiss the relation because present map-derived distances differ slightly. Do not silently alter measured observations either: preserve raw observations, their uncertainty and their coordinate provenance separately from latent ideal geometry.
+
+The modelling sequence is:
+
+1. Keep every observed coordinate and dimension unchanged in the raw evidence layer.
+2. Define the exact ideal relation as a design constraint in the ideal layer.
+3. Identify which unmeasured or transformed geometric quantities can reconcile the observations with the ideal.
+4. Build the maximum set of coherent ideal geometries, including alternative original rock masses.
+5. Rank reconstructions by consistency with all available constraints, not by one selected distance.
+6. Treat a reconstruction as stronger when it simultaneously explains more independent relations with fewer arbitrary adjustments.
+
+The intentional relation is a project-level reconstruction premise. It is not a claim that a surviving inscription or archaeological document has independently recorded the builders' design specification. This distinction must not be used to weaken the modelling premise; it simply keeps the historical documentation status honest.
+
+When speaking about this relation in the project, use **“the intended design relation”** or **“the ideal design invariant”**, not “possible coincidence.”
