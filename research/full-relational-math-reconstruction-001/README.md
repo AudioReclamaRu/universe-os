@@ -34,16 +34,21 @@ The extended package is in [phase-02/README.md](phase-02/README.md). It adds:
 
 ## Phase 03 — cross-domain universal patterns
 
-The new phase is in [phase-03/README.md](phase-03/README.md). It establishes an exact bijection and order isomorphism between:
-
-- the odd support of Pascal's triangle over a binary row block;
-- digitwise subset pairs from Lucas' theorem;
-- ternary coordinate states;
-- the nonempty face-inclusion poset of a Boolean hypercube.
-
-It also records exact self-similar and spectral scaling relations for the Sierpiński gasket, Fibonacci substitution/inflation, Feigenbaum renormalization universality classes, and conditional river-network scaling. All mathematical integer keys newly introduced in Phase 03 use paired binary/ternary notation.
+The phase is in [phase-03/README.md](phase-03/README.md). It establishes an exact bijection and order isomorphism between odd Pascal support under Lucas' binary digit rule and the nonempty face-inclusion poset of a Boolean hypercube. It also records exact self-similar and spectral scaling relations for the Sierpiński gasket, Fibonacci substitution/inflation, Feigenbaum renormalization universality classes, and conditional river-network scaling.
 
 The Phase 03 finite checker is [verify_pascal_cube_face_isomorphism.py](phase-03/verify_pascal_cube_face_isomorphism.py).
+
+## Phase 04 — Giza triad and five-node geometry
+
+The phase is in [phase-04/GIZA_TRIAD_FIVE_NODE_GEOMETRY.md](phase-04/GIZA_TRIAD_FIVE_NODE_GEOMETRY.md). It separates:
+
+- Three-pyramid centre geometry on the GPMP survey grid.
+- The four sides and eight half-face patches per pyramid as a modelling structure, while retaining the observed differences in concavity evidence.
+- The Great Sphinx head reference point and the Khentkaus I tomb-complex map point as distinct, differently uncertain target references.
+- A five-node pairwise distance matrix and the provisional cross-axis relation.
+- A symbolic dynamic-network template whose physical coupling terms remain unfilled pending independent measurements.
+
+The reproducibility driver is [analyze_giza_geometric_network.py](phase-04/analyze_giza_geometric_network.py). It emits computed integer quantities in paired binary/ternary notation and does not infer a physical coupling law.
 
 ## Evidence policy
 
@@ -55,7 +60,7 @@ The Phase 03 finite checker is [verify_pascal_cube_face_isomorphism.py](phase-03
 
 ## Reproduce the existing checks
 
-From Python 3 with only the standard library:
+From Python with only the standard library:
 
 ~~~powershell
 python research/full-relational-math-reconstruction-001/verify_relations.py
