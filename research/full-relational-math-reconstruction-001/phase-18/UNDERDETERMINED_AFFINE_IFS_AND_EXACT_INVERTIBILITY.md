@@ -106,7 +106,7 @@ A negative result is limited to the stated finite affine-map families, common co
 
 Six standard-library tests are included. They cover an underdetermined two-dimensional family with coincident fixed points, a one-dimensional free scaling, an identically-zero determinant family, a capped unresolved permutation search, a conjugate affine-map pair, and empty-payload validation.
 
-The synthetic input and exact expected output are stored as example_input.json and example_summary.json. Local prototype checks exercise the algebraic cases, but this phase is not represented as a fresh-checkout validation or repository-wide CI result.
+The synthetic input and exact expected output are stored as example_input.json and example_summary.json. All six Phase 18 tests passed in the clean GitHub Actions pull-request checkout, workflow run [45243433007](https://github.com/AudioReclamaRu/universe-os/actions/runs/45243433007), using Python 3.12. This is phase-scoped CI, not repository-wide CI.
 
 ## H. Relation to the Canonical Mathematical Pattern Atlas
 
