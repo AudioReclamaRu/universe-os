@@ -318,7 +318,7 @@ and the integration reports for [Phase 24](phase-24/ADAPTIVE_MATRIX_WORD_REFINEM
 [Phase 22](phase-22/RELATIONAL_GRAPH_ISOMORPHISM_FOR_AFFINE_IFS.md) and
 [Phase 19](phase-19/ADAPTIVE_AFFINE_IFS_CONJUGACY_PIPELINE.md).
 
-### Validation status — phases 16–25
+### Validation status — phases 16–26
 
-The dedicated GitHub Actions workflow [ifs-exact-comparator-tests.yml](../.github/workflows/ifs-exact-comparator-tests.yml) completed successfully on the clean PR checkout in [run 45258174141](https://github.com/AudioReclamaRu/universe-os/actions/runs/45258174141), head `8e0df810100609e94067b087d4ec0ce9992504d0`: Phase 16 — 17 tests; Phase 17 — 9; Phase 18 — 6; Phase 19 — 9; Phase 20 — 6; Phase 21 — 7; Phase 22 — 9; Phase 23 — 6; Phase 24 — 6; Phase 25 — 6. **81 tests passed in total.** This is a clean-checkout CI result for the ten affine-IFS phase packages only. It does not claim that the complete repository or every earlier research phase passed CI.
+The dedicated GitHub Actions workflow [ifs-exact-comparator-tests.yml](../.github/workflows/ifs-exact-comparator-tests.yml) completed successfully on the clean pull-request checkout in [run 45266941902](https://github.com/AudioReclamaRu/universe-os/actions/runs/45266941902), testing branch head `269092eadefc74c49061ecb0fcf47656f7b20c98`: Phase 16 — 17 tests; Phase 17 — 9; Phase 18 — 6; Phase 19 — 10; Phase 20 — 6; Phase 21 — 7; Phase 22 — 9; Phase 23 — 6; Phase 24 — 8; Phase 25 — 6; Phase 26 — 7. **91 tests passed across all 11 affine-IFS phase packages.** This is a clean-checkout CI result for these eleven packages only. It does not claim that the complete repository or every earlier research phase passed CI.
 
