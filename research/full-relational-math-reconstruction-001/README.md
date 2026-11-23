@@ -240,3 +240,11 @@ The synthetic four-map scalar control reduces the unrestricted (4!=24) permutati
 
 See [CHARACTERISTIC_POLYNOMIAL_PARTITIONING_FOR_AFFINE_IFS.md](phase-20/CHARACTERISTIC_POLYNOMIAL_PARTITIONING_FOR_AFFINE_IFS.md), the implementation, tests and synthetic example.
 
+## Phase 21 — joint trace profiles for affine IFS map correspondence
+
+Phase 21 compares exact traces of six pairwise matrix words: \\(\\operatorname{tr}(A_iA_j)\\), \\(\\operatorname{tr}(A_i^2A_j)\\), \\(\\operatorname{tr}(A_iA_j^2)\\), \\(\\operatorname{tr}(A_iA_jA_iA_j)\\), \\(\\operatorname{tr}(A_i^2A_j^2)\\) and \\(\\operatorname{tr}([A_i,A_j]^2)\\). For each map it forms a sorted multiset of records against every map in its family. A common simultaneous conjugacy must preserve these profiles under the map permutation.
+
+The Phase 21 filter is necessary but not sufficient. It refines the Phase 20 characteristic-polynomial candidate graph; surviving matchings still pass through Phase 18's full affine equations, exact determinant-family solver and independent verification. A synthetic equal-characteristic-polynomial example reduces four individual-spectral candidate edges to zero relationally incompatible edges. Highly symmetric linear-part families may not be pruned; the 20-map Menger case remains on the Phase 17 fast path.
+
+Seven Phase 21 tests are included but have not been run from a clean checkout in this continuation. See [JOINT_TRACE_PROFILES_FOR_AFFINE_IFS.md](phase-21/JOINT_TRACE_PROFILES_FOR_AFFINE_IFS.md), the implementation, tests and synthetic example.
+
