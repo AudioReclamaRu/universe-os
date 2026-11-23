@@ -407,3 +407,17 @@ Do not reduce Giza by default to one isolated construction episode. The exact ch
 This historical fact applies to all nodes: the three pyramids and their eight half-face geometries; the Great Sphinx and its parent outcrop; the Khentkaus bedrock mass; the retained western-plateau alternative; and the surrounding terrain, quarry surfaces and geological transformations.
 
 **We do not ask whether people aimed and adjusted the Giza system. We ask WHY.** The primary research objectives are the intended overall outcome, functional roles, system architecture, selection of positions and proportions, governing constraints, inter-object relationships, and the reasons for repeated refinement. Reconstruct actual predecessors, axes, reference systems and techniques to answer those questions; do not turn the existence of prolonged human measuring into a debate.
+
+
+## Phase 05 supersession note
+
+The maximum-picture system model is now in [Phase 05 — GIZA PURPOSE ARCHITECTURE AND IDEAL NETWORK](../phase-05/GIZA_PURPOSE_ARCHITECTURE_AND_IDEAL_NETWORK.md).
+
+Phase 05 clarifies that:
+- the project's “second Sphinx” is the **Khentkaus-area natural bedrock parent mass**, not merely the tomb map point;
+- the Great Sphinx and Khentkaus are reconstructed as related but not necessarily identically shaped parent outcrops;
+- the western-plateau candidate remains a separate alternative branch;
+- all three pyramids retain eight half-face patches, with missing values represented by explicit H0/H1/H2 ideal families;
+- the correct symmetric V-profile sagitta for total half-wall direction difference \(\Delta\) is \(c=(B/2)\tan(\Delta/2)\); this supersedes any earlier quarter-angle form in this phase;
+- the Khentkaus-centred quarry circle, Khufu-side registration, quarry material balance, stratigraphic tie and external datum system are modelled together;
+- the exact cross-pair distance equality is retained as an ideal design invariant, while map pins remain only exploratory proxies.
