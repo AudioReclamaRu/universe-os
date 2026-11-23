@@ -42,7 +42,7 @@ The first example shows efficient frame recovery; the second shows that missing 
 A search cap is not a mathematical negative result.
 
 - Phase 17 frame-cap result remains unresolved and is returned without automatic fallback.
-- Phase 18 permutation-cap result remains unresolved.
+- Phase 20 candidate-matching-cap result remains unresolved.
 - A complete Phase 17 negative result is retained when the frame assumptions hold.
 - A complete Phase 18 negative result is retained only after all finite map permutations are examined and every consistent affine family has an identically zero determinant polynomial.
 
@@ -53,16 +53,16 @@ This separation is essential for preserving the Canonical Research Principle: no
 - Exact affine IFS map families in dimensions 1–3.
 - Common real quadratic coefficient field, using Phase 16 exact arithmetic.
 - Phase 17 requires a unique fixed point for every map and full affine span of the source fixed-point cloud.
-- Phase 18 is the fallback when those fixed-point assumptions fail.
-- Phase 20 reduces map correspondence using an exact characteristic-polynomial necessary invariant, but ambiguous matching families may still be factorial and capped.
-- A Phase 17 target-frame cap is not automatically retried with Phase 18.
+- Phase 20 is used when those fixed-point assumptions fail; it filters candidates by characteristic polynomial and delegates exact affine-family solving to Phase 18.
+- Phase 20 candidate matching remains capped; a capped result is unresolved, not negative.
+- A Phase 17 target-frame cap is not automatically retried with Phase 20.
 - No nonlinear conjugacy, mixed-field composita, higher-degree number fields, or physical causal interpretation is inferred.
 
 ## F. Validation
 
-Eight standard-library routing tests are included. They cover the Menger fast path, the underdetermined fallback, a frame-search cap, a complete Phase 17 negative result, an input mismatch, a Phase 18 permutation cap and empty-payload validation.
+Eight standard-library routing tests are included. They cover the Menger fast path, the Phase 20 filtered fallback, a frame-search cap, a complete Phase 17 negative result, an input mismatch, a Phase 20 candidate-matching cap, a complete Phase 20 negative result and empty-payload validation.
 
-The committed Phase 19 test module has not been executed from a clean checkout in this continuation. The routing logic has been inspected against the Phase 17 and 18 status contracts. This is not a repository-wide CI claim.
+The committed Phase 19 test module has not been executed from a clean checkout in this continuation. The routing logic has been inspected against the Phase 17 and Phase 20 status contracts. This is not a repository-wide CI claim.
 
 ## G. Relation to the Canonical Mathematical Pattern Atlas
 
@@ -75,8 +75,8 @@ This is a methodological integration inside the structural-equivalence layer. A 
 
 ## H. Next increments
 
-1. **Partly advanced in Phase 20:** the Phase 18 fallback now has an exact characteristic-polynomial candidate partition and searches only compatible perfect matchings. Repeated linear-part signatures can still produce a factorial number of candidate matchings; see [Phase 20](../phase-20/CHARACTERISTIC_POLYNOMIAL_PARTITIONING_FOR_AFFINE_IFS.md).
-2. Integrate the Phase 20 invariant partitions more tightly into the Phase 19 adaptive controller, while preserving its cap and negative-result policy.
+1. Strengthen the Phase 20 necessary-invariant filter for map families with repeated characteristic polynomials, while keeping exact affine verification decisive.
+2. Add relational invariants built from traces of products of multiple generators, preserving map-label permutation symmetry.
 3. Add exact handling of compatible coefficient-field extensions and composita.
 4. Extend the adaptive controller beyond affine IFS to substitution tilings, cellular automata, L-systems and nonlinear operators.
 5. Connect the structural engine to measured geometries and dynamical datasets with coordinate provenance, uncertainty and physical falsifiers.
