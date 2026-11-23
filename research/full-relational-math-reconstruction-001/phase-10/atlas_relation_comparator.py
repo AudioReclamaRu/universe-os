@@ -72,10 +72,10 @@ def _parse_basis(basis_id: str, basis_type: str, raw_groups: Sequence[Mapping[st
             omitted.append(name)
             continue
         groups.append(PiEntry(name, float(numeric_value), str(group.get("expression", "")), provenance))
-    if not groups:
-        raise ValueError(f"basis {basis_id} has no numerically evaluable Pi groups")
-    if any(not math.isfinite(group.value) or group.value <= 0 for group in groups):
-        raise ValueError(f"basis {basis_id} contains a non-positive or non-finite dimensionless value")
+    if not raw_groups:
+        raise ValueError(f"basis {basis_id} contains no Pi group entries")
+    if any(not math.isfinite(group.value) for group in groups):
+        raise ValueError(f"basis {basis_id} contains a non-finite dimensionless value")
     return BasisSet(basis_id, basis_type, tuple(groups), tuple(omitted))
 
 
@@ -125,20 +125,30 @@ def search_basis(basis: BasisSet, *, tolerance: float = 1e-4, max_terms: int = 3
                 exponents = [0] * n
                 for index, power in zip(indices, selected):
                     exponents[index] = power
-                # Keep every bounded integer-power relation. A power can match a
-                # mathematical constant even when the base does not.
-                log_value = sum(power * math.log(group.value)
-                                for group, power in zip(basis.groups, exponents) if power)
-                min_log = math.log(float.fromhex("0x0.0000000000001p-1022"))
-                max_log = math.log(float.fromhex("0x1.fffffffffffffp+1023"))
-                if min_log <= log_value <= max_log:
-                    value = math.exp(log_value)
+                selected_groups = [(group, power) for group, power in zip(basis.groups, exponents) if power]
+                zero_denominator = any(group.value == 0 and power < 0 for group, power in selected_groups)
+                zero_numerator = any(group.value == 0 and power > 0 for group, power in selected_groups)
+                if zero_denominator:
+                    value = None
+                    numeric_status = "undefined_zero_denominator"
+                    matches = ()
+                elif zero_numerator:
+                    value = 0.0
                     numeric_status = "evaluated_finite_float"
                     matches = atlas_matches(value, tolerance)
                 else:
-                    value = None
-                    numeric_status = "outside_finite_float_range"
-                    matches = ()
+                    log_value = sum(power * math.log(abs(group.value)) for group, power in selected_groups)
+                    sign = -1.0 if sum(power for group, power in selected_groups if group.value < 0) % 2 else 1.0
+                    min_log = math.log(float.fromhex("0x0.0000000000001p-1022"))
+                    max_log = math.log(float.fromhex("0x1.fffffffffffffp+1023"))
+                    if min_log <= log_value <= max_log:
+                        value = sign * math.exp(log_value)
+                        numeric_status = "evaluated_finite_float"
+                        matches = atlas_matches(value, tolerance)
+                    else:
+                        value = None
+                        numeric_status = "outside_finite_float_range"
+                        matches = ()
                 parts = [group.name if power == 1 else f"{group.name}^{power}"
                          for group, power in zip(basis.groups, exponents) if power]
                 candidates.append(Candidate(basis.basis_id, basis.basis_type, " * ".join(parts),
@@ -158,12 +168,14 @@ def compare_report(payload: Mapping[str, Any], *, tolerance: float = 1e-4, max_t
     total = 0
     for basis in bases:
         candidates = search_basis(basis, tolerance=tolerance, max_terms=min(max_terms, len(basis.groups)),
-                                  exponent_bound=exponent_bound, max_candidates=max_candidates)
+                                  exponent_bound=exponent_bound, max_candidates=max_candidates) if basis.groups else []
         total += len(candidates)
+        completeness = ("no_numeric_values" if not basis.groups else
+                        ("partial_numeric_projection" if basis.omitted_group_names else "complete_numeric_basis"))
         basis_results.append({
             "basis_id": basis.basis_id,
             "basis_type": basis.basis_type,
-            "basis_completeness": "partial_numeric_projection" if basis.omitted_group_names else "complete_numeric_basis",
+            "basis_completeness": completeness,
             "omitted_non_numeric_groups": list(basis.omitted_group_names),
             "input_group_count": paired(len(basis.groups) + len(basis.omitted_group_names)),
             "numerically_evaluable_group_count": paired(len(basis.groups)),
@@ -192,10 +204,10 @@ def compare_report(payload: Mapping[str, Any], *, tolerance: float = 1e-4, max_t
                    "max_abs_integer_exponent": paired(exponent_bound),
                    "max_candidates_per_basis": paired(max_candidates)},
         "basis_separation_rule": "Each canonical or alternative Pi basis is searched independently. Groups from different bases are never combined.",
-        "missing_numeric_rule": "If a Pi group has no numeric value, it is retained in the report as omitted and the search is labelled a partial numeric projection of that basis.",
+        "missing_numeric_rule": "If a Pi group has no numeric value, it is retained in the report as omitted and the search is labelled as a partial numeric projection of that basis. A basis with no numeric values remains listed but has no numeric candidates.",
         "scope_note": "Only the numeric machine-readable Atlas subset is compared here. Structural Atlas families require dedicated comparators.",
         "statistics_note": "Matches are an uncorrected exploratory screen. Tolerance and the number of tested candidates are reported; no significance or causal claim is inferred.",
-        "numeric_range_note": "Candidates outside finite floating-point range are retained symbolically with numeric value null and are not screened numerically.",
+        "numeric_range_note": "Candidates outside finite floating-point range are retained symbolically with numeric value null. Negative groups use integer-power sign rules; a zero group with a negative exponent is retained but marked undefined.",
         "basis_results": basis_results,
     }
 
