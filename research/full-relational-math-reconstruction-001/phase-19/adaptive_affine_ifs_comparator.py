@@ -13,6 +13,7 @@ for path in (PHASE17, PHASE18):
     if str(path) not in sys.path:
         sys.path.insert(0, str(path))
 
+from affine_ifs_conjugacy import paired
 from affine_ifs_scalable_matching import compare_ifs_pair_scalable
 from affine_ifs_underdetermined import compare_ifs_pair
 
@@ -122,7 +123,7 @@ def analyze_payload(payload):
         })
     return {
         "schema": "universe.affine-ifs-adaptive-conjugacy.batch.v1",
-        "pair_count": str(len(results)),
+        "pair_count": paired(len(results)),
         "results": results,
         "method_policy": (
             "Fixed-point frames first. Exact determinant-family fallback only when "
