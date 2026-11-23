@@ -176,3 +176,12 @@ The implementation and eleven tests are in [SCALE_FLOW_AND_DISCRETE_SCALE_INVARI
 Phase 13 estimates dynamic exponents from explicitly paired characteristic length/time observations. It preserves the pairing, checks unit-rescaling invariance, and supports ordinary least squares, time-uncertainty weighted least squares and an iterative effective-variance errors-in-variables approximation with within-pair error correlation. It compares the estimated exponent against the machine-readable numeric Atlas subset.
 
 The implementation, tests and synthetic paired-data example are in [PAIRED_SPACE_TIME_DYNAMIC_SCALING.md](phase-13/PAIRED_SPACE_TIME_DYNAMIC_SCALING.md). The method does not pair unrelated spatial and temporal datasets, and it does not assume a universal dynamic exponent. Full latent-variable likelihoods, cross-observation systematic covariance and hierarchical multi-process models remain future work.
+
+## Phase 14 — structural Atlas comparators for graphs and recurrences
+
+Phase 14 adds two structural comparators that do not reduce patterns to isolated decimal constants:
+
+- Finite simple graphs: degree sequence, components, cycle rank, bipartiteness, diameter, triangle count, exact adjacency spectral moments and characteristic polynomial; joint Weisfeiler–Leman refinement plus bounded exact graph-isomorphism search.
+- Finite sequences: exact rational inference of a minimal unique linear recurrence, characteristic polynomial, and separate comparisons of recurrence operator, exact initial state and projectively scaled initial state.
+
+The initial structural reference subset includes selected hypercubes, cycles, paths, complete/star graphs and Fibonacci/Lucas, Pell, Jacobsthal, Tribonacci and Padovan recurrence operators. It is a finite machine-readable subset, not the full structural Atlas. See [STRUCTURAL_ATLAS_COMPARATORS.md](phase-14/STRUCTURAL_ATLAS_COMPARATORS.md).
