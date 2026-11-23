@@ -115,7 +115,7 @@ A zero-edge relational graph is a complete negative result only for the stated f
 
 Seven standard-library tests are included. They cover pruning of equal-characteristic-polynomial but relationally incompatible families, preservation of a valid translated affine family with identical linear parts, map-order invariance, multiplicity preservation, capped ambiguous matching search, complete negative search and payload validation.
 
-The committed Phase 21 test module has not been run from a clean checkout in this continuation. No repository-wide CI pass is claimed.
+All seven Phase 21 tests passed in the clean GitHub Actions pull-request checkout, workflow run [45243433007](https://github.com/AudioReclamaRu/universe-os/actions/runs/45243433007), using Python 3.12. This confirms the Phase 21 test module from a clean checkout; no repository-wide CI pass is claimed.
 
 ## I. Relation to the Canonical Mathematical Pattern Atlas
 
