@@ -102,3 +102,12 @@ as an **intended design relation in the ideal model**, not a possible coincidenc
 ## Giza research question — WHY, not WHETHER
 
 The canon treats prolonged human measuring, aiming, checking and correction of the Giza layout as a fact and starting point. We do not spend effort proving that people did this. We reconstruct **why** they did it: intended overall result, functions of the objects and complete arrangement, governing constraints, selected geometries and the way all elements were meant to work together. See the canonical principles and Phase 04.
+
+
+## Phase 05 — Giza purpose architecture
+
+The integrated system reconstruction is in [phase-05/GIZA_PURPOSE_ARCHITECTURE_AND_IDEAL_NETWORK.md](phase-05/GIZA_PURPOSE_ARCHITECTURE_AND_IDEAL_NETWORK.md). It connects the three pyramid bases and eight half-faces each, the Great Sphinx parent outcrop, the Khentkaus parent outcrop, the Khentkaus-centred quarry ideal, material-volume accounting, external survey datums, successive layout refinement and the Sphinx–Khentkaus stratigraphic tie.
+
+The first grounded functional layer is a landscape-scale geometric registration, quarry-control and construction-coordination architecture. This is not the final explanation of the whole complex; further physical and system functions remain to be reconstructed.
+
+Reproduce the paired-numeral calculations with [phase-05/giza_ideal_system.py](phase-05/giza_ideal_system.py).
