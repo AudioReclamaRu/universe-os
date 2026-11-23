@@ -1,0 +1,57 @@
+{
+  "schema": "universe.fractal-generator-structural-comparison-summary.v1",
+  "synthetic_only": true,
+  "ifs": [
+    {
+      "name": "cantor_set",
+      "map_count": "<10_2|2_3>",
+      "similarity_dimension": "ln(2)/ln(3)",
+      "exact_match": true
+    },
+    {
+      "name": "sierpinski_gasket",
+      "map_count": "<11_2|10_3>",
+      "similarity_dimension": "ln(3)/ln(2)",
+      "exact_match": true
+    },
+    {
+      "name": "sierpinski_carpet",
+      "map_count": "<1000_2|22_3>",
+      "similarity_dimension": "ln(8)/ln(3)",
+      "exact_match": true
+    },
+    {
+      "name": "menger_sponge",
+      "map_count": "<10100_2|202_3>",
+      "similarity_dimension": "ln(20)/ln(3)",
+      "exact_match": true
+    },
+    {
+      "name": "koch_curve",
+      "map_count": "<100_2|11_3>",
+      "similarity_dimension": "ln(4)/ln(3)",
+      "exact_match": true
+    }
+  ],
+  "quadratic_dynamics": [
+    {
+      "name": "mandelbrot_parameter_family",
+      "parameter_mode": "variable",
+      "normalized_form": "z²+c",
+      "match": "mandelbrot_quadratic_parameter_family"
+    },
+    {
+      "name": "julia_fixed_c_minus_one",
+      "parameter_mode": "fixed",
+      "normalized_form": "z²-1",
+      "match": "julia_map_c_minus1"
+    },
+    {
+      "name": "affinely_conjugate_quadratic_example",
+      "parameter_mode": "fixed",
+      "normalized_form": "z²-1",
+      "match": "julia_map_c_minus1"
+    }
+  ],
+  "guard": "These are exact synthetic generator descriptors, not measurements of natural fractals or evidence of shared physical origin. Similarity dimension equals Hausdorff dimension only under suitable separation assumptions."
+}
