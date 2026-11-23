@@ -1,0 +1,21 @@
+{
+  "schema": "universe.paired-space-time-scaling-summary.v1",
+  "synthetic_only": true,
+  "datasets": [
+    {
+      "name": "synthetic_dynamic_scaling_control",
+      "dynamic_scaling_exponent_z": 1.500000349470616,
+      "fit_method": "ordinary_least_squares",
+      "slope_standard_uncertainty": 2.017669542493585e-7
+    },
+    {
+      "name": "synthetic_correlated_measurement_uncertainty",
+      "dynamic_scaling_exponent_z": 1.245081976670236,
+      "fit_method": "iterative_effective_variance_errors_in_variables",
+      "iterations": "<1_2|1_3>",
+      "converged": true,
+      "slope_standard_uncertainty": 0.005491000669843346
+    }
+  ],
+  "guard": "The paired observations and uncertainties are constructed synthetic values. Effective-variance fitting is an approximation, not a full latent-variable model."
+}
