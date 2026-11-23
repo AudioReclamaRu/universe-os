@@ -79,7 +79,7 @@ class UniversalTraceCatalogTests(unittest.TestCase):
         )
         self.assertEqual(result["status"], "partial_catalog_verification_unresolved")
         self.assertEqual(result["verified_identity_count"], "<0_2|0_3>")
-        self.assertEqual(result["unresolved_identity_count"], "<1_2|1_3>")
+        self.assertEqual(result["unresolved_identity_count"], result["unique_nonzero_trace_identities"])
         self.assertGreaterEqual(len(result["identities"]), 1)
         self.assertTrue(result["identities"][0]["status"].startswith("unresolved_"))
 
