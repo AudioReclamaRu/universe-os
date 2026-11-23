@@ -127,3 +127,10 @@ The new phase defines the common mathematical grammar for oscillatory systems fr
 Its central object is the **scale-bridge transfer operator** \(\mathcal T_{j\leftarrow i}(\omega)\), with source, carrier, path, interface, receiver, mode overlap, coupling, phase, attenuation, energy and falsifier. It separates distinct physical carriers and rejects frequency resemblance alone as proof of coupling.
 
 The phase positions Giza as one candidate subsystem within this wider network, rather than the whole investigation: [MULTISCALE_RESONANCE_ARCHITECTURE.md](phase-06/MULTISCALE_RESONANCE_ARCHITECTURE.md).
+
+
+## Canonical Mathematical Pattern Atlas — reference base for every search
+
+The common, living reference system is [00_CANONICAL_PATTERN_ATLAS.md](00_CANONICAL_PATTERN_ATLAS.md). It covers mathematical constants, recurrences, Pascal and binary–ternary structures, all major fractal families (including Mandelbrot, Julia, Sierpiński, Cantor, Koch and Menger), geometry, tilings, symmetry and root systems, topology, graphs, nonlinear dynamics, waves and resonance, fluids and turbulence, morphogenesis, branching, probability, information, variational principles, quantum fields, planetary, stellar and cosmological patterns.
+
+**Every new search and every new relation must be compared against the whole atlas**, not just the nearest subject category. The atlas is the persistent comparison base for UNIVERSE, GIZA PRIME, RSE and all connected investigations. New discoveries expand it.
