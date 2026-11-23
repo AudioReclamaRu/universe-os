@@ -200,6 +200,18 @@ class AdaptiveAffineIFSComparatorTests(unittest.TestCase):
         self.assertEqual(result["status"], "relational_graph_search_limit_reached")
         self.assertFalse(result["final_result"]["search"]["graph_search_complete"])
 
+
+    def test_phase24_budget_is_forwarded_through_adaptive_controller(self):
+        source, target = same_fixed_point_pair()
+        result = compare_ifs_pair_adaptive(
+            source, target, max_matrix_products=1, max_word_length=5
+        )
+        self.assertEqual(result["status"], "affine_conjugacy_verified")
+        budget = result["final_result"]["adaptive_matrix_word_refinement"]["matrix_product_budget"]
+        self.assertEqual(budget["limit"], "<1_2|1_3>")
+        self.assertEqual(result["selected_method"],
+                         "phase22_edge_labelled_relational_graph_plus_exact_affine_solver")
+
     def test_empty_payload_rejected(self):
         with self.assertRaises(ValueError):
             analyze_payload({})
