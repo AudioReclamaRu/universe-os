@@ -1,0 +1,39 @@
+{
+  "schema": "universe.ifs-relational-graph-conjugacy.v1",
+  "pair_count": "<1_2|1_3>",
+  "results": [
+    {
+      "name": "Same individual characteristic polynomials but incompatible directed pair-relations",
+      "status": "no_affine_conjugacy_found",
+      "source_coordinate_system": "two_source_operators",
+      "target_coordinate_system": "repeated_target_operator",
+      "exact_field": "Q(√3)",
+      "candidate_filter": "exact_vertex_charpoly_and_joint_directed_trace_profiles",
+      "candidate_edge_count": "<0_2|0_3>",
+      "unrestricted_permutation_count": "<10_2|2_3>",
+      "candidate_map_indices": [[], []],
+      "search": {
+        "graph_search_complete": true,
+        "candidate_isomorphisms_tested": "<0_2|0_3>",
+        "search_nodes": "<0_2|0_3>",
+        "affine_families_solved": "<0_2|0_3>"
+      },
+      "joint_relational_trace_filter": {
+        "word_trace_invariants": [
+          "tr(A_i A_j)",
+          "tr(A_i^2 A_j)",
+          "tr(A_i A_j^2)",
+          "tr(A_i A_j A_i A_j)",
+          "tr(A_i^2 A_j^2)",
+          "tr([A_i,A_j]^2)"
+        ],
+        "source_profile_class_count": "<1_2|1_3>",
+        "profile_definition": "Each map vertex is coloured by its exact characteristic polynomial and sorted multiset of pairwise six-word trace records.",
+        "edge_constraint": "One bijection must preserve every ordered pair label, including self-loops, under a single common map permutation.",
+        "logical_status": "Necessary, not sufficient, invariant for simultaneous similarity. Every final witness still passes the complete affine equations."
+      },
+      "interpretation": "The exact vertex/edge-labelled relational graph has no compatible bijection. No simultaneous affine conjugacy exists for the supplied finite map families under the selected necessary invariants."
+    }
+  ],
+  "global_guard": "Exact vertex and directed edge labels are necessary invariants under one simultaneous affine conjugacy, not sufficient. Every final witness is verified against every original affine map equation."
+}
