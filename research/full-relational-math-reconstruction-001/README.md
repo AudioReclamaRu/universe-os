@@ -224,11 +224,11 @@ See [UNDERDETERMINED_AFFINE_IFS_AND_EXACT_INVERTIBILITY.md](phase-18/UNDERDETERM
 
 ## Phase 19 — adaptive affine-IFS conjugacy pipeline
 
-Phase 19 unifies the Phase 17 fixed-point-frame search and Phase 18 exact determinant-family fallback. The controller first uses fixed-point frames when every map has a unique fixed point and the source fixed-point cloud spans the ambient affine space. It falls back to the underdetermined affine-family solver only when those assumptions are inapplicable.
+Phase 19 unifies the Phase 17 fixed-point-frame search with a Phase 20 → Phase 18 fallback. The controller uses fixed-point frames first; only when those assumptions are inapplicable does it compare exact characteristic polynomials of the linear parts to remove impossible map pairings, then solve surviving candidate matchings with the Phase 18 determinant-family method. The Menger case stays on the Phase 17 fast path because its maps share the same linear part and the Phase 20 filter would not prune the candidate graph.
 
-Dimension/field/map-count mismatches and complete Phase 17 negative results remain terminal. A Phase 17 frame-search cap remains unresolved and is not silently retried as a different search. The controller records all attempts, switching conditions and the selected final method.
+Dimension/field/map-count mismatches, complete Phase 17 negative results and frame-search caps remain terminal. Search caps are unresolved, not negative. The controller records every method attempt and the selected final method.
 
-Seven routing tests are included. The test module has not been executed from a clean checkout in this continuation; the repository-wide CI status is not claimed. See [ADAPTIVE_AFFINE_IFS_CONJUGACY_PIPELINE.md](phase-19/ADAPTIVE_AFFINE_IFS_CONJUGACY_PIPELINE.md), the implementation, tests and the coincident-fixed-point fallback example.
+Eight routing tests are included. The committed test module has not been executed from a clean checkout in this continuation; repository-wide CI is not claimed. See [ADAPTIVE_AFFINE_IFS_CONJUGACY_PIPELINE.md](phase-19/ADAPTIVE_AFFINE_IFS_CONJUGACY_PIPELINE.md), the implementation, tests and synthetic examples.
 
 ## Phase 20 — exact characteristic-polynomial partitions for affine IFS matching
 
