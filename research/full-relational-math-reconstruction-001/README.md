@@ -185,3 +185,11 @@ Phase 14 adds two structural comparators that do not reduce patterns to isolated
 - Finite sequences: exact rational inference of a minimal unique linear recurrence, characteristic polynomial, and separate comparisons of recurrence operator, exact initial state and projectively scaled initial state.
 
 The initial structural reference subset includes selected hypercubes, cycles, paths, complete/star graphs and Fibonacci/Lucas, Pell, Jacobsthal, Tribonacci and Padovan recurrence operators. It is a finite machine-readable subset, not the full structural Atlas. See [STRUCTURAL_ATLAS_COMPARATORS.md](phase-14/STRUCTURAL_ATLAS_COMPARATORS.md).
+
+## Phase 15 — fractal generator and quadratic dynamics comparators
+
+Phase 15 adds exact structural comparison for selected self-similar generators and complex quadratic dynamics. Affine IFS maps are represented over rational coefficients and (mathbb Q(sqrt3)), compared as order-independent exact map sets, and checked for contractivity/common similarity ratio. The initial families are the Cantor set, Sierpinski gasket/carpet, Menger sponge and Koch curve. Similarity-dimension candidates are reported conditionally on separation assumptions.
+
+Quadratic complex maps are normalized by exact affine conjugacy to (wmapsto w^2+C). The comparator keeps the variable-parameter Mandelbrot-family role distinct from fixed-parameter Julia maps. It compares operators and descriptors, not rendered images or parameter-plane membership.
+
+See [FRACTAL_GENERATOR_AND_QUADRATIC_DYNAMICS_COMPARATORS.md](phase-15/FRACTAL_GENERATOR_AND_QUADRATIC_DYNAMICS_COMPARATORS.md). This is a finite structural subset; other fractal, tiling, automaton and nonlinear-dynamics generators remain open.
