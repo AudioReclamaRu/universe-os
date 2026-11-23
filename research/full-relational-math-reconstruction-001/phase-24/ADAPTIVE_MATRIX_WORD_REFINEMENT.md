@@ -48,8 +48,12 @@ the target graph. This preserves every potentially corresponding edge that
 can constrain an ambiguous vertex, while avoiding extra word calculations
 for pairs whose endpoints are already fixed.
 
-The new exact trace values are appended to the existing six-word edge labels.
-The vertex profiles are rebuilt, and Phase 23 refinement is rerun jointly.
+The new exact trace values are passed through Phase 25's dependency reducer.
+Phase 25 first verifies the universal Phase 21 commutator-square identity and
+removes that redundant coordinate. It then tests candidate feature columns
+against one shared exact basis over the combined active source and target
+ordered-pair support. Only independent features are appended to the edge
+labels. The vertex profiles are rebuilt, and Phase 23 refinement is rerun jointly.
 Previous stable colour IDs are retained as part of the new initial colours,
 so each successive candidate partition can only split, never merge.
 
@@ -72,6 +76,11 @@ B_{\mathrm{tier}}=
 where N_s,N_t are ordered source and target map-pair counts incident to
 currently ambiguous vertices. A tier is atomic: it is fully applied or not
 applied at all. Partial tier results are never mixed into the graph.
+
+Phase 25 still charges every candidate trace that must be evaluated to test
+its exact dependence. A dependent feature is not carried into subsequent
+refinement labels, but this comparison-local reduction does not claim that
+the current tier's discovery cost is saved.
 
 This is a deterministic work proxy, not a wall-clock or coefficient-bit
 complexity guarantee. It can be configured through max_matrix_products;
@@ -111,10 +120,16 @@ Six standard-library tests cover:
 5. selective calculation only on ambiguous-vertex incidence;
 6. invalid budget and word-length handling.
 
+Phase 25's exact dependency layer is integrated between trace evaluation and
+edge-label extension. Universal identities are distinguished from
+finite-comparison dependencies, and the latter are accepted only with one
+shared exact coefficient vector on source and target active supports.
+
 The Phase 22 integration preserves all prior safeguards: one common map
 bijection, both directed edge orientations, self-loops, multiplicity,
 Phase 23 stable refinement, Phase 18's exact affine equations, independent
-verification, and unresolved search caps.
+verification, and unresolved search caps. See
+[EXACT_TRACE_FEATURE_DEPENDENCY_REDUCTION.md](../phase-25/EXACT_TRACE_FEATURE_DEPENDENCY_REDUCTION.md).
 
 ## F. Relation to the Canonical Mathematical Pattern Atlas
 
