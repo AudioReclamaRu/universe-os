@@ -394,3 +394,18 @@ The dedicated GitHub Actions pull-request workflow completed successfully on the
 - Phase 28 — 14 tests
 
 **119 tests passed across all 13 affine-IFS phase packages.** This is a clean-checkout CI result for these thirteen packages only. It does not claim that the complete repository or every earlier research phase passed CI.
+
+
+## Phase 29 — bounded trace-identity ideal closure
+
+Phase 29 builds a finite, exact consequence space from the fundamental trace identity. It supports rational linear-combination substitutions of noncommutative words, multiplication by trace monomials within explicit degree bounds, and exact additive closure over Q.
+
+The FTI is multilinear and alternating. Every rational linear-combination substitution therefore expands into a finite sum of word-tuple FTI identities; repeated word choices vanish, and all distinct word sets in the declared vocabulary are already represented by Phase 28. This gives an exact substitution-span statement without enumerating infinitely many rational coefficient choices.
+
+For multiplicative closure, every verified Phase 28 seed is multiplied by every canonical trace monomial within the configured trace-word-length and total-letter-degree limits. Each derived relation is reverified by Phase 27's exact generic-matrix-entry expansion.
+
+An incremental exact sparse Gaussian-elimination procedure computes a linearly independent basis of the bounded candidate span. Every dependent candidate carries a rational coefficient certificate, and the complete sparse polynomial sum is recomputed to exact zero.
+
+This is a basis of the finite bounded consequence space, **not** a minimal generating set of the full infinite T-ideal. The global characteristic-zero Procesi–Razmyslov theorem supplies the theoretical basis for FTI generation; the actual computed catalog remains explicitly bounded.
+
+See [Phase 29 theory and implementation report](phase-29/BOUNDED_TRACE_IDENTITY_IDEAL_CLOSURE.md), the [closure engine](phase-29/trace_ideal_closure.py) and the [14 Phase 29 tests](phase-29/test_trace_ideal_closure.py).
