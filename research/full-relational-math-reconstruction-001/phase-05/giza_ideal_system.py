@@ -379,6 +379,7 @@ def main():
     print(f"G32--G23: distance={fmt(d1,'m')}; height difference={fmt(h1,'m')}; slope={fmt(degrees(atan(h1/d1)),'°',1_000_000)}")
     print(f"G32--G24: distance={fmt(d2,'m')}; height difference={fmt(h2,'m')}; slope={fmt(degrees(atan(h2/d2)),'°',1_000_000)}")
     print("The field survey correlates marly/nummulitic beds near Khentkaus with the Sphinx neck/head sequence.")
+    khentkaus_glss_b_geometry()
     print("\nEND: system geometry reproduced; broader physical functions remain further research layers.")
 
 if __name__=="__main__":
