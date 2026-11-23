@@ -146,3 +146,9 @@ Every candidate relation is compared against the full Canonical Pattern Atlas. M
 Phase 08 adds a standard-library Python reference kernel that converts typed quantities into dimensionally admissible relation candidates, compares numerical ratios and fitted scaling exponents against a machine-readable subset of the Canonical Pattern Atlas, and preserves paired binary/ternary report keys. It supports uncertainty propagation for ratios, optional same-frame cross-ratios and log-log power-law fits.
 
 The implementation, tests and synthetic input/output are in [phase-08/RELATION_DISCOVERY_ENGINE.md](phase-08/RELATION_DISCOVERY_ENGINE.md). The numeric registry is intentionally only a subset: structural atlas families require dedicated comparators. Numerical matches remain candidates, not causal evidence. The test suite was run locally; this is not a full-repository CI claim.
+
+## Phase 09 — Buckingham–Π dimensional relation engine
+
+Phase 09 adds exact rational null-space analysis for Buckingham–Π groups. The engine builds the seven-dimensional SI exponent matrix, calculates rank/nullity and pivot/free variables, then emits a canonical basis plus complete alternative bases with exact exponent vectors. It preserves variable source/unit/status metadata and can evaluate groups when positive numeric values are supplied.
+
+The implementation, tests and Reynolds-number demonstration are in [phase-09/BUCKINGHAM_PI_ENGINE.md](phase-09/BUCKINGHAM_PI_ENGINE.md). The example recovers Π = ρUL/μ; a test also derives the pendulum dimensionless group T²g/L. Alternative bases are explicitly non-unique representations of the same null space. Dimensional compatibility is not a physical law or causal mechanism.
