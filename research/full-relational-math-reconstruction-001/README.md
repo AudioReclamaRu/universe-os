@@ -193,3 +193,12 @@ Phase 15 adds exact structural comparison for selected self-similar generators a
 Quadratic complex maps are normalized by exact affine conjugacy to (wmapsto w^2+C). The comparator keeps the variable-parameter Mandelbrot-family role distinct from fixed-parameter Julia maps. It compares operators and descriptors, not rendered images or parameter-plane membership.
 
 See [FRACTAL_GENERATOR_AND_QUADRATIC_DYNAMICS_COMPARATORS.md](phase-15/FRACTAL_GENERATOR_AND_QUADRATIC_DYNAMICS_COMPARATORS.md). This is a finite structural subset; other fractal, tiling, automaton and nonlinear-dynamics generators remain open.
+
+## Phase 16 — affine conjugacy and coordinate invariance of IFS generators
+
+Phase 16 adds an exact comparator for finite affine IFS map families expressed in different coordinate systems. For each candidate map permutation it solves \\(H\\circ F_i=G_{\\pi(i)}\\circ H\\) with \\(H(x)=Px+t\\), checks the determinant exactly and re-verifies every map. Rational and quadratic-surd arithmetic are exact over a common squarefree real quadratic field in dimensions 1–3. The tool separates verified conjugacy, complete negative search, underdetermined systems and capped unresolved searches; a capped permutation search is never a negative result.
+
+The synthetic Sierpiński-gasket control recovers \\(P=[[2,1],[1,2]]\\), \\(t=[3,-1]\\), \\(\\det(P)=3\\). Seventeen local tests pass. This is a mathematical coordinate-equivalence result, not an empirical physical finding; the field and permutation search remain bounded.
+
+See [AFFINE_IFS_CONJUGACY_AND_COORDINATE_INVARIANCE.md](phase-16/AFFINE_IFS_CONJUGACY_AND_COORDINATE_INVARIANCE.md). The phase does not yet cover arbitrary number fields, mixed-field composita, non-affine conjugacies or large unrestricted permutation spaces.
+
