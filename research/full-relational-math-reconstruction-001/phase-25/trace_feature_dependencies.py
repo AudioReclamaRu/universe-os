@@ -82,6 +82,10 @@ def insert_feature(basis, feature_name: str, values, radical: int):
     if isinstance(radical, bool) or not isinstance(radical, int) or radical < 2:
         raise ValueError("radical must be an integer >= 2")
     vector = list(values)
+    if not vector:
+        raise ValueError("dependency feature vector must contain at least one sample row")
+    if basis and len(vector) != len(basis[0]["vector"]):
+        raise ValueError("all dependency feature vectors must share one sample-row count")
     expression = {feature_name: core.O}
     for entry in basis:
         factor = vector[entry["pivot"]]
