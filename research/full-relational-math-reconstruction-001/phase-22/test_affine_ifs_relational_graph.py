@@ -91,6 +91,8 @@ class RelationalGraphConjugacyTests(unittest.TestCase):
         source, target = same_slope_translation_pair()
         result = compare_ifs_pair_relational_graph(source, target)
         self.assertEqual(result["status"], "affine_conjugacy_verified")
+        self.assertIn("adaptive_colour_refinement", result)
+        self.assertTrue(result["adaptive_colour_refinement"]["stable"])
         self.assertEqual(result["affine_coordinate_change"]["matrix_P"], [["<10_2|2_3>"]])
         self.assertEqual(result["affine_coordinate_change"]["translation_t"], ["<11_2|10_3>"])
         self.assertEqual(result["map_permutation_target_index_for_each_source"],
@@ -114,6 +116,10 @@ class RelationalGraphConjugacyTests(unittest.TestCase):
         self.assertEqual(result["status"], "no_affine_conjugacy_found")
         self.assertTrue(result["search"]["graph_search_complete"])
         self.assertEqual(result["candidate_edge_count"], "<0_2|0_3>")
+        self.assertEqual(
+            result["adaptive_colour_refinement"]["candidate_edges_after_refinement"],
+            "<0_2|0_3>",
+        )
 
     def test_complete_negative_after_all_relational_isomorphisms(self):
         source, target = ambiguous_nonconjugate_translation_pair()
