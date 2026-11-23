@@ -82,3 +82,22 @@ The modelling sequence is:
 The intentional relation is a project-level reconstruction premise. It is not a claim that a surviving inscription or archaeological document has independently recorded the builders' design specification. This distinction must not be used to weaken the modelling premise; it simply keeps the historical documentation status honest.
 
 When speaking about this relation in the project, use **“the intended design relation”** or **“the ideal design invariant”**, not “possible coincidence.”
+
+
+## Historical reality — human measuring and aiming over millennia
+
+This is **not merely an idealisation invented for this reconstruction**:
+
+> **На нашей планете люди тысячелетиями наблюдали, измеряли, размечали, прицеливались, проверяли направления, расстояния, углы и пропорции, строили, исправляли и передавали геометрические знания следующим поколениям.**
+
+This is a real, long-duration feature of human history across societies and generations. Celestial observation, surveying, orientation, baseline setting, construction layout, proportional design, checking and correction are human practices with deep historical roots. They must not be described as something builders merely “might have done”.
+
+### How this governs Giza research
+
+Giza is investigated within that real history of human measurement and design. The starting framework is cumulative and multi-stage: natural landscape observation, reference selection, setting-out, comparison, correction, quarrying, shaping, construction, modification, reuse and transmission of knowledge across generations.
+
+Do not default to a single isolated construction episode or treat long-term human aiming as a fictional optional scenario. Reconstruct predecessor states, inherited references and successive geometric refinements as a main research line.
+
+The exact chronology, number of stages, identities of the participating communities and continuity of particular surveying traditions remain questions to resolve from evidence. That uncertainty concerns *which stages occurred and how they were connected*; it does not erase the historical fact that human beings have measured and aimed for millennia.
+
+When evidence is missing, return to the canonical motto and search for predecessor layouts, surviving reference marks, reused alignments, quarry boundaries, construction phases and transformed natural features. Do not replace the long human history of measurement with a default assumption of one-time placement.
