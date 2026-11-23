@@ -89,12 +89,13 @@ reordering, negative and cap controls.
 
 ## E. Tests and validation
 
-Five standard-library tests cover:
+Six standard-library tests cover:
 1. neighbour-colour incidence that is invisible to simple row profiles;
 2. target relabelling of an isomorphic graph;
-3. direction preservation and a deliberately inconclusive regular control;
-4. self-loops and multiplicity;
-5. invalid graph-shape rejection.
+3. direction preservation under reversed ordered-pair labels;
+4. a regular control where refinement remains correctly inconclusive;
+5. self-loops and multiplicity;
+6. invalid graph-shape rejection.
 
 The GitHub Actions workflow runs this package on Python 3.12 alongside Phases
 16–22. Test success is reported only after the corresponding clean PR run
