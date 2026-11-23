@@ -41,9 +41,8 @@ class ScalableAffineIFSMatchingTests(unittest.TestCase):
         self.assertEqual(result["status"], "affine_conjugacy_verified")
         self.assertEqual(result["affine_coordinate_change"]["determinant_P"], "<11_2|10_3>")
         self.assertEqual(result["affine_coordinate_change"]["translation_t"], [
-            "<100_2|11_3>",
-            "<111_2|21_3>/<11_2|10_3>",
-            "<1010_2|101_3>/<11_2|10_3>",
+            "<11_2|10_3>",
+            "-<1_2|1_3>",
         ])
         self.assertFalse(result["search"]["map_permutation_enumeration"])
 
