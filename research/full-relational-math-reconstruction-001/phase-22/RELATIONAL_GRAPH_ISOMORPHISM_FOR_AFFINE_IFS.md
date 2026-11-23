@@ -116,9 +116,16 @@ Phase 22 moves from map-wise relational profiles to a whole-family labelled rela
 
 It remains a mathematical structural filter. A verified affine conjugacy does not identify a natural source, propagation carrier, receiver, common history, energy transfer or causal physical bridge.
 
-## I. Next increments
+## I. Phase 23 integration
 
-1. Add adaptive longer matrix words when the current labelled graph leaves large equivalence classes, with explicit search budgets.
-2. Use exact partition refinement and branch-and-bound to improve the relational graph search on highly symmetric families.
-3. Combine fixed-point frame constraints with edge-labelled relational graph search before map correspondence enumeration.
-4. Extend exact fields and connect verified structural candidates to measured natural-system data with provenance, uncertainty and falsifiable physical mechanisms.
+The Phase 23 directed colour-refinement module is now applied before Phase 22 backtracking. It begins from the exact characteristic-polynomial / Phase 21 profile colours and repeatedly refines them with separate incoming and outgoing multisets of (exact edge label, neighbour colour). Source and target are refined jointly.
+
+The result includes the refinement round count, combined class-count sequence and candidate-edge counts before and after refinement. A stable colour mismatch is a valid negative for these selected graph invariants; a non-discrete stable partition is not a positive result. Phase 22 still performs full directed-edge graph search, and Phase 18 still verifies the complete affine equations.
+
+Five Phase 23 unit tests exercise the refinement engine itself. They do not claim an additional measured pruning gain on an affine-IFS dataset. See [ADAPTIVE_DIRECTED_COLOUR_REFINEMENT.md](../phase-23/ADAPTIVE_DIRECTED_COLOUR_REFINEMENT.md).
+
+## J. Next increments
+
+1. Add adaptive longer matrix words when the refined labelled graph leaves large equivalence classes, with explicit search budgets.
+2. Combine fixed-point frame constraints with edge-labelled relational graph search before map correspondence enumeration.
+3. Extend exact fields and connect verified structural candidates to measured natural-system data with provenance, uncertainty and falsifiable physical mechanisms.
