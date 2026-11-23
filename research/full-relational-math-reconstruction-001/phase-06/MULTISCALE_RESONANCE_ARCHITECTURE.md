@@ -7,7 +7,7 @@
 
 This phase replaces monument-by-monument dimensional preoccupation with a general physical architecture. Giza is one candidate subsystem within a much wider hierarchy of matter, fields, structures, fluids, planets, stars and cosmic history.
 
-## 1. Central principle — one mathematical language, distinct physical carriers
+## I. Central principle — one mathematical language, distinct physical carriers
 
 We search for recurring mathematical relations across scales:
 
@@ -26,7 +26,7 @@ The recurrence of this mathematical grammar does **not** mean that every process
 
 The target is therefore not one magical universal frequency. It is a **multiscale network of mode families and relations**, with some bridges physically active, some weak, some blocked, some nonlinear, some historically fossilized, and some not yet known.
 
-## 2. Multiscale ladder
+## II. Multiscale ladder
 
 The hierarchy is a research map, not a claim that every layer is automatically connected to the next.
 
@@ -56,7 +56,7 @@ The ladder contains both **active propagation** and **historical imprint**:
 
 For example, the early-universe baryon acoustic oscillation pattern is retained in the distribution of matter. It must not be described as an acoustic wave currently travelling from the early universe into the Giza plateau.
 
-## 3. The common dynamical grammar
+## III. The common dynamical grammar
 
 For a system with generalized coordinates \(\mathbf q\):
 
@@ -110,7 +110,7 @@ G_{g\mu}&K_g&G_{gs}&\cdots\\
 
 The off-diagonal blocks \(G_{ij}\) are not decorative connections. They represent actual physical coupling through contacts, interfaces, common fields or propagation paths. If a bridge is absent, the corresponding block is zero or negligibly small in the relevant regime.
 
-## 4. What resonance actually requires
+## IV. What resonance actually requires
 
 A frequency resemblance is not enough. A physically meaningful resonance relation must satisfy several conditions together:
 
@@ -137,7 +137,7 @@ The resonance bandwidth is of order:
 
 A high-\(Q\) mode is selective and stores oscillatory energy for longer; a low-\(Q\) mode is broader and dissipates energy faster. Neither is automatically better: a system may need broad capture, narrow selection or deliberate damping.
 
-## 5. Coupling and the emergence of collective modes
+## V. Coupling and the emergence of collective modes
 
 Consider two modes with uncoupled frequencies \(\omega_a\) and \(\omega_b\), coupled at rate \(g\). The qualitative regimes are:
 
@@ -162,37 +162,37 @@ A useful distinction:
 
 All three must be investigated.
 
-## 6. How a micro-oscillation can influence a macroscopic mode
+## VI. How a micro-oscillation can influence a macroscopic mode
 
 A local microscopic motion does not automatically amplify into a planetary vibration. The bridge must be specified.
 
 Possible mechanisms include:
 
-### 6.1. Coherent accumulation
+### VI-A. Coherent accumulation
 
 If many elements oscillate with aligned phases, their contributions can add coherently. If their phases are independent, the net oscillation is much smaller relative to the fully coherent case. Therefore a macroscopic mode requires a reason for phase correlation: common forcing, repeated geometry, synchronization, a shared boundary, nonlinear locking or a collective instability.
 
-### 6.2. Effective material response
+### VI-B. Effective material response
 
 Atomic and grain-scale behaviour determines aggregate elastic moduli, density, anisotropy, attenuation, scattering and internal friction. These effective properties determine how blocks, structures and bedrock respond at longer wavelengths.
 
-### 6.3. Contact and interface transmission
+### VI-C. Contact and interface transmission
 
 A small vibration can transmit through a chain of contacts, but each interface has reflection, conversion and dissipation. A continuous energy path must be traced rather than assumed.
 
-### 6.4. Resonant selection
+### VI-D. Resonant selection
 
 A large structure or geological mass may select a narrow band from a broadband input. It can act as a resonator, filter, waveguide, reflector or receiver without being an energy source.
 
-### 6.5. Parametric amplification and nonlinear conversion
+### VI-E. Parametric amplification and nonlinear conversion
 
 A slowly varying pressure, load, temperature, fluid level or boundary condition can modulate stiffness or inertia. Under appropriate conditions this can amplify a mode or move energy between frequency bands. The required threshold and energy source must be calculated.
 
-### 6.6. Stochastic excitation
+### VI-F. Stochastic excitation
 
 Uncorrelated microscopic fluctuations may contribute to a background spectrum. They do not create a coherent large-scale signal without a collective mechanism or suitable filtering. A broad noisy source can nevertheless continuously excite global normal modes if the coupling and spectral overlap exist.
 
-## 7. The bridge operator — the central object of the research
+## VII. The bridge operator — the central object of the research
 
 For every transition from scale \(\mathcal L_i\) to \(\mathcal L_j\), define:
 
@@ -224,7 +224,7 @@ The bridge passport records:
 
 For a linear chain of layers, the total transfer is a product of local transfer and interface operators. In a network with loops, the full response must be solved as a coupled system; it cannot be inferred by multiplying selected frequency ratios.
 
-## 8. The scale-invariant relation — compare dimensionless structure, not raw frequency
+## VIII. The scale-invariant relation — compare dimensionless structure, not raw frequency
 
 For a wave mode with characteristic speed \(v\), characteristic length \(L\) and mode-shape factor \(\chi_n\):
 
@@ -251,7 +251,7 @@ The core dimensionless relation register is:
 | Invariant | Definition | What it tests |
 |---|---|---|
 | Modal scale | \(\Pi_\omega=\omega L/v\) | Geometry and boundary scaling |
-| Quality factor | \(Q=\omega/(2\gamma)\) | Storage versus damping |
+| Quality factor | \(Q=\omega/(\mathbf2\gamma)\) | Storage versus damping |
 | Relative detuning | \(\Pi_\Delta=(\omega_d-\omega_n)/\gamma\) | How close a drive is to a mode bandwidth |
 | Coupling strength | \(\Pi_g=g/\gamma\) | Coupling versus modal loss |
 | Impedance contrast | \(\Pi_Z=Z_i/Z_j\) | Interface transmission/reflection |
@@ -263,51 +263,51 @@ The core dimensionless relation register is:
 
 A proposed universal pattern is stronger when the same dimensionless relation appears independently in different physical systems and remains stable under changes of units, coordinate conventions and measurement resolution.
 
-## 9. Distinct resonance families across nature
+## IX. Distinct resonance families across nature
 
 These are established examples of different mechanisms that share a mathematical language.
 
-### 9.1. Microscopic and mesoscopic matter
+### IX-A. Microscopic and mesoscopic matter
 
 Crystal-lattice vibrations are described by phonons; defects, impurities, grain boundaries and finite geometry alter propagation and attenuation. Long-wavelength collective lattice motion connects to classical elastic sound, while the short-scale description requires atomistic treatment. Phononic crystals and acoustic metamaterials deliberately shape dispersion and wave transmission.
 
 This supplies the first bridge from microscopic material properties to the effective elastic response of a stone, block or structure.
 
-### 9.2. Local structures and geological masses
+### IX-B. Local structures and geological masses
 
 Structures and rock masses support elastic eigenmodes determined by geometry, density, elastic constants, joints, cavities, anchoring, cracks and damping. A structure and its foundation form one coupled boundary-value problem; treating them as independent oscillators can miss hybrid modes.
 
 The correct object is the coupled structure–foundation–terrain operator, with environmental forcing and measured transfer functions.
 
-### 9.3. Earth normal modes and the Earth's hum
+### IX-C. Earth normal modes and the Earth's hum
 
 The Earth has global spheroidal and toroidal free oscillation modes. Background seismic modes can be continuously excited even without a major earthquake. Research identifies ocean infragravity-wave interactions and atmosphere–ocean–seafloor coupling as important excitation paths.
 
 This is a real example of a wave in one environmental subsystem exciting global elastic modes of the solid Earth. It is an especially useful model for studying how a distributed, non-seismic source can feed a planetary-scale resonator.
 
-### 9.4. Earth–ionosphere electromagnetic cavity
+### IX-D. Earth–ionosphere electromagnetic cavity
 
 The conducting Earth surface and ionospheric region form a global electromagnetic cavity. Lightning and atmospheric electrical activity excite extremely-low-frequency electromagnetic resonances.
 
 This is an electromagnetic branch, not the same mode family as Earth's elastic normal modes. It can be coupled to atmospheric and plasma processes only through specified electrodynamic mechanisms.
 
-### 9.5. Solar and stellar oscillations
+### IX-E. Solar and stellar oscillations
 
 The Sun exhibits global acoustic oscillations studied by helioseismology. These modes probe the internal structure of a star. Stellar oscillations are therefore another planetary/stellar-scale normal-mode family, with gravity, pressure, rotation, convection and magnetic fields setting the spectrum.
 
-### 9.6. Plasma and heliospheric waves
+### IX-F. Plasma and heliospheric waves
 
 Magnetized plasma supports Alfvén and magnetohydrodynamic waves. These transport disturbances through magnetic fields and plasma flows. They cannot be treated as sound travelling through a vacuum; the plasma and magnetic field are the carrier and restoring structure.
 
-### 9.7. Orbital resonance
+### IX-G. Orbital resonance
 
 Orbital resonances are relations between orbital frequencies or periods, mediated by gravitational perturbations. They can organise long-term orbital evolution and phase relationships. They are not acoustic normal modes and do not imply that planetary bodies transmit mechanical sound through space.
 
-### 9.8. Primordial acoustic imprints
+### IX-H. Primordial acoustic imprints
 
 In the early universe, coupled matter–radiation plasma supported pressure waves. Their imprint remains in the large-scale distribution of matter as baryon acoustic oscillations. This is a fossilized pattern from an earlier physical regime, not a present-day resonator that is directly exciting local structures.
 
-## 10. Giza as one candidate subsystem in the multiscale network
+## X. Giza as one candidate subsystem in the multiscale network
 
 The Giza system is no longer treated as a stand-alone question about whether the pyramids or Sphinx “make sound”. It is a candidate engineered/geological subsystem embedded in multiple natural fields.
 
@@ -323,7 +323,7 @@ The model contains:
 - the regional seismic, acoustic, electromagnetic and hydrological environment;
 - Earth-scale elastic modes and the Earth–ionosphere electromagnetic cavity as separate global receivers.
 
-### 10.1. Candidate physical roles
+### X-A. Candidate physical roles
 
 Each object may have more than one role, and roles are tested independently:
 
@@ -342,7 +342,7 @@ Each object may have more than one role, and roles are tested independently:
 
 A pyramid, chamber or outcrop is not assigned any one of these roles merely by resemblance. The role is selected by the response signature and physical energy path.
 
-### 10.2. Giza-to-Earth bridge candidates
+### X-B. Giza-to-Earth bridge candidates
 
 | Candidate path | Possible carrier | Key test |
 |---|---|---|
@@ -356,7 +356,7 @@ A pyramid, chamber or outcrop is not assigned any one of these roles merely by r
 
 A direct Giza-to-Earth-normal-mode or Giza-to-Schumann-resonance coupling is **not inserted by assumption**. It is a bridge to investigate with calibrated source, receiver, path, coherence and energy measurements. The global resonances are real; the contribution of any Giza element to them is a separate question.
 
-## 11. The binary–ternary research encoding
+## XI. The binary–ternary research encoding
 
 The project's binary and ternary structures are used to organise states and relations, not to force every physical variable to be discrete.
 
@@ -394,7 +394,7 @@ The resulting binary/ternary network can represent:
 - which paths are measured, idealized or unknown;
 - where a network-level collective mode emerges.
 
-## 12. Universal resonance hypothesis — correct form
+## XII. Universal resonance hypothesis — correct form
 
 The research hypothesis is **not** that all things in the Universe share one frequency.
 
@@ -428,7 +428,7 @@ The deeper search is for universal or recurring dimensionless relations governin
 
 A universal relation may hold within a class of physical systems rather than everywhere. A failure of exact frequency equality does not rule out a common scaling law, a phase relation, a mode-shape relation or a shared operator.
 
-## 13. Measurement architecture — observe transfer, not just peaks
+## XIII. Measurement architecture — observe transfer, not just peaks
 
 A frequency peak at two locations does not prove energy transmission between them. The minimum useful observation set is:
 
@@ -445,7 +445,7 @@ A frequency peak at two locations does not prove energy transmission between the
 
 A credible bridge must survive changes in sensor position, repeated sessions, independent instruments and control sites.
 
-## 14. The first research sequence
+## XIV. The first research sequence
 
 **Do not return to millimetre-level monument mapping as the default next step.** Work first at the level of mode families, scaling relations and transfer architecture.
 
@@ -460,7 +460,7 @@ A credible bridge must survive changes in sensor position, repeated sessions, in
 | \(\mathcal P_G\) | Identify what would couple Giza to larger natural modes | Required source strength, transfer, phase coherence, receiver response and falsifiers |
 | \(\mathcal P_H\) | Only then refine the geometry or instrumentation that materially controls the bridge | Targeted measurement plan, not an indiscriminate monument survey |
 
-## 15. Negative results and open channels
+## XV. Negative results and open channels
 
 The canonical motto remains:
 
@@ -482,7 +482,7 @@ When a proposed cross-scale connection fails, determine which layer failed:
 
 Retain the alternative paths and the null result with its detection limits.
 
-## 16. Source anchors
+## XVI. Source anchors
 
 - Phonon engineering and the relation between atomistic lattice vibration and continuum acoustics: https://doi.org/10.1002/smsc.202200052
 - Earth's background free oscillations and ocean infragravity-wave excitation: https://doi.org/10.1146/annurev-earth-050212-124020
@@ -495,7 +495,7 @@ Retain the alternative paths and the null result with its detection limits.
 - NASA description of baryon acoustic oscillations as early-universe sound-wave imprints: https://science.nasa.gov/mission/roman-space-telescope/baryon-acoustic-oscillations/
 - NASA glossary and orbital mean-motion resonance definition: https://science.nasa.gov/universe/glossary/
 
-## 17. Phase conclusion
+## XVII. Phase conclusion
 
 The correct target is a **multiscale resonance network**, not an isolated Giza frequency and not one assumed planetary master oscillator.
 
