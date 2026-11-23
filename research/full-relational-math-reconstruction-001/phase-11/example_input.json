@@ -1,0 +1,331 @@
+{
+  "phase09_report": {
+    "schema": "universe.buckingham-pi.v1",
+    "rank": "<0_2|0_3>",
+    "nullity": "<10_2|2_3>",
+    "variable_count": "<10_2|2_3>",
+    "dimension_matrix": [
+      [
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0"
+      ]
+    ],
+    "pivot_variables": [],
+    "free_variables": [
+      "dimensionless_parameter_A",
+      "dimensionless_parameter_B"
+    ],
+    "canonical_basis": [
+      {
+        "basis_id": "<1_2|1_3>",
+        "expression": "dimensionless_parameter_A",
+        "exponents": {
+          "dimensionless_parameter_A": "1"
+        },
+        "numeric_value_secondary": 2,
+        "status": "dimensionless_group_candidate",
+        "interpretation_guard": "dimensionless_does_not_mean_universal_or_causal"
+      },
+      {
+        "basis_id": "<10_2|2_3>",
+        "expression": "dimensionless_parameter_B",
+        "exponents": {
+          "dimensionless_parameter_B": "1"
+        },
+        "numeric_value_secondary": 0.8090169943749475,
+        "status": "dimensionless_group_candidate",
+        "interpretation_guard": "dimensionless_does_not_mean_universal_or_causal"
+      }
+    ],
+    "alternative_basis_examples": [
+      {
+        "basis_id": "<1_2|1_3>",
+        "groups": [
+          {
+            "basis_id": "<1_2|1_3>",
+            "expression": "dimensionless_parameter_A * dimensionless_parameter_B",
+            "exponents": {
+              "dimensionless_parameter_A": "1",
+              "dimensionless_parameter_B": "1"
+            },
+            "numeric_value_secondary": 1.618033988749895,
+            "status": "dimensionless_group_candidate",
+            "interpretation_guard": "dimensionless_does_not_mean_universal_or_causal"
+          },
+          {
+            "basis_id": "<10_2|2_3>",
+            "expression": "dimensionless_parameter_B",
+            "exponents": {
+              "dimensionless_parameter_B": "1"
+            },
+            "numeric_value_secondary": 0.8090169943749475,
+            "status": "dimensionless_group_candidate",
+            "interpretation_guard": "dimensionless_does_not_mean_universal_or_causal"
+          }
+        ]
+      },
+      {
+        "basis_id": "<10_2|2_3>",
+        "groups": [
+          {
+            "basis_id": "<1_2|1_3>",
+            "expression": "dimensionless_parameter_A * dimensionless_parameter_B^-1",
+            "exponents": {
+              "dimensionless_parameter_A": "1",
+              "dimensionless_parameter_B": "-1"
+            },
+            "numeric_value_secondary": 2.472135954999579,
+            "status": "dimensionless_group_candidate",
+            "interpretation_guard": "dimensionless_does_not_mean_universal_or_causal"
+          },
+          {
+            "basis_id": "<10_2|2_3>",
+            "expression": "dimensionless_parameter_B",
+            "exponents": {
+              "dimensionless_parameter_B": "1"
+            },
+            "numeric_value_secondary": 0.8090169943749475,
+            "status": "dimensionless_group_candidate",
+            "interpretation_guard": "dimensionless_does_not_mean_universal_or_causal"
+          }
+        ]
+      },
+      {
+        "basis_id": "<11_2|10_3>",
+        "groups": [
+          {
+            "basis_id": "<1_2|1_3>",
+            "expression": "dimensionless_parameter_A",
+            "exponents": {
+              "dimensionless_parameter_A": "1"
+            },
+            "numeric_value_secondary": 2,
+            "status": "dimensionless_group_candidate",
+            "interpretation_guard": "dimensionless_does_not_mean_universal_or_causal"
+          },
+          {
+            "basis_id": "<10_2|2_3>",
+            "expression": "dimensionless_parameter_A * dimensionless_parameter_B",
+            "exponents": {
+              "dimensionless_parameter_A": "1",
+              "dimensionless_parameter_B": "1"
+            },
+            "numeric_value_secondary": 1.618033988749895,
+            "status": "dimensionless_group_candidate",
+            "interpretation_guard": "dimensionless_does_not_mean_universal_or_causal"
+          }
+        ]
+      },
+      {
+        "basis_id": "<100_2|11_3>",
+        "groups": [
+          {
+            "basis_id": "<1_2|1_3>",
+            "expression": "dimensionless_parameter_A",
+            "exponents": {
+              "dimensionless_parameter_A": "1"
+            },
+            "numeric_value_secondary": 2,
+            "status": "dimensionless_group_candidate",
+            "interpretation_guard": "dimensionless_does_not_mean_universal_or_causal"
+          },
+          {
+            "basis_id": "<10_2|2_3>",
+            "expression": "dimensionless_parameter_A * dimensionless_parameter_B^-1",
+            "exponents": {
+              "dimensionless_parameter_A": "1",
+              "dimensionless_parameter_B": "-1"
+            },
+            "numeric_value_secondary": 2.472135954999579,
+            "status": "dimensionless_group_candidate",
+            "interpretation_guard": "dimensionless_does_not_mean_universal_or_causal"
+          }
+        ]
+      }
+    ],
+    "basis_note": "A null-space basis is not unique. Every alternative basis is searched separately.",
+    "input_provenance": [
+      {
+        "name": "dimensionless_parameter_A",
+        "unit": "1",
+        "source": "synthetic demonstration only",
+        "status": "idealized"
+      },
+      {
+        "name": "dimensionless_parameter_B",
+        "unit": "1",
+        "source": "synthetic demonstration only",
+        "status": "idealized"
+      }
+    ]
+  },
+  "phase10_report": {
+    "basis_results": [
+      {
+        "basis_type": "canonical",
+        "basis_id": "canonical",
+        "basis_completeness": "complete_numeric_basis",
+        "candidate_count": "<1_2|1_3>",
+        "candidates": [
+          {
+            "candidate_id": "<1_2|1_3>",
+            "formula": "G<1_2|1_3> * G<10_2|2_3>",
+            "exponent_vector": {
+              "G<1_2|1_3>": 1,
+              "G<10_2|2_3>": 1
+            },
+            "value_numeric_secondary": 1.618033988749895,
+            "numeric_evaluation_status": "evaluated_finite_float",
+            "matches": [
+              {
+                "atlas_key": "constant.phi",
+                "symbol": "φ",
+                "relative_error_numeric_secondary": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "basis_type": "alternative",
+        "basis_id": "<1_2|1_3>",
+        "basis_completeness": "complete_numeric_basis",
+        "candidate_count": "<1_2|1_3>",
+        "candidates": [
+          {
+            "candidate_id": "<1_2|1_3>",
+            "formula": "G<1_2|1_3>",
+            "exponent_vector": {
+              "G<1_2|1_3>": 1
+            },
+            "value_numeric_secondary": 1.618033988749895,
+            "numeric_evaluation_status": "evaluated_finite_float",
+            "matches": [
+              {
+                "atlas_key": "constant.phi",
+                "symbol": "φ",
+                "relative_error_numeric_secondary": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "basis_type": "alternative",
+        "basis_id": "<10_2|2_3>",
+        "basis_completeness": "complete_numeric_basis",
+        "candidate_count": "<1_2|1_3>",
+        "candidates": [
+          {
+            "candidate_id": "<1_2|1_3>",
+            "formula": "G<1_2|1_3> * G<10_2|2_3>^2",
+            "exponent_vector": {
+              "G<1_2|1_3>": 1,
+              "G<10_2|2_3>": 2
+            },
+            "value_numeric_secondary": 1.618033988749895,
+            "numeric_evaluation_status": "evaluated_finite_float",
+            "matches": [
+              {
+                "atlas_key": "constant.phi",
+                "symbol": "φ",
+                "relative_error_numeric_secondary": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "basis_type": "alternative",
+        "basis_id": "<11_2|10_3>",
+        "basis_completeness": "complete_numeric_basis",
+        "candidate_count": "<1_2|1_3>",
+        "candidates": [
+          {
+            "candidate_id": "<1_2|1_3>",
+            "formula": "G<10_2|2_3>",
+            "exponent_vector": {
+              "G<10_2|2_3>": 1
+            },
+            "value_numeric_secondary": 1.618033988749895,
+            "numeric_evaluation_status": "evaluated_finite_float",
+            "matches": [
+              {
+                "atlas_key": "constant.phi",
+                "symbol": "φ",
+                "relative_error_numeric_secondary": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "basis_type": "alternative",
+        "basis_id": "<100_2|11_3>",
+        "basis_completeness": "complete_numeric_basis",
+        "candidate_count": "<1_2|1_3>",
+        "candidates": [
+          {
+            "candidate_id": "<1_2|1_3>",
+            "formula": "G<1_2|1_3>^2 * G<10_2|2_3>^-1",
+            "exponent_vector": {
+              "G<1_2|1_3>": 2,
+              "G<10_2|2_3>": -1
+            },
+            "value_numeric_secondary": 1.618033988749895,
+            "numeric_evaluation_status": "evaluated_finite_float",
+            "matches": [
+              {
+                "atlas_key": "constant.phi",
+                "symbol": "φ",
+                "relative_error_numeric_secondary": 0
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "log_covariance": {
+    "variable_order": [
+      "dimensionless_parameter_A",
+      "dimensionless_parameter_B"
+    ],
+    "log_relative_covariance": [
+      [
+        0.0001,
+        0.00005
+      ],
+      [
+        0.00005,
+        0.0004
+      ]
+    ],
+    "source": "synthetic covariance for software validation only",
+    "status": "idealized"
+  }
+}
