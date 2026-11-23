@@ -202,3 +202,13 @@ The synthetic Sierpiński-gasket control recovers \\(P=[[2,1],[1,2]]\\), \\(t=[3
 
 See [AFFINE_IFS_CONJUGACY_AND_COORDINATE_INVARIANCE.md](phase-16/AFFINE_IFS_CONJUGACY_AND_COORDINATE_INVARIANCE.md). The phase does not yet cover arbitrary number fields, mixed-field composita, non-affine conjugacies or large unrestricted permutation spaces.
 
+## Phase 17 — fixed-point affine frames and scalable IFS matching
+
+Phase 17 removes factorial enumeration of complete map permutations when comparing finite affine IFS generators with unique fixed points whose source fixed-point cloud spans the ambient space. It computes each exact fixed point from \\( (I-A_i)x_i^*=b_i \\), chooses one source affine frame, enumerates ordered target frames, and reconstructs the only affine map sending each frame to the other. A bipartite perfect-matching test then assigns all source maps to target maps using exact fixed-point and linear-part compatibility. Every returned witness is independently checked against all affine map equations.
+
+The 20-map Menger control reverses the target map list and applies an exact affine coordinate change. The comparator verifies all 20 maps after testing 23 of 116,280 ordered target frames, without enumerating the \\(20!\\) map permutations. Menger's internal symmetries mean that the recovered witness need not be the same affine map used to construct the synthetic target.
+
+Nine Phase 17 tests and the separate 17 Phase 16 tests pass locally. The method returns explicit inconclusive statuses when fixed points are not unique, the source fixed-point cloud does not span the ambient space, or a search cap is reached. A capped search is unresolved, not negative. This is an algorithmic mathematical control, not physical evidence of a Menger-like natural process or common origin.
+
+See [AFFINE_IFS_FIXED_POINT_FRAMES_AND_SCALABLE_MATCHING.md](phase-17/AFFINE_IFS_FIXED_POINT_FRAMES_AND_SCALABLE_MATCHING.md). The implementation and reproducible 20-map synthetic input/output are stored alongside the phase report.
+
