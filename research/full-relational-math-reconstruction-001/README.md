@@ -340,7 +340,7 @@ The independent verifier substitutes generic matrices with independent commuting
 
 Phase 27 currently proves individual FTI instances for supplied word substitutions. It does not yet enumerate every possible substitution or integrate universal reductions into the Phase 24–26 adaptive comparison pipeline. It makes no claim about a physical implementation of these algebraic matrices.
 
-See [UNIVERSAL_TRACE_IDENTITIES_AND_GENERIC_MATRIX_PROOFS.md](phase-27/UNIVERSAL_TRACE_IDENTITIES_AND_GENERIC_MATRIX_PROOFS.md), the [implementation](phase-27/universal_trace_identities.py) and the [14 Phase 27 tests](phase-27/test_universal_trace_identities.py).
+See [UNIVERSAL_TRACE_IDENTITIES_AND_GENERIC_MATRIX_PROOFS.md](phase-27/UNIVERSAL_TRACE_IDENTITIES_AND_GENERIC_MATRIX_PROOFS.md), the [implementation](phase-27/universal_trace_identities.py) and the [16 Phase 27 tests](phase-27/test_universal_trace_identities.py).
 
 ### Validation status — phases 16–27
 
@@ -364,15 +364,15 @@ The dedicated GitHub Actions workflow [ifs-exact-comparator-tests.yml](../.githu
 
 ## Phase 28 — bounded catalog of universal trace identities
 
-Phase 28 systematically enumerates fundamental trace identity (FTI) substitutions over a finite noncommutative matrix-word vocabulary. For dimension d, it generates all nonempty words over the declared generator alphabet up to maximum length L, then enumerates every combination of d+1 distinct words. The FTI's alternating multilinearity means permutations of one substitution set differ only by global sign; repeated arguments produce the zero alternating expression and are omitted.
+Phase 28 systematically enumerates fundamental trace identity (FTI) substitutions over a finite noncommutative matrix-word vocabulary. For dimension d, it generates all nonempty words over the declared generator alphabet up to maximum length L, then enumerates every multiset of d+1 words, including repetitions. The FTI is symmetric and multilinear: permutations of its arguments give the same expression, while repeated arguments are valid and generally nonzero.
 
 Generated trace polynomials are canonicalised using only trace cyclicity, commutativity of scalar trace factors, exact coefficient collection, common integer-gcd reduction and global sign. Distinct substitution sets yielding the same polynomial up to nonzero rational scalar are represented once, with aliases preserved. No word reversal or generator commutation is assumed.
 
 Every unique nonzero polynomial is independently verified by the Phase 27 generic-matrix-entry expansion. Word-catalog, substitution-set, permutation, per-identity and total expansion caps are explicit. A cap never becomes a negative result; total-budget exhaustion preserves a verified prefix and marks the remaining catalog unresolved.
 
-The completion claim is bounded to the declared dimension, alphabet, word-length limit and FTI substitution family. It is not a complete basis of all trace identities, does not yet include substitutions by arbitrary linear combinations of words, and is not yet integrated into the Phase 24–26 adaptive comparator.
+The completion claim is bounded to the declared dimension, alphabet, word-length limit and FTI multiset substitution family. It is not a complete basis of all trace identities, does not yet include multiplicative ideal consequences, and is not yet integrated into the Phase 24–26 adaptive comparator.
 
-See [Phase 28 report](phase-28/BOUNDED_UNIVERSAL_TRACE_IDENTITY_CATALOG.md), the [catalog generator](phase-28/universal_trace_catalog.py) and the [14 catalog tests](phase-28/test_universal_trace_catalog.py).
+See [Phase 28 report](phase-28/BOUNDED_UNIVERSAL_TRACE_IDENTITY_CATALOG.md), the [catalog generator](phase-28/universal_trace_catalog.py) and the [15 catalog tests](phase-28/test_universal_trace_catalog.py).
 
 
 ### Validation status — phases 16–28
@@ -400,7 +400,7 @@ The dedicated GitHub Actions pull-request workflow completed successfully on the
 
 Phase 29 builds a finite, exact consequence space from the fundamental trace identity. It supports rational linear-combination substitutions of noncommutative words, multiplication by trace monomials within explicit degree bounds, and exact additive closure over Q.
 
-The FTI is multilinear and alternating. Every rational linear-combination substitution therefore expands into a finite sum of word-tuple FTI identities; repeated word choices vanish, and all distinct word sets in the declared vocabulary are already represented by Phase 28. This gives an exact substitution-span statement without enumerating infinitely many rational coefficient choices.
+The FTI is symmetric and multilinear. Every rational linear-combination substitution therefore expands into a finite sum of word-multiset FTI identities; repeated word choices are retained, and argument permutations give the same identity. All word multisets in the declared vocabulary are represented by the corrected Phase 28 catalog. This gives an exact substitution-span statement without enumerating infinitely many rational coefficient choices.
 
 For multiplicative closure, every verified Phase 28 seed is multiplied by every canonical trace monomial within the configured trace-word-length and total-letter-degree limits. Each derived relation is reverified by Phase 27's exact generic-matrix-entry expansion.
 

@@ -28,7 +28,7 @@ Each FTI argument may be a finite rational linear combination of noncommutative 
 P_i=\sum_{w\in S_i}c_{i,w}w,\qquad c_{i,w}\in\mathbb Q.
 \]
 
-The FTI is multilinear and alternating in its d+1 arguments. Therefore:
+The FTI is multilinear and symmetric in its d+1 arguments. Therefore:
 
 \[
 FTI(P_0,\ldots,P_d)=
@@ -36,7 +36,7 @@ FTI(P_0,\ldots,P_d)=
 \left(\prod_i c_{i,w_i}\right)FTI(w_0,\ldots,w_d).
 \]
 
-Any tuple with repeated words vanishes by alternation. Every tuple of distinct words is represented, up to permutation sign, in Phase 28's complete combination catalog for the declared word vocabulary. This is an exact span statement; the program does not try to enumerate infinitely many rational coefficient vectors.
+Tuples with repeated words are retained. Argument permutations produce the same FTI, so every word multiset is represented in Phase 28's complete multiset catalog for the declared vocabulary. This is an exact span statement; the program does not try to enumerate infinitely many rational coefficient vectors.
 
 The standalone expansion function verifies the resulting primitive integer polynomial with Phase 27's generic-matrix-entry verifier.
 
@@ -80,4 +80,4 @@ This phase does not compute the full infinite ideal, does not claim a minimal T-
 
 ## Tests
 
-Fourteen standard-library tests cover rational linear substitutions, alternation, zero supports, substitution caps, bounded multiplier closure, exact basis production, explicit linear-dependency certificates, cyclic trace-word canonicalisation, multiplier and seed caps, total expansion budget handling and input validation.
+Fourteen standard-library tests cover rational linear substitutions, repeated arguments, zero supports, substitution caps, bounded multiplier closure, exact basis production, explicit linear-dependency certificates, cyclic trace-word canonicalisation, multiplier and seed caps, total expansion budget handling and input validation.

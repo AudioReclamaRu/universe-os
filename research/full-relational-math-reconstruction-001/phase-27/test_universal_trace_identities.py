@@ -125,6 +125,20 @@ class UniversalTraceIdentityTests(unittest.TestCase):
         self.assertEqual(identity["status"], "identity_constructed")
         self.assertTrue(all(term["coefficient"].startswith(("<", "-<")) for term in identity["terms"]))
 
+    def test_fundamental_trace_identity_is_symmetric_in_arguments(self):
+        forward = generate_fundamental_trace_identity(2, [[0], [1], [2]])
+        swapped = generate_fundamental_trace_identity(2, [[1], [0], [2]])
+        self.assertEqual(forward["status"], "identity_constructed")
+        self.assertEqual(swapped["status"], "identity_constructed")
+        self.assertEqual(forward["terms"], swapped["terms"])
+
+    def test_repeated_arguments_are_retained_and_universally_verified(self):
+        result = prove_fundamental_trace_identity(2, [[0], [0], [0]])
+        self.assertEqual(result["status"], "universally_verified_identity")
+        self.assertGreater(len(result["identity"]["terms"]), 0)
+        self.assertTrue(result["verification"]["verified"])
+        self.assertEqual(result["verification"]["exact_residual"], "0")
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

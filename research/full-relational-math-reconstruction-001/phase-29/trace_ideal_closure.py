@@ -227,7 +227,7 @@ def expand_linear_combination_substitution(
     """Expand FTI on d+1 rational linear combinations of noncommutative words.
 
     Multilinearity expands the identity over one selected word from each
-    support. Repeated selected words vanish by alternation. Rational
+    support. Repeated selected words are retained; the FTI is symmetric in its arguments. Rational
     coefficients are cleared to a primitive integer trace polynomial before
     passing it to the Phase 27 generic-matrix verifier.
     """
@@ -274,7 +274,7 @@ def expand_linear_combination_substitution(
 
     polynomial = {}
     visited = 0
-    zero_alternating_choices = 0
+    zero_polynomial_choices = 0
     for selected in product(*supports):
         visited += 1
         words = [word for word, _ in selected]
@@ -296,7 +296,7 @@ def expand_linear_combination_substitution(
             }
         raw_poly = _poly_from_terms(identity["terms"])
         if not raw_poly:
-            zero_alternating_choices += 1
+            zero_polynomial_choices += 1
             continue
         _poly_add_scaled(polynomial, raw_poly, coefficient)
 
@@ -305,12 +305,12 @@ def expand_linear_combination_substitution(
             **common,
             "status": "identically_zero_after_exact_expansion",
             "substitution_expansions": _paired(visited),
-            "zero_alternating_choices": _paired(zero_alternating_choices),
+            "zero_polynomial_choices": _paired(zero_polynomial_choices),
             "trace_terms": [],
             "verification": {
                 "verified": True,
                 "exact_residual": "0",
-                "reason": "all multilinear word choices cancelled or vanished by alternation",
+                "reason": "all expanded coefficients cancelled or selected FTI polynomials were zero",
             },
         }
 
@@ -332,7 +332,7 @@ def expand_linear_combination_substitution(
         **common,
         "status": final_status,
         "substitution_expansions": _paired(visited),
-        "zero_alternating_choices": _paired(zero_alternating_choices),
+        "zero_polynomial_choices": _paired(zero_polynomial_choices),
         "primitive_integer_trace_terms": integer_terms,
         "verification": verification,
     }
@@ -471,9 +471,9 @@ def build_bounded_trace_relation_space(
 ):
     """Build a bounded FTI-generated relation space and exact rational basis.
 
-    The seed catalog contains every FTI substitution on d+1 distinct words
-    from the declared vocabulary. By multilinearity and alternation, it spans
-    FTI evaluations on arbitrary rational linear combinations of those words.
+    The seed catalog contains every FTI substitution on multisets of d+1 words,
+    including repetitions, from the declared vocabulary. By multilinearity and
+    symmetry, it spans FTI evaluations on arbitrary rational linear combinations.
     Every seed is multiplied by every trace monomial in the finite multiplier
     vocabulary. Derived polynomials are verified generically and reduced to
     an exact Q-basis.
@@ -571,6 +571,7 @@ def build_bounded_trace_relation_space(
     candidate_count = seed_count * len(multipliers)
     common_counts = {
         "seed_identity_count": _paired(seed_count),
+        "seed_candidate_substitution_sets": seed_catalog["candidate_substitution_sets"],
         "trace_cycle_generators": [
             [_paired(generator) for generator in word] for word in cycles
         ],
@@ -579,12 +580,12 @@ def build_bounded_trace_relation_space(
         "derived_relation_candidate_cap": _paired(max_derived_relations),
         "multilinear_substitution_closure": {
             "supported": True,
-            "basis": "all distinct word substitutions from the declared Phase 28 word vocabulary",
+            "basis": "all word multisets, including repeated arguments, from the declared Phase 28 word vocabulary",
             "reason": (
-                "The FTI is multilinear and alternating in its dimension+1 arguments. "
+                "The FTI is multilinear and symmetric in its dimension+1 arguments. "
                 "Every rational linear-combination substitution expands into word tuples; "
-                "tuples with repeated words vanish and all distinct-word tuples occur "
-                "in the complete Phase 28 combination catalog, up to permutation sign."
+                "tuples with repeated words are retained and all word multisets occur "
+                "in the complete Phase 28 multiset catalog, with argument order immaterial."
             ),
             "arbitrary_rational_support_coefficients_enumerated": False,
             "closure_is_exact_span": True,

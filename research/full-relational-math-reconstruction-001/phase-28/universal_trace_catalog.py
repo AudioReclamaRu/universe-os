@@ -1,7 +1,7 @@
 """Bounded catalog of universally verified fundamental trace identities.
 
 Phase 28 enumerates word substitutions from a finite noncommutative alphabet,
-canonicalises the alternating substitution set and resulting trace polynomial,
+canonicalises the symmetric substitution multiset and resulting trace polynomial,
 deduplicates identities up to nonzero rational scalar, and verifies every
 catalogued identity by Phase 27's exact generic-matrix-entry expansion.
 
@@ -12,7 +12,7 @@ to be a complete basis of all trace identities.
 from __future__ import annotations
 
 from collections import defaultdict
-from itertools import combinations, product
+from itertools import combinations_with_replacement, product
 from math import comb, factorial, gcd
 import re
 
@@ -154,7 +154,7 @@ def _base_report(
 ):
     word_count = sum(generator_count ** length for length in range(1, max_word_length + 1))
     permutation_count = factorial(dimension + 1)
-    substitution_count = comb(word_count, dimension + 1) if word_count >= dimension + 1 else 0
+    substitution_count = comb(word_count + dimension, dimension + 1)
     return {
         "schema": "universe.universal-trace-identity-catalog.v1",
         "dimension": _paired(dimension),
@@ -173,9 +173,9 @@ def _base_report(
         "sampled_matrix_data_used": False,
         "universal_identity_scope": "all square matrices of the declared dimension",
         "catalog_completeness_scope": (
-            "all combinations of dimension+1 distinct nonempty words over the "
-            "declared generator alphabet with length <= maximum_word_length, "
-            "after fundamental-identity permutation symmetry"
+            "all multisets of dimension+1 nonempty words, including repeated words, "
+            "over the declared generator alphabet with length <= maximum_word_length; "
+            "argument permutations are symmetric"
         ),
         "not_claimed": (
             "a complete basis or generating set for all trace identities; "
@@ -197,11 +197,10 @@ def enumerate_universal_trace_identity_catalog(
 ):
     """Enumerate and exactly verify a bounded FTI substitution catalog.
 
-    The FTI is alternating and multilinear in its d+1 arguments. Therefore
-    permutations of one substitution set change only the global sign, which
-    is normalised away. Repeated substitutions yield the zero alternating
-    expression and are excluded. Distinct generated trace polynomials are
-    deduplicated up to a nonzero rational scalar.
+    The FTI is symmetric and multilinear in its d+1 arguments. Therefore
+    permutations of one substitution multiset give the same expression.
+    Repeated arguments are valid and are retained. Distinct generated trace
+    polynomials are deduplicated up to a nonzero rational scalar.
 
     Any configured cap returns an explicit unresolved status. A total
     verification cap may leave a verified prefix; all unverified identities
@@ -271,7 +270,7 @@ def enumerate_universal_trace_identity_catalog(
 
     unique = {}
     collapsed_zero_sets = 0
-    for substitution_set in combinations(words, dimension + 1):
+    for substitution_set in combinations_with_replacement(words, dimension + 1):
         identity = phase27.generate_fundamental_trace_identity(
             dimension,
             [list(word) for word in substitution_set],

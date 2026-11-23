@@ -30,15 +30,15 @@ class UniversalTraceCatalogTests(unittest.TestCase):
         )
         self.assertNotEqual(words[3], words[4])
 
-    def test_catalog_enumerates_every_distinct_word_set_and_verifies(self):
+    def test_catalog_enumerates_every_word_multiset_and_verifies(self):
         result = enumerate_universal_trace_identity_catalog(
             dimension=2,
             generator_count=2,
             max_word_length=2,
         )
         self.assertEqual(result["status"], "complete_catalog_verified")
-        self.assertEqual(result["candidate_substitution_sets"], "<10100_2|202_3>")
-        self.assertEqual(result["substitution_sets_processed"], "<10100_2|202_3>")
+        self.assertEqual(result["candidate_substitution_sets"], "<111000_2|2002_3>")
+        self.assertEqual(result["substitution_sets_processed"], "<111000_2|2002_3>")
         self.assertEqual(result["verified_identity_count"], result["unique_nonzero_trace_identities"])
         self.assertEqual(result["rejected_identity_count"], "<0_2|0_3>")
         self.assertEqual(result["unresolved_identity_count"], "<0_2|0_3>")
@@ -93,15 +93,19 @@ class UniversalTraceCatalogTests(unittest.TestCase):
         self.assertGreater(len(result["identities"]), 0)
         self.assertEqual(result["unresolved_identity_count"], result["unique_nonzero_trace_identities"])
 
-    def test_too_few_words_has_complete_empty_catalog(self):
+    def test_single_word_vocabulary_keeps_repeated_argument_identity(self):
         result = enumerate_universal_trace_identity_catalog(
             dimension=3,
             generator_count=1,
-            max_word_length=2,
+            max_word_length=1,
         )
-        self.assertEqual(result["status"], "complete_catalog_no_admissible_substitution_sets")
-        self.assertEqual(result["candidate_substitution_sets"], "<0_2|0_3>")
-        self.assertEqual(result["identities"], [])
+        self.assertEqual(result["status"], "complete_catalog_verified")
+        self.assertEqual(result["candidate_substitution_sets"], "<1_2|1_3>")
+        self.assertEqual(result["substitution_sets_processed"], "<1_2|1_3>")
+        self.assertEqual(len(result["identities"]), 1)
+        words = result["identities"][0]["substitutions"]
+        self.assertEqual(len(words), 4)
+        self.assertEqual(len(set(tuple(word) for word in words)), 1)
 
     def test_signature_ignores_trace_cyclic_rotation_and_factor_order(self):
         one = [
@@ -161,6 +165,19 @@ class UniversalTraceCatalogTests(unittest.TestCase):
             enumerate_universal_trace_identity_catalog(2, 0, 2)
         with self.assertRaises(ValueError):
             word_catalog(2, 0)
+
+    def test_repeated_arguments_are_included_in_multiset_catalog(self):
+        result = enumerate_universal_trace_identity_catalog(
+            dimension=2,
+            generator_count=3,
+            max_word_length=1,
+        )
+        self.assertEqual(result["status"], "complete_catalog_verified")
+        self.assertEqual(result["candidate_substitution_sets"], "<1010_2|101_3>")
+        self.assertTrue(any(
+            len(set(tuple(word) for word in entry["substitutions"])) < 3
+            for entry in result["identities"]
+        ))
 
 
 if __name__ == "__main__":

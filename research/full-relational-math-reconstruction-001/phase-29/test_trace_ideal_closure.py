@@ -56,15 +56,18 @@ class BoundedTraceIdealClosureTests(unittest.TestCase):
         self.assertEqual(result["status"], "universally_verified_identity")
         self.assertTrue(result["verification"]["verified"])
 
-    def test_equal_linear_arguments_vanish_by_alternation(self):
+    def test_repeated_linear_arguments_are_retained_and_verified(self):
         same = [
             {"word": [0], "coefficient": 1},
             {"word": [1], "coefficient": 1},
         ]
-        result = expand_linear_combination_substitution(1, 2, [same, same])
-        self.assertEqual(result["status"], "identically_zero_after_exact_expansion")
-        self.assertEqual(result["trace_terms"], [])
+        result = expand_linear_combination_substitution(
+            2, 2, [same, same, same]
+        )
+        self.assertEqual(result["status"], "universally_verified_identity")
+        self.assertTrue(result["primitive_integer_trace_terms"])
         self.assertTrue(result["verification"]["verified"])
+        self.assertEqual(result["verification"]["exact_residual"], "0")
 
     def test_linear_substitution_expansion_cap_is_unresolved(self):
         result = expand_linear_combination_substitution(
@@ -92,11 +95,19 @@ class BoundedTraceIdealClosureTests(unittest.TestCase):
             max_multiplier_total_word_degree=1,
         )
         self.assertEqual(result["status"], "complete_bounded_relation_space")
-        self.assertEqual(result["seed_identity_count"], "<1_2|1_3>")
+        self.assertNotEqual(result["seed_identity_count"], "<0_2|0_3>")
+        self.assertEqual(result["seed_candidate_substitution_sets"], "<1010_2|101_3>")
         self.assertEqual(result["multiplier_monomial_count"], "<100_2|11_3>")
-        self.assertEqual(result["derived_relation_candidate_count"], "<100_2|11_3>")
-        self.assertEqual(result["independent_basis_count"], "<100_2|11_3>")
+        self.assertEqual(
+            result["processed_derived_relations"],
+            result["derived_relation_candidate_count"],
+        )
         self.assertEqual(result["unresolved_derived_relations"], "<0_2|0_3>")
+        decode = lambda value: int(value.split("_2|")[0][1:], 2)
+        self.assertEqual(
+            decode(result["independent_basis_count"]) + decode(result["exactly_dependent_count"]),
+            decode(result["derived_relation_candidate_count"]),
+        )
         self.assertTrue(all(
             entry["universal_verification"]["status"] == "universally_verified_identity"
             for entry in result["independent_basis"]

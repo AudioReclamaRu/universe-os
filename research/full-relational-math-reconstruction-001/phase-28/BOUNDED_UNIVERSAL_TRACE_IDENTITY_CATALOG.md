@@ -2,7 +2,7 @@
 
 ## Objective
 
-Phase 28 turns Phase 27's single-instance proof into a reproducible bounded catalog. It enumerates nonempty noncommutative matrix words over a declared finite generator alphabet, selects every permitted set of d+1 distinct words, constructs the dimension-d fundamental trace identity (FTI) for each set, canonicalises the resulting trace polynomial and exactly verifies every distinct catalog entry.
+Phase 28 turns Phase 27's single-instance proof into a reproducible bounded catalog. It enumerates nonempty noncommutative matrix words over a declared finite generator alphabet, selects every permitted multiset of d+1 words including repetitions, constructs the dimension-d fundamental trace identity (FTI) for each multiset, canonicalises the resulting trace polynomial and exactly verifies every distinct catalog entry.
 
 No sampled matrix values are used. Every entry marked \`universally_verified_identity\` is checked by Phase 27's formal expansion in independent generic matrix entries.
 
@@ -26,7 +26,7 @@ The word vocabulary is exhaustive within its bound:
 |\mathcal W|=\sum_{\ell=1}^{L}g^\ell.
 \]
 
-The FTI is alternating and multilinear in its d+1 arguments. Permuting one substitution set changes the generated expression only by an overall sign. Therefore Phase 28 enumerates combinations, not permutations, of d+1 distinct words. Repeated substitutions give the zero alternating expression and are excluded from the nontrivial catalog.
+The FTI is symmetric and multilinear in its d+1 arguments. Permuting one substitution tuple leaves the generated expression unchanged. Therefore Phase 28 enumerates multisets, not ordered tuples, of d+1 words. Repeated arguments are valid, generally nonzero trace polynomials, and are retained.
 
 ## Canonicalisation and deduplication
 
@@ -61,7 +61,7 @@ When the status is \`complete_catalog_verified\`, the search is complete for:
 - the declared matrix dimension;
 - the declared generator alphabet;
 - all nonempty words up to the declared maximum length;
-- all combinations of d+1 distinct words;
+- all multisets of d+1 words, including repeated arguments;
 - the FTI construction and its trace-polynomial equivalence classes.
 
 It is **not** a complete basis or generating set of all trace identities. It does not yet enumerate substitutions by arbitrary linear combinations of words, all consequences obtained by multiplication/addition of identities, identities from other trace theorems, or identities outside the declared finite word domain.
@@ -70,4 +70,4 @@ The current catalog does not feed universal reductions back into the Phase 24–
 
 ## Tests
 
-Fourteen standard-library tests cover deterministic word enumeration, noncommutative order, full bounded combination coverage, generic-matrix verification, signature normalisation, caps, paired integer configuration, repeated generators inside words and the explicit incompleteness boundary.
+Fifteen standard-library tests cover deterministic word enumeration, noncommutative order, full bounded multiset coverage, repeated arguments, generic-matrix verification, signature normalisation, caps, paired integer configuration, repeated generators inside words and the explicit incompleteness boundary.
