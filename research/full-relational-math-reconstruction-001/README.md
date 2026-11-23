@@ -50,6 +50,10 @@ The phase is in [phase-04/GIZA_TRIAD_FIVE_NODE_GEOMETRY.md](phase-04/GIZA_TRIAD_
 
 The reproducibility driver is [analyze_giza_geometric_network.py](phase-04/analyze_giza_geometric_network.py). It emits computed integer quantities in paired binary/ternary notation and does not infer a physical coupling law.
 
+## Canonical research principle
+
+The governing motto and maximum-picture / idealization rules are defined in [00_CANONICAL_RESEARCH_PRINCIPLES.md](00_CANONICAL_RESEARCH_PRINCIPLES.md). This policy must guide the next step whenever evidence is missing or the investigation is uncertain.
+
 ## Evidence policy
 
 - Exact identities and combinatorial isomorphisms are distinguished from empirical regularities.
