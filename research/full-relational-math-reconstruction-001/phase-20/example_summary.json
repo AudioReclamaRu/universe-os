@@ -1,0 +1,46 @@
+{
+  "schema": "universe.ifs-characteristic-partitioned-conjugacy.v1",
+  "pair_count": "<1_2|1_3>",
+  "results": [
+    {
+      "name": "Four distinct scalar linear signatures: 24 permutations reduced to one candidate matching",
+      "status": "affine_conjugacy_verified",
+      "source_coordinate_system": "source_line",
+      "target_coordinate_system": "translated_line",
+      "exact_field": "Q(√3)",
+      "filter": "exact_characteristic_polynomial_of_each_linear_part",
+      "candidate_edge_count": "<100_2|11_3>",
+      "unrestricted_permutation_count": "<11000_2|220_3>",
+      "candidate_map_indices": [
+        ["<0_2|0_3>"],
+        ["<1_2|1_3>"],
+        ["<10_2|2_3>"],
+        ["<11_2|10_3>"]
+      ],
+      "affine_coordinate_change": {
+        "convention": "y = P*x + t",
+        "matrix_P": [["<1_2|1_3>"]],
+        "translation_t": ["<11_2|10_3>"],
+        "determinant_P": "<1_2|1_3>"
+      },
+      "map_permutation_target_index_for_each_source": [
+        "<0_2|0_3>", "<1_2|1_3>", "<10_2|2_3>", "<11_2|10_3>"
+      ],
+      "linear_solution_family": {
+        "rank": "<1_2|1_3>",
+        "free_parameter_count": "<1_2|1_3>",
+        "parameter_assignment": ["<1_2|1_3>"],
+        "determinant_polynomial_term_count": "<1_2|1_3>"
+      },
+      "search": {
+        "candidate_matchings_tested": "<1_2|1_3>",
+        "affine_families_solved": "<1_2|1_3>",
+        "search_complete": false,
+        "stopped_on_verified_match": true
+      },
+      "verification": "Every affine map equation and det(P) ≠ 0 were checked exactly.",
+      "interpretation": "The exact linear-part invariant filter removed impossible pairings; a remaining candidate produced a verified invertible affine conjugacy."
+    }
+  ],
+  "global_guard": "Characteristic-polynomial equality is necessary, not sufficient, for similarity of linear parts. Every final affine witness is verified exactly."
+}
