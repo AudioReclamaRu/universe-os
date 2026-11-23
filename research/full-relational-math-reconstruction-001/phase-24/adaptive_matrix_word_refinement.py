@@ -152,6 +152,8 @@ def _refinement_summary(result):
         ],
         "candidate_edges_before": core.paired(result["candidate_edges_before_refinement"]),
         "candidate_edges_after": core.paired(result["candidate_edges_after_refinement"]),
+        "candidate_edges_before_refinement": core.paired(result["candidate_edges_before_refinement"]),
+        "candidate_edges_after_refinement": core.paired(result["candidate_edges_after_refinement"]),
         "stable": result["stable"],
     }
 
