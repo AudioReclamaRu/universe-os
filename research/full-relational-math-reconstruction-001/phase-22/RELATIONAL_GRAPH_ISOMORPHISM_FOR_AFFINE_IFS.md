@@ -97,10 +97,10 @@ The caps apply to graph search and candidate isomorphisms. They do not authorize
 
 - Dimensions 1–3.
 - Exact rational / common real-quadratic field arithmetic inherited from Phases 16 and 18.
-- Exact characteristic polynomials, the six Phase 21 directed pairwise trace words, Phase 23 directed colour refinement, and Phase 24 adaptive binary matrix-word traces.
+- Exact characteristic polynomials, the Phase 21 directed pairwise traces with their universal commutator-square dependency removed by Phase 25, Phase 23 directed colour refinement, and Phase 24 adaptive binary matrix-word traces reduced by Phase 25's exact finite-comparison dependency test.
 - Deterministic constrained backtracking with residual perfect-matching feasibility checks.
 - Search is bounded by graph-node and complete-isomorphism caps; optional word expansion has a separate matrix-product budget and maximum word length.
-- These selected vertex/edge labels are necessary, not complete invariants for simultaneous similarity.
+- These selected vertex/edge labels are necessary, not complete invariants for simultaneous similarity. Phase 25 finite-comparison dependencies apply only to the combined active source/target ordered-pair support and are not universal matrix identities.
 - Full affine operator equations and determinant feasibility remain decisive.
 - Higher-degree number fields, longer word algebras, nonlinear conjugacy and physical causal identification remain outside scope.
 
