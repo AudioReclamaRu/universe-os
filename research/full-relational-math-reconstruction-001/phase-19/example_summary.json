@@ -73,7 +73,7 @@
               "affine_families_solved": "<1_2|1_3>",
               "search_complete": false,
               "stopped_on_verified_match": true,
-              "candidate_matching_cap": "<11000110100000_2|1010202202_3>"
+              "candidate_matching_cap": "<11000011010100000_2|12002011201_3>"
             },
             "verification": "Every affine map equation and det(P) ≠ 0 were checked exactly.",
             "interpretation": "The exact characteristic-polynomial filter removed impossible pairings; a remaining candidate produced a verified invertible affine conjugacy."
