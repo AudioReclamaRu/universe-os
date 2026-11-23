@@ -322,3 +322,26 @@ and the integration reports for [Phase 24](phase-24/ADAPTIVE_MATRIX_WORD_REFINEM
 
 The dedicated GitHub Actions workflow [ifs-exact-comparator-tests.yml](../.github/workflows/ifs-exact-comparator-tests.yml) completed successfully on the clean pull-request checkout in [run 45266941902](https://github.com/AudioReclamaRu/universe-os/actions/runs/45266941902), testing branch head `269092eadefc74c49061ecb0fcf47656f7b20c98`: Phase 16 — 17 tests; Phase 17 — 9; Phase 18 — 6; Phase 19 — 10; Phase 20 — 6; Phase 21 — 7; Phase 22 — 9; Phase 23 — 6; Phase 24 — 8; Phase 25 — 6; Phase 26 — 7. **91 tests passed across all 11 affine-IFS phase packages.** This is a clean-checkout CI result for these eleven packages only. It does not claim that the complete repository or every earlier research phase passed CI.
 
+
+
+## Phase 27 — universal trace identities and exact generic-matrix proofs
+
+Phase 27 distinguishes universal matrix identities from Phase 26's finite-support polynomial dependencies. It constructs the dimension-d fundamental trace identity for d+1 arbitrary matrix words:
+
+\[
+\sum_{\sigma\in S_{d+1}}\operatorname{sgn}(\sigma)
+\prod_{c=(i_1\,\ldots\,i_k)\in\operatorname{Cycles}(\sigma)}
+\operatorname{tr}(W_{i_1}\cdots W_{i_k})=0.
+\]
+
+Trace words are canonicalised only under cyclic rotation; scalar trace factors commute, but matrix reversal and generator commutativity are not assumed.
+
+The independent verifier substitutes generic matrices with independent commuting entry indeterminates, expands every trace product exactly, and checks every coefficient of the resulting sparse polynomial. A zero formal residual establishes the identity for every matrix tuple of the declared dimension over a characteristic-zero commutative coefficient field. A nonzero residual rejects the proposed universal identity. Permutation and generic-index expansion caps return unresolved, never a negative finding.
+
+Phase 27 currently proves individual FTI instances for supplied word substitutions. It does not yet enumerate every possible substitution or integrate universal reductions into the Phase 24–26 adaptive comparison pipeline. It makes no claim about a physical implementation of these algebraic matrices.
+
+See [UNIVERSAL_TRACE_IDENTITIES_AND_GENERIC_MATRIX_PROOFS.md](phase-27/UNIVERSAL_TRACE_IDENTITIES_AND_GENERIC_MATRIX_PROOFS.md), the [implementation](phase-27/universal_trace_identities.py) and the [14 Phase 27 tests](phase-27/test_universal_trace_identities.py).
+
+### Phase 27 local validation
+
+The standard-library package passed 14 tests locally, including exact FTI verification for matrix dimensions 1, 2 and 3, noncommutative word substitutions, trace cyclicity, scalar trace-factor commutativity, false-identity rejection and conservative unresolved-cap behaviour. The dedicated CI matrix has been extended to Phase 27; its clean-checkout result is reported after the workflow completes.
