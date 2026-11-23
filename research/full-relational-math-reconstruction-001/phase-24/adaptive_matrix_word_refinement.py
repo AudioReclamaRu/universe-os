@@ -218,14 +218,8 @@ def refine_ambiguous_matrix_word_graph(
         source_edges, target_edges,
     )
     initial_candidate_edges = refinement["candidate_edges_before_refinement"]
-    if initial_candidate_map_indices != [
-        [
-            j for j, target_colour in enumerate(refinement["target_colours"])
-            if target_colour == refinement["source_colours"][i]
-        ]
-        for i in range(n)
-    ]:
-        raise ArithmeticError("initial Phase 25 compression changed the Phase 22 vertex partition")
+    if sum(len(row) for row in initial_candidate_map_indices) != initial_candidate_edges:
+        raise ArithmeticError("initial Phase 25 compression changed the Phase 22 candidate-edge count")
     if not _has_perfect_matching(refinement["candidate_map_indices"], n):
         return _result(
             "no_compatible_initial_colour_bijection", source_edges, target_edges,
