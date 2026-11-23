@@ -102,6 +102,9 @@ The result is mathematical structural correspondence only. It does not establish
 
 Phase 19 now calls this exact partition as its fallback when fixed-point-frame assumptions are inapplicable. The 20-map Menger control remains on the Phase 17 route because all its maps share the same scalar linear part and the characteristic-polynomial filter would not reduce its candidate graph. See [the adaptive Phase 19 pipeline](../phase-19/ADAPTIVE_AFFINE_IFS_CONJUGACY_PIPELINE.md).
 
+
+Phase 19 now applies Phase 21 joint pairwise trace profiles before this characteristic-polynomial filter. The Menger control remains on the Phase 17 fast path because the uniform-contraction generator does not gain useful pruning from either fallback invariant. See [Phase 21](../phase-21/JOINT_TRACE_PROFILES_FOR_AFFINE_IFS.md) and [the adaptive Phase 19 pipeline](../phase-19/ADAPTIVE_AFFINE_IFS_CONJUGACY_PIPELINE.md).
+
 ## I. Next increments
 
 1. Add stronger exact similarity invariants for dimensions two and three, while retaining full affine-equation verification.
