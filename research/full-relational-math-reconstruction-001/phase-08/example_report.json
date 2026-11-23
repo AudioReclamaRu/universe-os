@@ -1,0 +1,57 @@
+{
+  "schema": "universe.relation-discovery.v1",
+  "numeral_convention": "paired binary/ternary integer keys",
+  "quantity_count": "<11_2|10_3>",
+  "candidate_count": "<10_2|2_3>",
+  "candidates": [
+    {
+      "id": "<1_2|1_3>",
+      "formula": "(candidate_length) / (reference_length)",
+      "operation": "ratio",
+      "value_numeric_secondary": 1.618033988749895,
+      "dimension": {},
+      "inputs": ["candidate_length", "reference_length"],
+      "uncertainty": null,
+      "matches": [
+        {
+          "key": "constant.phi",
+          "symbol": "φ",
+          "expression": "(1 + √5) / 2",
+          "family": "metallic mean",
+          "relative_error": 0.0
+        }
+      ],
+      "status": "derived_candidate",
+      "guard": "correspondence_is_not_causation"
+    },
+    {
+      "id": "<10_2|2_3>",
+      "formula": "(reference_length) / (candidate_length)",
+      "operation": "ratio",
+      "value_numeric_secondary": 0.6180339887498948,
+      "dimension": {},
+      "inputs": ["reference_length", "candidate_length"],
+      "uncertainty": null,
+      "matches": [],
+      "status": "derived_candidate",
+      "guard": "correspondence_is_not_causation"
+    }
+  ],
+  "power_law_fit": {
+    "exponent": 2.0,
+    "amplitude": 1.0,
+    "r_squared": 1.0,
+    "count": "<100_2|11_3>",
+    "residuals": [0.0, 0.0, 0.0, 0.0],
+    "atlas_matches": [
+      {
+        "key": "integer.two",
+        "symbol": "2",
+        "expression": "paired integer <10₂|2₃>",
+        "family": "integer key",
+        "relative_error": 0.0
+      }
+    ],
+    "interpretation": "empirical fit, not universal law"
+  }
+}
