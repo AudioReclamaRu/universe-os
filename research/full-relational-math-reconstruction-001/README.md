@@ -289,6 +289,35 @@ The search still charges every candidate trace evaluation to the matrix-product 
 
 Six Phase 25 tests cover the universal commutator identity, exact dependency coefficients, local-vs-universal scope, independent features and validation. See [EXACT_TRACE_FEATURE_DEPENDENCY_REDUCTION.md](phase-25/EXACT_TRACE_FEATURE_DEPENDENCY_REDUCTION.md).
 
+## Phase 26 — exact polynomial dependency discovery for trace features
+
+Phase 26 extends Phase 25's exact linear trace-feature reduction. For every
+still-linearly-independent adaptive word candidate, it constructs all
+constant and polynomial monomial columns up to a configurable total degree
+(default 2) from previously retained features. One exact coefficient vector
+must satisfy the candidate equation across the combined active source and
+target ordered-pair rows.
+
+Every accepted polynomial relation includes exact coefficients, monomial
+factor metadata and a row-by-row exact-zero verification certificate. It is
+explicitly a **finite-support relation**, not a universal matrix identity.
+To prevent vacuous interpolation, a candidate is not classified as dependent
+when the monomial-column rank saturates the entire sample space. Minimum rows
+and maximum monomial count are separately configurable; all unresolved
+candidates are retained conservatively.
+
+The adaptive Phase 19 controller and Phase 22 graph comparator expose
+max_polynomial_degree, max_polynomial_monomials and min_polynomial_sample_rows.
+These limits remain independent of the Phase 24 matrix-product budget and
+Phase 22 graph-search caps.
+
+See [EXACT_POLYNOMIAL_TRACE_DEPENDENCIES.md](phase-26/EXACT_POLYNOMIAL_TRACE_DEPENDENCIES.md),
+the [exact implementation](phase-26/polynomial_trace_dependencies.py),
+the [seven Phase 26 tests](phase-26/test_polynomial_trace_dependencies.py),
+and the integration reports for [Phase 24](phase-24/ADAPTIVE_MATRIX_WORD_REFINEMENT.md),
+[Phase 22](phase-22/RELATIONAL_GRAPH_ISOMORPHISM_FOR_AFFINE_IFS.md) and
+[Phase 19](phase-19/ADAPTIVE_AFFINE_IFS_CONJUGACY_PIPELINE.md).
+
 ### Validation status — phases 16–25
 
 The dedicated GitHub Actions workflow [ifs-exact-comparator-tests.yml](../.github/workflows/ifs-exact-comparator-tests.yml) completed successfully on the clean PR checkout in [run 45258174141](https://github.com/AudioReclamaRu/universe-os/actions/runs/45258174141), head `8e0df810100609e94067b087d4ec0ce9992504d0`: Phase 16 — 17 tests; Phase 17 — 9; Phase 18 — 6; Phase 19 — 9; Phase 20 — 6; Phase 21 — 7; Phase 22 — 9; Phase 23 — 6; Phase 24 — 6; Phase 25 — 6. **81 tests passed in total.** This is a clean-checkout CI result for the ten affine-IFS phase packages only. It does not claim that the complete repository or every earlier research phase passed CI.
