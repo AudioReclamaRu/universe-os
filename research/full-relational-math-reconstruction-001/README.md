@@ -198,7 +198,7 @@ See [FRACTAL_GENERATOR_AND_QUADRATIC_DYNAMICS_COMPARATORS.md](phase-15/FRACTAL_G
 
 Phase 16 adds an exact comparator for finite affine IFS map families expressed in different coordinate systems. For each candidate map permutation it solves \\(H\\circ F_i=G_{\\pi(i)}\\circ H\\) with \\(H(x)=Px+t\\), checks the determinant exactly and re-verifies every map. Rational and quadratic-surd arithmetic are exact over a common squarefree real quadratic field in dimensions 1–3. The tool separates verified conjugacy, complete negative search, underdetermined systems and capped unresolved searches; a capped permutation search is never a negative result.
 
-The synthetic Sierpiński-gasket control recovers \\(P=[[2,1],[1,2]]\\), \\(t=[3,-1]\\), \\(\\det(P)=3\\). Seventeen local tests pass. This is a mathematical coordinate-equivalence result, not an empirical physical finding; the field and permutation search remain bounded.
+The synthetic Sierpiński-gasket control recovers \\(P=[[2,1],[1,2]]\\), \\(t=[3,-1]\\), \\(\\det(P)=3\\). Seventeen standard-library tests are included; the committed Phase 16 test module was not run from a clean checkout in this continuation. This is a mathematical coordinate-equivalence result, not an empirical physical finding; the field and permutation search remain bounded.
 
 See [AFFINE_IFS_CONJUGACY_AND_COORDINATE_INVARIANCE.md](phase-16/AFFINE_IFS_CONJUGACY_AND_COORDINATE_INVARIANCE.md). The phase does not yet cover arbitrary number fields, mixed-field composita, non-affine conjugacies or large unrestricted permutation spaces.
 
@@ -208,7 +208,7 @@ Phase 17 removes factorial enumeration of complete map permutations when compari
 
 The 20-map Menger control reverses the target map list and applies an exact affine coordinate change. The comparator verifies all 20 maps after testing 23 of 116,280 ordered target frames, without enumerating the \\(20!\\) map permutations. Menger's internal symmetries mean that the recovered witness need not be the same affine map used to construct the synthetic target.
 
-Nine Phase 17 tests and the separate 17 Phase 16 tests pass locally. The method returns explicit inconclusive statuses when fixed points are not unique, the source fixed-point cloud does not span the ambient space, or a search cap is reached. A capped search is unresolved, not negative. This is an algorithmic mathematical control, not physical evidence of a Menger-like natural process or common origin.
+Nine Phase 17 tests and the separate 17 Phase 16 tests are included but were not run from a clean checkout in this continuation. An independent exact rational-arithmetic reproduction of the Menger control recovered and verified a witness after 23 of 116,280 ordered target frames. The method returns explicit inconclusive statuses when fixed points are not unique, the source fixed-point cloud does not span the ambient space, or a search cap is reached. A capped search is unresolved, not negative. This is an algorithmic mathematical control, not physical evidence of a Menger-like natural process or common origin.
 
 See [AFFINE_IFS_FIXED_POINT_FRAMES_AND_SCALABLE_MATCHING.md](phase-17/AFFINE_IFS_FIXED_POINT_FRAMES_AND_SCALABLE_MATCHING.md). The implementation and reproducible 20-map synthetic input/output are stored alongside the phase report.
 
