@@ -37,6 +37,8 @@ def compare_ifs_pair_adaptive(
     max_target_frames=250000,
     max_graph_nodes=250000,
     max_candidate_isomorphisms=100000,
+    max_matrix_products=250000,
+    max_word_length=8,
 ):
     """Use fixed-point frames first, then exact whole-family relational graph search.
 
@@ -48,6 +50,7 @@ def compare_ifs_pair_adaptive(
         (max_target_frames, "max_target_frames"),
         (max_graph_nodes, "max_graph_nodes"),
         (max_candidate_isomorphisms, "max_candidate_isomorphisms"),
+        (max_matrix_products, "max_matrix_products"),
     ):
         if isinstance(value, bool) or not isinstance(value, int) or value < 1:
             raise ValueError(f"{name} must be a positive integer")
@@ -68,6 +71,8 @@ def compare_ifs_pair_adaptive(
             target,
             max_graph_nodes=max_graph_nodes,
             max_candidate_isomorphisms=max_candidate_isomorphisms,
+            max_matrix_products=max_matrix_products,
+            max_word_length=max_word_length,
         )
         method = "phase22_edge_labelled_relational_graph_plus_exact_affine_solver"
         attempts.append({
@@ -80,9 +85,9 @@ def compare_ifs_pair_adaptive(
         final_result = relational_result
         decision = (
             "Phase 17's fixed-point-frame assumptions did not hold. "
-            "Phase 22 matched exact vertex colours and every directed pairwise "
-            "trace-word edge under one map bijection, then solved and independently "
-            "verified the complete affine equations."
+            "Phase 24 adaptively extended exact matrix-word traces on ambiguous "
+            "classes; Phase 22 then matched the resulting directed graph and "
+            "Phase 18 independently verified the complete affine equations."
         )
     else:
         selected_method = "phase17_exact_fixed_point_frames"
@@ -101,7 +106,7 @@ def compare_ifs_pair_adaptive(
             )
 
     return {
-        "schema": "universe.affine-ifs-adaptive-conjugacy.v4",
+        "schema": "universe.affine-ifs-adaptive-conjugacy.v5",
         "selected_method": selected_method,
         "status": final_result["status"],
         "decision": decision,
@@ -136,16 +141,19 @@ def analyze_payload(payload):
                 max_candidate_isomorphisms=int(
                     item.get("max_candidate_isomorphisms", 100000)
                 ),
+                max_matrix_products=int(item.get("max_matrix_products", 250000)),
+                max_word_length=int(item.get("max_word_length", 8)),
             ),
         })
     return {
-        "schema": "universe.affine-ifs-adaptive-conjugacy.batch.v4",
+        "schema": "universe.affine-ifs-adaptive-conjugacy.batch.v5",
         "pair_count": paired(len(results)),
         "results": results,
         "method_policy": (
             "Fixed-point frames first. If their explicit applicability assumptions "
-            "fail, use exact vertex/edge-labelled relational graph isomorphism "
-            "before solving complete affine map equations. Search caps remain unresolved."
+            "fail, Phase 24 adaptively extends exact matrix-word traces for ambiguous "
+            "classes before Phase 22 graph matching and Phase 18 affine verification. "
+            "Matrix-product and search caps remain explicit."
         ),
     }
 
