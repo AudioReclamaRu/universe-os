@@ -1,0 +1,40 @@
+{
+  "schema": "universe.ifs-joint-trace-partitioned-batch.v1",
+  "pair_count": "<1_2|1_3>",
+  "results": [
+    {
+      "name": "Two source operators with equal characteristic polynomials versus a repeated target operator",
+      "status": "no_affine_conjugacy_found",
+      "source_coordinate_system": "two_source_operators",
+      "target_coordinate_system": "repeated_target_operator",
+      "filter": "exact_characteristic_polynomial_of_each_linear_part",
+      "candidate_filter": {
+        "characteristic_polynomial_edges": "<100_2|11_3>",
+        "edges_after_refinement": "<0_2|0_3>",
+        "additional_filter": "exact_joint_pairwise_word-trace_profiles"
+      },
+      "candidate_edge_count": "<0_2|0_3>",
+      "unrestricted_permutation_count": "<10_2|2_3>",
+      "candidate_map_indices": [[], []],
+      "search_complete": true,
+      "interpretation": "The exact characteristic-polynomial candidate graph has no perfect matching. Similarity of each paired linear part is necessary for affine conjugacy, so no affine map bijection exists.",
+      "joint_relational_trace_filter": {
+        "word_trace_invariants": [
+          "tr(A_i A_j)",
+          "tr(A_i^2 A_j)",
+          "tr(A_i A_j^2)",
+          "tr(A_i A_j A_i A_j)",
+          "tr(A_i^2 A_j^2)",
+          "tr([A_i,A_j]^2)"
+        ],
+        "candidate_edges_after_relational_filter": "<0_2|0_3>",
+        "source_profile_class_count": "<1_2|1_3>",
+        "target_profile_class_count": "<1_2|1_3>",
+        "profile_definition": "For each map A_i, the sorted multiset over all A_j of the six exact trace words listed above. The multiset preserves map multiplicity but is invariant to map-label permutation.",
+        "logical_status": "Necessary condition for one common simultaneous affine conjugacy; not a sufficient proof. Full affine equations and determinant remain decisive."
+      },
+      "schema": "universe.ifs-joint-trace-partitioned-conjugacy.v1"
+    }
+  ],
+  "global_guard": "Joint trace profiles are exact necessary invariants under a common simultaneous conjugacy. They only prune map pairings; every surviving candidate must still pass the complete affine equations and invertibility check."
+}
