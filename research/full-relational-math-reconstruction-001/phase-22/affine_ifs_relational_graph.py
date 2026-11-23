@@ -13,7 +13,8 @@ PHASE16 = ROOT / "phase-16"
 PHASE18 = ROOT / "phase-18"
 PHASE20 = ROOT / "phase-20"
 PHASE21 = ROOT / "phase-21"
-for path in (PHASE16, PHASE18, PHASE20, PHASE21):
+PHASE23 = ROOT / "phase-23"
+for path in (PHASE16, PHASE18, PHASE20, PHASE21, PHASE23):
     if str(path) not in sys.path:
         sys.path.insert(0, str(path))
 
@@ -27,6 +28,7 @@ from affine_ifs_underdetermined import (
 )
 from affine_ifs_characteristic_partition import characteristic_polynomial
 from affine_ifs_joint_trace_partition import _pair_relation_record, TRACE_WORDS
+from affine_ifs_adaptive_color_refinement import refine_joint_directed_colours
 
 
 def _has_perfect_matching(candidates, source_indices, unavailable_targets, target_count):
@@ -148,10 +150,39 @@ def compare_ifs_pair_relational_graph(
             raise ValueError(f"{name} must be a positive integer")
 
     graphs = _relational_graphs(source_maps, target_maps, d)
-    candidates = graphs["candidates"]
-    candidate_edges = sum(len(row) for row in candidates)
+    initial_candidates = graphs["candidates"]
     unrestricted = math.factorial(len(source_maps))
     vertex_profile_classes = len(set(graphs["source_profiles"]))
+    refinement = refine_joint_directed_colours(
+        [
+            (graphs["source_characteristics"][i], graphs["source_profiles"][i])
+            for i in range(len(source_maps))
+        ],
+        [
+            (graphs["target_characteristics"][i], graphs["target_profiles"][i])
+            for i in range(len(target_maps))
+        ],
+        graphs["source_edges"],
+        graphs["target_edges"],
+    )
+    candidates = refinement["candidate_map_indices"]
+    candidate_edges = sum(len(row) for row in candidates)
+    refinement_report = {
+        "method": refinement["method"],
+        "rounds": core.paired(refinement["refinement_rounds"]),
+        "combined_colour_class_counts": [
+            core.paired(value) for value in refinement["combined_colour_class_counts"]
+        ],
+        "stable": refinement["stable"],
+        "candidate_edges_before_refinement": core.paired(
+            refinement["candidate_edges_before_refinement"]
+        ),
+        "candidate_edges_after_refinement": core.paired(
+            refinement["candidate_edges_after_refinement"]
+        ),
+        "candidate_edges_removed": core.paired(refinement["candidate_edges_removed"]),
+        "logical_status": refinement["logical_status"],
+    }
 
     if any(not row for row in candidates) or not _has_perfect_matching(
         candidates, list(range(len(source_maps))), set(), len(target_maps)
@@ -161,10 +192,11 @@ def compare_ifs_pair_relational_graph(
             "source_coordinate_system": source_coordinates,
             "target_coordinate_system": target_coordinates,
             "exact_field": f"Q(√{d})",
-            "candidate_filter": "exact_vertex_charpoly_and_joint_directed_trace_profiles",
+            "candidate_filter": "phase23_exact_joint_directed_colour_refinement",
             "candidate_edge_count": core.paired(candidate_edges),
             "unrestricted_permutation_count": core.paired(unrestricted),
             "candidate_map_indices": [[core.paired(j) for j in row] for row in candidates],
+            "adaptive_colour_refinement": refinement_report,
             "search": {
                 "graph_search_complete": True,
                 "candidate_isomorphisms_tested": core.paired(0),
@@ -172,9 +204,9 @@ def compare_ifs_pair_relational_graph(
                 "affine_families_solved": core.paired(0),
             },
             "interpretation": (
-                "The exact vertex/edge-labelled relational graph has no compatible "
-                "bijection. No simultaneous affine conjugacy exists for the supplied "
-                "finite map families under the selected necessary invariants."
+                "The stable exact directed colour partition has no compatible "
+                "source/target bijection. No simultaneous affine conjugacy exists "
+                "for the supplied finite map families under the selected necessary invariants."
             ),
         }
 
@@ -287,10 +319,11 @@ def compare_ifs_pair_relational_graph(
         "source_coordinate_system": source_coordinates,
         "target_coordinate_system": target_coordinates,
         "exact_field": f"Q(√{d})",
-        "candidate_filter": "exact_vertex_charpoly_and_joint_directed_trace_profiles",
+        "candidate_filter": "phase23_exact_joint_directed_colour_refinement",
         "candidate_edge_count": core.paired(candidate_edges),
         "unrestricted_permutation_count": core.paired(unrestricted),
         "candidate_map_indices": [[core.paired(j) for j in row] for row in candidates],
+        "adaptive_colour_refinement": refinement_report,
         "joint_relational_trace_filter": {
             "word_trace_invariants": list(TRACE_WORDS),
             "source_profile_class_count": core.paired(vertex_profile_classes),
