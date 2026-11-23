@@ -1,0 +1,18 @@
+{
+  "schema": "universe.relation-uncertainty.v1",
+  "synthetic_only": true,
+  "relation_family_count": "<1_2|1_3>",
+  "representation_count": "<101_2|12_3>",
+  "original_variable_exponents": {
+    "dimensionless_parameter_A": "1",
+    "dimensionless_parameter_B": "1"
+  },
+  "log_variance": 0.0006000000000000001,
+  "log_standard_uncertainty": 0.024494897427831782,
+  "relative_standard_deviation_if_lognormal": 0.02449857212176662,
+  "multiplicative_log_sigma_interval": [
+    0.9758026680092396,
+    1.0247973619913604
+  ],
+  "interpretation": "The same constructed relation maps back to one original-variable exponent vector in five separate Pi-basis representations. Synthetic uncertainty only; not a physical measurement."
+}
