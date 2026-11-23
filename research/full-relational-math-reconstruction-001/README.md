@@ -111,3 +111,10 @@ The integrated system reconstruction is in [phase-05/GIZA_PURPOSE_ARCHITECTURE_A
 The first grounded functional layer is a landscape-scale geometric registration, quarry-control and construction-coordination architecture. This is not the final explanation of the whole complex; further physical and system functions remain to be reconstructed.
 
 Reproduce the paired-numeral calculations with [phase-05/giza_ideal_system.py](phase-05/giza_ideal_system.py).
+
+
+## Phase 05 direct-survey update — Khentkaus GLSS bedrock datum
+
+The Phase 05 driver now ingests all ten GLSS B01–B10 markers on the top of the natural bedrock base, including their elevations, in GPMP coordinates. It derives the marker centroid, convex-hull envelope, principal plan axis and fitted upper-surface plane, and replaces the Khentkaus map pin in the updated cross-pair calculation with the GLSS B-marker datum. The Great Sphinx remains explicitly a map proxy until its ARCE local grid is tied horizontally to GPMP using common survey control.
+
+See [Phase 05 Sections 16–18](phase-05/GIZA_PURPOSE_ARCHITECTURE_AND_IDEAL_NETWORK.md).
