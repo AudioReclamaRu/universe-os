@@ -96,6 +96,6 @@ The full governing policy is in [00_CANONICAL_RESEARCH_PRINCIPLES.md](00_CANONIC
 
 Human societies have measured, surveyed, aligned, aimed, checked and refined the geometry of their built and natural environments over millennia. This is a real historical context, not a hypothetical modelling device.
 
-Giza research must therefore investigate the site as part of long-duration human practices of observation, geodesy, orientation, construction layout, quarrying, shaping, correction and transmission of geometric knowledge. A single-episode layout is not the automatic default. Reconstruct cumulative stages and predecessor states; determine their chronology and continuity from evidence. Uncertainty about the exact sequence does not negate the established historical reality of millennia-long human measuring and aiming.
+For this programme, the fact that people repeatedly measured, tried out, aimed, checked and corrected the Giza arrangement over a long period is a fixed starting point, not a hypothesis to be proven. **The research question is WHY they did it:** what overall result and function they sought, what constraints and invariants governed their choices, why they selected these positions and proportions, and how the objects worked together. Reconstruct chronology and technical methods as supporting details, not as a reason to reopen whether prolonged human aiming occurred.
 
 See [00_CANONICAL_RESEARCH_PRINCIPLES.md](00_CANONICAL_RESEARCH_PRINCIPLES.md).
