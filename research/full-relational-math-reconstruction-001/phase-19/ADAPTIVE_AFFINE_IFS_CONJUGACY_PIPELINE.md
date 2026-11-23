@@ -72,3 +72,5 @@ A verified match does not establish a shared natural origin, historical directio
 2. Use exact partition refinement and branch-and-bound to improve search on highly symmetric relational graphs.
 3. Combine fixed-point frame constraints with edge-labelled relational graph search before residual map assignment.
 4. Extend exact fields and connect verified structural candidates to measured data with provenance, uncertainty and falsifiable mechanisms.
+
+The Phase 22 fallback now applies Phase 23 joint directed colour refinement before its graph search. The initial exact colours still combine the Phase 20 characteristic polynomial and Phase 21 relational profile; Phase 23 then refines by incoming/outgoing edge labels against neighbour classes. The adaptive controller contract and cap semantics are unchanged. The integrated implementation is validated by the Phase 19 and Phase 22 jobs in the Phase 23-era workflow.
