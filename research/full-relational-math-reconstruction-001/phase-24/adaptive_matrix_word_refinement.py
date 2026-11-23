@@ -14,12 +14,20 @@ ROOT = Path(__file__).resolve().parent.parent
 PHASE16 = ROOT / "phase-16"
 PHASE21 = ROOT / "phase-21"
 PHASE23 = ROOT / "phase-23"
-for path in (PHASE16, PHASE21, PHASE23):
+PHASE25 = ROOT / "phase-25"
+for path in (PHASE16, PHASE21, PHASE23, PHASE25):
     if str(path) not in sys.path:
         sys.path.insert(0, str(path))
 
 import affine_ifs_conjugacy as core
 from affine_ifs_adaptive_color_refinement import refine_joint_directed_colours
+from trace_feature_dependencies import (
+    BASELINE_WORDS,
+    COMMUTATOR_IDENTITY,
+    compress_phase21_edges,
+    dependency_basis_from_edges,
+    insert_feature,
+)
 
 
 BASELINE_CYCLIC_WORDS = frozenset({"01", "001", "011", "0101", "0011"})
@@ -97,16 +105,26 @@ def _pair_indices(count, active):
     ]
 
 
-def _extend_edges(edges, matrices, active, words, radical):
+def _append_retained_edge_features(edges, pair_values):
     extended = [list(row) for row in edges]
-    pairs = _pair_indices(len(matrices), active)
-    for i, j in pairs:
-        additions = tuple(
-            trace_matrix_word(matrices[i], matrices[j], word, radical)
-            for word in words
-        )
-        extended[i][j] = tuple(extended[i][j]) + additions
-    return extended, len(pairs)
+    for (i, j), values in pair_values.items():
+        extended[i][j] = tuple(extended[i][j]) + tuple(values)
+    return extended
+
+
+def _initial_candidate_map(
+    source_characteristics, target_characteristics, source_edges, target_edges
+):
+    source_profiles = _profiles(source_edges)
+    target_profiles = _profiles(target_edges)
+    return [
+        [
+            j for j in range(len(target_edges))
+            if source_characteristics[i] == target_characteristics[j]
+            and source_profiles[i] == target_profiles[j]
+        ]
+        for i in range(len(source_edges))
+    ]
 
 
 def _colour_refinement(
@@ -186,8 +204,12 @@ def refine_ambiguous_matrix_word_graph(
     if any(len(row) != n for row in source_base_edges + target_base_edges):
         raise ValueError("edge-label matrices must be square")
 
-    source_edges = [list(row) for row in source_base_edges]
-    target_edges = [list(row) for row in target_base_edges]
+    source_edges = compress_phase21_edges(source_base_edges, radical)
+    target_edges = compress_phase21_edges(target_base_edges, radical)
+    initial_candidate_map_indices = _initial_candidate_map(
+        source_characteristics, target_characteristics, source_edges, target_edges
+    )
+    applied_words = []
     used_products = 0
     used_evaluations = 0
     tier_reports = []
@@ -196,11 +218,20 @@ def refine_ambiguous_matrix_word_graph(
         source_edges, target_edges,
     )
     initial_candidate_edges = refinement["candidate_edges_before_refinement"]
+    if initial_candidate_map_indices != [
+        [
+            j for j, target_colour in enumerate(refinement["target_colours"])
+            if target_colour == refinement["source_colours"][i]
+        ]
+        for i in range(n)
+    ]:
+        raise ArithmeticError("initial Phase 25 compression changed the Phase 22 vertex partition")
     if not _has_perfect_matching(refinement["candidate_map_indices"], n):
         return _result(
             "no_compatible_initial_colour_bijection", source_edges, target_edges,
             refinement, tier_reports, used_products, used_evaluations,
             max_matrix_products, max_word_length, initial_candidate_edges,
+            initial_candidate_map_indices,
         )
 
     initial_refinement = refinement
@@ -250,16 +281,55 @@ def refine_ambiguous_matrix_word_graph(
             expansion_status = "matrix_product_budget_exhausted"
             break
 
-        source_edges, source_pair_count = _extend_edges(
-            source_edges, source_matrices, ambiguous_source, words, radical
+        basis, prior_dependencies = dependency_basis_from_edges(
+            source_edges, target_edges,
+            source_pairs, target_pairs,
+            applied_words, radical,
         )
-        target_edges, target_pair_count = _extend_edges(
-            target_edges, target_matrices, ambiguous_target, words, radical
-        )
-        if source_pair_count != len(source_pairs) or target_pair_count != len(target_pairs):
-            raise ArithmeticError("matrix-word pair accounting mismatch")
+        candidate_values = {}
+        source_values_by_word = {}
+        target_values_by_word = {}
+        for word in words:
+            source_values = [
+                trace_matrix_word(source_matrices[i], source_matrices[j], word, radical)
+                for i, j in source_pairs
+            ]
+            target_values = [
+                trace_matrix_word(target_matrices[i], target_matrices[j], word, radical)
+                for i, j in target_pairs
+            ]
+            candidate_values[word] = source_values + target_values
+            source_values_by_word[word] = dict(zip(source_pairs, source_values))
+            target_values_by_word[word] = dict(zip(target_pairs, target_values))
+
+        retained_words = []
+        dependent_words = []
+        for word in words:
+            independent, relation = insert_feature(
+                basis, f"trace:{word}", candidate_values[word], radical
+            )
+            if independent:
+                retained_words.append(word)
+            else:
+                dependent_words.append(relation)
+
+        source_append = {}
+        target_append = {}
+        for pair in source_pairs:
+            values = tuple(source_values_by_word[word][pair] for word in retained_words)
+            if values:
+                source_append[pair] = values
+        for pair in target_pairs:
+            values = tuple(target_values_by_word[word][pair] for word in retained_words)
+            if values:
+                target_append[pair] = values
+        source_edges = _append_retained_edge_features(source_edges, source_append)
+        target_edges = _append_retained_edge_features(target_edges, target_append)
+        source_pair_count = len(source_pairs)
+        target_pair_count = len(target_pairs)
         used_products += matrix_products
         used_evaluations += trace_evaluations
+        applied_words.extend(retained_words)
         next_refinement = _colour_refinement(
             source_characteristics, target_characteristics,
             source_edges, target_edges,
@@ -267,14 +337,17 @@ def refine_ambiguous_matrix_word_graph(
         )
         if next_refinement["candidate_edges_before_refinement"] > refinement["candidate_edges_after_refinement"]:
             raise ArithmeticError(
-                "adding exact words merged a previously distinguished candidate partition: "
-                f"initial={next_refinement['candidate_edges_before_refinement']} "
-                f"previous_final={refinement['candidate_edges_after_refinement']}"
+                "adding exact independent words merged a previously distinguished candidate partition"
             )
+
         tier_reports.append({
             "length": core.paired(tier["length"]),
             "words": list(words),
             "word_count": core.paired(len(words)),
+            "tested_words": list(words),
+            "retained_words": list(retained_words),
+            "dependent_words": dependent_words,
+            "prior_feature_dependencies": prior_dependencies,
             "source_ambiguous_vertices": [core.paired(i) for i in sorted(ambiguous_source)],
             "target_ambiguous_vertices": [core.paired(i) for i in sorted(ambiguous_target)],
             "source_ordered_pairs": core.paired(source_pair_count),
@@ -296,15 +369,23 @@ def refine_ambiguous_matrix_word_graph(
             break
 
     report = {
-        "method": "phase24_adaptive_exact_binary_matrix_word_trace_refinement",
+        "method": "phase25_exact_dependency_reduced_adaptive_matrix_word_refinement",
         "expansion_status": expansion_status,
+        "universal_trace_reductions": [
+            {
+                "identity": COMMUTATOR_IDENTITY["equation"],
+                "removed_feature": COMMUTATOR_IDENTITY["left"],
+                "status": "exact_universal_identity_checked_on_all_input_edges",
+            }
+        ],
+        "retained_additional_words": list(applied_words),
         "baseline_word_trace_invariants": [
             "tr(A_i A_j)",
             "tr(A_i^2 A_j)",
             "tr(A_i A_j^2)",
             "tr(A_i A_j A_i A_j)",
             "tr(A_i^2 A_j^2)",
-            "tr([A_i,A_j]^2)",
+            "tr([A_i,A_j]^2) = 2*tr(A_i A_j A_i A_j) - 2*tr(A_i^2 A_j^2) [exactly reduced]",
         ],
         "additional_word_tiers": tier_reports,
         "initial_colour_refinement": _refinement_summary(initial_refinement),
@@ -322,11 +403,12 @@ def refine_ambiguous_matrix_word_graph(
         },
         "max_word_length": core.paired(max_word_length),
         "logical_status": (
-            "Every appended trace is invariant under a common simultaneous "
-            "similarity. Adaptive word traces and stable colour refinement are "
-            "necessary filters only; complete graph matching and exact affine "
-            "equations remain decisive. A skipped whole tier is recorded, not "
-            "partially applied."
+            "Universal trace identities are removed exactly. Finite-comparison "
+            "dependencies are detected with one shared exact coefficient vector "
+            "over all active source and target ordered-pair rows; those dependent "
+            "features are omitted only on that support. Candidate word evaluation "
+            "is still charged to the matrix-product budget. Complete graph matching "
+            "and exact affine equations remain decisive."
         ),
     }
     return {
@@ -335,6 +417,7 @@ def refine_ambiguous_matrix_word_graph(
         "source_profiles": _profiles(source_edges),
         "target_profiles": _profiles(target_edges),
         "candidate_map_indices": refinement["candidate_map_indices"],
+        "initial_candidate_map_indices": initial_candidate_map_indices,
         "candidate_edges_before_refinement": initial_candidate_edges,
         "candidate_edges_after_refinement": refinement["candidate_edges_after_refinement"],
         "adaptive_matrix_word_refinement": report,
@@ -342,10 +425,18 @@ def refine_ambiguous_matrix_word_graph(
 
 
 def _result(status, source_edges, target_edges, refinement, tier_reports,
-            used_products, used_evaluations, budget, max_word_length, initial_edges):
+            used_products, used_evaluations, budget, max_word_length, initial_edges,
+            initial_candidate_map_indices):
     report = {
-        "method": "phase24_adaptive_exact_binary_matrix_word_trace_refinement",
+        "method": "phase25_exact_dependency_reduced_adaptive_matrix_word_refinement",
         "expansion_status": status,
+        "universal_trace_reductions": [
+            {
+                "identity": COMMUTATOR_IDENTITY["equation"],
+                "removed_feature": COMMUTATOR_IDENTITY["left"],
+                "status": "exact_universal_identity_checked_on_all_input_edges",
+            }
+        ],
         "additional_word_tiers": tier_reports,
         "initial_colour_refinement": _refinement_summary(refinement),
         "final_colour_refinement": _refinement_summary(refinement),
@@ -368,6 +459,7 @@ def _result(status, source_edges, target_edges, refinement, tier_reports,
         "source_profiles": _profiles(source_edges),
         "target_profiles": _profiles(target_edges),
         "candidate_map_indices": refinement["candidate_map_indices"],
+        "initial_candidate_map_indices": initial_candidate_map_indices,
         "candidate_edges_before_refinement": initial_edges,
         "candidate_edges_after_refinement": refinement["candidate_edges_after_refinement"],
         "adaptive_matrix_word_refinement": report,
