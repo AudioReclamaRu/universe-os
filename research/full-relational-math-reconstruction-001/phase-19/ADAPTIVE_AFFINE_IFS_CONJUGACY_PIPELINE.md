@@ -49,9 +49,9 @@ A search cap is not a mathematical negative result.
 - Exact affine IFS map families in dimensions 1–3.
 - Common real quadratic coefficient field, using Phase 16 exact arithmetic.
 - Phase 17 requires a unique fixed point for every map and full affine span of source fixed points.
-- Phase 22 uses exact characteristic polynomials and directed edge-labelled pairwise traces; Phase 24 adaptively appends longer exact two-generator matrix-word traces when stable classes remain ambiguous. These are necessary, not complete invariants for simultaneous similarity.
+- Phase 22 uses exact characteristic polynomials and directed edge-labelled pairwise traces; Phase 24 adaptively appends longer exact two-generator matrix-word traces when stable classes remain ambiguous; Phase 25 removes universal and finite-comparison linear dependencies. These are necessary, not complete invariants for simultaneous similarity.
 - The exact affine equations and determinant feasibility remain decisive.
-- Search is bounded by frame, graph-node and candidate-isomorphism limits. Adaptive matrix-word expansion has a separate matrix-product budget and a maximum word length.
+- Search is bounded by frame, graph-node and candidate-isomorphism limits. Adaptive matrix-word expansion has a separate matrix-product budget and a maximum word length. Phase 25 finite-comparison dependencies are scoped to the active source/target edge support.
 - No nonlinear conjugacy, mixed-field composita, higher-degree number fields or physical causal interpretation is inferred.
 
 ## F. Validation
@@ -81,12 +81,26 @@ both direct calls and batch payloads. Frame-search, graph-search and word
 budgets remain separate; a cap in one layer is not silently treated as a
 negative result in another.
 
-## I. Next increments
+## I. Phase 25 integration
 
-1. Add exact algebraic dependency detection between matrix words to avoid
-   spending budget on trace expressions already implied by shorter words.
-2. Explore higher-degree word invariants and mixed coefficient fields under
-   explicit resource controls.
+The Phase 22 fallback now passes each fully evaluated Phase 24 word tier
+through Phase 25's exact dependency reducer. The universal Phase 21
+commutator-square trace is removed after exact identity checks. New trace
+columns are tested in one rational/quadratic-field row-echelon basis across
+the combined source and target active ordered-pair samples. A single shared
+coefficient vector is required. Dependent features are omitted from the
+current active edge labels and their equations are recorded; finite-family
+relations are not promoted to universal trace identities.
+
+The adaptive controller exposes independent frame, graph and matrix-product
+budgets. Candidate traces still consume the matrix-product budget even when
+their features are subsequently identified as dependent.
+
+## J. Next increments
+
+1. Extend exact dependency detection to polynomial relations, retaining
+   explicit domains and proof certificates.
+2. Derive dimension-specific universal trace identities with auditable proofs.
 3. Connect verified structural candidates to measured systems with provenance,
    uncertainty, physical carrier paths and falsifiable mechanisms.
 
