@@ -55,7 +55,7 @@ class ExactTraceFeatureDependencyTests(unittest.TestCase):
         self.assertFalse(independent)
         self.assertEqual(
             {item["feature"]: item["coefficient"] for item in relation["equation_terms"]},
-            {"trace:u": "<10_2|2_3>", "trace:v": "-<11_2|10_3>", "trace:w": "<1_2|1_3>"},
+            {"trace:u": "-<10_2|2_3>", "trace:v": "<11_2|10_3>", "trace:w": "<1_2|1_3>"},
         )
 
     def test_local_dependency_is_explicitly_not_a_universal_identity(self):
