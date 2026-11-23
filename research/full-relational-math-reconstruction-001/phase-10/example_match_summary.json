@@ -1,0 +1,50 @@
+{
+  "schema": "universe.atlas-relation-comparison-summary.v1",
+  "status": "synthetic_software_demonstration_only",
+  "basis_count": "<101_2|12_3>",
+  "numeric_atlas_reference_count": "<1110_2|112_3>",
+  "tolerance_relative": 0.0001,
+  "search_window": {
+    "max_nonzero_terms": "<11_2|10_3>",
+    "max_abs_integer_exponent": "<10_2|2_3>"
+  },
+  "observed_controlled_matches": [
+    {
+      "basis_type": "canonical",
+      "basis_id": "canonical",
+      "relation": "G1 * G2",
+      "atlas_symbol": "φ",
+      "numeric_value_secondary": 1.618033988749895
+    },
+    {
+      "basis_type": "alternative",
+      "basis_id": "<1_2|1_3>",
+      "relation": "G1",
+      "atlas_symbol": "φ",
+      "numeric_value_secondary": 1.618033988749895
+    },
+    {
+      "basis_type": "alternative",
+      "basis_id": "<10_2|2_3>",
+      "relation": "G1 * G2^2",
+      "atlas_symbol": "φ",
+      "numeric_value_secondary": 1.618033988749895
+    },
+    {
+      "basis_type": "alternative",
+      "basis_id": "<11_2|10_3>",
+      "relation": "G2",
+      "atlas_symbol": "φ",
+      "numeric_value_secondary": 1.618033988749895
+    },
+    {
+      "basis_type": "alternative",
+      "basis_id": "<100_2|11_3>",
+      "relation": "G1^2 * G2^-1",
+      "atlas_symbol": "φ",
+      "numeric_value_secondary": 1.618033988749895
+    }
+  ],
+  "interpretation": "The same deliberately constructed synthetic relation appears in different coordinates under equivalent bases. These are not independent discoveries or a physical observation.",
+  "guard": "numeric_match_is_not_symbolic_proof_or_causal_evidence"
+}
