@@ -265,7 +265,18 @@ The abstract control demonstrates a case where every vertex has the same row and
 
 See [ADAPTIVE_DIRECTED_COLOUR_REFINEMENT.md](phase-23/ADAPTIVE_DIRECTED_COLOUR_REFINEMENT.md). The dedicated CI matrix now includes phases 16–23; the new phase has six standard-library tests.
 
-### Validation status — phases 16–23
 
-The dedicated GitHub Actions workflow [ifs-exact-comparator-tests.yml](../.github/workflows/ifs-exact-comparator-tests.yml) completed successfully on the clean PR merge checkout in [run 45252880972](https://github.com/AudioReclamaRu/universe-os/actions/runs/45252880972). The run's PR head was `1507dd0a26624a678387742beecda76d48987ea7` (merge-checkout SHA `0a429c0c6e24f35a68fec24102583d43f8efc860`): Phase 16 — 17 tests; Phase 17 — 9; Phase 18 — 6; Phase 19 — 8; Phase 20 — 6; Phase 21 — 7; Phase 22 — 7; Phase 23 — 6. **66 tests passed in total.** This is a clean-checkout CI result for the eight affine-IFS phase packages only. It does not claim that the complete repository or every earlier research phase passed CI.
+## Phase 24 — adaptive exact matrix-word refinement
+
+Phase 24 extends the six Phase 21 pairwise trace invariants in controlled exact tiers. It enumerates binary necklaces of mixed two-generator words, identifies cyclic rotations using trace cyclicity, and computes higher traces only on ordered map pairs incident to vertices that remain ambiguous after the joint Phase 23 colour refinement. Each complete tier is charged against an explicit matrix-product budget and is either fully applied or skipped. After each tier, Phase 23 runs again with the prior stable colour classes retained, so candidate partitions only split.
+
+The main synthetic control uses three contracting 3×3 maps: two repeated operators and a third operator. All four distinct linear parts have the same characteristic polynomial, and the six Phase 21 traces agree in both ordered directions. The length-5 words also agree. The length-6 word 001011 differs exactly: source trace -179/4096, target trace -175/4096. This removes the remaining ambiguous map class before invoking the full affine solver. A separate budget control shows that when the next tier does not fit, the tier is skipped atomically and the complete Phase 22 graph/Phase 18 affine check can still determine the finite-family result.
+
+This is an exact synthetic algebra control, not evidence of physical origin or a complete trace-algebra invariant. The budget counts matrix products as a deterministic work proxy, not wall-clock or coefficient bit complexity.
+
+See [ADAPTIVE_MATRIX_WORD_REFINEMENT.md](phase-24/ADAPTIVE_MATRIX_WORD_REFINEMENT.md), the implementation and six tests. The adaptive Phase 19 controller exposes the matrix-product budget and maximum word length.
+
+### Validation status — phases 16–24
+
+The dedicated GitHub Actions workflow [ifs-exact-comparator-tests.yml](../.github/workflows/ifs-exact-comparator-tests.yml) completed successfully on the clean PR checkout in [run 45256541620](https://github.com/AudioReclamaRu/universe-os/actions/runs/45256541620), head `c529a17844fa2d56ba0e35e541e8728516789fa7`: Phase 16 — 17 tests; Phase 17 — 9; Phase 18 — 6; Phase 19 — 9; Phase 20 — 6; Phase 21 — 7; Phase 22 — 9; Phase 23 — 6; Phase 24 — 6. **75 tests passed in total.** This is a clean-checkout CI result for the nine affine-IFS phase packages only. It does not claim that the complete repository or every earlier research phase passed CI.
 
