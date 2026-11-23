@@ -58,7 +58,7 @@ A search cap is not a mathematical negative result.
 
 Eight standard-library routing tests are included. They cover the Menger fast path, the Phase 22 fallback, a frame-search cap, a complete Phase 17 negative result, an input mismatch, relational rejection of an incompatible family, a Phase 22 graph-search cap and empty-payload validation.
 
-The Phase 19 test module is included in the dedicated GitHub Actions matrix. The matrix was green for phases 16–21 in PR run [45243886069](https://github.com/AudioReclamaRu/universe-os/actions/runs/45243886069); the new Phase 22 entry is pending its first run. This is a phase-scoped workflow, not a repository-wide CI claim.
+All eight Phase 19 routing tests passed in the clean GitHub Actions PR checkout, workflow run [45245272098](https://github.com/AudioReclamaRu/universe-os/actions/runs/45245272098), using Python 3.12. The workflow covers phases 16–22 only; this is not a repository-wide CI claim.
 
 ## G. Relation to the Canonical Mathematical Pattern Atlas
 
