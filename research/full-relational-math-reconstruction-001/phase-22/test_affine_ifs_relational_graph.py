@@ -86,6 +86,47 @@ def gasket():
     }
 
 
+
+def higher_word_collision_pair():
+    source_a = [
+        ["3/4", "3/4", "1/2"],
+        [0, "1/2", 0],
+        [0, "-1/2", "1/4"],
+    ]
+    source_b = [
+        ["3/4", 0, 0],
+        ["-1/4", "1/2", 0],
+        ["-1/2", 0, "1/4"],
+    ]
+    target_a = [
+        ["3/4", 0, "-1/2"],
+        [0, "1/2", "1/4"],
+        [0, 0, "1/4"],
+    ]
+    target_b = [
+        ["1/4", 0, 0],
+        ["-1/4", "1/2", 0],
+        ["1/4", "-1/4", "3/4"],
+    ]
+    return (
+        {
+            "dimension": 3, "radical": 3, "coordinate_system": "source_contracting_operators",
+            "maps": [
+                {"matrix": copy.deepcopy(source_a), "translation": [0, 0, 0]},
+                {"matrix": copy.deepcopy(source_a), "translation": [0, 0, 0]},
+                {"matrix": source_b, "translation": [0, 0, 0]},
+            ],
+        },
+        {
+            "dimension": 3, "radical": 3, "coordinate_system": "target_contracting_operators",
+            "maps": [
+                {"matrix": copy.deepcopy(target_a), "translation": [0, 0, 0]},
+                {"matrix": copy.deepcopy(target_a), "translation": [0, 0, 0]},
+                {"matrix": target_b, "translation": [0, 0, 0]},
+            ],
+        },
+    )
+
 class RelationalGraphConjugacyTests(unittest.TestCase):
     def test_recovers_exact_common_affine_transform(self):
         source, target = same_slope_translation_pair()
@@ -149,6 +190,35 @@ class RelationalGraphConjugacyTests(unittest.TestCase):
         result = compare_ifs_pair_relational_graph(source, target)
         self.assertEqual(result["status"], "affine_conjugacy_verified")
         self.assertEqual(len(result["map_permutation_target_index_for_each_source"]), 3)
+
+
+    def test_phase24_higher_word_prunes_ambiguous_class_after_length_six(self):
+        source, target = higher_word_collision_pair()
+        result = compare_ifs_pair_relational_graph(source, target)
+        self.assertEqual(result["status"], "no_affine_conjugacy_found")
+        report = result["adaptive_matrix_word_refinement"]
+        applied = [tier for tier in report["additional_word_tiers"] if tier["applied"]]
+        self.assertEqual([tier["length"] for tier in applied], ["<101_2|12_3>", "<110_2|20_3>"])
+        self.assertEqual(applied[0]["candidate_edges_after"], applied[1]["candidate_edges_before"])
+        self.assertEqual(applied[0]["candidate_edges_after"], "<101_2|12_3>")
+        self.assertEqual(applied[1]["candidate_edges_after"], "<0_2|0_3>")
+        self.assertIn("001011", applied[1]["words"])
+        self.assertEqual(result["search"]["affine_families_solved"], "<0_2|0_3>")
+        self.assertEqual(report["expansion_status"], "no_compatible_colour_bijection")
+
+    def test_phase24_budget_skips_whole_word_tier_and_exact_solver_remains_decisive(self):
+        source, target = higher_word_collision_pair()
+        result = compare_ifs_pair_relational_graph(
+            source, target, max_matrix_products=479, max_word_length=6
+        )
+        self.assertEqual(result["status"], "no_affine_conjugacy_found")
+        report = result["adaptive_matrix_word_refinement"]
+        tiers = report["additional_word_tiers"]
+        self.assertEqual(len(tiers), 1)
+        self.assertFalse(tiers[0]["applied"])
+        self.assertEqual(tiers[0]["required_matrix_products"], "<111011111_2|121112_3>")
+        self.assertEqual(report["matrix_product_budget"]["used"], "<0_2|0_3>")
+        self.assertTrue(result["search"]["graph_search_complete"])
 
     def test_empty_payload_rejected(self):
         with self.assertRaises(ValueError):
