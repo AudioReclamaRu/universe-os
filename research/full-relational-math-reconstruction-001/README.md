@@ -134,3 +134,9 @@ The phase positions Giza as one candidate subsystem within this wider network, r
 The common, living reference system is [00_CANONICAL_PATTERN_ATLAS.md](00_CANONICAL_PATTERN_ATLAS.md). It covers mathematical constants, recurrences, Pascal and binary–ternary structures, all major fractal families (including Mandelbrot, Julia, Sierpiński, Cantor, Koch and Menger), geometry, tilings, symmetry and root systems, topology, graphs, nonlinear dynamics, waves and resonance, fluids and turbulence, morphogenesis, branching, probability, information, variational principles, quantum fields, planetary, stellar and cosmological patterns.
 
 **Every new search and every new relation must be compared against the whole atlas**, not just the nearest subject category. The atlas is the persistent comparison base for UNIVERSE, GIZA PRIME, RSE and all connected investigations. New discoveries expand it.
+
+## Phase 07 — relation-first physics and mathematics
+
+The new phase makes relations—not a privileged scale—the primary research object. It defines independent spatial and temporal transformations, invariant and covariant relations, relations-of-relations, dimensional analysis, renormalization/coarse-graining, continuous and discrete scale invariance, space-time response, emergence and whole-atlas comparison. It explicitly searches every spatial and temporal scale while distinguishing invariance from crossover, broken scaling and finite-window behaviour.
+
+Every candidate relation is compared against the full Canonical Pattern Atlas. Mathematical exactness, empirical repeatability, physical mechanism and causal identification are tracked separately. See [RELATION_FIRST_PHYSICS_AND_MATHEMATICS.md](phase-07/RELATION_FIRST_PHYSICS_AND_MATHEMATICS.md).
