@@ -140,3 +140,9 @@ The common, living reference system is [00_CANONICAL_PATTERN_ATLAS.md](00_CANONI
 The new phase makes relations—not a privileged scale—the primary research object. It defines independent spatial and temporal transformations, invariant and covariant relations, relations-of-relations, dimensional analysis, renormalization/coarse-graining, continuous and discrete scale invariance, space-time response, emergence and whole-atlas comparison. It explicitly searches every spatial and temporal scale while distinguishing invariance from crossover, broken scaling and finite-window behaviour.
 
 Every candidate relation is compared against the full Canonical Pattern Atlas. Mathematical exactness, empirical repeatability, physical mechanism and causal identification are tracked separately. See [RELATION_FIRST_PHYSICS_AND_MATHEMATICS.md](phase-07/RELATION_FIRST_PHYSICS_AND_MATHEMATICS.md).
+
+## Phase 08 — executable relation-discovery kernel
+
+Phase 08 adds a standard-library Python reference kernel that converts typed quantities into dimensionally admissible relation candidates, compares numerical ratios and fitted scaling exponents against a machine-readable subset of the Canonical Pattern Atlas, and preserves paired binary/ternary report keys. It supports uncertainty propagation for ratios, optional same-frame cross-ratios and log-log power-law fits.
+
+The implementation, tests and synthetic input/output are in [phase-08/RELATION_DISCOVERY_ENGINE.md](phase-08/RELATION_DISCOVERY_ENGINE.md). The numeric registry is intentionally only a subset: structural atlas families require dedicated comparators. Numerical matches remain candidates, not causal evidence. The test suite was run locally; this is not a full-repository CI claim.
