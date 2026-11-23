@@ -13,7 +13,7 @@ Phase 19 combines these methods into one deterministic controller. It selects th
 
 1. Run the exact Phase 17 fixed-point-frame comparator.
 2. If it returns a verified conjugacy or a complete result under its applicability assumptions, accept that result.
-3. If it reports **unique_fixed_point_method_not_applicable** or **source_fixed_points_do_not_span_ambient_space**, run the Phase 18 exact affine-family method.
+3. If it reports **unique_fixed_point_method_not_applicable** or **source_fixed_points_do_not_span_ambient_space**, run the Phase 20 candidate partition followed by the Phase 18 exact affine-family method.
 4. If Phase 17 reports a dimension, field or map-count mismatch, stop and report the mismatch.
 5. If Phase 17 reaches its ordered-frame search cap, preserve the unresolved result. Do not silently start another expensive search and do not reinterpret a cap as a negative result.
 6. If Phase 17 completes its frame search and finds no affine conjugacy, preserve that complete negative result under the Phase 17 assumptions.
@@ -24,7 +24,7 @@ The controller records every attempted method, the reason for switching, the fin
 
 The Phase 17 route reduces the search to affine frames formed by exact fixed points. It avoids the factorial map-permutation search when those points provide a full coordinate frame.
 
-The Phase 18 route does not need a fixed-point frame. It works directly from all operator and translation equations, parameterizes the entire affine solution family and tests the determinant polynomial for an invertible member. It is more general for degenerate fixed-point configurations but still enumerates finite map correspondences under a cap.
+The Phase 20 → Phase 18 fallback does not need a fixed-point frame. It first removes pairings whose linear-part characteristic polynomials differ, then solves only the surviving candidate matchings. It works directly from all operator and translation equations, parameterizes the entire affine solution family and tests the determinant polynomial for an invertible member. It is more general for degenerate fixed-point configurations but still enumerates finite map correspondences under a cap.
 
 The controller does not treat these algorithms as interchangeable black boxes. It preserves the conditions under which each conclusion is valid.
 
@@ -54,13 +54,13 @@ This separation is essential for preserving the Canonical Research Principle: no
 - Common real quadratic coefficient field, using Phase 16 exact arithmetic.
 - Phase 17 requires a unique fixed point for every map and full affine span of the source fixed-point cloud.
 - Phase 18 is the fallback when those fixed-point assumptions fail.
-- Phase 18 map permutations remain factorial and capped.
+- Phase 20 reduces map correspondence using an exact characteristic-polynomial necessary invariant, but ambiguous matching families may still be factorial and capped.
 - A Phase 17 target-frame cap is not automatically retried with Phase 18.
 - No nonlinear conjugacy, mixed-field composita, higher-degree number fields, or physical causal interpretation is inferred.
 
 ## F. Validation
 
-Seven standard-library routing tests are included. They cover the Menger fast path, the underdetermined fallback, a frame-search cap, a complete Phase 17 negative result, an input mismatch, a Phase 18 permutation cap and empty-payload validation.
+Eight standard-library routing tests are included. They cover the Menger fast path, the underdetermined fallback, a frame-search cap, a complete Phase 17 negative result, an input mismatch, a Phase 18 permutation cap and empty-payload validation.
 
 The committed Phase 19 test module has not been executed from a clean checkout in this continuation. The routing logic has been inspected against the Phase 17 and 18 status contracts. This is not a repository-wide CI claim.
 
