@@ -14,7 +14,8 @@ PHASE18 = ROOT / "phase-18"
 PHASE20 = ROOT / "phase-20"
 PHASE21 = ROOT / "phase-21"
 PHASE23 = ROOT / "phase-23"
-for path in (PHASE16, PHASE18, PHASE20, PHASE21, PHASE23):
+PHASE24 = ROOT / "phase-24"
+for path in (PHASE16, PHASE18, PHASE20, PHASE21, PHASE23, PHASE24):
     if str(path) not in sys.path:
         sys.path.insert(0, str(path))
 
@@ -29,6 +30,7 @@ from affine_ifs_underdetermined import (
 from affine_ifs_characteristic_partition import characteristic_polynomial
 from affine_ifs_joint_trace_partition import _pair_relation_record, TRACE_WORDS
 from affine_ifs_adaptive_color_refinement import refine_joint_directed_colours
+from adaptive_matrix_word_refinement import refine_ambiguous_matrix_word_graph
 
 
 def _has_perfect_matching(candidates, source_indices, unavailable_targets, target_count):
@@ -121,6 +123,8 @@ def compare_ifs_pair_relational_graph(
     target,
     max_graph_nodes=250000,
     max_candidate_isomorphisms=100000,
+    max_matrix_products=250000,
+    max_word_length=8,
 ):
     n, d, source_coordinates, source_maps = core._parse(source)
     m, e, target_coordinates, target_maps = core._parse(target)
@@ -145,6 +149,7 @@ def compare_ifs_pair_relational_graph(
     for value, name in (
         (max_graph_nodes, "max_graph_nodes"),
         (max_candidate_isomorphisms, "max_candidate_isomorphisms"),
+        (max_matrix_products, "max_matrix_products"),
     ):
         if isinstance(value, bool) or not isinstance(value, int) or value < 1:
             raise ValueError(f"{name} must be a positive integer")
@@ -154,40 +159,31 @@ def compare_ifs_pair_relational_graph(
     initial_candidate_edges = sum(len(row) for row in initial_candidates)
     unrestricted = math.factorial(len(source_maps))
     vertex_profile_classes = len(set(graphs["source_profiles"]))
-    refinement = refine_joint_directed_colours(
-        [
-            (graphs["source_characteristics"][i], graphs["source_profiles"][i])
-            for i in range(len(source_maps))
-        ],
-        [
-            (graphs["target_characteristics"][i], graphs["target_profiles"][i])
-            for i in range(len(target_maps))
-        ],
+
+    refinement = refine_ambiguous_matrix_word_graph(
+        [item["matrix"] for item in source_maps],
+        [item["matrix"] for item in target_maps],
+        graphs["source_characteristics"],
+        graphs["target_characteristics"],
         graphs["source_edges"],
         graphs["target_edges"],
+        d,
+        max_matrix_products=max_matrix_products,
+        max_word_length=max_word_length,
     )
     if refinement["candidate_edges_before_refinement"] != initial_candidate_edges:
         raise ArithmeticError(
-            "Phase 23 initial colour classes disagree with the Phase 22 vertex filter"
+            "Phase 24 initial colour classes disagree with the Phase 22 vertex filter"
         )
     candidates = refinement["candidate_map_indices"]
     candidate_edges = sum(len(row) for row in candidates)
-    refinement_report = {
-        "method": refinement["method"],
-        "rounds": core.paired(refinement["refinement_rounds"]),
-        "combined_colour_class_counts": [
-            core.paired(value) for value in refinement["combined_colour_class_counts"]
-        ],
-        "stable": refinement["stable"],
-        "candidate_edges_before_refinement": core.paired(
-            refinement["candidate_edges_before_refinement"]
-        ),
-        "candidate_edges_after_refinement": core.paired(
-            refinement["candidate_edges_after_refinement"]
-        ),
-        "candidate_edges_removed": core.paired(refinement["candidate_edges_removed"]),
-        "logical_status": refinement["logical_status"],
-    }
+    graphs["source_edges"] = refinement["source_edges"]
+    graphs["target_edges"] = refinement["target_edges"]
+    graphs["source_profiles"] = refinement["source_profiles"]
+    graphs["target_profiles"] = refinement["target_profiles"]
+    graphs["candidates"] = candidates
+    adaptive_word_report = refinement["adaptive_matrix_word_refinement"]
+    colour_refinement_report = adaptive_word_report["final_colour_refinement"]
 
     if any(not row for row in candidates) or not _has_perfect_matching(
         candidates, list(range(len(source_maps))), set(), len(target_maps)
@@ -197,11 +193,12 @@ def compare_ifs_pair_relational_graph(
             "source_coordinate_system": source_coordinates,
             "target_coordinate_system": target_coordinates,
             "exact_field": f"Q(√{d})",
-            "candidate_filter": "phase23_exact_joint_directed_colour_refinement",
+            "candidate_filter": "phase24_adaptive_exact_matrix_word_trace_refinement",
             "candidate_edge_count": core.paired(candidate_edges),
             "unrestricted_permutation_count": core.paired(unrestricted),
             "candidate_map_indices": [[core.paired(j) for j in row] for row in candidates],
-            "adaptive_colour_refinement": refinement_report,
+            "adaptive_matrix_word_refinement": adaptive_word_report,
+            "adaptive_colour_refinement": colour_refinement_report,
             "search": {
                 "graph_search_complete": True,
                 "candidate_isomorphisms_tested": core.paired(0),
@@ -324,13 +321,22 @@ def compare_ifs_pair_relational_graph(
         "source_coordinate_system": source_coordinates,
         "target_coordinate_system": target_coordinates,
         "exact_field": f"Q(√{d})",
-        "candidate_filter": "phase23_exact_joint_directed_colour_refinement",
+        "candidate_filter": "phase24_adaptive_exact_matrix_word_trace_refinement",
         "candidate_edge_count": core.paired(candidate_edges),
         "unrestricted_permutation_count": core.paired(unrestricted),
         "candidate_map_indices": [[core.paired(j) for j in row] for row in candidates],
-        "adaptive_colour_refinement": refinement_report,
+        "adaptive_matrix_word_refinement": adaptive_word_report,
+        "adaptive_colour_refinement": colour_refinement_report,
         "joint_relational_trace_filter": {
             "word_trace_invariants": list(TRACE_WORDS),
+            "adaptive_additional_words": [
+                {
+                    "length": tier["length"],
+                    "words": tier["words"],
+                    "applied": tier["applied"],
+                }
+                for tier in adaptive_word_report["additional_word_tiers"]
+            ],
             "source_profile_class_count": core.paired(vertex_profile_classes),
             "profile_definition": (
                 "Each map vertex is colored by its exact characteristic polynomial "
@@ -398,18 +404,20 @@ def analyze_payload(payload):
                 item["target"],
                 max_graph_nodes=int(item.get("max_graph_nodes", 250000)),
                 max_candidate_isomorphisms=int(item.get("max_candidate_isomorphisms", 100000)),
+                max_matrix_products=int(item.get("max_matrix_products", 250000)),
+                max_word_length=int(item.get("max_word_length", 8)),
             ),
         }
         for item in pairs
     ]
     return {
-        "schema": "universe.ifs-relational-graph-conjugacy.v1",
+        "schema": "universe.ifs-relational-graph-conjugacy.v2",
         "pair_count": core.paired(len(results)),
         "results": results,
         "global_guard": (
-            "Exact vertex and directed edge labels are necessary invariants under one "
-            "simultaneous affine conjugacy, not sufficient. Every final witness is "
-            "verified against every original affine map equation."
+            "Adaptive exact matrix-word traces and directed colour refinement are "
+            "necessary invariants only. Every final witness is verified against "
+            "every original affine map equation; work budgets and search caps are explicit."
         ),
     }
 
