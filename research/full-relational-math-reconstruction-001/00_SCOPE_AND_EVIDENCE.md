@@ -90,3 +90,12 @@ This is a governing research principle, not permission to treat every unsupporte
 When the next step is unclear, explicitly inspect missing evidence, preservation, erosion, burial, later modification, access, sampling, instrument sensitivity, measurement resolution, noise and method suitability. Build and retain the maximum defensible set of candidate models, including idealized reconstructions for missing measurements. Label each value as measured, source-reported, reconstructed, idealized, inferred, assumed or unknown. Then design an independent test and state its discriminating outcomes and falsifiers.
 
 The full governing policy is in [00_CANONICAL_RESEARCH_PRINCIPLES.md](00_CANONICAL_RESEARCH_PRINCIPLES.md).
+
+
+## 9. Historical context — millennia of human measurement and aiming
+
+Human societies have measured, surveyed, aligned, aimed, checked and refined the geometry of their built and natural environments over millennia. This is a real historical context, not a hypothetical modelling device.
+
+Giza research must therefore investigate the site as part of long-duration human practices of observation, geodesy, orientation, construction layout, quarrying, shaping, correction and transmission of geometric knowledge. A single-episode layout is not the automatic default. Reconstruct cumulative stages and predecessor states; determine their chronology and continuity from evidence. Uncertainty about the exact sequence does not negate the established historical reality of millennia-long human measuring and aiming.
+
+See [00_CANONICAL_RESEARCH_PRINCIPLES.md](00_CANONICAL_RESEARCH_PRINCIPLES.md).
