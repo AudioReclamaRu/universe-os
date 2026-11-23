@@ -49,14 +49,14 @@ A search cap is not a mathematical negative result.
 - Exact affine IFS map families in dimensions 1–3.
 - Common real quadratic coefficient field, using Phase 16 exact arithmetic.
 - Phase 17 requires a unique fixed point for every map and full affine span of source fixed points.
-- Phase 22 uses exact characteristic polynomials and directed edge-labelled pairwise traces; Phase 24 adaptively appends longer exact two-generator matrix-word traces when stable classes remain ambiguous; Phase 25 removes universal and finite-comparison linear dependencies. These are necessary, not complete invariants for simultaneous similarity.
+- Phase 22 uses exact characteristic polynomials and directed edge-labelled pairwise traces; Phase 24 adaptively appends longer exact two-generator matrix-word traces when stable classes remain ambiguous; Phase 25 removes the universal commutator identity and finite-comparison linear dependencies; Phase 26 tests bounded-degree polynomial dependencies on the same combined support, with unresolved candidates retained. These are necessary, not complete invariants for simultaneous similarity.
 - The exact affine equations and determinant feasibility remain decisive.
-- Search is bounded by frame, graph-node and candidate-isomorphism limits. Adaptive matrix-word expansion has a separate matrix-product budget and a maximum word length. Phase 25 finite-comparison dependencies are scoped to the active source/target edge support.
+- Search is bounded by frame, graph-node and candidate-isomorphism limits. Adaptive matrix-word expansion has a separate matrix-product budget and a maximum word length. Phase 25 linear and Phase 26 polynomial dependencies are scoped to the active combined source/target edge support. Phase 26 also has a separate monomial-count cap and minimum sample-row threshold.
 - No nonlinear conjugacy, mixed-field composita, higher-degree number fields or physical causal interpretation is inferred.
 
 ## F. Validation
 
-Nine standard-library routing tests are included. They cover the Menger fast path, the Phase 22 fallback, a frame-search cap, a complete Phase 17 negative result, an input mismatch, relational rejection of an incompatible family, a Phase 22 graph-search cap, Phase 24 budget propagation and empty-payload validation.
+Ten standard-library routing tests are included. They cover the Menger fast path, the Phase 22 fallback, a frame-search cap, a complete Phase 17 negative result, an input mismatch, relational rejection of an incompatible family, a Phase 22 graph-search cap, Phase 24 budget propagation, Phase 26 polynomial-control propagation and empty-payload validation.
 
 All nine Phase 19 routing tests passed in the clean GitHub Actions PR checkout in [run 45256541620](https://github.com/AudioReclamaRu/universe-os/actions/runs/45256541620), using Python 3.12. The dedicated matrix includes Phases 16–24 only, not full-repository CI.
 
@@ -96,11 +96,30 @@ The adaptive controller exposes independent frame, graph and matrix-product
 budgets. Candidate traces still consume the matrix-product budget even when
 their features are subsequently identified as dependent.
 
-## J. Next increments
+## J. Phase 26 integration
 
-1. Extend exact dependency detection to polynomial relations, retaining
-   explicit domains and proof certificates.
-2. Derive dimension-specific universal trace identities with auditable proofs.
+The Phase 22 fallback now applies Phase 26 after Phase 25's exact linear
+dependency reduction. A candidate trace is checked against all constant and
+bounded-degree monomials in the previously retained features. Source and
+target active ordered-pair rows are concatenated before coefficient recovery,
+so the same exact polynomial must hold on both systems.
+
+An accepted dependency includes the exact polynomial expression, monomial
+factor metadata, combined row count and a full row-by-row exact-zero
+verification certificate. These are finite-support equations, not universal
+trace identities. If sample count, monomial cap or span-saturation safeguards
+prevent classification, Phase 26 retains the feature and records the
+unresolved status.
+
+The adaptive controller and batch payload expose max_polynomial_degree,
+max_polynomial_monomials and min_polynomial_sample_rows separately from the
+matrix-product and graph-search limits.
+
+## K. Next increments
+
+1. Derive dimension-specific universal trace identities with auditable proofs.
+2. Explore higher-degree polynomial relations under explicit arithmetic
+   and monomial budgets, without conflating sample identities with universal laws.
 3. Connect verified structural candidates to measured systems with provenance,
    uncertainty, physical carrier paths and falsifiable mechanisms.
 
