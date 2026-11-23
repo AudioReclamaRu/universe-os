@@ -63,3 +63,16 @@ Pinned baseline: https://github.com/AudioReclamaRu/universe-os/commit/6506a838be
 ## Scope boundary
 
 This is a research and preservation package. It is not an implementation of UNIVERSE 3.0, does not alter the v2 engine, and does not assert that numerical correspondences prove physical functions or historical intent.
+
+## Phase 02 — full explicit reconstruction
+
+The extended package is in [phase-02/README.md](phase-02/README.md). It adds:
+
+- Complete Q7 geometric face and inclusion tables, Hasse covers, same-dimensional adjacency and vertex incidence.
+- Exact H3 root-system and reflection-group checks in Q(sqrt(5)); exact D4 / Spin(8) triality checks.
+- Mass-matrix factorization, dimensions and relabelling audit.
+- Scalar nonlinear parameter sweeps and reset-border analysis.
+- A critical implementation finding: the v2 XOR graph is used for visualization/readout, but no graph-neighbour coupling operator appears in the time-evolution equation.
+- Giza/Richat geology-first validation protocol and dimensionally explicit tests.
+
+The phase-02 data directory includes all 75,938 strict inclusions between nonempty Q7 faces. The empty face is counted separately in the abstract face lattice.
