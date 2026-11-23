@@ -136,7 +136,7 @@ class AdaptiveMatrixWordRefinementTests(unittest.TestCase):
         result = refine_ambiguous_matrix_word_graph(
             matrices_s, matrices_t, chars_s, chars_t,
             baseline_edges(matrices_s), baseline_edges(matrices_t), 3,
-            max_matrix_products=5000, max_word_length=5,
+            max_matrix_products=5000, max_word_length=6,
             max_polynomial_monomials=1,
         )
         report = result["adaptive_matrix_word_refinement"]
