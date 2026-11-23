@@ -3,7 +3,7 @@ import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-for sibling in ("phase-16", "phase-24", "phase-25"):
+for sibling in ("phase-16", "phase-21", "phase-24", "phase-25"):
     path = ROOT / sibling
     if str(path) not in sys.path:
         sys.path.insert(0, str(path))
