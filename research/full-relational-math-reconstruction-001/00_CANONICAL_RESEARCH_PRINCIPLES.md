@@ -112,3 +112,28 @@ The questions to reconstruct are:
 The exact chronology, participants, number of stages and continuity of particular techniques are details to reconstruct. They do not reopen the settled starting point that people carried out prolonged measurement, aiming and correction.
 
 When evidence is missing, return to the canonical motto and search for predecessor layouts, surviving reference marks, reused alignments, quarry boundaries, construction phases and transformed natural features. Do not replace cumulative human design with a default assumption of one-time placement.
+
+
+## Mandatory use of the Canonical Mathematical Pattern Atlas
+
+The [Canonical Mathematical Pattern Atlas](00_CANONICAL_PATTERN_ATLAS.md) is the common reference base for every research search, analysis, reconstruction and interpretation across UNIVERSE, GIZA PRIME, RSE and connected projects.
+
+Before treating a new result as isolated, compare it with the entire atlas:
+- exact and approximate numerical keys;
+- golden, metallic and other canonical ratios;
+- recurrence and algebraic constants;
+- Mandelbrot, Julia, Sierpiński, Cantor, Menger and other fractal families;
+- geometry, tiling, polyhedral and symmetry structures;
+- topology, graphs and incidence relations;
+- nonlinear dynamics, chaos, synchronisation and memory;
+- waves, spectra, resonance, impedance and transfer;
+- fluids, turbulence, branching and transport;
+- morphogenesis, geology and natural forms;
+- probability, entropy, information and optimisation;
+- quantum, field-theoretic, planetary, stellar and cosmological patterns.
+
+The comparison must include relationships between values and structures, not only direct numerical matches: reciprocal and complementary ratios, ratios of ratios, roots, powers, continued fractions, recurrence coefficients, eigenvalue ratios, scaling exponents, spectral and phase relations, graph/topology invariants, symmetry, and common generation operators.
+
+**This comparison is mandatory every time a new relation is found.** A candidate coincidence is retained in the register and classified; it is not discarded merely because its mechanism is not yet known. Exact identity, structural correspondence, ideal target, numerical candidate, exploratory resemblance and unresolved status remain distinct.
+
+The atlas is a living base: every genuinely new mathematical pattern or physical regularity is added with its definition, generating rule, invariant, related entries, evidence status, source and next discriminating test.
