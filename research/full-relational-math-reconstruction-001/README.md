@@ -360,3 +360,16 @@ The dedicated GitHub Actions workflow [ifs-exact-comparator-tests.yml](../.githu
 - Phase 27 — 14 tests
 
 **105 tests passed across all 12 affine-IFS phase packages.** This is a clean-checkout CI result for these twelve packages only. It does not claim that the complete repository or every earlier research phase passed CI.
+
+
+## Phase 28 — bounded catalog of universal trace identities
+
+Phase 28 systematically enumerates fundamental trace identity (FTI) substitutions over a finite noncommutative matrix-word vocabulary. For dimension d, it generates all nonempty words over the declared generator alphabet up to maximum length L, then enumerates every combination of d+1 distinct words. The FTI's alternating multilinearity means permutations of one substitution set differ only by global sign; repeated arguments produce the zero alternating expression and are omitted.
+
+Generated trace polynomials are canonicalised using only trace cyclicity, commutativity of scalar trace factors, exact coefficient collection, common integer-gcd reduction and global sign. Distinct substitution sets yielding the same polynomial up to nonzero rational scalar are represented once, with aliases preserved. No word reversal or generator commutation is assumed.
+
+Every unique nonzero polynomial is independently verified by the Phase 27 generic-matrix-entry expansion. Word-catalog, substitution-set, permutation, per-identity and total expansion caps are explicit. A cap never becomes a negative result; total-budget exhaustion preserves a verified prefix and marks the remaining catalog unresolved.
+
+The completion claim is bounded to the declared dimension, alphabet, word-length limit and FTI substitution family. It is not a complete basis of all trace identities, does not yet include substitutions by arbitrary linear combinations of words, and is not yet integrated into the Phase 24–26 adaptive comparator.
+
+See [Phase 28 report](phase-28/BOUNDED_UNIVERSAL_TRACE_IDENTITY_CATALOG.md), the [catalog generator](phase-28/universal_trace_catalog.py) and the [14 catalog tests](phase-28/test_universal_trace_catalog.py).

@@ -20,6 +20,7 @@ on:
       - "research/full-relational-math-reconstruction-001/phase-25/**"
       - "research/full-relational-math-reconstruction-001/phase-26/**"
       - "research/full-relational-math-reconstruction-001/phase-27/**"
+      - "research/full-relational-math-reconstruction-001/phase-28/**"
       - "research/full-relational-math-reconstruction-001/README.md"
       - ".github/workflows/ifs-exact-comparator-tests.yml"
 
@@ -33,7 +34,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        phase: [16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27]
+        phase: [16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28]
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
