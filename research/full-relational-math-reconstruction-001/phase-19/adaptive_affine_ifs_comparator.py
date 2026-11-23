@@ -7,9 +7,10 @@ import sys
 from pathlib import Path
 
 PHASE_ROOT = Path(__file__).resolve().parent.parent
+PHASE16 = PHASE_ROOT / "phase-16"
 PHASE17 = PHASE_ROOT / "phase-17"
 PHASE18 = PHASE_ROOT / "phase-18"
-for path in (PHASE17, PHASE18):
+for path in (PHASE16, PHASE17, PHASE18):
     if str(path) not in sys.path:
         sys.path.insert(0, str(path))
 
