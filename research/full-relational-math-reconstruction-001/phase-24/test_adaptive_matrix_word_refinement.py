@@ -1,4 +1,12 @@
+import sys
 import unittest
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+for sibling in ("phase-16", "phase-20", "phase-21", "phase-23", "phase-24"):
+    path = ROOT / sibling
+    if str(path) not in sys.path:
+        sys.path.insert(0, str(path))
 
 import affine_ifs_conjugacy as core
 from affine_ifs_characteristic_partition import characteristic_polynomial
