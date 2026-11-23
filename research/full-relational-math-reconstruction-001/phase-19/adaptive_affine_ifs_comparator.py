@@ -95,7 +95,7 @@ def compare_ifs_pair_adaptive(
         "selected_method": selected_method,
         "status": final_result["status"],
         "decision": decision,
-        "attempt_count": len(attempts),
+        "attempt_count": paired(len(attempts)),
         "attempts": attempts,
         "final_result": final_result,
         "global_guard": (
