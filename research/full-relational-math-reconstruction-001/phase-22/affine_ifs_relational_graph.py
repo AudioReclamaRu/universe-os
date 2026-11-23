@@ -151,6 +151,7 @@ def compare_ifs_pair_relational_graph(
 
     graphs = _relational_graphs(source_maps, target_maps, d)
     initial_candidates = graphs["candidates"]
+    initial_candidate_edges = sum(len(row) for row in initial_candidates)
     unrestricted = math.factorial(len(source_maps))
     vertex_profile_classes = len(set(graphs["source_profiles"]))
     refinement = refine_joint_directed_colours(
@@ -165,6 +166,10 @@ def compare_ifs_pair_relational_graph(
         graphs["source_edges"],
         graphs["target_edges"],
     )
+    if refinement["candidate_edges_before_refinement"] != initial_candidate_edges:
+        raise ArithmeticError(
+            "Phase 23 initial colour classes disagree with the Phase 22 vertex filter"
+        )
     candidates = refinement["candidate_map_indices"]
     candidate_edges = sum(len(row) for row in candidates)
     refinement_report = {
