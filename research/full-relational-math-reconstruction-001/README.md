@@ -198,7 +198,7 @@ See [FRACTAL_GENERATOR_AND_QUADRATIC_DYNAMICS_COMPARATORS.md](phase-15/FRACTAL_G
 
 Phase 16 adds an exact comparator for finite affine IFS map families expressed in different coordinate systems. For each candidate map permutation it solves \\(H\\circ F_i=G_{\\pi(i)}\\circ H\\) with \\(H(x)=Px+t\\), checks the determinant exactly and re-verifies every map. Rational and quadratic-surd arithmetic are exact over a common squarefree real quadratic field in dimensions 1–3. The tool separates verified conjugacy, complete negative search, underdetermined systems and capped unresolved searches; a capped permutation search is never a negative result.
 
-The synthetic Sierpiński-gasket control recovers \\(P=[[2,1],[1,2]]\\), \\(t=[3,-1]\\), \\(\\det(P)=3\\). Seventeen standard-library tests are included; the committed Phase 16 test module was not run from a clean checkout in this continuation. This is a mathematical coordinate-equivalence result, not an empirical physical finding; the field and permutation search remain bounded.
+The synthetic Sierpiński-gasket control recovers \\(P=[[2,1],[1,2]]\\), \\(t=[3,-1]\\), \\(\\det(P)=3\\). All 17 Phase 16 tests passed in the clean GitHub Actions PR checkout, workflow run [45243433007](https://github.com/AudioReclamaRu/universe-os/actions/runs/45243433007). This is a mathematical coordinate-equivalence result, not an empirical physical finding; the field and permutation search remain bounded.
 
 See [AFFINE_IFS_CONJUGACY_AND_COORDINATE_INVARIANCE.md](phase-16/AFFINE_IFS_CONJUGACY_AND_COORDINATE_INVARIANCE.md). The phase does not yet cover arbitrary number fields, mixed-field composita, non-affine conjugacies or large unrestricted permutation spaces.
 
@@ -208,7 +208,7 @@ Phase 17 removes factorial enumeration of complete map permutations when compari
 
 The 20-map Menger control reverses the target map list and applies an exact affine coordinate change. The comparator verifies all 20 maps after testing 23 of 116,280 ordered target frames, without enumerating the \\(20!\\) map permutations. Menger's internal symmetries mean that the recovered witness need not be the same affine map used to construct the synthetic target.
 
-Nine Phase 17 tests and the separate 17 Phase 16 tests are included but were not run from a clean checkout in this continuation. An independent exact rational-arithmetic reproduction of the Menger control recovered and verified a witness after 23 of 116,280 ordered target frames. The method returns explicit inconclusive statuses when fixed points are not unique, the source fixed-point cloud does not span the ambient space, or a search cap is reached. A capped search is unresolved, not negative. This is an algorithmic mathematical control, not physical evidence of a Menger-like natural process or common origin.
+All nine Phase 17 tests and all 17 Phase 16 tests passed in clean GitHub Actions PR run [45243433007](https://github.com/AudioReclamaRu/universe-os/actions/runs/45243433007). The Menger control recovered and verified a valid witness after 23 of 116,280 ordered target frames. The method returns explicit inconclusive statuses when fixed points are not unique, the source fixed-point cloud does not span the ambient space, or a search cap is reached. A capped search is unresolved, not negative. This is an algorithmic mathematical control, not physical evidence of a Menger-like natural process or common origin.
 
 See [AFFINE_IFS_FIXED_POINT_FRAMES_AND_SCALABLE_MATCHING.md](phase-17/AFFINE_IFS_FIXED_POINT_FRAMES_AND_SCALABLE_MATCHING.md). The implementation and reproducible 20-map synthetic input/output are stored alongside the phase report.
 
@@ -218,17 +218,17 @@ Phase 18 addresses affine IFS pairs whose conjugacy equations are consistent but
 
 If that determinant polynomial is identically zero, the family contains no invertible coordinate transformation. If it is nonzero, the algorithm constructs a nonzero witness deterministically: because its degree in each free parameter is at most the ambient dimension (n), successive exact specializations over \\(\\{0,1,\\ldots,n\\}\\) preserve a nonzero polynomial and yield an invertible member. Every map equation and the final determinant are checked exactly.
 
-The synthetic two-map, two-dimensional control has coincident source fixed points, so Phase 17's fixed-point-frame method cannot apply. Phase 18 finds an exact invertible affine witness from a two-parameter solution family. Six tests are included. This phase still enumerates map correspondences with a cap; a capped search is unresolved, not negative. The example is mathematical, not physical evidence.
+The synthetic two-map, two-dimensional control has coincident source fixed points, so Phase 17's fixed-point-frame method cannot apply. Phase 18 finds an exact invertible affine witness from a two-parameter solution family. All six Phase 18 tests passed in clean GitHub Actions PR run [45243433007](https://github.com/AudioReclamaRu/universe-os/actions/runs/45243433007). This phase still enumerates map correspondences with a cap; a capped search is unresolved, not negative. The example is mathematical, not physical evidence.
 
 See [UNDERDETERMINED_AFFINE_IFS_AND_EXACT_INVERTIBILITY.md](phase-18/UNDERDETERMINED_AFFINE_IFS_AND_EXACT_INVERTIBILITY.md). It does not prove common physical origin or causal coupling.
 
 ## Phase 19 — adaptive affine-IFS conjugacy pipeline
 
-Phase 19 unifies the Phase 17 fixed-point-frame search with a Phase 20 → Phase 18 fallback. The controller uses fixed-point frames first; only when those assumptions are inapplicable does it compare exact characteristic polynomials of the linear parts to remove impossible map pairings, then solve surviving candidate matchings with the Phase 18 determinant-family method. The Menger case stays on the Phase 17 fast path because its maps share the same linear part and the Phase 20 filter would not prune the candidate graph.
+Phase 19 unifies the Phase 17 fixed-point-frame search with a Phase 21 → Phase 20 → Phase 18 fallback. The controller uses fixed-point frames first; only when those assumptions are inapplicable does it compare joint pairwise word-trace profiles, intersect them with exact characteristic-polynomial candidates, then solve surviving matchings with the Phase 18 determinant-family method. The Menger case stays on the Phase 17 fast path because its maps share the same linear part and identical joint trace profiles, so the fallback filters do not prune the candidate graph.
 
 Dimension/field/map-count mismatches, complete Phase 17 negative results and frame-search caps remain terminal. Search caps are unresolved, not negative. The controller records every method attempt and the selected final method.
 
-Eight routing tests are included. The committed test module has not been executed from a clean checkout in this continuation; repository-wide CI is not claimed. See [ADAPTIVE_AFFINE_IFS_CONJUGACY_PIPELINE.md](phase-19/ADAPTIVE_AFFINE_IFS_CONJUGACY_PIPELINE.md), the implementation, tests and synthetic examples.
+All seven Phase 19 routing tests passed in clean GitHub Actions PR run [45243433007](https://github.com/AudioReclamaRu/universe-os/actions/runs/45243433007). See [ADAPTIVE_AFFINE_IFS_CONJUGACY_PIPELINE.md](phase-19/ADAPTIVE_AFFINE_IFS_CONJUGACY_PIPELINE.md), the implementation, tests and synthetic examples.
 
 ## Phase 20 — exact characteristic-polynomial partitions for affine IFS matching
 
@@ -236,7 +236,7 @@ Phase 20 reduces the Phase 18 map-correspondence search with a necessary similar
 
 The comparator enumerates only candidate perfect matchings, using a deterministic minimum-remaining-values order and exact residual matching checks. Each surviving matching is still tested using Phase 18's full affine equations, determinant polynomial, invertible witness construction and exact verification. Characteristic-polynomial equality is necessary but not sufficient for similarity, so it is only a filter.
 
-The synthetic four-map scalar control reduces the unrestricted (4!=24) permutations to one candidate matching and recovers (P=1,t=3). Six standard-library tests are included, but the Phase 20 test module was not executed from a clean checkout in this continuation. Families with repeated linear-part signatures can still retain factorially many candidate matchings; the Phase 17 fixed-point route remains preferable for the Menger control.
+The synthetic four-map scalar control reduces the unrestricted (4!=24) permutations to one candidate matching and recovers (P=1,t=3). All six Phase 20 tests passed in clean GitHub Actions PR run [45243433007](https://github.com/AudioReclamaRu/universe-os/actions/runs/45243433007). Families with repeated linear-part signatures can still retain factorially many candidate matchings; the Phase 17 fixed-point route remains preferable for the Menger control.
 
 See [CHARACTERISTIC_POLYNOMIAL_PARTITIONING_FOR_AFFINE_IFS.md](phase-20/CHARACTERISTIC_POLYNOMIAL_PARTITIONING_FOR_AFFINE_IFS.md), the implementation, tests and synthetic example.
 
@@ -246,5 +246,9 @@ Phase 21 compares exact traces of six pairwise matrix words: \\(\\operatorname{t
 
 The Phase 21 filter is necessary but not sufficient. It refines the Phase 20 characteristic-polynomial candidate graph; surviving matchings still pass through Phase 18's full affine equations, exact determinant-family solver and independent verification. A synthetic equal-characteristic-polynomial example reduces four individual-spectral candidate edges to zero relationally incompatible edges. Highly symmetric linear-part families may not be pruned; the 20-map Menger case remains on the Phase 17 fast path.
 
-Seven Phase 21 tests are included but have not been run from a clean checkout in this continuation. See [JOINT_TRACE_PROFILES_FOR_AFFINE_IFS.md](phase-21/JOINT_TRACE_PROFILES_FOR_AFFINE_IFS.md), the implementation, tests and synthetic example.
+All seven Phase 21 tests passed in clean GitHub Actions PR run [45243433007](https://github.com/AudioReclamaRu/universe-os/actions/runs/45243433007). See [JOINT_TRACE_PROFILES_FOR_AFFINE_IFS.md](phase-21/JOINT_TRACE_PROFILES_FOR_AFFINE_IFS.md), the implementation, tests and synthetic example.
+
+### Validation status — phases 16–21
+
+The dedicated GitHub Actions workflow [ifs-exact-comparator-tests.yml](../.github/workflows/ifs-exact-comparator-tests.yml) ran on the PR merge checkout. [Workflow run 45243433007](https://github.com/AudioReclamaRu/universe-os/actions/runs/45243433007) completed successfully: Phase 16 — 17 tests; Phase 17 — 9; Phase 18 — 6; Phase 19 — 7; Phase 20 — 6; Phase 21 — 7. **52 tests passed in total.** This is a clean-checkout CI result for these six affine-IFS phase packages only. It does not claim that the complete repository or every earlier research phase passed CI.
 
