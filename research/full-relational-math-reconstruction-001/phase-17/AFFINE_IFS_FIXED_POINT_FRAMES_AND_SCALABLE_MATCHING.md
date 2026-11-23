@@ -118,9 +118,9 @@ This demonstrates the algorithmic improvement on a controlled mathematical examp
 
 ## G. Validation
 
-Nine standard-library tests are included. They cover the Sierpiński gasket control, the 20-map Menger control with reversed map ordering, a complete negative result, a capped unresolved search, duplicate fixed-point multiplicity, dimension/map-count errors, and the two principal method-inapplicability cases. The committed Phase 17 test module was not run from a clean checkout in this continuation. Separately, an exact rational-arithmetic reproduction of the Menger control recovered a valid witness after 23 of 116,280 ordered target frames and independently checked every affine map equation.
+Nine standard-library tests passed in the clean GitHub Actions pull-request checkout, workflow run [45243433007](https://github.com/AudioReclamaRu/universe-os/actions/runs/45243433007), using Python 3.12. They cover the Sierpiński gasket control, the 20-map Menger control with reversed map ordering, a complete negative result, a capped unresolved search, duplicate fixed-point multiplicity, dimension/map-count errors, and the two principal method-inapplicability cases. The Menger control recovered a valid witness after 23 of 116,280 ordered target frames and independently checked every affine map equation.
 
-The Phase 17 CLI example is stored in example_input.json and its reproducible output in example_summary.json. Phase 16's separate 17-test suite also passes locally. These are local phase-level checks; they are not a fresh-checkout validation or repository-wide CI claim.
+The Phase 17 CLI example is stored in example_input.json and its expected output in example_summary.json. Phase 16's separate 17-test suite also passed in the same clean pull-request CI run. This workflow covers only the affine IFS phase tests 16–21, not the entire repository.
 
 ## H. Relation to the Canonical Mathematical Pattern Atlas
 
