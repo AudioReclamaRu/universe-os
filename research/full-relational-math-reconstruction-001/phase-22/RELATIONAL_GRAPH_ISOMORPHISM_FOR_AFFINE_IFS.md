@@ -108,7 +108,7 @@ The caps apply to graph search and candidate isomorphisms. They do not authorize
 
 Nine standard-library tests are included. They cover exact common-transform recovery, target map-order reversal, relational rejection when isolated vertex spectra are insufficient, complete negative search, graph-search cap semantics, a three-map gasket control, payload validation, Phase 24 higher-word pruning and atomic word-budget behaviour.
 
-Phase 22 is run together with Phase 24 in the dedicated Python 3.12 workflow matrix. The current implementation's clean-checkout validation is recorded in the root research README after the final nine-phase CI run completes.
+All nine Phase 22 tests passed in the clean GitHub Actions PR checkout in [run 45256541620](https://github.com/AudioReclamaRu/universe-os/actions/runs/45256541620), using Python 3.12. The same nine-phase matrix also ran the six Phase 24 tests. This is not full-repository CI.
 
 ## H. Relation to the Canonical Mathematical Pattern Atlas
 
