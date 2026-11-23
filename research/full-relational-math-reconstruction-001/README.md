@@ -83,3 +83,17 @@ Pinned baseline: https://github.com/AudioReclamaRu/universe-os/commit/6506a838be
 ## Scope boundary
 
 This is a research and preservation package. It is not an implementation of UNIVERSE 3.0, does not alter the v2 engine, and does not assert that mathematical correspondences prove physical functions or historical intent.
+
+
+## Giza design-intent invariant
+
+The Giza reconstruction treats the cross-pair relation
+
+\[
+d(P_{\rm Khufu},M_{\rm Great\ Sphinx})
+=
+d(P_{\rm Khafre},M_{\rm Khentkaus})
+=L^*
+\]
+
+as an **intended design relation in the ideal model**, not a possible coincidence. The raw coordinates and their uncertainty remain unchanged; the ideal layer reconstructs the original parent-mass reference points, eight half-faces, axes and transformations that realise the invariant. See Section K of [Phase 04](phase-04/GIZA_TRIAD_FIVE_NODE_GEOMETRY.md) and the governing rule in [the canonical principles](00_CANONICAL_RESEARCH_PRINCIPLES.md).
