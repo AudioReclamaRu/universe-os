@@ -11,13 +11,14 @@ PHASE16 = PHASE_ROOT / "phase-16"
 PHASE17 = PHASE_ROOT / "phase-17"
 PHASE18 = PHASE_ROOT / "phase-18"
 PHASE20 = PHASE_ROOT / "phase-20"
-for path in (PHASE16, PHASE17, PHASE18, PHASE20):
+PHASE21 = PHASE_ROOT / "phase-21"
+for path in (PHASE16, PHASE17, PHASE18, PHASE20, PHASE21):
     if str(path) not in sys.path:
         sys.path.insert(0, str(path))
 
 from affine_ifs_conjugacy import paired
 from affine_ifs_scalable_matching import compare_ifs_pair_scalable
-from affine_ifs_characteristic_partition import compare_ifs_pair_partitioned
+from affine_ifs_joint_trace_partition import compare_ifs_pair_trace_partitioned
 
 
 FALLBACK_STATUSES = {
@@ -41,7 +42,7 @@ def compare_ifs_pair_adaptive(
     """Use fixed-point frames first, then exact invariant partitions if needed.
 
     A capped Phase 17 frame search remains unresolved and is not silently
-    reinterpreted as a different search. The Phase 20 fallback is used only
+    reinterpreted as a different search. The Phase 21 fallback is used only
     when Phase 17's fixed-point assumptions are inapplicable.
     """
     if (isinstance(max_target_frames, bool) or
@@ -63,12 +64,12 @@ def compare_ifs_pair_adaptive(
     }]
 
     if frame_status in FALLBACK_STATUSES:
-        partition_result = compare_ifs_pair_partitioned(
+        partition_result = compare_ifs_pair_trace_partitioned(
             source, target,
             max_candidate_matchings=max_candidate_matchings,
         )
         attempts.append({
-            "method": "phase20_characteristic_partition_plus_phase18_exact_solver",
+            "method": "phase21_joint_trace_profiles_plus_phase20_and_phase18_exact_solver",
             "trigger": frame_status,
             "status": partition_result["status"],
             "result": partition_result,
@@ -77,8 +78,8 @@ def compare_ifs_pair_adaptive(
         final_result = partition_result
         decision = (
             "Phase 17's fixed-point-frame assumptions did not hold. "
-            "Phase 20 filtered impossible map pairings by exact characteristic "
-            "polynomials, then used Phase 18's determinant-family solver."
+            "Phase 21 filtered map pairings by joint exact word-trace profiles, then Phase 20 characteristic "
+            "polynomials and Phase 18's determinant-family solver."
         )
     else:
         selected_method = "phase17_exact_fixed_point_frames"
@@ -97,7 +98,7 @@ def compare_ifs_pair_adaptive(
             )
 
     return {
-        "schema": "universe.affine-ifs-adaptive-conjugacy.v2",
+        "schema": "universe.affine-ifs-adaptive-conjugacy.v3",
         "selected_method": selected_method,
         "status": final_result["status"],
         "decision": decision,
@@ -106,7 +107,7 @@ def compare_ifs_pair_adaptive(
         "final_result": final_result,
         "method_order": [
             "phase17_exact_fixed_point_frames",
-            "phase20_characteristic_partition_plus_phase18_exact_solver",
+            "phase21_joint_trace_profiles_plus_phase20_and_phase18_exact_solver",
         ],
         "global_guard": (
             "A verified affine conjugacy is mathematical structural equivalence only. "
@@ -132,13 +133,14 @@ def analyze_payload(payload):
             ),
         })
     return {
-        "schema": "universe.affine-ifs-adaptive-conjugacy.batch.v2",
+        "schema": "universe.affine-ifs-adaptive-conjugacy.batch.v3",
         "pair_count": paired(len(results)),
         "results": results,
         "method_policy": (
             "Fixed-point frames first. If their explicit applicability assumptions "
-            "fail, apply exact characteristic-polynomial partitions before the "
-            "underdetermined affine-family solver. Search caps remain unresolved."
+            "fail, apply joint pairwise word-trace profiles, then exact "
+            "characteristic-polynomial partitions, before the underdetermined "
+            "affine-family solver. Search caps remain unresolved."
         ),
     }
 
