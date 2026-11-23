@@ -58,24 +58,14 @@ def feature_vector(edges, ordered_pairs, feature_index):
     return values
 
 
-def _subtract_expression(left, factor, right):
+def _subtract_expression(left, factor, right, radical):
     result = dict(left)
     for name, coefficient in right.items():
-        product = core.mul(factor, coefficient, _RADICAL_CONTEXT[0])
+        product = core.mul(factor, coefficient, radical)
         result[name] = core.sub(result.get(name, core.Z), product)
         if core.zero(result[name]):
             del result[name]
     return result
-
-
-# The basis uses coefficients in the same Q(sqrt(d)) field as the matrix traces.
-_RADICAL_CONTEXT = [3]
-
-
-def set_dependency_field(radical: int):
-    if isinstance(radical, bool) or not isinstance(radical, int) or radical < 2:
-        raise ValueError("radical must be an integer >= 2")
-    _RADICAL_CONTEXT[0] = radical
 
 
 def new_dependency_basis():
@@ -89,7 +79,8 @@ def insert_feature(basis, feature_name: str, values, radical: int):
     an exact equation candidate + sum(c_i * prior_i) = 0 over every supplied
     sample row. Coefficients are field-exact and common to all rows.
     """
-    set_dependency_field(radical)
+    if isinstance(radical, bool) or not isinstance(radical, int) or radical < 2:
+        raise ValueError("radical must be an integer >= 2")
     vector = list(values)
     expression = {feature_name: core.O}
     for entry in basis:
@@ -101,7 +92,7 @@ def insert_feature(basis, feature_name: str, values, radical: int):
             for value, basis_value in zip(vector, entry["vector"])
         ]
         expression = _subtract_expression(
-            expression, factor, entry["expression"]
+            expression, factor, entry["expression"], radical
         )
 
     pivot = next((i for i, value in enumerate(vector) if not core.zero(value)), None)
