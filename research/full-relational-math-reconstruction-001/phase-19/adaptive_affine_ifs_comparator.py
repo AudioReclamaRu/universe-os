@@ -74,7 +74,7 @@ def compare_ifs_pair_adaptive(
             "status": partition_result["status"],
             "result": partition_result,
         })
-        selected_method = "phase20_characteristic_partition_plus_phase18_exact_solver"
+        selected_method = "phase21_joint_trace_profiles_plus_phase20_and_phase18_exact_solver"
         final_result = partition_result
         decision = (
             "Phase 17's fixed-point-frame assumptions did not hold. "
