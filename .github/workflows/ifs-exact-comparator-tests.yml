@@ -1,0 +1,40 @@
+name: Affine IFS exact-comparator tests
+
+on:
+  push:
+    branches:
+      - research/full-relational-math-reconstruction-001
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "research/full-relational-math-reconstruction-001/phase-16/**"
+      - "research/full-relational-math-reconstruction-001/phase-17/**"
+      - "research/full-relational-math-reconstruction-001/phase-18/**"
+      - "research/full-relational-math-reconstruction-001/phase-19/**"
+      - "research/full-relational-math-reconstruction-001/phase-20/**"
+      - ".github/workflows/ifs-exact-comparator-tests.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  phase-tests:
+    name: Phase ${{ matrix.phase }} unit tests
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        phase: [16, 17, 18, 19, 20]
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run phase unit tests
+        working-directory: research/full-relational-math-reconstruction-001/phase-${{ matrix.phase }}
+        run: python -m unittest discover -v -p "test_*.py"
