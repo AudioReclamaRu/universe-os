@@ -222,3 +222,11 @@ The synthetic two-map, two-dimensional control has coincident source fixed point
 
 See [UNDERDETERMINED_AFFINE_IFS_AND_EXACT_INVERTIBILITY.md](phase-18/UNDERDETERMINED_AFFINE_IFS_AND_EXACT_INVERTIBILITY.md). It does not prove common physical origin or causal coupling.
 
+## Phase 19 — adaptive affine-IFS conjugacy pipeline
+
+Phase 19 unifies the Phase 17 fixed-point-frame search and Phase 18 exact determinant-family fallback. The controller first uses fixed-point frames when every map has a unique fixed point and the source fixed-point cloud spans the ambient affine space. It falls back to the underdetermined affine-family solver only when those assumptions are inapplicable.
+
+Dimension/field/map-count mismatches and complete Phase 17 negative results remain terminal. A Phase 17 frame-search cap remains unresolved and is not silently retried as a different search. The controller records all attempts, switching conditions and the selected final method.
+
+Seven routing tests are included. The test module has not been executed from a clean checkout in this continuation; the repository-wide CI status is not claimed. See [ADAPTIVE_AFFINE_IFS_CONJUGACY_PIPELINE.md](phase-19/ADAPTIVE_AFFINE_IFS_CONJUGACY_PIPELINE.md), the implementation, tests and the coincident-fixed-point fallback example.
+
