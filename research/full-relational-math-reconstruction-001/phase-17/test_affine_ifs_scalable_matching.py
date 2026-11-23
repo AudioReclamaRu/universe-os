@@ -1,5 +1,11 @@
 import copy
+import sys
 import unittest
+from pathlib import Path
+
+PHASE16 = Path(__file__).resolve().parent.parent / "phase-16"
+if str(PHASE16) not in sys.path:
+    sys.path.insert(0, str(PHASE16))
 
 from affine_ifs_conjugacy import apply_affine_coordinate_change
 from affine_ifs_scalable_matching import compare_ifs_pair_scalable, analyze_payload
