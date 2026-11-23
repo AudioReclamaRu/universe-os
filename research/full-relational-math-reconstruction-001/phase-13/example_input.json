@@ -1,0 +1,80 @@
+{
+  "atlas_relative_tolerance": 0.0001,
+  "paired_datasets": [
+    {
+      "name": "synthetic_dynamic_scaling_control",
+      "length_name": "characteristic_length",
+      "time_name": "characteristic_duration",
+      "length_unit": "synthetic length unit",
+      "time_unit": "synthetic time unit",
+      "length": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32
+      ],
+      "time": [
+        3,
+        8.48528137423857,
+        24,
+        67.88225099390856,
+        192,
+        543.0589287840191
+      ]
+    },
+    {
+      "name": "synthetic_correlated_measurement_uncertainty",
+      "length_name": "length",
+      "time_name": "response_time",
+      "length_unit": "synthetic length unit",
+      "time_unit": "synthetic time unit",
+      "length": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "time": [
+        1.262625,
+        2.7991,
+        5.59425,
+        16.692,
+        43.796,
+        76.77,
+        220.188
+      ],
+      "sigma_log_length": [
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01
+      ],
+      "sigma_log_time": [
+        0.02,
+        0.02,
+        0.02,
+        0.02,
+        0.02,
+        0.02,
+        0.02
+      ],
+      "rho_log_length_time": [
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3
+      ]
+    }
+  ]
+}
