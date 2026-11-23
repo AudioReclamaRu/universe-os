@@ -97,3 +97,8 @@ d(P_{\rm Khafre},M_{\rm Khentkaus})
 \]
 
 as an **intended design relation in the ideal model**, not a possible coincidence. The raw coordinates and their uncertainty remain unchanged; the ideal layer reconstructs the original parent-mass reference points, eight half-faces, axes and transformations that realise the invariant. See Section K of [Phase 04](phase-04/GIZA_TRIAD_FIVE_NODE_GEOMETRY.md) and the governing rule in [the canonical principles](00_CANONICAL_RESEARCH_PRINCIPLES.md).
+
+
+## Giza research question — WHY, not WHETHER
+
+The canon treats prolonged human measuring, aiming, checking and correction of the Giza layout as a fact and starting point. We do not spend effort proving that people did this. We reconstruct **why** they did it: intended overall result, functions of the objects and complete arrangement, governing constraints, selected geometries and the way all elements were meant to work together. See the canonical principles and Phase 04.
