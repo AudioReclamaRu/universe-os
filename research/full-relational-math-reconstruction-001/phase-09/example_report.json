@@ -1,0 +1,23 @@
+{
+  "schema": "universe.buckingham-pi.v1",
+  "rank": "<11_2|10_3>",
+  "nullity": "<1_2|1_3>",
+  "variable_count": "<100_2|11_3>",
+  "canonical_basis": [
+    {
+      "basis_id": "<1_2|1_3>",
+      "expression": "density * velocity * length * dynamic_viscosity^-1",
+      "exponents": {
+        "density": "1",
+        "velocity": "1",
+        "length": "1",
+        "dynamic_viscosity": "-1"
+      },
+      "numeric_value_secondary": 1000000.0,
+      "status": "dimensionless_group_candidate",
+      "interpretation_guard": "dimensionless_does_not_mean_universal_or_causal"
+    }
+  ],
+  "alternative_basis_examples": [],
+  "basis_note": "A null-space basis is not unique. Every listed alternative is a complete basis spanning the same dimensionless exponent subspace."
+}
