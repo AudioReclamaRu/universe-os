@@ -1,12 +1,12 @@
 {
-  "schema": "universe.affine-ifs-adaptive-conjugacy.batch.v1",
+  "schema": "universe.affine-ifs-adaptive-conjugacy.batch.v2",
   "pair_count": "<1_2|1_3>",
   "results": [
     {
-      "name": "Adaptive routing: coincident fixed points require exact affine-family fallback",
-      "selected_method": "phase18_exact_determinant_family",
+      "name": "Adaptive routing: coincident fixed points require exact characteristic partition and affine-family fallback",
+      "selected_method": "phase20_characteristic_partition_plus_phase18_exact_solver",
       "status": "affine_conjugacy_verified",
-      "decision": "Phase 17's fixed-point-frame assumptions did not hold; the full affine solution-family method was used.",
+      "decision": "Phase 17's fixed-point-frame assumptions did not hold. Phase 20 filtered impossible map pairings by exact characteristic polynomials, then used Phase 18's determinant-family solver.",
       "attempt_count": "<10_2|2_3>",
       "attempts": [
         {
@@ -18,7 +18,7 @@
           }
         },
         {
-          "method": "phase18_exact_determinant_family",
+          "method": "phase20_characteristic_partition_plus_phase18_exact_solver",
           "trigger": "source_fixed_points_do_not_span_ambient_space",
           "status": "affine_conjugacy_verified",
           "result": {
@@ -26,49 +26,86 @@
             "source_coordinate_system": "same_fixed_point_at_origin",
             "target_coordinate_system": "affine_transformed_same_fixed_point_cloud",
             "exact_field": "Q(√3)",
+            "filter": "exact_characteristic_polynomial_of_each_linear_part",
+            "candidate_edge_count": "<10_2|2_3>",
+            "unrestricted_permutation_count": "<10_2|2_3>",
+            "candidate_map_indices": [
+              [
+                "<0_2|0_3>"
+              ],
+              [
+                "<1_2|1_3>"
+              ]
+            ],
             "affine_coordinate_change": {
               "convention": "y = P*x + t",
               "matrix_P": [
-                ["<10_2|2_3>", "<1_2|1_3>/<10_2|2_3>"],
-                ["<1_2|1_3>", "<1_2|1_3>"]
+                [
+                  "<10_2|2_3>",
+                  "<1_2|1_3>/<10_2|2_3>"
+                ],
+                [
+                  "<1_2|1_3>",
+                  "<1_2|1_3>"
+                ]
               ],
-              "translation_t": ["<11_2|10_3>", "-<1_2|1_3>"],
+              "translation_t": [
+                "<11_2|10_3>",
+                "-<1_2|1_3>"
+              ],
               "determinant_P": "<11_2|10_3>/<10_2|2_3>"
             },
             "map_permutation_target_index_for_each_source": [
-              "<0_2|0_3>", "<1_2|1_3>"
+              "<0_2|0_3>",
+              "<1_2|1_3>"
             ],
             "linear_solution_family": {
               "rank": "<100_2|11_3>",
               "free_parameter_count": "<10_2|2_3>",
-              "parameter_assignment": ["<1_2|1_3>", "<1_2|1_3>"],
-              "determinant_polynomial_term_count": "<1_2|1_3>",
-              "nonzero_witness_method": "Exact determinant polynomial; deterministic specialization over {0,1,...,n}."
+              "parameter_assignment": [
+                "<1_2|1_3>",
+                "<1_2|1_3>"
+              ],
+              "determinant_polynomial_term_count": "<1_2|1_3>"
             },
             "search": {
-              "permutations_tested": "<1_2|1_3>",
-              "total_permutations": "<10_2|2_3>",
+              "candidate_matchings_tested": "<1_2|1_3>",
+              "affine_families_solved": "<1_2|1_3>",
               "search_complete": false,
-              "stopped_on_verified_match": true
+              "stopped_on_verified_match": true,
+              "candidate_matching_cap": "<11000110100000_2|1010202202_3>"
             },
             "verification": "Every affine map equation and det(P) ≠ 0 were checked exactly.",
-            "interpretation": "An invertible affine conjugacy was recovered from an underdetermined exact linear solution family. This is mathematical structural equivalence, not physical causation."
+            "interpretation": "The exact characteristic-polynomial filter removed impossible pairings; a remaining candidate produced a verified invertible affine conjugacy."
           }
         }
+      ],
+      "method_order": [
+        "phase17_exact_fixed_point_frames",
+        "phase20_characteristic_partition_plus_phase18_exact_solver"
       ],
       "final_result": {
         "status": "affine_conjugacy_verified",
         "affine_coordinate_change": {
           "convention": "y = P*x + t",
           "matrix_P": [
-            ["<10_2|2_3>", "<1_2|1_3>/<10_2|2_3>"],
-            ["<1_2|1_3>", "<1_2|1_3>"]
+            [
+              "<10_2|2_3>",
+              "<1_2|1_3>/<10_2|2_3>"
+            ],
+            [
+              "<1_2|1_3>",
+              "<1_2|1_3>"
+            ]
           ],
-          "translation_t": ["<11_2|10_3>", "-<1_2|1_3>"],
+          "translation_t": [
+            "<11_2|10_3>",
+            "-<1_2|1_3>"
+          ],
           "determinant_P": "<11_2|10_3>/<10_2|2_3>"
         }
       }
     }
   ],
-  "method_policy": "Fixed-point frames first. Exact determinant-family fallback only when fixed-point assumptions are inapplicable. Search caps remain unresolved."
+  "method_policy": "Fixed-point frames first. If their explicit applicability assumptions fail, apply exact characteristic-polynomial partitions before the underdetermined affine-family solver. Search caps remain unresolved."
 }
