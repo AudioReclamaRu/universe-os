@@ -1,0 +1,32 @@
+{
+  "schema": "universe.scale-flow-analysis-summary.v1",
+  "synthetic_only": true,
+  "datasets": [
+    {
+      "name": "quadratic_reference_case",
+      "global_exponent": 2,
+      "atlas_match": "integer.two",
+      "interpretation": "synthetic global power-law control"
+    },
+    {
+      "name": "two_regime_transport",
+      "global_exponent": 1.462406015037594,
+      "break_x": 28.92546549759998,
+      "exponent_before": 1,
+      "exponent_after": 2,
+      "piecewise_delta_bic": -1372.1801647484303,
+      "dsi_status": "not_supported_against_best_nonperiodic_trend",
+      "interpretation": "synthetic continuous hinge control; DSI not selected"
+    },
+    {
+      "name": "log_periodic_synthetic_signal",
+      "global_exponent": 1.1815333382626432,
+      "dsi_status": "supported_exploratory_candidate",
+      "scale_factor_estimate": 1.700348675613349,
+      "dsi_delta_bic": -566.5019652674284,
+      "trend_baseline": "global_power_law",
+      "interpretation": "synthetic log-periodic recovery with constructed lambda=1.7"
+    }
+  ],
+  "guard": "These are constructed datasets for software validation only, not physical observations. BIC and frequency scans are exploratory, not calibrated significance tests."
+}
