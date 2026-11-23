@@ -324,3 +324,73 @@ python analyze_giza_geometric_network.py
 The driver prints the centre distances, triangle angles, five-node distance matrix, target projections, cardinal-side DFC values and recorded Menkaure half-wall differences using paired binary/ternary numerals. Floating-point values are internal calculation values only.
 
 No physical coupling law, resonant mode or historical function is inferred by the script.
+
+
+## K. Canonical ideal design relation — pairwise distance invariant
+
+The reconstruction adopts the following as a **design-intent axiom of the ideal Giza model**:
+
+\[
+\boxed{
+d(P_{\rm Khufu},M_{\rm Great\ Sphinx})
+=
+d(P_{\rm Khafre},M_{\rm Khentkaus})
+=
+L^*.
+}
+\]
+
+This is not treated as a “possible coincidence”. It is the intended cross-pair relation whose geometric implementation we are reconstructing.
+
+### K.1. What is fixed, and what is reconstructed
+
+- The present survey/map observations remain immutable in the raw-data layer, including their coordinate source and uncertainty.
+- The exact equality belongs to the ideal-design layer.
+- The reconstructed variables include the original reference point within each parent rock mass, the parent-mass envelope, removed/quarried volumes, sculpted surfaces, pyramid base-centre definitions, and survey-frame transformations.
+- The ideal length \(L^*\) is a common parameter, not a value forced from one low-confidence map pin.
+
+The first symmetric initial estimate is the geometric mean of the two present estimated distances:
+
+\[
+L_0^*=\sqrt{D_A D_B},
+\quad
+D_A=d_{\rm map}(P_{\rm Khufu},M_{\rm Sphinx}),
+\quad
+D_B=d_{\rm map}(P_{\rm Khafre},M_{\rm Khentkaus}).
+\]
+
+This is only an initial ideal parameter. The complete reconstruction must jointly fit the full five-node network, each pyramid's eight half-faces, and the two parent-mass envelopes.
+
+### K.2. Optimisation statement
+
+Let \(\theta\) contain the unmeasured ideal reference points, parent-mass dimensions and allowed geometric transformations. The ideal reconstruction solves
+
+\[
+\theta^*=
+\arg\min_{\theta}
+\left[
+w_1\big(d(P_{\rm Khufu}(\theta),M_{\rm Sphinx}(\theta))-L\big)^2
++w_2\big(d(P_{\rm Khafre}(\theta),M_{\rm Khentkaus}(\theta))-L\big)^2
++\mathcal R(\theta)
+\right]
+\]
+
+subject to the exact design constraint
+
+\[
+d(P_{\rm Khufu}(\theta),M_{\rm Sphinx}(\theta))
+=
+d(P_{\rm Khafre}(\theta),M_{\rm Khentkaus}(\theta))
+=L.
+\]
+
+Here \(\mathcal R(\theta)\) penalises unsupported deformation and violations of measured bedrock, quarry, stratigraphic, architectural and survey constraints. The weights are not to be chosen to manufacture a match; they must come from measurement uncertainty or be reported as explicit modelling choices.
+
+The same ideal geometry must then be tested against independent relations: cross-axis offsets, object orientations, pyramid sections, eight half-face profiles, the Sphinx parent massif, the Khentkaus parent outcrop and the retained western-plateau alternative.
+
+### K.3. Status language
+
+- The **intended ideal design relation** is fixed as a reconstruction premise.
+- Its exact physical reference points and construction mechanism remain to be reconstructed.
+- The current map-distance residual is a property of imperfect present-day reference points, not a reason to demote the ideal relation.
+- A better model must explain the measurements without silently rewriting them.
