@@ -2,40 +2,35 @@
 
 ## Purpose
 
-Phases 17 and 18 solve complementary cases:
+Phases 17–18 solve complementary cases. Phase 17 reconstructs an affine coordinate frame from unique map fixed points when the source fixed-point cloud spans the ambient space. Phase 18 solves the full affine operator equations and can recover an invertible coordinate change even when the fixed-point geometry is degenerate.
 
-- Phase 17 is fast when every affine map has a unique fixed point and the source fixed-point cloud spans the ambient affine space. It reconstructs a coordinate transform from affine frames and assigns maps with a bipartite matching algorithm.
-- Phase 18 handles consistent but underdetermined affine conjugacy systems, including coincident or lower-rank fixed-point clouds. It determines exactly whether the affine solution family contains an invertible coordinate transform.
-
-Phase 19 combines these methods into one deterministic controller. It selects the fast frame route where applicable and falls back to the determinant-family route only when the frame assumptions fail.
+Phase 19 is the deterministic controller. It uses the fast fixed-point route first; only when that method's assumptions do not hold does it route through Phase 21 joint trace profiles, Phase 20 characteristic-polynomial partitions and the Phase 18 exact determinant-family solver.
 
 ## A. Routing policy
 
 1. Run the exact Phase 17 fixed-point-frame comparator.
-2. If it returns a verified conjugacy or a complete result under its applicability assumptions, accept that result.
-3. If it reports **unique_fixed_point_method_not_applicable** or **source_fixed_points_do_not_span_ambient_space**, run the Phase 20 candidate partition followed by the Phase 18 exact affine-family method.
-4. If Phase 17 reports a dimension, field or map-count mismatch, stop and report the mismatch.
-5. If Phase 17 reaches its ordered-frame search cap, preserve the unresolved result. Do not silently start another expensive search and do not reinterpret a cap as a negative result.
-6. If Phase 17 completes its frame search and finds no affine conjugacy, preserve that complete negative result under the Phase 17 assumptions.
-
-The controller records every attempted method, the reason for switching, the final method and the final result.
+2. Accept a verified witness or a complete result under the frame method's assumptions.
+3. If unique fixed points or full source affine span are unavailable, run the Phase 21 relational trace-profile filter. That passes only necessary candidate edges to Phase 20.
+4. Phase 20 intersects those edges with exact individual characteristic-polynomial compatibility and solves the remaining candidate matchings with Phase 18.
+5. Dimension, field and map-count mismatches are terminal.
+6. A Phase 17 frame-search cap remains unresolved and is not silently retried through another search.
+7. Every fallback result retains the status and limits of the method that produced it.
 
 ## B. Why the routes are complementary
 
-The Phase 17 route reduces the search to affine frames formed by exact fixed points. It avoids the factorial map-permutation search when those points provide a full coordinate frame.
+The Phase 17 route avoids factorial map-permutation enumeration when unique fixed points provide a full coordinate frame.
 
-The Phase 20 → Phase 18 fallback does not need a fixed-point frame. It first removes pairings whose linear-part characteristic polynomials differ, then solves only the surviving candidate matchings. It works directly from all operator and translation equations, parameterizes the entire affine solution family and tests the determinant polynomial for an invertible member. It is more general for degenerate fixed-point configurations but still enumerates finite map correspondences under a cap.
+The Phase 21 → Phase 20 → Phase 18 route does not require such a frame. It compares the relations between each linear operator and the rest of its family, then applies an individual spectral invariant, and finally tests the complete affine equations. The trace and characteristic-polynomial filters are necessary conditions only; the exact common affine transformation is still the decisive test.
 
-The controller does not treat these algorithms as interchangeable black boxes. It preserves the conditions under which each conclusion is valid.
+The Menger control remains on the Phase 17 route. Its maps share the same scalar linear part and identical joint trace profiles, so the fallback filters would not reduce its candidate graph.
 
 ## C. Demonstrations
 
-The test controls exercise both routes:
+- **20-map Menger IFS:** the full-rank fixed-point cloud routes to Phase 17. The exact rational control finds a valid witness after 23 of 116,280 ordered target frames.
+- **Two-map coincident-fixed-point IFS:** the source fixed points do not span the plane. Phase 21 preserves the two valid relational profiles, Phase 20 retains the two characteristic-compatible pairings, and Phase 18 recovers an invertible witness from a two-parameter affine solution family.
+- **Equal individual spectra but incompatible family relations:** Phase 20 alone leaves four possible edges. Phase 21's joint trace profiles reduce these to zero, rejecting the supplied finite family without solving an affine system.
 
-- **20-map Menger IFS:** a full-rank unique-fixed-point cloud routes to Phase 17. An independent exact rational-arithmetic reproduction recovered a valid coordinate witness after 23 of 116,280 ordered target frames.
-- **Two-map coincident-fixed-point IFS:** the source fixed points do not span the plane, so the controller records Phase 17's method-inapplicability status and routes to Phase 18. Phase 18 recovers an invertible witness from a two-parameter affine solution family.
-
-The first example shows efficient frame recovery; the second shows that missing geometric frame information does not automatically mean that no affine relation exists.
+These are mathematical software controls, not physical measurements or evidence of common natural origin.
 
 ## D. Search-cap and negative-result discipline
 
@@ -43,40 +38,37 @@ A search cap is not a mathematical negative result.
 
 - Phase 17 frame-cap result remains unresolved and is returned without automatic fallback.
 - Phase 20 candidate-matching-cap result remains unresolved.
-- A complete Phase 17 negative result is retained when the frame assumptions hold.
-- A complete Phase 18 negative result is retained only after all finite map permutations are examined and every consistent affine family has an identically zero determinant polynomial.
-
-This separation is essential for preserving the Canonical Research Principle: non-detection is interpreted relative to the exact search domain and limits.
+- A complete Phase 17 negative result is retained under the frame assumptions.
+- A complete Phase 20 negative result is retained only after all candidate perfect matchings are examined and all consistent affine families fail the exact invertibility test.
+- A zero-edge Phase 21 relational graph is a complete negative result only for the stated finite family and selected necessary-invariant family.
 
 ## E. Scope and limitations
 
 - Exact affine IFS map families in dimensions 1–3.
 - Common real quadratic coefficient field, using Phase 16 exact arithmetic.
-- Phase 17 requires a unique fixed point for every map and full affine span of the source fixed-point cloud.
-- Phase 20 is used when those fixed-point assumptions fail; it filters candidates by characteristic polynomial and delegates exact affine-family solving to Phase 18.
-- Phase 20 candidate matching remains capped; a capped result is unresolved, not negative.
-- A Phase 17 target-frame cap is not automatically retried with Phase 20.
+- Phase 17 requires a unique fixed point for every map and full affine span of source fixed points.
+- Phase 21 uses six selected pairwise trace words; these are necessary, not complete, simultaneous-similarity invariants.
+- Phase 20 uses individual characteristic polynomials; these are also necessary, not sufficient, similarity invariants.
+- Phase 18 solves the remaining affine equation families; its candidate matching search remains capped.
+- A Phase 17 target-frame cap is not automatically retried.
 - No nonlinear conjugacy, mixed-field composita, higher-degree number fields, or physical causal interpretation is inferred.
 
 ## F. Validation
 
-Eight standard-library routing tests are included. They cover the Menger fast path, the Phase 20 filtered fallback, a frame-search cap, a complete Phase 17 negative result, an input mismatch, a Phase 20 candidate-matching cap, a complete Phase 20 negative result and empty-payload validation.
+Seven standard-library routing tests are included. They cover the Menger fast path, the Phase 21 → Phase 20 → Phase 18 fallback, a frame-search cap, a complete Phase 17 negative result, an input mismatch, relational rejection of equal-characteristic-polynomial but incompatible families, and empty-payload validation.
 
-The committed Phase 19 test module has not been executed from a clean checkout in this continuation. The routing logic has been inspected against the Phase 17 and Phase 20 status contracts. This is not a repository-wide CI claim.
+The committed Phase 19 test module has not been executed from a clean checkout in this continuation. A CI workflow matrix has been added for phases 16–21, but a passing run has not yet been verified. This is not a repository-wide CI pass claim.
 
 ## G. Relation to the Canonical Mathematical Pattern Atlas
 
-Phase 19 combines two complementary ways of identifying the same structural relation under coordinate change:
+Phase 19 combines geometric coordinate recovery, relations among operators, individual spectral invariants and exact affine-family feasibility. This is a concrete adaptive search architecture for structural equivalence.
 
-- geometric reconstruction from an affine frame of fixed points;
-- algebraic reconstruction from a full operator-equation solution family.
-
-This is a methodological integration inside the structural-equivalence layer. A verified match does not establish a shared natural origin, historical direction, energy transfer, or physical causal bridge.
+A verified match does not establish a shared natural origin, historical direction, energy transfer, source/receiver path, or physical causal bridge.
 
 ## H. Next increments
 
-1. Strengthen the Phase 20 necessary-invariant filter for map families with repeated characteristic polynomials, while keeping exact affine verification decisive.
-2. Add relational invariants built from traces of products of multiple generators, preserving map-label permutation symmetry.
+1. Expand the Phase 21 trace family adaptively with cyclic words of greater length under an explicit complexity budget.
+2. Compare generated matrix-algebra invariants while retaining full affine-equation verification.
 3. Add exact handling of compatible coefficient-field extensions and composita.
 4. Extend the adaptive controller beyond affine IFS to substitution tilings, cellular automata, L-systems and nonlinear operators.
 5. Connect the structural engine to measured geometries and dynamical datasets with coordinate provenance, uncertainty and physical falsifiers.
