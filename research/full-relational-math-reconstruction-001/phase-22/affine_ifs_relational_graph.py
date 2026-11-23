@@ -29,7 +29,6 @@ from affine_ifs_underdetermined import (
 )
 from affine_ifs_characteristic_partition import characteristic_polynomial
 from affine_ifs_joint_trace_partition import _pair_relation_record, TRACE_WORDS
-from affine_ifs_adaptive_color_refinement import refine_joint_directed_colours
 from adaptive_matrix_word_refinement import refine_ambiguous_matrix_word_graph
 
 
@@ -340,8 +339,9 @@ def compare_ifs_pair_relational_graph(
             "source_profile_class_count": core.paired(vertex_profile_classes),
             "profile_definition": (
                 "Each map vertex is colored by its exact characteristic polynomial "
-                "and sorted multiset of pairwise six-word trace records. Every directed "
-                "edge i→j carries the exact six-word record for (A_i,A_j)."
+                "and sorted multiset of current pairwise edge labels. Each directed "
+                "edge includes the six Phase 21 baseline values and every Phase 24 "
+                "higher-word trace applied to its ambiguity class."
             ),
             "edge_constraint": (
                 "One bijection must preserve every ordered pair label, including "
