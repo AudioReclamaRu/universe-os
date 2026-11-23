@@ -502,3 +502,10 @@ The correct target is a **multiscale resonance network**, not an isolated Giza f
 The smallest scales supply material response and microscopic excitation. Grain contacts, blocks and interfaces determine effective properties and losses. Built structures and natural rock masses support local modes. The plateau, air, water and regional geology provide additional paths and boundaries. The atmosphere and oceans can excite whole-Earth normal modes. The Earth–ionosphere system supports a separate electromagnetic cavity family. Stars and plasma systems have their own mode families; orbital resonances and primordial acoustic imprints belong to distinct gravitational and cosmological branches.
 
 The unifying object is the bridge operator and its dimensionless relation passport. The next task is to identify which bridges are established in nature, which are candidate in Giza, which are forbidden by the current physical model, and what measurements would decide each case.
+
+
+## Canonical pattern-atlas comparison
+
+All relations and mechanisms in this multiscale physics phase must be compared against the complete [Canonical Mathematical Pattern Atlas](../00_CANONICAL_PATTERN_ATLAS.md). This includes metallic means and algebraic constants; fractal and complex-dynamics families; recurrence and substitution rules; geometry and symmetry; topology and graph spectra; nonlinear and critical dynamics; spectral and wave relations; turbulence and branching; information and entropy; renormalization and cosmological patterns.
+
+For every new scale relation, perform both scalar comparisons (ratios, inverse ratios, roots, powers, continued fractions, exponents, spectral/phase ratios) and structural comparisons (operators, symmetries, topology, graph spectra, recurrence and generation rules). Preserve every candidate correspondence and update the atlas when a new family is discovered.
