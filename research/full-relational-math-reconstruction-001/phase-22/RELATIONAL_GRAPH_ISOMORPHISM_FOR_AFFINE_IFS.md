@@ -67,9 +67,9 @@ A_1=\operatorname{diag}(1/2,1/3),\qquad
 A_2=\operatorname{diag}(1/3,1/2).
 \]
 
-The target repeats \(A_1\) twice. The individual characteristic polynomials of \(A_1\) and \(A_2\) are identical, so Phase 20 alone permits all four vertex pairings. The sorted per-map profiles of Phase 21 are also insufficient to retain the pair incidence for this symmetric example.
+The target repeats \(A_1\) twice. The individual characteristic polynomials of \(A_1\) and \(A_2\) are identical, so Phase 20 alone permits all four vertex pairings. Phase 21's per-map profile filter may already reject this particular pair because the source and target row multisets differ; this example therefore does not claim an additional performance gain over Phase 21.
 
-Phase 22 preserves the directed pair labels and tests the full relational graph. It finds no compatible vertex bijection and rejects the supplied finite families before constructing any affine equation system.
+Phase 22 nevertheless represents the full directed incidence structure explicitly and checks whether any one bijection preserves every ordered pair label. It finds no compatible vertex bijection and rejects the supplied finite families before constructing any affine equation system. The control validates the whole-graph constraint and its negative-result semantics; a separate benchmark would be needed to quantify extra pruning over Phase 21 on families whose vertex profiles already match.
 
 This is an exact negative result within the stated map family and selected relational invariant. It is not a claim about nonlinear conjugacies, omitted maps, different number fields or other physical models.
 
@@ -108,7 +108,7 @@ The caps apply to graph search and candidate isomorphisms. They do not authorize
 
 Seven standard-library tests are included. They cover exact common-transform recovery, target map-order reversal, relational rejection when isolated vertex spectra are insufficient, complete negative search, graph-search cap semantics, a three-map gasket control and payload validation.
 
-The Phase 22 test module has not yet been run in GitHub Actions. The dedicated workflow matrix previously passed phases 16–21; Phase 22 will be added as a separate matrix entry.
+All seven Phase 22 tests passed in the clean GitHub Actions PR checkout, workflow run [45245272098](https://github.com/AudioReclamaRu/universe-os/actions/runs/45245272098), using Python 3.12. The workflow covers phases 16–22, not the full repository.
 
 ## H. Relation to the Canonical Mathematical Pattern Atlas
 
