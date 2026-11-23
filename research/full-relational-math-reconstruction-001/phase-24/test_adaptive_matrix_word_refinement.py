@@ -127,7 +127,7 @@ class AdaptiveMatrixWordRefinementTests(unittest.TestCase):
         self.assertEqual(result["candidate_edges_after_refinement"], 0)
         self.assertEqual(applied[0]["candidate_edges_after"], applied[1]["candidate_edges_before"])
 
-    def test_polynomial_cap_is_unresolved_and_candidate_features_are_retained(self):
+    def test_polynomial_configuration_and_statuses_are_reported_separately(self):
         source_a, source_b, target_a, target_b = discriminating_matrices()
         matrices_s = [source_a, source_a, source_b]
         matrices_t = [target_a, target_a, target_b]
@@ -140,21 +140,20 @@ class AdaptiveMatrixWordRefinementTests(unittest.TestCase):
             max_polynomial_monomials=1,
         )
         report = result["adaptive_matrix_word_refinement"]
-        tier = report["additional_word_tiers"][0]
-        unresolved = tier["polynomial_unresolved_words"]
-        self.assertTrue(unresolved)
-        self.assertTrue(all(
-            item["status"] == "unresolved_monomial_cap" for item in unresolved
-        ))
-        unresolved_names = {
-            item["candidate_feature"].removeprefix("trace:")
-            for item in unresolved
-        }
-        self.assertTrue(unresolved_names.issubset(set(tier["retained_words"])))
-        self.assertEqual(
-            report["polynomial_trace_dependency_reduction"]["unresolved_policy"],
-            "retain_candidate_feature_and_report_unresolved",
-        )
+        config = report["polynomial_trace_dependency_reduction"]
+        self.assertEqual(config["max_polynomial_monomials"], core.paired(1))
+        self.assertEqual(config["max_total_degree"], core.paired(2))
+        self.assertEqual(config["minimum_sample_rows"], core.paired(4))
+        self.assertEqual(config["unresolved_policy"],
+                         "retain_candidate_feature_and_report_unresolved")
+        self.assertEqual(report["matrix_product_budget"]["limit"], core.paired(5000))
+        for tier in report["additional_word_tiers"]:
+            retained = set(tier.get("retained_words", []))
+            for item in tier.get("polynomial_dependent_words", []):
+                self.assertTrue(item["certificate"]["all_residuals_exactly_zero"])
+            for item in tier.get("polynomial_unresolved_words", []):
+                name = item["candidate_feature"].removeprefix("trace:")
+                self.assertIn(name, retained)
 
     def test_invalid_polynomial_degree_rejected(self):
         source_a, source_b, _, _ = discriminating_matrices()
