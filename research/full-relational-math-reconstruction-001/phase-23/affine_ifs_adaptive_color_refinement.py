@@ -17,7 +17,6 @@ def _joint_colour_ids(source_signatures, target_signatures):
     unique = set(signatures)
     ordered = sorted(unique, key=repr)
     ids = {signature: index for index, signature in enumerate(ordered)}
-    split = len(source_signatures)
     return (
         [ids[item] for item in source_signatures],
         [ids[item] for item in target_signatures],
