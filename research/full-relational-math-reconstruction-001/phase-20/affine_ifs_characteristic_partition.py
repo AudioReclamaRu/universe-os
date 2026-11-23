@@ -9,9 +9,11 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+P16 = ROOT / "phase-16"
 P18 = ROOT / "phase-18"
-if str(P18) not in sys.path:
-    sys.path.insert(0, str(P18))
+for path in (P16, P18):
+    if str(path) not in sys.path:
+        sys.path.insert(0, str(path))
 
 import affine_ifs_conjugacy as core
 from affine_ifs_underdetermined import (
