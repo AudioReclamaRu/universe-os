@@ -256,7 +256,16 @@ A deterministic constrained backtracking search tests partial map assignments in
 
 All seven Phase 22 standard-library tests passed in clean GitHub Actions PR run [45245272098](https://github.com/AudioReclamaRu/universe-os/actions/runs/45245272098). See [RELATIONAL_GRAPH_ISOMORPHISM_FOR_AFFINE_IFS.md](phase-22/RELATIONAL_GRAPH_ISOMORPHISM_FOR_AFFINE_IFS.md), the implementation, tests and synthetic example.
 
-### Validation status — phases 16–22
 
-The dedicated GitHub Actions workflow [ifs-exact-comparator-tests.yml](../.github/workflows/ifs-exact-comparator-tests.yml) completed successfully on the clean PR merge checkout in [run 45245272098](https://github.com/AudioReclamaRu/universe-os/actions/runs/45245272098): Phase 16 — 17 tests; Phase 17 — 9; Phase 18 — 6; Phase 19 — 8; Phase 20 — 6; Phase 21 — 7; Phase 22 — 7. **60 tests passed in total.** This is a clean-checkout CI result for the seven affine-IFS phase packages only. It does not claim that the complete repository or every earlier research phase passed CI.
+## Phase 23 — adaptive directed colour refinement for affine-IFS relational graphs
+
+Phase 23 adds exact joint one-dimensional Weisfeiler–Leman / equitable-partition refinement for the directed edge-labelled graph from Phase 22. Each refinement round combines the prior exact vertex colour with separate incoming and outgoing multisets of (edge label, neighbour colour). Multiplicity and self-loops are preserved, and source and target are refined jointly. The stable classes now filter Phase 22's candidate vertex correspondences before constrained graph search; Phase 18's complete affine equations and exact determinant witness remain decisive.
+
+The abstract control demonstrates a case where every vertex has the same row and column label multisets, yet the correlation between edge labels and neighbour colours differs. Refinement rejects the cross-graph correspondence. This validates the refinement rule, not an empirical IFS speedup or physical mechanism. A stable partition is necessary but not sufficient, and unresolved caps retain their prior semantics.
+
+See [ADAPTIVE_DIRECTED_COLOUR_REFINEMENT.md](phase-23/ADAPTIVE_DIRECTED_COLOUR_REFINEMENT.md). The dedicated CI matrix now includes phases 16–23; the new phase has five standard-library tests.
+
+### Validation status — phases 16–23
+
+The previous verified baseline in [run 45245508248](https://github.com/AudioReclamaRu/universe-os/actions/runs/45245508248) passed 60 tests across phases 16–22. Phase 23 extends the dedicated workflow matrix. The updated eight-phase total and clean-checkout status will be recorded after the new PR run completes; no Phase 23 CI success is claimed in advance. This workflow does not represent full-repository CI.
 
