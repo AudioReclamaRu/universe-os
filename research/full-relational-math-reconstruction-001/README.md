@@ -230,3 +230,13 @@ Dimension/field/map-count mismatches and complete Phase 17 negative results rema
 
 Seven routing tests are included. The test module has not been executed from a clean checkout in this continuation; the repository-wide CI status is not claimed. See [ADAPTIVE_AFFINE_IFS_CONJUGACY_PIPELINE.md](phase-19/ADAPTIVE_AFFINE_IFS_CONJUGACY_PIPELINE.md), the implementation, tests and the coincident-fixed-point fallback example.
 
+## Phase 20 — exact characteristic-polynomial partitions for affine IFS matching
+
+Phase 20 reduces the Phase 18 map-correspondence search with a necessary similarity invariant. For each source/target map pair, it compares the exact characteristic polynomials of their linear parts. A bipartite graph contains only pairings with equal characteristic polynomials; a perfect matching is required before any complete affine conjugacy system is solved.
+
+The comparator enumerates only candidate perfect matchings, using a deterministic minimum-remaining-values order and exact residual matching checks. Each surviving matching is still tested using Phase 18's full affine equations, determinant polynomial, invertible witness construction and exact verification. Characteristic-polynomial equality is necessary but not sufficient for similarity, so it is only a filter.
+
+The synthetic four-map scalar control reduces the unrestricted (4!=24) permutations to one candidate matching and recovers (P=1,t=3). Six standard-library tests are included, but the Phase 20 test module was not executed from a clean checkout in this continuation. Families with repeated linear-part signatures can still retain factorially many candidate matchings; the Phase 17 fixed-point route remains preferable for the Menger control.
+
+See [CHARACTERISTIC_POLYNOMIAL_PARTITIONING_FOR_AFFINE_IFS.md](phase-20/CHARACTERISTIC_POLYNOMIAL_PARTITIONING_FOR_AFFINE_IFS.md), the implementation, tests and synthetic example.
+
