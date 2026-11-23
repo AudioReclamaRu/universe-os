@@ -1,0 +1,74 @@
+{
+  "schema": "universe.affine-ifs-adaptive-conjugacy.batch.v1",
+  "pair_count": "<1_2|1_3>",
+  "results": [
+    {
+      "name": "Adaptive routing: coincident fixed points require exact affine-family fallback",
+      "selected_method": "phase18_exact_determinant_family",
+      "status": "affine_conjugacy_verified",
+      "decision": "Phase 17's fixed-point-frame assumptions did not hold; the full affine solution-family method was used.",
+      "attempt_count": "<10_2|2_3>",
+      "attempts": [
+        {
+          "method": "phase17_exact_fixed_point_frames",
+          "status": "source_fixed_points_do_not_span_ambient_space",
+          "result": {
+            "status": "source_fixed_points_do_not_span_ambient_space",
+            "interpretation": "The source fixed-point cloud has affine rank below the ambient dimension. The frame method is inconclusive; no non-conjugacy is inferred."
+          }
+        },
+        {
+          "method": "phase18_exact_determinant_family",
+          "trigger": "source_fixed_points_do_not_span_ambient_space",
+          "status": "affine_conjugacy_verified",
+          "result": {
+            "status": "affine_conjugacy_verified",
+            "source_coordinate_system": "same_fixed_point_at_origin",
+            "target_coordinate_system": "affine_transformed_same_fixed_point_cloud",
+            "exact_field": "Q(√3)",
+            "affine_coordinate_change": {
+              "convention": "y = P*x + t",
+              "matrix_P": [
+                ["<10_2|2_3>", "<1_2|1_3>/<10_2|2_3>"],
+                ["<1_2|1_3>", "<1_2|1_3>"]
+              ],
+              "translation_t": ["<11_2|10_3>", "-<1_2|1_3>"],
+              "determinant_P": "<11_2|10_3>/<10_2|2_3>"
+            },
+            "map_permutation_target_index_for_each_source": [
+              "<0_2|0_3>", "<1_2|1_3>"
+            ],
+            "linear_solution_family": {
+              "rank": "<100_2|11_3>",
+              "free_parameter_count": "<10_2|2_3>",
+              "parameter_assignment": ["<1_2|1_3>", "<1_2|1_3>"],
+              "determinant_polynomial_term_count": "<1_2|1_3>",
+              "nonzero_witness_method": "Exact determinant polynomial; deterministic specialization over {0,1,...,n}."
+            },
+            "search": {
+              "permutations_tested": "<1_2|1_3>",
+              "total_permutations": "<10_2|2_3>",
+              "search_complete": false,
+              "stopped_on_verified_match": true
+            },
+            "verification": "Every affine map equation and det(P) ≠ 0 were checked exactly.",
+            "interpretation": "An invertible affine conjugacy was recovered from an underdetermined exact linear solution family. This is mathematical structural equivalence, not physical causation."
+          }
+        }
+      ],
+      "final_result": {
+        "status": "affine_conjugacy_verified",
+        "affine_coordinate_change": {
+          "convention": "y = P*x + t",
+          "matrix_P": [
+            ["<10_2|2_3>", "<1_2|1_3>/<10_2|2_3>"],
+            ["<1_2|1_3>", "<1_2|1_3>"]
+          ],
+          "translation_t": ["<11_2|10_3>", "-<1_2|1_3>"],
+          "determinant_P": "<11_2|10_3>/<10_2|2_3>"
+        }
+      }
+    }
+  ],
+  "method_policy": "Fixed-point frames first. Exact determinant-family fallback only when fixed-point assumptions are inapplicable. Search caps remain unresolved."
+}
