@@ -119,8 +119,9 @@ The determinant polynomial is the exact bridge between them. The result adds a f
 
 ## I. Next increments
 
-1. Combine the Phase 17 fixed-point-frame search and Phase 18 determinant-family solver into one adaptive comparator with explicit method selection and provenance.
-2. Replace factorial map-permutation enumeration for underdetermined families with invariant-based candidate partitions and exact assignment search.
+1. **Partly advanced in Phase 20:** exact characteristic polynomials of linear parts now build a necessary-invariant bipartite candidate graph, eliminating impossible map pairings before affine-system solving. Candidate perfect matchings are searched exactly. Families whose maps all share the same characteristic polynomial can still retain factorially many matchings; see [Phase 20](../phase-20/CHARACTERISTIC_POLYNOMIAL_PARTITIONING_FOR_AFFINE_IFS.md).
+2. Combine the Phase 20 invariant partitions with the Phase 17 fixed-point method and Phase 18 determinant solver under the Phase 19 controller.
 3. Extend exact arithmetic to compatible higher-degree number fields and composita.
-4. Generalize from affine IFS maps to substitution tilings, cellular automata, L-systems and nonlinear operators.
-5. Apply the combined structural tests to measured natural-system data, retaining coordinate provenance, uncertainty and physical falsifiers.
+4. Generalize from quadratic fields to exact algebraic number fields of higher degree.
+5. Extend generator equivalence beyond affine IFS to substitutions, tilings, cellular automata, L-systems and nonlinear operators in the full Atlas.
+6. Connect these exact structural tests to measured natural-system data without collapsing geometric equivalence into physical causation.
