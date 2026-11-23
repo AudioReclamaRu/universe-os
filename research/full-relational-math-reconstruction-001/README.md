@@ -224,11 +224,11 @@ See [UNDERDETERMINED_AFFINE_IFS_AND_EXACT_INVERTIBILITY.md](phase-18/UNDERDETERM
 
 ## Phase 19 — adaptive affine-IFS conjugacy pipeline
 
-Phase 19 unifies the Phase 17 fixed-point-frame search with a Phase 21 → Phase 20 → Phase 18 fallback. The controller uses fixed-point frames first; only when those assumptions are inapplicable does it compare joint pairwise word-trace profiles, intersect them with exact characteristic-polynomial candidates, then solve surviving matchings with the Phase 18 determinant-family method. The Menger case stays on the Phase 17 fast path because its maps share the same linear part and identical joint trace profiles, so the fallback filters do not prune the candidate graph.
+Phase 19 unifies the Phase 17 fixed-point-frame search with a Phase 22 whole-family relational graph fallback. The controller uses fixed-point frames first; only when those assumptions are inapplicable does it search one directed edge-labelled graph whose vertex colours combine exact characteristic polynomials and Phase 21 relational profiles. A single map bijection must preserve every ordered pair trace record before Phase 18's full affine equations and determinant witness solver are invoked. The Menger case remains on the Phase 17 fast path because its uniform linear parts and relational symmetries offer little fallback pruning.
 
-Dimension/field/map-count mismatches, complete Phase 17 negative results and frame-search caps remain terminal. Search caps are unresolved, not negative. The controller records every method attempt and the selected final method.
+Dimension/field/map-count mismatches, complete Phase 17 negative results and search caps retain their explicit terminal or unresolved statuses. The controller records every method attempt and the selected final method.
 
-All seven Phase 19 routing tests passed in clean GitHub Actions PR run [45243433007](https://github.com/AudioReclamaRu/universe-os/actions/runs/45243433007). See [ADAPTIVE_AFFINE_IFS_CONJUGACY_PIPELINE.md](phase-19/ADAPTIVE_AFFINE_IFS_CONJUGACY_PIPELINE.md), the implementation, tests and synthetic examples.
+The Phase 19 controller's earlier seven tests passed in clean GitHub Actions run [45243886069](https://github.com/AudioReclamaRu/universe-os/actions/runs/45243886069). The expanded Phase 22 integration is awaiting its first CI run. See [ADAPTIVE_AFFINE_IFS_CONJUGACY_PIPELINE.md](phase-19/ADAPTIVE_AFFINE_IFS_CONJUGACY_PIPELINE.md), the implementation, tests and synthetic examples.
 
 ## Phase 20 — exact characteristic-polynomial partitions for affine IFS matching
 
@@ -248,7 +248,15 @@ The Phase 21 filter is necessary but not sufficient. It refines the Phase 20 cha
 
 All seven Phase 21 tests passed in clean GitHub Actions PR run [45243433007](https://github.com/AudioReclamaRu/universe-os/actions/runs/45243433007). See [JOINT_TRACE_PROFILES_FOR_AFFINE_IFS.md](phase-21/JOINT_TRACE_PROFILES_FOR_AFFINE_IFS.md), the implementation, tests and synthetic example.
 
-### Validation status — phases 16–21
+## Phase 22 — exact relational graph isomorphism for simultaneous IFS conjugacy
 
-The dedicated GitHub Actions workflow [ifs-exact-comparator-tests.yml](../.github/workflows/ifs-exact-comparator-tests.yml) ran on the PR merge checkout. [Workflow run 45243433007](https://github.com/AudioReclamaRu/universe-os/actions/runs/45243433007) completed successfully: Phase 16 — 17 tests; Phase 17 — 9; Phase 18 — 6; Phase 19 — 7; Phase 20 — 6; Phase 21 — 7. **52 tests passed in total.** This is a clean-checkout CI result for these six affine-IFS phase packages only. It does not claim that the complete repository or every earlier research phase passed CI.
+Phase 22 represents the whole finite affine-map family as a directed, edge-labelled relational graph. Each map is a vertex coloured by its exact characteristic polynomial and Phase 21 relational profile. Each ordered pair of maps carries the exact six-word trace record for that pair, including self-loops. One common map bijection must preserve every vertex and directed edge label.
+
+A deterministic constrained backtracking search tests partial map assignments in both directions and uses residual bipartite matching to prune impossible continuations. Only complete relational graph isomorphisms are passed to Phase 18's exact affine equations and determinant-family solver; the graph match itself is never reported as affine conjugacy. Search-node and candidate-isomorphism caps are unresolved, not negative.
+
+Seven standard-library tests are included. The Phase 22 test module and expanded Phase 19 integration are pending their first clean-checkout CI run. See [RELATIONAL_GRAPH_ISOMORPHISM_FOR_AFFINE_IFS.md](phase-22/RELATIONAL_GRAPH_ISOMORPHISM_FOR_AFFINE_IFS.md), the implementation, tests and synthetic example.
+
+### Validation status — phases 16–22
+
+The dedicated GitHub Actions workflow [ifs-exact-comparator-tests.yml](../.github/workflows/ifs-exact-comparator-tests.yml) completed successfully on clean PR checkouts for phases 16–21: [run 45243886069](https://github.com/AudioReclamaRu/universe-os/actions/runs/45243886069) passed 52 tests. Phase 22 adds seven tests and expands the Phase 19 controller; its first CI run is pending. The workflow covers these affine-IFS packages only, not the complete repository or every earlier research phase.
 
