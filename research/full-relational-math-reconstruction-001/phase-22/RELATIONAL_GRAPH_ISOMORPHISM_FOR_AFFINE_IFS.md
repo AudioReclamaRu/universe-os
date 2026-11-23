@@ -97,10 +97,11 @@ The caps apply to graph search and candidate isomorphisms. They do not authorize
 
 - Dimensions 1–3.
 - Exact rational / common real-quadratic field arithmetic inherited from Phases 16 and 18.
-- Exact characteristic polynomials, the Phase 21 directed pairwise traces with their universal commutator-square dependency removed by Phase 25, Phase 23 directed colour refinement, and Phase 24 adaptive binary matrix-word traces reduced by Phase 25's exact finite-comparison dependency test.
+- Exact characteristic polynomials, the Phase 21 directed pairwise traces with their universal commutator-square dependency removed by Phase 25, Phase 23 directed colour refinement, Phase 24 adaptive binary matrix-word traces, Phase 25 exact linear-dependency reduction, and Phase 26 bounded-degree polynomial-dependency reduction on the combined finite support.
 - Deterministic constrained backtracking with residual perfect-matching feasibility checks.
 - Search is bounded by graph-node and complete-isomorphism caps; optional word expansion has a separate matrix-product budget and maximum word length.
-- These selected vertex/edge labels are necessary, not complete invariants for simultaneous similarity. Phase 25 finite-comparison dependencies apply only to the combined active source/target ordered-pair support and are not universal matrix identities.
+- These selected vertex/edge labels are necessary, not complete invariants for simultaneous similarity. Phase 25 linear and Phase 26 polynomial finite-comparison dependencies apply only to the combined active source/target ordered-pair support and are not universal matrix identities.
+- Phase 26 uses explicit total-degree, monomial-count and minimum-row bounds. If the monomial span saturates the observed rows, the result is unresolved and the candidate feature is retained.
 - Full affine operator equations and determinant feasibility remain decisive.
 - Higher-degree number fields, longer word algebras, nonlinear conjugacy and physical causal identification remain outside scope.
 
@@ -145,11 +146,32 @@ handling. The Phase 22 package now also tests the integrated discriminator and
 the case where the optional trace budget is exhausted but the exact affine
 solver still determines the finite-family result.
 
-## K. Next increments
+## K. Phase 26 polynomial dependency integration
 
-1. Extend the trace-word search with algebraic dependency detection and exact
-   reduction of words before spending further matrix-product budget.
-2. Combine fixed-point frame constraints with edge-labelled graph search
-   before residual map assignment.
-3. Extend exact fields and connect verified structural candidates to measured
-   natural-system data with provenance, uncertainty and falsifiable mechanisms.
+Phase 26 tests whether a still-linearly-independent candidate matrix-word
+trace is a polynomial of configured total degree (default two) in previously
+retained trace features. It builds the exact constant/monomial columns over
+the combined source and target active supports and uses one shared coefficient
+vector. Every accepted equation is re-evaluated exactly on every combined row
+before the candidate feature can be omitted.
+
+The monomial cap defaults to 512 and the minimum sample count to four. If the
+monomial columns span all observed rows, the candidate is unresolved rather
+than automatically labelled dependent. Any cap or sample limitation also
+retains the candidate. The controller exposes these settings independently
+from the matrix-product and graph-search budgets.
+
+The Phase 26 tests include a quadratic control, a degree-one negative control,
+a source/target coefficient-consistency control, a monomial-span saturation
+case, a monomial cap, a finite-support relation broken by an added row, and
+parameter validation. See
+[EXACT_POLYNOMIAL_TRACE_DEPENDENCIES.md](../phase-26/EXACT_POLYNOMIAL_TRACE_DEPENDENCIES.md).
+
+## L. Next increments
+
+1. Derive additional dimension-specific universal trace identities with
+   auditable symbolic proofs, keeping them separate from sample relations.
+2. Explore higher-degree polynomial feature relations under explicit
+   monomial and bit-complexity budgets.
+3. Connect verified structural candidates to measured natural-system data
+   with provenance, uncertainty and falsifiable mechanisms.
