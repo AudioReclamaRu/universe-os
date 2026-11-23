@@ -234,6 +234,7 @@ def main() -> None:
     print(f"Target along-axis separation: {rounded_tenth(target_along)} m")
     print(f"Target cross-axis separation: {rounded_tenth(target_cross)} m")
     print(f"Difference from Khafre cross-axis offset: {rounded_tenth(mismatch)} m")
+    print("WARNING: exploratory mixed-frame projection only; map-derived target points are not tied to the GPMP survey grid by a surveyed transformation.")
 
     print("CARDINAL-SIDE DFC VALUES — ARC MINUTES")
     for pyramid, sides in SIDE_DFC_ARCMIN.items():
