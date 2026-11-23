@@ -318,7 +318,7 @@ and the integration reports for [Phase 24](phase-24/ADAPTIVE_MATRIX_WORD_REFINEM
 [Phase 22](phase-22/RELATIONAL_GRAPH_ISOMORPHISM_FOR_AFFINE_IFS.md) and
 [Phase 19](phase-19/ADAPTIVE_AFFINE_IFS_CONJUGACY_PIPELINE.md).
 
-### Validation status — phases 16–26
+### Historical validation status — phases 16–26
 
 The dedicated GitHub Actions workflow [ifs-exact-comparator-tests.yml](../.github/workflows/ifs-exact-comparator-tests.yml) completed successfully on the clean pull-request checkout in [run 45266941902](https://github.com/AudioReclamaRu/universe-os/actions/runs/45266941902), testing branch head `269092eadefc74c49061ecb0fcf47656f7b20c98`: Phase 16 — 17 tests; Phase 17 — 9; Phase 18 — 6; Phase 19 — 10; Phase 20 — 6; Phase 21 — 7; Phase 22 — 9; Phase 23 — 6; Phase 24 — 8; Phase 25 — 6; Phase 26 — 7. **91 tests passed across all 11 affine-IFS phase packages.** This is a clean-checkout CI result for these eleven packages only. It does not claim that the complete repository or every earlier research phase passed CI.
 
@@ -342,6 +342,21 @@ Phase 27 currently proves individual FTI instances for supplied word substitutio
 
 See [UNIVERSAL_TRACE_IDENTITIES_AND_GENERIC_MATRIX_PROOFS.md](phase-27/UNIVERSAL_TRACE_IDENTITIES_AND_GENERIC_MATRIX_PROOFS.md), the [implementation](phase-27/universal_trace_identities.py) and the [14 Phase 27 tests](phase-27/test_universal_trace_identities.py).
 
-### Phase 27 local validation
+### Validation status — phases 16–27
 
-The standard-library package passed 14 tests locally, including exact FTI verification for matrix dimensions 1, 2 and 3, noncommutative word substitutions, trace cyclicity, scalar trace-factor commutativity, false-identity rejection and conservative unresolved-cap behaviour. The dedicated CI matrix has been extended to Phase 27; its clean-checkout result is reported after the workflow completes.
+The dedicated GitHub Actions workflow [ifs-exact-comparator-tests.yml](../.github/workflows/ifs-exact-comparator-tests.yml) completed successfully on the clean pull-request checkout in [run 45269985159](https://github.com/AudioReclamaRu/universe-os/actions/runs/45269985159), testing branch head 7f31fea7742f62c7f4bfc38234816ab92af155a9.
+
+- Phase 16 — 17 tests
+- Phase 17 — 9 tests
+- Phase 18 — 6 tests
+- Phase 19 — 10 tests
+- Phase 20 — 6 tests
+- Phase 21 — 7 tests
+- Phase 22 — 9 tests
+- Phase 23 — 6 tests
+- Phase 24 — 8 tests
+- Phase 25 — 6 tests
+- Phase 26 — 7 tests
+- Phase 27 — 14 tests
+
+**105 tests passed across all 12 affine-IFS phase packages.** This is a clean-checkout CI result for these twelve packages only. It does not claim that the complete repository or every earlier research phase passed CI.
