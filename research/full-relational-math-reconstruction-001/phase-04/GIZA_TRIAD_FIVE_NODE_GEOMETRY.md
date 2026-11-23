@@ -394,3 +394,16 @@ The same ideal geometry must then be tested against independent relations: cross
 - Its exact physical reference points and construction mechanism remain to be reconstructed.
 - The current map-distance residual is a property of imperfect present-day reference points, not a reason to demote the ideal relation.
 - A better model must explain the measurements without silently rewriting them.
+
+
+## L. Historical context — human measuring and aiming over millennia
+
+The Giza investigation takes place within the real, long history of human activity on this planet. **People have been observing, measuring, surveying, aiming, laying out axes, checking distances/angles/proportions, building, correcting and transmitting geometric knowledge for millennia.** This is not merely a speculative feature of our model.
+
+Accordingly, Giza is investigated as a cumulative human design and measurement landscape. The primary line of inquiry is to reconstruct successive predecessor states and operations: landscape observation; selection and transfer of reference points; baselines and sight lines; orientation; distance and proportion checks; setting-out; quarrying and shaping; construction; correction; reuse; and the transmission of knowledge between generations.
+
+Do not reduce Giza by default to one isolated construction episode. The exact chronology, number of stages, communities involved and continuity of particular techniques are to be investigated; they do not need to be assumed in advance. That unresolved detail is not a reason to demote the established long history of human measuring and aiming to an optional fantasy.
+
+This historical framework applies to all nodes: the three pyramids and their eight half-face geometries; the Great Sphinx and its parent outcrop; the Khentkaus bedrock mass; the retained western-plateau alternative; and the surrounding terrain, quarry surfaces and geological transformations.
+
+The reconstruction must now search for the actual traces and mathematical consequences of that cumulative work: predecessor alignments, repeated axes, inherited baselines, geometric corrections, construction phases, reused reference points and relationships that become more exact as the layout develops.
