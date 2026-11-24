@@ -25,6 +25,38 @@ if HERE not in sys.path:
 import giza_multiscale_model as g  # noqa: E402
 
 
+def _assert_json_data_equal(testcase, bundled, generated, path="report"):
+    """Compare two parsed JSON trees, tolerating cross-version float repr.
+
+    Python 3.14 and 3.12 can serialize the same float with a different number
+    of digits, and libm can differ by an ULP across platforms.  The committed
+    report's DATA is the determinism contract; byte-level determinism inside a
+    single interpreter is covered by test_report_is_byte_deterministic and
+    test_write_report_matches_dumps.
+    """
+    if isinstance(bundled, dict) or isinstance(generated, dict):
+        testcase.assertIsInstance(bundled, dict, path)
+        testcase.assertIsInstance(generated, dict, path)
+        testcase.assertEqual(set(bundled), set(generated), path)
+        for key in sorted(bundled):
+            _assert_json_data_equal(testcase, bundled[key], generated[key], path + "." + key)
+    elif isinstance(bundled, (list, tuple)) or isinstance(generated, (list, tuple)):
+        testcase.assertIsInstance(bundled, (list, tuple), path)
+        testcase.assertIsInstance(generated, (list, tuple), path)
+        testcase.assertEqual(len(bundled), len(generated), path)
+        for index, (left, right) in enumerate(zip(bundled, generated)):
+            _assert_json_data_equal(testcase, left, right, "%s[%d]" % (path, index))
+    elif isinstance(bundled, bool) or isinstance(generated, bool):
+        testcase.assertEqual(bundled, generated, path)
+    elif isinstance(bundled, (int, float)) and isinstance(generated, (int, float)):
+        testcase.assertTrue(
+            math.isclose(bundled, generated, rel_tol=1e-9, abs_tol=1e-12),
+            "%s: %r != %r" % (path, bundled, generated),
+        )
+    else:
+        testcase.assertEqual(bundled, generated, path)
+
+
 class ArtifactValidationTests(unittest.TestCase):
     def test_schema_file_declares_contract(self):
         schema = g.scenario_schema()
@@ -812,8 +844,10 @@ class ReportAndDeterminismTests(unittest.TestCase):
 
     def test_bundled_report_matches_generated(self):
         with open(os.path.join(HERE, "deterministic_report_example.json"), "r", encoding="utf-8") as handle:
-            bundled = handle.read()
-        self.assertEqual(bundled, g.deterministic_dumps(g.build_deterministic_report()) + "\n")
+            bundled = json.load(handle)
+        generated = g.build_deterministic_report()
+        _assert_json_data_equal(self, bundled, generated)
+        self.assertEqual(bundled["report_id"], generated["report_id"])
 
     def test_report_separates_computed_from_represented(self):
         report = g.build_deterministic_report()
