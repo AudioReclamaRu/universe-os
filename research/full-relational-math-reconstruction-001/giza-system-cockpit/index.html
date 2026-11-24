@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>UNIVERSE OS // GIZA PRIME INTEGRATED SYSTEM COCKPIT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@300;400;500;700&family=Unbounded:wght@300;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#09090f;--panel:#0d0d18;--surface:#111120;--border:#1e1e35;
+  --amber:#f5a623;--amber2:#ffcc44;--amber-d:#5a3800;
+  --green:#39ff7a;--red:#ff3c54;--cyan:#00d4ff;--violet:#8855ff;
+  --white:#e8e4d8;--dim:#2a2840;--pink:#ff88cc;
+  --mono:'Martian Mono',monospace;--head:'Unbounded',sans-serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;background:var(--ink);color:var(--amber);font-family:var(--mono);font-size:10px;overflow:hidden;cursor:crosshair;}
+body::after{content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.07) 2px,rgba(0,0,0,0.07) 4px);}
+body::before{content:'';position:fixed;inset:0;z-index:9997;pointer-events:none;
+  background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,0.55) 100%);}
+body{display:grid;grid-template-rows:52px 1fr 24px;}
+
+/* ── HEADER ───────────────────────────────────────────── */
+header{display:flex;align-items:center;justify-content:space-between;padding:0 16px;
+  background:var(--panel);border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
+header::before{content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(245,166,35,0.025),transparent);
+  animation:scanH 6s linear infinite;}
+@keyframes scanH{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+.logo{font-family:var(--head);font-size:13px;font-weight:900;letter-spacing:4px;color:var(--amber);
+  text-shadow:0 0 20px rgba(245,166,35,.45),0 0 60px rgba(245,166,35,.1);white-space:nowrap;}
+.logo span{color:var(--amber2);}
+.logo sub{font-size:6px;color:var(--amber-d);letter-spacing:3px;vertical-align:middle;margin-left:8px;}
+.subline{font-size:6px;letter-spacing:3px;color:var(--amber-d);margin-top:2px;white-space:nowrap;}
+.hdr-kpis{display:flex;gap:1px;align-items:stretch;height:100%;}
+.kpi{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:0 10px;border-left:1px solid var(--border);min-width:70px;}
+.kpi-v{font-family:var(--head);font-size:11px;font-weight:700;color:var(--amber2);letter-spacing:1px;line-height:1;white-space:nowrap;}
+.kpi-v.pos{color:var(--green);text-shadow:0 0 8px rgba(57,255,122,.4);}
+.kpi-v.warn{color:var(--red);text-shadow:0 0 8px rgba(255,60,84,.3);}
+.kpi-v.vio{color:var(--violet);}
+.kpi-l{font-size:6px;letter-spacing:2px;color:var(--amber-d);margin-top:3px;white-space:nowrap;}
+.hdr-r{display:flex;align-items:center;gap:10px;font-size:8px;}
+.conn-wrap{display:flex;align-items:center;gap:6px;}
+#conn-dot{width:8px;height:8px;border-radius:50%;background:#1a1a2a;transition:all .3s;}
+#conn-dot.on{background:var(--green);box-shadow:0 0 10px var(--green);}
+#conn-dot.err{background:var(--red);box-shadow:0 0 10px var(--red);animation:blink .5s infinite;}
+@keyframes blink{50%{opacity:0;}}
+#conn-lbl{color:var(--amber-d);letter-spacing:2px;}
+#clock{color:var(--amber);letter-spacing:2px;font-weight:500;}
+
+/* ── MAIN / 80% CENTRE ────────────────────────────────── */
+main{display:grid;grid-template-columns:minmax(190px,10fr) minmax(0,80fr) minmax(190px,10fr);
+  gap:1px;background:var(--border);overflow:hidden;}
+main.left-collapsed{grid-template-columns:0 minmax(0,90fr) minmax(190px,10fr);}
+main.right-collapsed{grid-template-columns:minmax(190px,10fr) minmax(0,90fr) 0;}
+main.both-collapsed{grid-template-columns:0 minmax(0,100fr) 0;}
+.col{display:flex;flex-direction:column;gap:1px;background:var(--border);overflow:hidden;min-width:0;}
+.col.hidden{display:none;}
+.pnl{background:var(--panel);padding:9px 11px;flex-shrink:0;overflow:hidden;}
+.pnl.grow{flex:1;overflow:hidden;display:flex;flex-direction:column;min-height:0;}
+.pnl-title{font-size:6px;letter-spacing:3px;color:var(--amber-d);border-bottom:1px solid var(--border);
+  padding-bottom:5px;margin-bottom:7px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;}
+.pnl-title em{font-style:normal;color:var(--amber);}
+.pnl-title .exp{color:var(--amber-d);font-size:8px;letter-spacing:0;}
+.pnl.collapsed .pnl-body{display:none;}
+.pnl.collapsed{padding-bottom:4px;}
+.pnl.collapsed .pnl-title{margin-bottom:0;}
+.row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px;gap:6px;}
+.lbl{font-size:7px;color:var(--amber-d);letter-spacing:1px;white-space:nowrap;}
+.val{font-size:8px;color:var(--amber);font-weight:500;text-align:right;}
+.val.g{color:var(--green);}.val.r{color:var(--red);}.val.c{color:var(--cyan);}
+.val.v{color:var(--violet);}.val.w{color:var(--white);}.val.a2{color:var(--amber2);}
+.btn-row{display:flex;gap:4px;flex-wrap:wrap;margin-top:7px;}
+.btn{padding:4px 8px;background:transparent;border:1px solid var(--border);color:var(--amber-d);
+  font-family:var(--mono);font-size:6px;letter-spacing:2px;cursor:pointer;transition:all .15s;white-space:nowrap;}
+.btn:hover{border-color:var(--amber);color:var(--amber);background:rgba(245,166,35,.06);}
+.btn.on{border-color:var(--green);color:var(--green);background:rgba(57,255,122,.05);}
+.btn.sm{padding:3px 6px;font-size:6px;}
+.gauge-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:5px;}
+.gauge{background:rgba(245,166,35,.02);border:1px solid var(--border);padding:4px 6px;cursor:pointer;}
+.gauge:hover{border-color:var(--amber-d);}
+.gauge-lbl{font-size:6px;letter-spacing:2px;color:var(--amber-d);margin-bottom:2px;white-space:nowrap;}
+.gauge-bar{height:2px;background:var(--dim);margin-bottom:2px;}
+.gauge-fill{height:2px;background:var(--dim);}
+.gauge-val{font-size:7px;color:var(--amber-d);}
+.notice{border:1px solid var(--amber-d);background:rgba(245,166,35,.025);padding:6px 8px;
+  font-size:7px;line-height:1.7;color:var(--amber);margin-bottom:7px;}
+.notice.warn{border-color:rgba(255,60,84,.4);color:var(--red);background:rgba(255,60,84,.03);}
+.notice.violet{border-color:rgba(136,85,255,.5);color:var(--violet);background:rgba(136,85,255,.03);}
+#rlog{overflow-y:auto;flex:1;font-size:7px;line-height:1.7;}
+#rlog::-webkit-scrollbar{width:2px;}#rlog::-webkit-scrollbar-thumb{background:var(--dim);}
+.lrow{display:grid;grid-template-columns:38px 1fr;gap:5px;padding:3px 0;border-bottom:1px solid rgba(30,30,53,.5);}
+.lrow .t{color:var(--dim);}.lrow.ok{color:var(--dim);}.lrow.sig{color:var(--amber);}
+.lrow.warn{color:rgba(245,166,35,.65);}.lrow.err{color:rgba(255,60,84,.75);}
+.lrow.sync{color:rgba(0,212,255,.7);}.lrow.vio{color:var(--violet);}
+
+/* ── STAGE ────────────────────────────────────────────── */
+#stage{position:relative;background:var(--ink);overflow:hidden;min-width:0;}
+#viewbar{position:absolute;top:0;left:0;right:0;height:28px;display:flex;align-items:stretch;
+  background:rgba(13,13,24,.94);border-bottom:1px solid var(--border);z-index:20;overflow-x:auto;}
+#viewbar::-webkit-scrollbar{height:0;}
+.vtab{padding:0 11px;display:flex;align-items:center;font-size:7px;letter-spacing:2px;color:var(--amber-d);
+  border-right:1px solid var(--border);cursor:pointer;white-space:nowrap;background:transparent;}
+.vtab:hover{color:var(--amber);background:rgba(245,166,35,.04);}
+.vtab.active{color:var(--amber2);background:rgba(245,166,35,.08);box-shadow:inset 0 -2px 0 var(--amber);}
+#viewport{position:absolute;inset:28px 0 0 0;width:100%;height:calc(100% - 28px);display:block;touch-action:none;}
+#stage-hud{position:absolute;left:10px;top:38px;z-index:15;pointer-events:none;font-size:7px;
+  letter-spacing:2px;line-height:1.9;color:var(--amber-d);text-shadow:0 0 6px #000;}
+#stage-hud b{color:var(--amber);font-weight:500;}
+#stage-tools{position:absolute;right:10px;top:38px;z-index:15;display:flex;flex-direction:column;gap:4px;align-items:flex-end;}
+#stage-tools .btn{background:rgba(13,13,24,.9);}
+#watermark{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);z-index:12;
+  font-family:var(--head);font-size:clamp(10px,1.5vw,22px);font-weight:900;letter-spacing:8px;
+  color:rgba(255,60,84,.20);text-align:center;pointer-events:none;white-space:nowrap;}
+#watermark small{display:block;font-family:var(--mono);font-size:clamp(6px,.7vw,9px);
+  letter-spacing:4px;color:rgba(255,60,84,.42);margin-top:8px;}
+#detail{position:absolute;right:0;top:28px;bottom:0;width:min(380px,42%);z-index:30;
+  background:rgba(13,13,24,.98);border-left:1px solid var(--amber-d);
+  box-shadow:-16px 0 40px rgba(0,0,0,.7);padding:14px 16px;overflow-y:auto;display:none;}
+#detail.open{display:block;}
+#detail h2{font-family:var(--head);font-size:11px;letter-spacing:3px;color:var(--amber2);
+  border-bottom:1px solid var(--border);padding-bottom:8px;margin-bottom:10px;}
+#detail .drow{display:flex;justify-content:space-between;gap:10px;padding:4px 0;
+  border-bottom:1px solid rgba(30,30,53,.6);font-size:8px;}
+#detail .drow span:first-child{color:var(--amber-d);letter-spacing:1px;flex-shrink:0;}
+#detail .drow span:last-child{color:var(--white);text-align:right;word-break:break-word;}
+#detail .dwarn{margin-top:10px;border:1px solid rgba(255,60,84,.35);padding:7px;
+  font-size:7px;line-height:1.7;color:var(--red);}
+#detail-close{float:right;cursor:pointer;color:var(--red);font-size:10px;}
+
+/* ── FOOTER ───────────────────────────────────────────── */
+footer{display:flex;align-items:center;justify-content:space-between;padding:0 14px;
+  background:var(--panel);border-top:1px solid var(--border);font-size:7px;
+  letter-spacing:2px;color:var(--amber-d);gap:12px;overflow:hidden;white-space:nowrap;}
+footer em{font-style:normal;color:var(--amber);}
+#fscroll{color:var(--cyan);}
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="logo">UNIVERSE <span>OS</span><sub>GIZA PRIME COCKPIT</sub></div>
+    <div class="subline">STAGE A CONTRACTS // STAGE G VISUAL SHELL // 7 DOMAINS</div>
+  </div>
+  <div class="hdr-kpis">
+    <div class="kpi"><div class="kpi-v warn" id="h-src">0</div><div class="kpi-l">VERIFIED SRC</div></div>
+    <div class="kpi"><div class="kpi-v warn" id="h-obj">0</div><div class="kpi-l">REAL OBJECTS</div></div>
+    <div class="kpi"><div class="kpi-v warn" id="h-rel">0</div><div class="kpi-l">RELATIONS</div></div>
+    <div class="kpi"><div class="kpi-v" id="h-ens">0</div><div class="kpi-l">ENSEMBLES</div></div>
+    <div class="kpi"><div class="kpi-v" id="h-adpt">0</div><div class="kpi-l">LIVE ADAPTERS</div></div>
+    <div class="kpi"><div class="kpi-v vio" id="h-v42">CONCEPT</div><div class="kpi-l">VECTOR 42</div></div>
+    <div class="kpi"><div class="kpi-v" id="h-atlas">none</div><div class="kpi-l">ATLAS VERSION</div></div>
+  </div>
+  <div class="hdr-r">
+    <div class="conn-wrap"><div id="conn-dot"></div><span id="conn-lbl">OFFLINE / DEMO</span></div>
+    <span id="clock">--:--:--</span>
+  </div>
+</header>
+
+<main id="shell">
+
+  <!-- LEFT RAIL -->
+  <div class="col" id="railLeft">
+    <div class="pnl" data-detail="state">
+      <div class="pnl-title">[ 01 ] <em>SYSTEM STATE</em><span class="exp">⤢</span></div>
+      <div class="pnl-body">
+        <div id="phase-box" class="notice" style="margin-bottom:6px;">FRAMEWORK / NO LIVE INTEGRATION</div>
+        <div class="row"><span class="lbl">ARCH VERSION</span><span class="val w" id="s-arch">—</span></div>
+        <div class="row"><span class="lbl">HUMAN OWNER</span><span class="val" id="s-owner">—</span></div>
+        <div class="row"><span class="lbl">COORDINATION</span><span class="val" id="s-coord">—</span></div>
+        <div class="row"><span class="lbl">SYNTH FIXTURE</span><span class="val a2" id="s-synth">—</span></div>
+        <div class="btn-row">
+          <button class="btn on" id="btn-synth" onclick="toggleSynth()">SYNTH DEMO: ON</button>
+          <button class="btn" onclick="resetCamera()">⟲ VIEW</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="pnl" data-detail="physical">
+      <div class="pnl-title">[ 02 ] <em>PHYSICAL CHANNELS</em><span class="exp">⤢</span></div>
+      <div class="pnl-body">
+        <div class="notice warn">Physical units only. No measured Giza sensor stream is attached. All values below are unknown, not zero.</div>
+        <div class="gauge-grid" id="phys-grid"></div>
+      </div>
+    </div>
+
+    <div class="pnl" data-detail="physics-controls">
+      <div class="pnl-title">[ 03 ] <em>PHYSICS CONTROLS</em><span class="exp">⤢</span></div>
+      <div class="pnl-body">
+        <div class="row"><span class="lbl">SPRING k</span><span class="val c">[[1,-1],[-1,1]] signed</span></div>
+        <div class="row"><span class="lbl">DASHPOT c</span><span class="val c">N*s/m</span></div>
+        <div class="row"><span class="lbl">RADIATION</span><span class="val c">real impedance, W</span></div>
+        <div class="row"><span class="lbl">PARETO SET</span><span class="val">discrete synthetic only</span></div>
+        <div class="row"><span class="lbl">NEGLIGIBILITY</span><span class="val r">not claimed</span></div>
+        <div style="margin-top:6px;font-size:7px;color:var(--amber-d);line-height:1.8;" id="phys-note">
+          Controls inherited from the corrected GIZA multiscale projection. Not a reconstruction of the plateau.
+        </div>
+      </div>
+    </div>
+
+    <div class="pnl grow" data-detail="layers">
+      <div class="pnl-title">[ 04 ] <em>LAYERS / FILTERS</em><span class="exp">⤢</span></div>
+      <div class="pnl-body" id="layer-body" style="overflow-y:auto;flex:1;"></div>
+    </div>
+  </div>
+
+  <!-- CENTRE -->
+  <div class="col" id="stage">
+    <div id="viewbar"></div>
+    <canvas id="viewport"></canvas>
+    <div id="stage-hud"></div>
+    <div id="stage-tools">
+      <button class="btn" onclick="zoomBy(1.25)">+ ZOOM</button>
+      <button class="btn" onclick="zoomBy(0.8)">− ZOOM</button>
+      <button class="btn" onclick="resetCamera()">RESET</button>
+      <button class="btn" id="btn-rails" onclick="toggleRails()">RAILS ⇥</button>
+    </div>
+    <div id="watermark">SYNTHETIC CAPABILITY FIXTURE<small>NO VERIFIED GIZA GEOMETRY · NOT A RECONSTRUCTION</small></div>
+    <div id="detail"><span id="detail-close" onclick="closeDetail()">✕</span><div id="detail-body"></div></div>
+  </div>
+
+  <!-- RIGHT RAIL -->
+  <div class="col" id="railRight">
+    <div class="pnl" data-detail="information">
+      <div class="pnl-title">[ 05 ] <em>INFORMATION CHANNELS</em><span class="exp">⤢</span></div>
+      <div class="pnl-body">
+        <div class="notice violet">Information ≠ physical energy. Different unit classes are never merged.</div>
+        <div class="gauge-grid" id="info-grid"></div>
+      </div>
+    </div>
+
+    <div class="pnl" data-detail="vector42">
+      <div class="pnl-title">[ 06 ] <em>VECTOR 42 / INTENT</em><span class="exp">⤢</span></div>
+      <div class="pnl-body">
+        <div class="row"><span class="lbl">TYPE</span><span class="val v" id="v-type">—</span></div>
+        <div class="row"><span class="lbl">PHYS. DIMENSION</span><span class="val v" id="v-dim">—</span></div>
+        <div class="row"><span class="lbl">UNITS</span><span class="val v" id="v-unit">—</span></div>
+        <div class="row"><span class="lbl">VALIDATION</span><span class="val r" id="v-val">—</span></div>
+        <div class="notice warn" style="margin:6px 0 0;">Not measured physical energy. No J, W or other physical dimension may be displayed here.</div>
+      </div>
+    </div>
+
+    <div class="pnl grow" data-detail="nodes">
+      <div class="pnl-title">[ 07 ] <em>PROJECT / SECTOR REGISTRY</em><span class="exp">⤢</span></div>
+      <div class="pnl-body" id="node-body" style="overflow-y:auto;flex:1;"></div>
+    </div>
+
+    <div class="pnl grow" data-detail="log">
+      <div class="pnl-title">[ 08 ] <em>RESEARCH LOG</em><button class="btn sm" onclick="clearLog()">СБРОС</button></div>
+      <div id="rlog"></div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div>WORKSPACE <em>universe-os / research/full-relational-math-reconstruction-001</em></div>
+  <div id="fscroll">MOUSE: LMB rotate · SHIFT+LMB / RMB pan · WHEEL zoom · CLICK block = details</div>
+  <div style="margin-left:auto;">NO COSMIC CLAIM · NO AUTO-TRADE · NO SIMULATED INTEGRATION · <em id="fsha">—</em></div>
+</footer>
+
+<script src="cockpit_data.js"></script>
+<script>
+/* ══════════════════════════════════════════════════════════
+   UNIVERSE OS integrated cockpit — visual shell
+   Data comes from cockpit_data.js (generated by cockpit_engine.py).
+   Nothing here invents a measurement or an integration.
+   ══════════════════════════════════════════════════════════ */
+const $ = id => document.getElementById(id);
+const M = window.COCKPIT_DATA || {views:[],nodes:[],business_sectors:[],intent_vector_42:{},
+  energy_domains:{physical_channels:[],informational_channels:[]},iterations:[],unit_classes:{},
+  system_event_fields:[],evidence_statuses:[],separation_rules:{},adapters:{},
+  verified_geodetic_objects:0,verified_sources:0};
+const esc = s => String(s == null ? '—' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* Synthetic fixture — same identifiers as inventory_engine.SYNTHETIC_DEMONSTRATION.
+   Wireframe coordinates are display-only and carry no geodetic meaning. */
+const SYNTH = {
+  objects: [
+    {id:'major_pyramid_D',   x:-150, z:-40, w:120, d:120, h:80,  cat:'monumental'},
+    {id:'small_pyramid_C',   x:-40,  z:40,  w:45,  d:45,  h:30,  cat:'monumental'},
+    {id:'sphinx_E',          x:110,  z:-120,w:70,  d:30,  h:25,  cat:'monumental'},
+    {id:'bedrock_fracture_B',x:30,   z:120, w:180, d:12,  h:6,   cat:'geological'},
+    {id:'drainage_channel_A',x:-190, z:160, w:220, d:16,  h:3,   cat:'hydrological'},
+    {id:'well_F',            x:-250, z:60,  w:24,  d:24,  h:10,  cat:'subsurface'},
+    {id:'quarry_G',          x:200,  z:60,  w:100, d:80,  h:8,   cat:'infrastructural'}
+  ],
+  relations: [
+    {a:'drainage_channel_A', b:'well_F',             cls:'hydraulic', status:'hypothesized_unverified'},
+    {a:'drainage_channel_A', b:'bedrock_fracture_B', cls:'hydraulic', status:'hypothesized_unverified'},
+    {a:'bedrock_fracture_B', b:'quarry_G',           cls:'geological',status:'inferred_indirect'},
+    {a:'bedrock_fracture_B', b:'major_pyramid_D',    cls:'geological',status:'inferred_indirect'},
+    {a:'small_pyramid_C',    b:'major_pyramid_D',    cls:'spatial',   status:'inferred_indirect'},
+    {a:'sphinx_E',           b:'bedrock_fracture_B', cls:'mechanical',status:'hypothesized_unverified'},
+    {a:'quarry_G',           b:'small_pyramid_C',    cls:'mechanical',status:'hypothesized_unverified'},
+    {a:'well_F',             b:'drainage_channel_A', cls:'spatial',   status:'inferred_indirect'}
+  ]
+};
+
+let state = {
+  view:'spatial', synth:true, yaw:0.62, pitch:-0.52, zoom:1.0, panX:0, panY:0,
+  drag:null, lastX:0, lastY:0, hover:null, rails:false,
+  layers:{monumental:true, geological:true, hydrological:true, subsurface:true,
+          infrastructural:true, relations:true, grid:true},
+  logs:[], picked:null, compare:0.5
+};
+const CLR = {spatial:'#f5a623', geological:'#8855ff', mechanical:'#00d4ff', hydraulic:'#39ff7a',
+             thermal:'#ff3c54', gas_dynamic:'#ff88cc', electromagnetic:'#00d4ff', functional:'#ffcc44'};
+const STATUS_CLR = {available:'#39ff7a', partial:'#f5a623', conceptual:'#8855ff',
+                    not_implemented:'#2a2840', unavailable:'#ff3c54', empty:'#5a3800', forbidden:'#ff3c54'};
+
+/* ── header / rails ───────────────────────────────────── */
+function buildHeader(){
+  $('h-src').textContent = M.verified_sources ?? 0;
+  $('h-obj').textContent = M.verified_geodetic_objects ?? 0;
+  $('h-rel').textContent = '0';
+  $('h-ens').textContent = '0';
+  const caps = (M.adapters && M.adapters.counts) || {};
+  const live = (caps.available||0)+(caps.partial||0);
+  $('h-adpt').textContent = live;
+  $('h-adpt').className = 'kpi-v' + (live>4?' pos':'');
+  $('h-v42').textContent = 'CONCEPT';
+  $('h-atlas').textContent = 'none';
+  $('s-arch').textContent = (M.architecture_version||'—').slice(0,22);
+  $('s-owner').textContent = M.human_owner||'—';
+  $('s-coord').textContent = M.coordination_layer||'—';
+  $('s-synth').textContent = state.synth?'ENABLED':'DISABLED';
+  $('v-type').textContent = M.intent_vector_42.type||'—';
+  $('v-dim').textContent = String(M.intent_vector_42.physical_dimension)+' / null';
+  $('v-unit').textContent = M.intent_vector_42.units||'—';
+  $('v-val').textContent = M.intent_vector_42.validation||'—';
+  $('fsha').textContent = (window.COCKPIT_MANIFEST_SHA256||'—').slice(0,12);
+}
+function buildViewbar(){
+  $('viewbar').innerHTML = (M.views||[]).map(v =>
+    `<div class="vtab${v.id===state.view?' active':''}" data-view="${v.id}" onclick="setView('${v.id}')">${esc(v.label)}</div>`).join('');
+}
+function buildGauges(){
+  const phys = ((M.energy_domains||{}).physical_channels||[]);
+  $('phys-grid').innerHTML = phys.map((g,i) =>
+    `<div class="gauge" data-detail="phys:${i}"><div class="gauge-lbl">${esc(g.id)}</div>
+      <div class="gauge-bar"><div class="gauge-fill" style="width:0%"></div></div>
+      <div class="gauge-val">unknown · ${esc(g.unit)}</div></div>`).join('');
+  const info = ((M.energy_domains||{}).informational_channels||[]);
+  $('info-grid').innerHTML = info.map((g,i) =>
+    `<div class="gauge" data-detail="info:${i}"><div class="gauge-lbl">${esc(g.id)}</div>
+      <div class="gauge-bar"><div class="gauge-fill" style="width:0%"></div></div>
+      <div class="gauge-val">${esc(g.unit)} · ${esc(g.status)}</div></div>`).join('');
+}
+function buildLayers(){
+  const cats = [['monumental','MONUMENTAL'],['geological','GEOLOGICAL'],['hydrological','HYDROLOGICAL'],
+                ['subsurface','SUBSURFACE'],['infrastructural','INFRASTRUCTURAL']];
+  let html = '';
+  cats.forEach(([k,l]) => html +=
+    `<div class="row"><span class="lbl">${l}</span><button class="btn sm ${state.layers[k]?'on':''}"
+      onclick="toggleLayer('${k}')">${state.layers[k]?'ON':'OFF'}</button></div>`);
+  html += `<div class="row"><span class="lbl">RELATIONS</span><button class="btn sm ${state.layers.relations?'on':''}"
+      onclick="toggleLayer('relations')">${state.layers.relations?'ON':'OFF'}</button></div>`;
+  html += `<div class="row"><span class="lbl">GRID / AXES</span><button class="btn sm ${state.layers.grid?'on':''}"
+      onclick="toggleLayer('grid')">${state.layers.grid?'ON':'OFF'}</button></div>`;
+  html += `<div class="notice" style="margin:8px 0 0;">14 inventory slots are <b>not_inventoried</b>. 0 verified objects. Absence from the catalogue is not absence from the landscape.</div>`;
+  $('layer-body').innerHTML = html;
+}
+function buildNodes(){
+  let html = '';
+  (M.nodes||[]).forEach(n => {
+    const c = STATUS_CLR[n.status]||'#5a3800';
+    html += `<div class="row" style="cursor:pointer" onclick="openNode('${n.node_id}')">
+      <span class="lbl" style="color:${c}">● ${esc(n.node_id)}</span><span class="val" style="color:${c}">${esc(n.status)}</span></div>`;
+  });
+  html += `<div class="pnl-title" style="margin-top:8px;">EXTERNAL SECTORS / EARTH EAR</div>`;
+  (M.business_sectors||[]).forEach(s => {
+    html += `<div class="row" style="cursor:pointer" onclick="openSector('${s.sector_id}')">
+      <span class="lbl" style="color:#2a2840">○ ${esc(s.name)}</span><span class="val" style="color:#5a3800">${esc(s.status)}</span></div>`;
+  });
+  $('node-body').innerHTML = html;
+}
+function addLog(msg, cls='ok'){
+  const t = new Date().toTimeString().slice(0,8);
+  state.logs.push({t,msg,cls}); if(state.logs.length>90) state.logs.shift();
+  $('rlog').innerHTML = state.logs.map(l =>
+    `<div class="lrow ${l.cls}"><span class="t">${l.t}</span><span>${esc(l.msg)}</span></div>`).join('');
+  $('rlog').scrollTop = $('rlog').scrollHeight;
+}
+function clearLog(){state.logs=[];$('rlog').innerHTML='';}
+
+/* ── details ──────────────────────────────────────────── */
+function openDetail(title, rows, warn){
+  $('detail-body').innerHTML = `<h2>${esc(title)}</h2>` +
+    rows.map(r => `<div class="drow"><span>${esc(r[0])}</span><span>${esc(r[1])}</span></div>`).join('') +
+    (warn?`<div class="dwarn">${esc(warn)}</div>`:'');
+  $('detail').classList.add('open');
+}
+function closeDetail(){$('detail').classList.remove('open');state.picked=null;}
+function openNode(id){
+  const n = (M.nodes||[]).find(x=>x.node_id===id); if(!n)return;
+  const rows = [['DOMAIN',n.domain],['STATUS',n.status],['OWNER',n.owner],
+    ['RESPONSIBILITY',n.responsibility],['CONTRACT',n.data_contract],['CONSTRAINT',n.constraint]];
+  (n.integration_points||[]).forEach(p => rows.push([p.id, p.status+' / '+p.direction]));
+  openDetail(n.name, rows, n.status==='unavailable'||n.status==='conceptual' ? 'Not a live integration. Status is declared, not simulated.' : null);
+}
+function openSector(id){
+  const s = (M.business_sectors||[]).find(x=>x.sector_id===id); if(!s)return;
+  openDetail(s.name, [['SECTOR ID',s.sector_id],['PARENT',s.parent_node],['STATUS',s.status],
+    ['METRICS DOMAIN',s.metrics_domain],['ALLOWED SIGNALS',(s.allowed_signals||[]).join(', ')],
+    ['PERMISSION',s.permission]],
+    'External information sector, not evidence of physical planetary interaction.');
+}
+function openObject(o){
+  state.picked = o.id;
+  openDetail(o.id, [
+    ['DISPLAY ROLE','synthetic wireframe only'],['CATEGORY',o.cat],
+    ['OBJECT ID',o.id],['COORDINATES','null / unknown'],['COORDINATE SYSTEM','unknown'],
+    ['GEOMETRY','display wireframe, no geodetic scale'],['ELEVATIONS','null / unknown'],
+    ['MATERIAL','unknown'],['PRESERVATION','unknown'],['TEMPORAL INTERVALS','unknown'],
+    ['SOURCE IDS','none'],['EVIDENCE STATUS','synthetic_fixture'],['MODELING TIER','symbolic']
+  ], 'No verified source is attached. This object is not Giza inventory data and carries no location claim.');
+}
+function openGauge(kind, i){
+  const g = kind==='phys' ? ((M.energy_domains||{}).physical_channels||[])[i]
+                          : ((M.energy_domains||{}).informational_channels||[])[i];
+  if(!g)return;
+  openDetail(g.id, [['UNIT CLASS',g.unit_class],['UNIT',g.unit],['PARENT NODE',g.node],
+    ['STATUS',g.status],['MEASURED VALUE','unknown / null'],['UNCERTAINTY','unknown / null'],
+    ['SOURCE','none']],
+    kind==='info' ? 'Informational/conceptual channel. Never convert to joules or watts.' :
+      'Physical channel declared with a unit, but no measurement has been attached.');
+}
+/* Delegated handling: gauges, registry rows and panel titles are created or
+   rebuilt at runtime, so per-element listeners would silently miss them. */
+const DETAIL_MAP = {
+  state:[['ARCHITECTURE',M.architecture_version],['STATUS',M.status],['VERIFIED SOURCES',M.verified_sources],
+         ['VERIFIED OBJECTS',M.verified_geodetic_objects],['SYNTH FIXTURE',M.synthetic_fixture_available],
+         ['HUMAN OWNER',M.human_owner],['COORDINATION',M.coordination_layer]],
+  physical:[['CHANNEL COUNT',((M.energy_domains||{}).physical_channels||[]).length],
+         ['MEASUREMENTS ATTACHED',0],['RULE','physical units only; unknown stays unknown'],
+         ['GIZA COSMOS CLAIM',M.giza_cosmos_claim]],
+  'physics-controls':[['SPRING','signed k[[1,-1],[-1,1]]'],['DASHPOT','N*s/m'],
+         ['RADIATION','real energy via radiation impedance (W)'],['PARETO','discrete synthetic'],
+         ['NEGLIGIBILITY CLAIM','absent']],
+  layers:[['INVENTORY SLOTS',14],['NOT_INVENTORIED',14],['VERIFIED OBJECTS',0],
+         ['KNOWN UNKNOWNS','explicit'],['UNKNOWN UNKNOWNS','not countable']],
+  information:[['CHANNEL COUNT',((M.energy_domains||{}).informational_channels||[]).length],
+         ['UNIT CLASSES','informational / conceptual'],['MIXING WITH PHYSICAL','forbidden'],
+         ['BUSINESS METRICS','informational only']],
+  vector42:[['TYPE',M.intent_vector_42.type],['PHYSICAL DIMENSION',M.intent_vector_42.physical_dimension],
+         ['UNITS',M.intent_vector_42.units],['STATE SPACE',M.intent_vector_42.state_space],
+         ['NORMALIZATION',M.intent_vector_42.normalization],['SOURCES',(M.intent_vector_42.sources||[]).length],
+         ['VALIDATION',M.intent_vector_42.validation],['PERMITTED TRANSFORMATIONS',(M.intent_vector_42.permitted_transformations||[]).length]],
+  nodes:[['SYSTEM NODES',(M.nodes||[]).length],['BUSINESS SECTORS',(M.business_sectors||[]).length],
+         ['LIVE ADAPTERS',(M.adapters||{}).counts&&(M.adapters.counts.available||0)],
+         ['SIMULATED INTEGRATIONS',(M.adapters||{}).simulated_integrations]],
+  log:[['POLICY','research log: sources, formulas, alternatives, rejected hypotheses, uncertainties, decisions'],
+       ['DECISION OWNER',M.human_owner],['AUTO APPROVAL','disabled']]
+};
+document.addEventListener('click', e => {
+  if(e.target.closest('#detail')) return;
+  const gauge = e.target.closest('[data-detail^="phys:"],[data-detail^="info:"]');
+  if(gauge){
+    const [k,i]=gauge.getAttribute('data-detail').split(':');
+    openGauge(k, parseInt(i,10)); return;
+  }
+  const ttl = e.target.closest('.pnl-title');
+  if(ttl){
+    if(e.target.classList.contains('exp')) return;
+    const pnl = ttl.closest('.pnl');
+    if(pnl) pnl.classList.toggle('collapsed');
+    return;
+  }
+  if(e.target.closest('button,[onclick]')) return;
+  const el = e.target.closest('[data-detail]');
+  if(!el) return;
+  const key = el.getAttribute('data-detail');
+  const rows = DETAIL_MAP[key];
+  if(rows) openDetail(key.toUpperCase(), rows,
+    key==='vector42' ? 'Conceptual / project-defined. Not a measured physical quantity.' : null);
+});
+
+/* ── controls ─────────────────────────────────────────── */
+function toggleSynth(){
+  state.synth=!state.synth;
+  $('btn-synth').textContent='SYNTH DEMO: '+(state.synth?'ON':'OFF');
+  $('btn-synth').classList.toggle('on',state.synth);
+  $('s-synth').textContent=state.synth?'ENABLED':'DISABLED';
+  addLog('Synthetic fixture '+(state.synth?'enabled':'disabled')+' — no Giza claim.','warn');
+}
+function toggleLayer(k){
+  state.layers[k]=!state.layers[k]; buildLayers();
+  addLog('Layer '+k+' → '+(state.layers[k]?'ON':'OFF'),'sync');
+}
+function toggleRails(){
+  state.rails=!state.rails;
+  $('shell').className = state.rails?'both-collapsed':'';
+  $('btn-rails').textContent = state.rails?'RAILS ⇤':'RAILS ⇥';
+  setTimeout(resize,0);
+}
+function resetCamera(){state.yaw=0.62;state.pitch=-0.52;state.zoom=1;state.panX=0;state.panY=0;addLog('Camera reset.','ok');}
+function zoomBy(f){state.zoom=Math.max(0.18,Math.min(9,state.zoom*f));}
+function setView(v){
+  state.view=v; buildViewbar(); closeDetail();
+  addLog('View → '+v.toUpperCase(),'sig');
+}
+
+/* ── canvas / projection ──────────────────────────────── */
+const cv=$('viewport'), ctx=cv.getContext('2d');
+let W=0,H=0,DPR=1;
+function resize(){
+  DPR=Math.min(2,window.devicePixelRatio||1);
+  W=cv.clientWidth; H=cv.clientHeight;
+  cv.width=Math.max(1,Math.floor(W*DPR)); cv.height=Math.max(1,Math.floor(H*DPR));
+  ctx.setTransform(DPR,0,0,DPR,0,0);
+}
+window.addEventListener('resize',resize);
+
+function rot3(p){
+  const cy=Math.cos(state.yaw), sy=Math.sin(state.yaw);
+  const cp=Math.cos(state.pitch), sp=Math.sin(state.pitch);
+  const x1=p.x*cy - p.z*sy, z1=p.x*sy + p.z*cy;
+  const y2=p.y*cp - z1*sp, z2=p.y*sp + z1*cp;
+  return {x:x1,y:y2,z:z2};
+}
+function project(p){
+  const r=rot3(p), f=900, depth=f/(f+r.z);
+  const s=state.zoom*depth;
+  return {x:W/2+state.panX+r.x*s, y:H/2+state.panY+r.y*s, s:s, z:r.z};
+}
+function line3(a,b,color,width=1,dash=null){
+  const pa=project(a), pb=project(b);
+  ctx.save();ctx.strokeStyle=color;ctx.lineWidth=width;
+  if(dash)ctx.setLineDash(dash);
+  ctx.beginPath();ctx.moveTo(pa.x,pa.y);ctx.lineTo(pb.x,pb.y);ctx.stroke();ctx.restore();
+}
+function poly3(points,stroke,fill,width=1,dash=null){
+  const ps=points.map(project);
+  ctx.save();ctx.beginPath();ctx.moveTo(ps[0].x,ps[0].y);
+  for(let i=1;i<ps.length;i++)ctx.lineTo(ps[i].x,ps[i].y);
+  ctx.closePath();
+  if(fill){ctx.fillStyle=fill;ctx.fill();}
+  ctx.strokeStyle=stroke;ctx.lineWidth=width;if(dash)ctx.setLineDash(dash);ctx.stroke();ctx.restore();
+}
+function hexA(hex,a){
+  const m=/^#([0-9a-f]{6})$/i.exec(hex);
+  if(!m)return 'rgba(245,166,35,'+a+')';
+  const n=parseInt(m[1],16);
+  return 'rgba('+((n>>16)&255)+','+((n>>8)&255)+','+(n&255)+','+a+')';
+}
+function box3(o,color,alpha=1){
+  const x0=o.x-o.w/2,x1=o.x+o.w/2,z0=o.z-o.d/2,z1=o.z+o.d/2,y0=0,y1=o.h;
+  const v=[[x0,y0,z0],[x1,y0,z0],[x1,y0,z1],[x0,y0,z1],
+           [x0,y1,z0],[x1,y1,z0],[x1,y1,z1],[x0,y1,z1]];
+  const edges=[[0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4],[0,4],[1,5],[2,6],[3,7]];
+  ctx.save();ctx.globalAlpha=alpha;
+  poly3([v[4],v[5],v[6],v[7]],color,hexA(color,0.045));
+  edges.forEach(([a,b])=>line3({x:v[a][0],y:v[a][1],z:v[a][2]},{x:v[b][0],y:v[b][1],z:v[b][2]},color,1));
+  ctx.restore();
+  const p=project({x:o.x,y:o.h+16,z:o.z});
+  ctx.save();ctx.fillStyle=color;ctx.font='7px Martian Mono,monospace';ctx.textAlign='center';
+  ctx.fillText(o.id,p.x,p.y);ctx.restore();
+  o._screen={x:p.x,y:p.y};
+}
+function drawGrid(){
+  if(!state.layers.grid)return;
+  const R=400, step=50;
+  ctx.save();ctx.globalAlpha=0.5;
+  for(let i=-R;i<=R;i+=step){
+    const major=(i%200===0);
+    line3({x:i,y:0,z:-R},{x:i,y:0,z:R},major?'#2a2440':'#171728',major?1:0.6);
+    line3({x:-R,y:0,z:i},{x:R,y:0,z:i},major?'#2a2440':'#171728',major?1:0.6);
+  }
+  line3({x:0,y:0,z:0},{x:0,y:0,z:-90},'#ffcc44',2);
+  line3({x:0,y:0,z:0},{x:90,y:0,z:0},'#00d4ff',2);
+  const n=project({x:0,y:0,z:-90}), e=project({x:90,y:0,z:0});
+  ctx.save();ctx.font='bold 8px Unbounded,sans-serif';ctx.fillStyle='#ffcc44';ctx.fillText('N',n.x,n.y-5);
+  ctx.fillStyle='#00d4ff';ctx.fillText('E',e.x+5,e.y);ctx.restore();
+  ctx.restore();
+}
+
+/* ── 3D views ────────────────────────────────────────── */
+function drawSpatial(){
+  drawGrid();
+  if(!state.synth){drawEmpty('NO VERIFIED GEOMETRY','0 sources · 0 objects · register an accepted source first');return;}
+  SYNTH.objects.forEach(o=>{
+    if(!state.layers[o.cat])return;
+    const c = CLR[o.cat]||'#f5a623';
+    box3(o,c,state.picked===o.id?1:0.85);
+  });
+  if(state.layers.relations) SYNTH.relations.forEach(r=>{
+    const a=SYNTH.objects.find(o=>o.id===r.a), b=SYNTH.objects.find(o=>o.id===r.b);
+    if(!a||!b)return;
+    if(!state.layers[a.cat]||!state.layers[b.cat])return;
+    const col=CLR[r.cls]||'#f5a623';
+    const dash=r.status==='hypothesized_unverified'?[3,4]:(r.status==='inferred_indirect'?[6,3]:null);
+    line3({x:a.x,y:a.h/2,z:a.z},{x:b.x,y:b.h/2,z:b.z},col,1.2,dash);
+  });
+}
+function drawRelations(){
+  if(!state.synth){drawEmpty('NO VERIFIED RELATIONS','9 typed families declared · 0 relations asserted');return;}
+  drawGrid();
+  SYNTH.objects.forEach(o=>box3(o,state.layers[o.cat]?(CLR[o.cat]||'#f5a623'):'#171728',0.55));
+  const seen={};
+  SYNTH.relations.forEach(r=>{
+    const a=SYNTH.objects.find(o=>o.id===r.a),b=SYNTH.objects.find(o=>o.id===r.b);
+    if(!a||!b)return;
+    const dash=r.status==='hypothesized_unverified'?[3,4]:(r.status==='inferred_indirect'?[6,3]:null);
+    line3({x:a.x,y:a.h/2,z:a.z},{x:b.x,y:b.h/2,z:b.z},CLR[r.cls]||'#f5a623',1.6,dash);
+    seen[r.cls]=(seen[r.cls]||0)+1;
+  });
+  let y=10;
+  ctx.save();ctx.font='7px Martian Mono,monospace';ctx.textAlign='left';
+  Object.keys(seen).sort().forEach(k=>{
+    ctx.fillStyle=CLR[k]||'#f5a623';ctx.fillText('■ '+k+'  '+seen[k],12,y);y+=12;
+  });
+  ctx.fillStyle='#5a3800';ctx.fillText('dashed = hypothesized · dash-dot = inferred · no established relation',12,y+6);
+  ctx.restore();
+}
+function drawSystem(){
+  const nodes=M.nodes||[];
+  const layers={orchestration:[-260,180],mathematics:[-80,180],compute_legacy:[100,180],
+    compute_future:[260,180],spatial_physical_research:[-260,-60],market_energy_observation:[-60,-60],
+    information_observation:[160,-60]};
+  nodes.forEach((n,i)=>{
+    const pos=layers[n.domain]||[0,0];
+    const o={id:n.node_id,x:pos[0],z:pos[1],w:120,d:70,h:50};
+    box3(o,STATUS_CLR[n.status]||'#5a3800',0.9);
+    const p=project({x:o.x,y:o.h+30,z:o.z});
+    ctx.save();ctx.font='6px Martian Mono,monospace';ctx.textAlign='center';ctx.fillStyle='#5a3800';
+    ctx.fillText(n.status,p.x,p.y);ctx.restore();
+    o._node=n;o._screen={x:p.x,y:p.y};
+  });
+  const find=id=>nodes.find(n=>n.node_id===id);
+  const edges=[['MEGABRAIN','UNIVERSE_OS'],['MEGABRAIN','GIZA_PRIME'],['MEGABRAIN','ASTRAEA'],
+    ['MEGABRAIN','EARTH_EAR'],['UNIVERSE_OS','GIZA_PRIME'],['UNIVERSE_OS','EARTH_EAR'],
+    ['UNIVERSE_2_0','UNIVERSE_OS'],['UNIVERSE_3_0','UNIVERSE_OS'],['ASTRAEA','EARTH_EAR']];
+  edges.forEach(([a,b])=>{
+    const na=find(a),nb=find(b);if(!na||!nb)return;
+    const pa=layers[na.domain],pb=layers[nb.domain];if(!pa||!pb)return;
+    line3({x:pa[0],y:55,z:pa[1]},{x:pb[0],y:55,z:pb[1]},'rgba(245,166,35,0.35)',1,[4,4]);
+  });
+  let y=10;ctx.save();ctx.font='7px Martian Mono,monospace';ctx.textAlign='left';
+  Object.keys(STATUS_CLR).forEach(k=>{ctx.fillStyle=STATUS_CLR[k];ctx.fillText('● '+k,12,y);y+=11;});
+  ctx.fillStyle='#5a3800';ctx.fillText('dashed = declared contract, not a live data link',12,y+6);ctx.restore();
+}
+function drawEvidence(){
+  const chain=[['SOURCE','no verified source','#ff3c54'],['INGEST','contract ready','#f5a623'],
+    ['TRANSFORM','no transformation set','#5a3800'],['MODEL','synthetic projection only','#8855ff'],
+    ['VIEW','this cockpit','#00d4ff'],['CLAIM','none / symbolic','#39ff7a']];
+  const span=Math.min(W-80,840), gap=span/(chain.length-1);
+  ctx.save();ctx.font='7px Martian Mono,monospace';ctx.textAlign='center';
+  for(let i=0;i<chain.length;i++){
+    const x=40+i*gap,y=H/2;
+    ctx.strokeStyle=chain[i][2];ctx.lineWidth=1;ctx.strokeRect(x-58,y-28,116,56);
+    ctx.fillStyle=chain[i][2];ctx.fillText(chain[i][0],x,y-10);
+    ctx.fillStyle='#5a3800';ctx.fillText(chain[i][1],x,y+8);
+    if(i>0){ctx.setLineDash([3,4]);ctx.strokeStyle='#2a2840';
+      ctx.beginPath();ctx.moveTo(x-gap+58,y);ctx.lineTo(x-58,y);ctx.stroke();ctx.setLineDash([]);}
+  }
+  ctx.fillStyle='#5a3800';ctx.fillText('15 SystemEvent fields · evidence status + uncertainty + permissions required at every hop',W/2,H/2+70);
+  ctx.restore();
+}
+
+/* ── 2D views ────────────────────────────────────────── */
+function panel(x,y,w,h,title,color){ctx.save();ctx.strokeStyle=color||'#1e1e35';ctx.lineWidth=1;
+  ctx.strokeRect(x,y,w,h);ctx.fillStyle=color||'#5a3800';ctx.font='7px Martian Mono,monospace';
+  ctx.textAlign='left';ctx.fillText(title,x+8,y+14);ctx.restore();}
+function drawTime(){
+  panel(20,20,W-40,86,'TIME / SYNCHRONIZATION — NO REAL SERIES ATTACHED','#5a3800');
+  ctx.save();ctx.strokeStyle='#171728';for(let i=1;i<6;i++){const y=20+i*14;
+    ctx.beginPath();ctx.moveTo(30,y);ctx.lineTo(W-30,y);ctx.stroke();}
+  ctx.fillStyle='#ff3c54';ctx.font='7px Martian Mono,monospace';
+  ctx.fillText('GIZA SENSOR STREAMS: absent · ASTRAEA FEED: adapter not_implemented · EARTH EAR INTAKE: not_implemented',34,60);
+  ctx.fillStyle='#5a3800';ctx.fillText('Before any coherence/lag test: check units, time base, sampling, gaps, look-ahead, null models, holdout.',34,82);
+  ctx.restore();
+  panel(20,124,W-40,H-164,'ALIGNMENT PROTOCOL (Issue #7 §14.6)','#f5a623');
+  const steps=['define quantities','check dimensions','preserve raw series','compute candidates',
+    'null/surrogate tests','multiple testing','discovery/holdout','robustness','effect size + CI','keep causal claim closed'];
+  ctx.save();ctx.font='7px Martian Mono,monospace';ctx.fillStyle='#f5a623';ctx.textAlign='left';
+  steps.forEach((s,i)=>{const col=i%2,row=Math.floor(i/2);const x=40+col*(W-80)/2,y=160+row*34;
+    ctx.fillStyle='#5a3800';ctx.fillText(String(i+1).padStart(2,'0'),x,y);
+    ctx.fillStyle='#f5a623';ctx.fillText(s,x+24,y);});
+  ctx.fillStyle='#39ff7a';ctx.fillText('A negative or null result is a valid result. No tuning ASTRAEA toward a desired harmony with Giza.',40,H-58);
+  ctx.restore();
+}
+function drawIntent(){
+  const v=M.intent_vector_42||{};
+  panel(20,20,W-40,H-50,'INTENT / CONTROL — VECTOR 42','#8855ff');
+  const cx=W/2,cy=H/2;
+  ctx.save();ctx.strokeStyle='#8855ff';ctx.lineWidth=2;ctx.beginPath();ctx.arc(cx,cy,Math.min(120,H/4),0,Math.PI*2);ctx.stroke();
+  ctx.fillStyle='#8855ff';ctx.font='bold 26px Unbounded,sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillText('42',cx,cy-8);ctx.font='7px Martian Mono,monospace';ctx.fillStyle='#5a3800';
+  ctx.fillText('CONCEPTUAL / PROJECT-DEFINED',cx,cy+22);ctx.textBaseline='alphabetic';
+  ctx.fillStyle='#ff3c54';ctx.font='8px Martian Mono,monospace';
+  ctx.fillText('NOT A MEASURED PHYSICAL QUANTITY — NO J / W / Pa',cx,cy+Math.min(120,H/4)+30);
+  ctx.fillStyle='#5a3800';ctx.font='7px Martian Mono,monospace';
+  ctx.fillText('type: '+(v.type||'—')+'   state space: '+(v.state_space||'not_defined')+'   validation: '+(v.validation||'—'),cx,H-70);
+  ctx.restore();
+}
+function drawOperations(){
+  const nodes=M.nodes||[];
+  const cw=Math.max(150,(W-60)/3), ch=76;
+  ctx.save();ctx.font='7px Martian Mono,monospace';
+  nodes.forEach((n,i)=>{
+    const x=20+(i%3)*(cw+8),y=24+Math.floor(i/3)*(ch+8);
+    panel(x,y,cw,ch,n.node_id,STATUS_CLR[n.status]);
+    ctx.fillStyle='#5a3800';ctx.textAlign='left';
+    ctx.fillText('status: '+n.status,x+8,y+28);
+    ctx.fillText('owner: '+n.owner,x+8,y+42);
+    const live=(n.integration_points||[]).filter(p=>p.status==='available'||p.status==='partial').length;
+    ctx.fillText('live adapters: '+live+' / '+((n.integration_points||[]).length),x+8,y+56);
+    ctx.fillStyle=STATUS_CLR[n.status];ctx.fillText('●',x+cw-14,y+28);
+  });
+  ctx.fillStyle='#39ff7a';ctx.fillText('MEGABRAIN: coordination only · user owns goals, policies and approval gates',20,H-44);
+  ctx.fillStyle='#ff3c54';ctx.fillText('No autonomous goal changes · no cross-project action without initiator + permission + approval + audit event',20,H-28);
+  ctx.restore();
+}
+function drawBusiness(){
+  const sectors=M.business_sectors||[];
+  const cw=Math.max(140,(W-60)/5),ch=Math.min(180,H-140);
+  ctx.save();ctx.font='7px Martian Mono,monospace';
+  sectors.forEach((s,i)=>{
+    const x=20+i*(cw+6),y=30;
+    panel(x,y,cw,ch,'SECTOR '+(i+1),'#2a2840');
+    ctx.fillStyle='#f5a623';ctx.textAlign='left';
+    const words=String(s.name).split(' ');let line='',ly=y+32;
+    words.forEach(w=>{if((line+' '+w).trim().length>20){ctx.fillText(line.trim(),x+8,ly);line=w;ly+=14;}
+      else line+=' '+w;});
+    ctx.fillText(line.trim(),x+8,ly);
+    ctx.fillStyle='#5a3800';ctx.fillText('domain: '+s.metrics_domain,x+8,y+90);
+    ctx.fillText('status: '+s.status,x+8,y+106);
+    ctx.fillText('signals: '+((s.allowed_signals||[]).length),x+8,y+122);
+  });
+  ctx.fillStyle='#ff3c54';ctx.fillText('External sensors / communication interfaces — NOT proof of physical planetary interaction.',20,H-64);
+  ctx.fillStyle='#5a3800';ctx.fillText('Sectors are kept separate: no single undifferentiated feed, no personal data in repository, official APIs only.',20,H-46);
+  ctx.restore();
+}
+function drawVersions(){
+  const its=M.iterations||[];
+  panel(20,20,W-40,H-50,'VERSION / ITERATION TIMELINE','#f5a623');
+  const x0=60,x1=W-60,y=H/2;
+  ctx.save();ctx.strokeStyle='#2a2840';ctx.beginPath();ctx.moveTo(x0,y);ctx.lineTo(x1,y);ctx.stroke();
+  its.forEach((it,i)=>{
+    const x=x0+(i+0.5)*(x1-x0)/its.length;
+    ctx.fillStyle=it.kind==='software'?'#39ff7a':'#8855ff';
+    ctx.beginPath();ctx.arc(x,y,5,0,Math.PI*2);ctx.fill();
+    ctx.font='7px Martian Mono,monospace';ctx.textAlign='center';
+    ctx.fillStyle='#f5a623';ctx.fillText(it.id,x,y-16);
+    ctx.fillStyle='#5a3800';ctx.fillText(it.commit.slice(0,10),x,y+20);
+    ctx.fillStyle='#2a2840';ctx.fillText(it.label.slice(0,34),x,y+34);
+  });
+  const sx=x0+(x1-x0)*state.compare;
+  ctx.strokeStyle='#00d4ff';ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(sx,40);ctx.lineTo(sx,H-50);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#00d4ff';ctx.font='7px Martian Mono,monospace';ctx.textAlign='center';
+  ctx.fillText('COMPARE '+Math.round(state.compare*100)+'%',sx,36);
+  ctx.fillStyle='#ff3c54';ctx.fillText('NO GEODETIC DIFF AVAILABLE: 0 verified atlas versions. Software releases are not scientific atlas versions.',W/2,H-70);
+  ctx.restore();
+}
+function drawEmpty(title,sub){
+  ctx.save();ctx.textAlign='center';
+  ctx.fillStyle='#ff3c54';ctx.font='bold 12px Unbounded,sans-serif';ctx.fillText(title,W/2,H/2-12);
+  ctx.fillStyle='#5a3800';ctx.font='7px Martian Mono,monospace';ctx.fillText(sub,W/2,H/2+10);
+  ctx.restore();
+}
+
+/* ── HUD + frame ─────────────────────────────────────── */
+function drawHud(){
+  const info={
+    spatial:['MODE','3D WIREFRAME / LOCAL DISPLAY SPACE','OBJECTS',state.synth?SYNTH.objects.length:0,
+      'VERIFIED',0,'CRS','unknown / synthetic'],
+    system:['NODES',(M.nodes||[]).length,'SECTORS',(M.business_sectors||[]).length,
+      'LIVE ADAPTERS',((M.adapters||{}).counts||{}).available||0,'TOPOLOGY','declared contracts'],
+    relations:['FAMILIES',9,'RELATIONS',state.synth?SYNTH.relations.length:0,
+      'ESTABLISHED',0,'STATUS','synthetic hypotheses only'],
+    time:['SERIES',0,'LAG TESTS',0,'NULL MODELS','not run','HOLDOUT','not run'],
+    evidence:['SOURCES',0,'TRANSFORMS',0,'CLAIMS',0,'PROVENANCE','contract only'],
+    intent:['TYPE','conceptual','UNIT','none','VALIDATION','not_validated','PHYSICAL','forbidden'],
+    operations:['OWNER',M.human_owner||'—','GATES','not_implemented','CI','external','AUDIT','pending'],
+    business:['SECTORS',(M.business_sectors||[]).length,'DOMAIN','informational','MIXING','forbidden','DATA','not_implemented'],
+    versions:['ATLAS','none','SOFTWARE REL',(M.iterations||[]).length,'DIFF','unavailable','LATEST','no validated atlas']
+  }[state.view]||[];
+  let html='';for(let i=0;i<info.length;i+=2)html+=`<div><b>${esc(info[i])}</b> ${esc(info[i+1])}</div>`;
+  $('stage-hud').innerHTML=html;
+  $('watermark').style.display = (state.view==='spatial'||state.view==='relations')&&state.synth?'block':'none';
+}
+function frame(){
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='#09090f';ctx.fillRect(0,0,W,H);
+  if(state.view==='spatial')drawSpatial();
+  else if(state.view==='relations')drawRelations();
+  else if(state.view==='system')drawSystem();
+  else if(state.view==='evidence')drawEvidence();
+  else if(state.view==='time')drawTime();
+  else if(state.view==='intent')drawIntent();
+  else if(state.view==='operations')drawOperations();
+  else if(state.view==='business')drawBusiness();
+  else if(state.view==='versions')drawVersions();
+  drawHud();
+  requestAnimationFrame(frame);
+}
+
+/* ── mouse navigation ────────────────────────────────── */
+cv.addEventListener('mousedown',e=>{
+  state.drag = (e.button===2||e.shiftKey)?'pan':'rotate';
+  state.lastX=e.clientX;state.lastY=e.clientY;
+});
+window.addEventListener('mouseup',()=>{state.drag=null;});
+cv.addEventListener('contextmenu',e=>e.preventDefault());
+cv.addEventListener('mousemove',e=>{
+  const r=cv.getBoundingClientRect(),mx=e.clientX-r.left,my=e.clientY-r.top;
+  if(state.drag){
+    const dx=e.clientX-state.lastX,dy=e.clientY-state.lastY;
+    state.lastX=e.clientX;state.lastY=e.clientY;
+    if(state.drag==='rotate'){state.yaw+=dx*0.006;state.pitch=Math.max(-1.45,Math.min(1.45,state.pitch-dy*0.006));}
+    else{state.panX+=dx;state.panY+=dy;}
+  } else if((state.view==='spatial'||state.view==='relations'||state.view==='system')&&state.synth){
+    let hit=null;
+    SYNTH.objects.forEach(o=>{if(o._screen&&Math.hypot(o._screen.x-mx,o._screen.y-my)<14)hit=o;});
+    cv.style.cursor=hit?'pointer':'crosshair';
+  }
+});
+cv.addEventListener('wheel',e=>{e.preventDefault();zoomBy(e.deltaY<0?1.12:0.89);},{passive:false});
+cv.addEventListener('click',e=>{
+  const r=cv.getBoundingClientRect(),mx=e.clientX-r.left,my=e.clientY-r.top;
+  if(state.view==='versions'){state.compare=Math.max(0,Math.min(1,(mx-60)/(W-120)));return;}
+  if(!state.synth)return;
+  let hit=null;
+  SYNTH.objects.forEach(o=>{if(o._screen&&Math.hypot(o._screen.x-mx,o._screen.y-my)<16)hit=o;});
+  if(hit)openObject(hit);
+});
+cv.addEventListener('dblclick',resetCamera);
+
+/* ── optional live link (offline is the honest default) ─ */
+function tick(){const n=new Date(),p=v=>String(v).padStart(2,'0');
+  $('clock').textContent=p(n.getUTCHours())+':'+p(n.getUTCMinutes())+':'+p(n.getUTCSeconds())+' UTC';}
+setInterval(tick,1000);tick();
+
+/* ── boot ────────────────────────────────────────────── */
+buildHeader();buildViewbar();buildGauges();buildLayers();buildNodes();resize();frame();
+addLog('UNIVERSE OS cockpit loaded — '+M.manifest_id,'sig');
+addLog('0 verified sources · 0 real objects · 0 relations','err');
+addLog('Synthetic wireframe fixture enabled — not Giza inventory data','warn');
+addLog('Adapters: unavailable / not_implemented / conceptual — no simulation','sync');
+addLog('Vector 42: conceptual / project-defined — not physical energy','vio');
+addLog('Mouse: LMB rotate · SHIFT+LMB or RMB pan · WHEEL zoom','ok');
+</script>
+</body>
+</html>

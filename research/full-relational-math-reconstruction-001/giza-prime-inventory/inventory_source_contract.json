@@ -1,0 +1,32 @@
+{
+  "contract_id": "GIZA_REAL_INVENTORY_SOURCE_CONTRACT",
+  "architecture_version": "real_landscape_inventory_revision_1",
+  "external_citations_attached": false,
+  "attached_sources": [],
+  "verified_source_count": 0,
+  "required_source_fields": [
+    "source_id",
+    "source_type",
+    "bibliographic_ref",
+    "datum",
+    "retrieved_at",
+    "verification_state"
+  ],
+  "accepted_source_types": [
+    "published_survey",
+    "archaeological_report",
+    "geological_map",
+    "hydrogeological_survey",
+    "institutional_catalogue"
+  ],
+  "verification_states": ["verified", "pending", "rejected"],
+  "gate": {
+    "rule": "Only a source with verification_state = verified may support a real object, natural structure or relation record.",
+    "no_source_no_record": true,
+    "pending_is_not_evidence": true,
+    "rejected_is_not_evidence": true,
+    "no_fabricated_substitute": true
+  },
+  "linked_real_source_ingestion_contract": "../giza-prime-multiscale/real_source_ingestion_contract.json",
+  "note": "The contract exists; no source has passed it. Real registers stay empty until a verified source is attached."
+}

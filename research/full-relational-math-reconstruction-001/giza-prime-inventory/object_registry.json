@@ -1,0 +1,205 @@
+{
+  "registry_id": "GIZA_REAL_LANDSCAPE_OBJECT_REGISTRY",
+  "architecture_version": "real_landscape_inventory_revision_1",
+  "scientific_status": "ingestion_framework_zero_verified_objects",
+  "external_citations_attached": false,
+  "verified_source_count": 0,
+  "coordinate_system_policy": "Every real record must declare datum, coordinate system and units. None are declared because no source has passed the gate.",
+  "objects": [],
+  "natural_structures": [],
+  "inventory_slots": [
+    {
+      "slot_id": "large_pyramid_complexes",
+      "landscape_category": "monumental",
+      "label": "Large pyramid complexes — ordinary records, no core status",
+      "targets_to_seek": ["large pyramid complexes and their immediate substructures"],
+      "natural_structure": false,
+      "verified_object_count": 0,
+      "coverage_status": "not_inventoried",
+      "known_gap": "No datum-controlled geometry, coordinates, elevations or sources attached",
+      "required_survey_layer": "datum-controlled archaeological survey with phase and preservation state"
+    },
+    {
+      "slot_id": "small_satellite_unfinished_pyramids",
+      "landscape_category": "monumental",
+      "label": "Small, satellite and unfinished pyramids",
+      "targets_to_seek": ["small pyramids", "satellite pyramids", "unfinished pyramids"],
+      "natural_structure": false,
+      "verified_object_count": 0,
+      "coverage_status": "not_inventoried",
+      "known_gap": "No complete inventory of small and unfinished pyramids",
+      "required_survey_layer": "datum-controlled archaeological inventory with construction phase"
+    },
+    {
+      "slot_id": "mastabas_necropolis_fields",
+      "landscape_category": "monumental",
+      "label": "Mastabas and necropolis fields",
+      "targets_to_seek": ["mastabas", "necropolis fields", "funerary superstructures"],
+      "natural_structure": false,
+      "verified_object_count": 0,
+      "coverage_status": "not_inventoried",
+      "known_gap": "Necropolis fields are not enumerated; burial density and extent unknown",
+      "required_survey_layer": "systematic cemetery survey with mapped graves and detection limits"
+    },
+    {
+      "slot_id": "mortuary_valley_temples",
+      "landscape_category": "architectural",
+      "label": "Mortuary temples and valley temples",
+      "targets_to_seek": ["mortuary temples", "valley temples", "temple enclosures"],
+      "natural_structure": false,
+      "verified_object_count": 0,
+      "coverage_status": "not_inventoried",
+      "known_gap": "No temple inventory or adaptation history attached",
+      "required_survey_layer": "datum-controlled architectural survey with modification record"
+    },
+    {
+      "slot_id": "platforms_enclosures_walls",
+      "landscape_category": "architectural",
+      "label": "Platforms, enclosures and walls",
+      "targets_to_seek": ["platforms", "enclosures", "boundary walls", "retaining structures"],
+      "natural_structure": false,
+      "verified_object_count": 0,
+      "coverage_status": "not_inventoried",
+      "known_gap": "No enclosure or wall network mapped",
+      "required_survey_layer": "architectural survey with connected-feature mapping"
+    },
+    {
+      "slot_id": "sphinx_and_temple_complex",
+      "landscape_category": "monumental",
+      "label": "Sphinx and associated temple complex — ordinary records, no core status",
+      "targets_to_seek": ["Sphinx and associated temple complex"],
+      "natural_structure": false,
+      "verified_object_count": 0,
+      "coverage_status": "not_inventoried",
+      "known_gap": "No verified geometry, parent-rock relation or original form claim attached",
+      "required_survey_layer": "datum-controlled survey distinguishing carved massif from later form"
+    },
+    {
+      "slot_id": "causeways_roads_ramps_passages",
+      "landscape_category": "linear",
+      "label": "Causeways, roads, ramps, embankments and passages",
+      "targets_to_seek": ["causeways", "roads", "ramps", "embankments", "passages", "tunnels"],
+      "natural_structure": false,
+      "verified_object_count": 0,
+      "coverage_status": "not_inventoried",
+      "known_gap": "Linear connectivity not mapped; buried and truncated segments unaccounted",
+      "required_survey_layer": "connected linear-feature survey with endpoints, gradients and burial state"
+    },
+    {
+      "slot_id": "boat_pits_shafts_wells_chambers_galleries",
+      "landscape_category": "subsurface",
+      "label": "Boat pits, shafts, wells, chambers and galleries",
+      "targets_to_seek": ["boat pits", "shafts", "wells", "chambers", "galleries", "voids"],
+      "natural_structure": false,
+      "verified_object_count": 0,
+      "coverage_status": "not_inventoried",
+      "known_gap": "No explicit cavity inventory; cavities are not inferred from external shape",
+      "required_survey_layer": "subsurface imaging with datum and confidence map"
+    },
+    {
+      "slot_id": "quarries_workshops_settlements_storage",
+      "landscape_category": "infrastructural",
+      "label": "Quarries, stone-working areas, settlements and storage zones",
+      "targets_to_seek": ["quarries", "workshops", "settlements", "stores", "transport and processing zones"],
+      "natural_structure": false,
+      "verified_object_count": 0,
+      "coverage_status": "not_inventoried",
+      "known_gap": "No complete production and logistics landscape inventory",
+      "required_survey_layer": "settlement and quarry survey with material-flow and phase evidence"
+    },
+    {
+      "slot_id": "ancient_channels_hydrogeology",
+      "landscape_category": "hydrological",
+      "label": "Ancient channels, waterways and hydrogeological structures",
+      "targets_to_seek": ["palaeo-channels", "waterways", "aquifers", "filtration paths", "reservoirs"],
+      "natural_structure": true,
+      "verified_object_count": 0,
+      "coverage_status": "not_inventoried",
+      "known_gap": "Water table, palaeo-flow paths and aquifer properties unresolved",
+      "required_survey_layer": "hydrogeological survey with datum-controlled heads and permeability"
+    },
+    {
+      "slot_id": "bedrock_massifs_fractures_faults",
+      "landscape_category": "geological",
+      "label": "Bedrock massifs, escarpments, fractures and faults",
+      "targets_to_seek": ["bedrock massifs", "escarpments", "fractures", "faults", "geological boundaries"],
+      "natural_structure": true,
+      "verified_object_count": 0,
+      "coverage_status": "not_inventoried",
+      "known_gap": "No geological surface or subsurface model and no structural network attached",
+      "required_survey_layer": "geological map with stratigraphy, structure and datum"
+    },
+    {
+      "slot_id": "natural_processes",
+      "landscape_category": "natural",
+      "label": "Relief, wind, thermal gradients and atmospheric or ground processes",
+      "targets_to_seek": ["relief", "wind fields", "thermal gradients", "atmospheric and ground processes"],
+      "natural_structure": true,
+      "verified_object_count": 0,
+      "coverage_status": "not_inventoried",
+      "known_gap": "No measured forcing fields or long-baseline environmental records",
+      "required_survey_layer": "co-located calibrated atmospheric, thermal and ground-process monitoring"
+    },
+    {
+      "slot_id": "destroyed_buried_ambiguous",
+      "landscape_category": "nonobvious",
+      "label": "Destroyed, buried, partially preserved and currently ambiguous objects",
+      "targets_to_seek": ["destroyed", "buried", "partially preserved", "unclassified or ambiguous objects"],
+      "natural_structure": false,
+      "verified_object_count": 0,
+      "coverage_status": "not_inventoried",
+      "known_gap": "Detection limits unstated; unknown unknowns are not countable",
+      "required_survey_layer": "systematic survey with explicit detection limits and negative evidence"
+    },
+    {
+      "slot_id": "interfaces_boundaries",
+      "landscape_category": "interface",
+      "label": "Interfaces and boundaries between subsystems",
+      "targets_to_seek": ["contacts", "boundaries", "source-path-interface-receiver pairs"],
+      "natural_structure": true,
+      "verified_object_count": 0,
+      "coverage_status": "not_inventoried",
+      "known_gap": "No measured contact, boundary or transfer interface attached",
+      "required_survey_layer": "source-path-interface-receiver measurement with closed transfer budget"
+    }
+  ],
+  "record_field_contract": {
+    "required_fields": [
+      "object_id",
+      "category",
+      "coordinates",
+      "coordinate_system",
+      "geometry",
+      "elevations",
+      "material",
+      "preservation_state",
+      "temporal_intervals",
+      "source_ids"
+    ],
+    "bound_fields": ["bounded_geometry", "elevation_range"],
+    "rule": "No field may be populated by assumption; missing values stay null or unknown."
+  },
+  "modeling_tiers": {
+    "numeric": {
+      "requires": ["coordinates", "coordinate_system", "geometry", "elevations", "material", "preservation_state", "temporal_intervals", "source_ids"],
+      "rule": "All required fields present from a verified source; numeric analysis permitted."
+    },
+    "interval": {
+      "requires": ["bounded_geometry", "elevation_range", "source_ids"],
+      "rule": "Partial verified data expressed as explicit bounds; interval analysis only."
+    },
+    "symbolic": {
+      "requires": [],
+      "rule": "No verified data; representation stays symbolic and unresolved."
+    }
+  },
+  "gate": {
+    "source_contract_ref": "inventory_source_contract.json",
+    "real_records_require_verified_source": true,
+    "no_preselected_core": true,
+    "no_fabricated_coordinates": true,
+    "no_fabricated_elevations": true,
+    "no_fabricated_material": true,
+    "absence_from_catalogue_is_not_absence_from_system": true
+  }
+}

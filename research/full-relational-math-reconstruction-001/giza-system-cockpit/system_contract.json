@@ -1,0 +1,100 @@
+{
+  "contract_id": "UNIVERSE_OS_SYSTEM_EVENT_CONTRACT",
+  "architecture_version": "integrated_system_cockpit_stage_a_revision_1",
+  "source_issue": "AudioReclamaRu/universe-os#7 section 14.4",
+  "system_event_fields": [
+    "event_id",
+    "project_id",
+    "sector_id",
+    "entity_id",
+    "event_type",
+    "event_time",
+    "ingest_time",
+    "source_id",
+    "payload",
+    "units",
+    "coordinate_frame",
+    "model_version",
+    "evidence_status",
+    "uncertainty",
+    "permissions"
+  ],
+  "field_requirements": {
+    "event_id": "globally unique, immutable",
+    "project_id": "must resolve to project_registry.json",
+    "sector_id": "nullable when not applicable; must resolve to a registered sector when present",
+    "entity_id": "original entity identifier in the source domain",
+    "event_type": "closed vocabulary declared below",
+    "event_time": "ISO-8601 with explicit time standard; null when not applicable",
+    "ingest_time": "ISO-8601 with explicit time standard; never equal to an invented event time",
+    "source_id": "must resolve to a source contract; null means unverified and non-promotable",
+    "payload": "domain-typed object; never a free-text substitute for a measurement",
+    "units": "must be in the declared unit vocabulary or explicitly null",
+    "coordinate_frame": "CRS/datum reference or explicitly null; mixed frames require a transformation record",
+    "model_version": "version of the producing model/algorithm or null",
+    "evidence_status": "closed vocabulary declared below",
+    "uncertainty": "explicit interval/quality record or null; null is displayed as unknown, never as zero",
+    "permissions": "privacy/licence/access scope record; required for cross-domain events"
+  },
+  "event_types": [
+    "measurement",
+    "geometry_version",
+    "source_ingested",
+    "relation_changed",
+    "ensemble_changed",
+    "model_updated",
+    "signal_observed",
+    "decision_recorded",
+    "iteration_accepted",
+    "iteration_rejected",
+    "adapter_status_changed",
+    "approval_gate_changed"
+  ],
+  "evidence_statuses": [
+    "measured_surveyed",
+    "published",
+    "digitized_from_plan",
+    "photogrammetric",
+    "remote_sensing",
+    "inferred",
+    "idealized",
+    "synthetic_fixture",
+    "hypothetical",
+    "unknown",
+    "disputed"
+  ],
+  "unit_classes": {
+    "physical": ["m", "s", "kg", "N", "N*m", "J", "W", "Pa", "Hz", "K", "degC", "V", "A", "T", "Wb", "V/m", "kg/s", "m3/s", "W/m2", "m/s"],
+    "informational": ["bit", "byte", "bit/s", "count", "score", "ratio", "dimensionless"],
+    "conceptual": ["conceptual", "project_defined", "none"]
+  },
+  "separation_rules": {
+    "no_physical_information_mixing": true,
+    "vector_42_is_conceptual_until_measured": true,
+    "vector_42_physical_unit_forbidden": true,
+    "business_metrics_are_not_physical_energy": true,
+    "astraea_correlation_is_not_causality": true,
+    "astraea_auto_trade_forbidden": true,
+    "cross_domain_link_requires_mechanism_and_evidence": true,
+    "unknown_uncertainty_is_not_zero": true,
+    "synthetic_fixture_never_verified": true,
+    "no_pyramid_to_planetary_or_cosmic_bridge": true
+  },
+  "cross_domain_link_requirements": [
+    "source_event_id",
+    "target_event_id",
+    "mechanism_definition",
+    "evidence_status",
+    "uncertainty",
+    "permission_scope",
+    "alternative_explanations_checked"
+  ],
+  "adapter_policy": {
+    "default_state": "not_implemented",
+    "read_only_unknown_integrations": true,
+    "no_credentials_in_repository": true,
+    "no_gui_launch_in_foreign_session": true,
+    "no_simulation_of_missing_integration": true
+  },
+  "note": "A contract, not a claim. Fields may be null when inapplicable; incompatible units, times, frames, evidence states and permissions may never be merged."
+}

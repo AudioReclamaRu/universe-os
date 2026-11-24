@@ -27,6 +27,8 @@ on:
       - "research/full-relational-math-reconstruction-001/phase-32/**"
       - "research/full-relational-math-reconstruction-001/phase-33/**"
       - "research/full-relational-math-reconstruction-001/giza-prime-multiscale/**"
+      - "research/full-relational-math-reconstruction-001/giza-prime-inventory/**"
+      - "research/full-relational-math-reconstruction-001/giza-system-cockpit/**"
       - "research/full-relational-math-reconstruction-001/README.md"
       - ".github/workflows/ifs-exact-comparator-tests.yml"
 
@@ -69,3 +71,41 @@ jobs:
       - name: Run GIZA multiscale model unit tests
         working-directory: research/full-relational-math-reconstruction-001/giza-prime-multiscale
         run: python -m unittest discover -v -p "test_*.py"
+
+  giza-inventory-tests:
+    name: GIZA PRIME real landscape inventory tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run GIZA inventory framework unit tests
+        working-directory: research/full-relational-math-reconstruction-001/giza-prime-inventory
+        run: python -m unittest discover -v -p "test_*.py"
+
+  system-cockpit-tests:
+    name: Integrated system cockpit contract tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run cockpit contract unit tests
+        working-directory: research/full-relational-math-reconstruction-001/giza-system-cockpit
+        run: python -m unittest discover -v -p "test_*.py"
+
+      - name: Verify generated cockpit payload is current
+        working-directory: research/full-relational-math-reconstruction-001/giza-system-cockpit
+        run: |
+          python -c "import cockpit_engine as ce; ce.write_cockpit_data('cockpit_data.js')"
+          git diff --exit-code -- cockpit_data.js

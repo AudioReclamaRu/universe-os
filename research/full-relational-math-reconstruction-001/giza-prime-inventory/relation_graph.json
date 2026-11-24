@@ -1,0 +1,45 @@
+{
+  "graph_id": "GIZA_REAL_LANDSCAPE_RELATION_GRAPH",
+  "architecture_version": "real_landscape_inventory_revision_1",
+  "scientific_status": "typed_relation_framework_zero_verified_relations",
+  "external_citations_attached": false,
+  "verified_source_count": 0,
+  "relation_classes": [
+    "spatial",
+    "geological",
+    "mechanical",
+    "acoustic",
+    "hydraulic",
+    "thermal",
+    "gas_dynamic",
+    "electromagnetic",
+    "functional"
+  ],
+  "epistemic_statuses": [
+    "established_documented",
+    "inferred_indirect",
+    "hypothesized_unverified"
+  ],
+  "relations": [],
+  "relation_record_fields": [
+    "relation_id",
+    "source_object_id",
+    "target_object_id",
+    "relation_class",
+    "epistemic_status",
+    "source_ids",
+    "evidence_class",
+    "modeling_tier"
+  ],
+  "separation_rule": "Relations are reported separately by relation_class and by epistemic_status. An established_documented relation must never be merged with inferred_indirect or hypothesized_unverified.",
+  "ingestion_gate": {
+    "source_contract_ref": "inventory_source_contract.json",
+    "require_verified_source_ids": true,
+    "require_epistemic_status": true,
+    "synthetic_relation_cannot_be_established": true,
+    "inferred_cannot_be_promoted_without_new_evidence": true,
+    "no_direct_pyramid_to_planetary_or_cosmic_bridge": true
+  },
+  "coordinate_or_measurement_claim": false,
+  "note": "Nine independently typed relation families. No relation is asserted until a verified source passes the contract."
+}
