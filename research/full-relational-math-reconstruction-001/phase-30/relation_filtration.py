@@ -483,10 +483,7 @@ def analyze_bounded_relation_filtration(
                 },
             }
             cells[(substitution_bound, multiplier_bound)] = cell
-            cell_reports.append({
-                key: value for key, value in cell.items()
-                if key != "basis_entries"
-            })
+            cell_reports.append(cell)
 
     stability = {}
     if max_substitution_word_length >= 2:
