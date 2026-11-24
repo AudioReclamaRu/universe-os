@@ -524,3 +524,27 @@ The implementation verifies both composed inclusion paths \(C\to B\to R\) and \(
 The small physical grid \((L=1,2)\), \((D=0,1)\), dimension 2, generator count 2, has one interior square with dimensions \(C=4\), \(A=12\), \(B=41\), \(R=120\), \(A\cap B=7\), \(q=74\), \(\omega=3\), and rank difference \(71=q-\omega\). Synthetic controls separately force nonzero and zero mixed overlap and exact non-integer rational coordinates. These are finite exact statements only; they do not prove global distributivity, stabilization, a universal recurrence, an infinite Hilbert series, or an infinite T-ideal presentation.
 
 See [Phase 32 report](phase-32/EXACT_BIFILTRATION_OPERATORS_AND_MIXED_OVERLAP.md), the [bifiltration operator engine](phase-32/bifiltration_operators.py) and the [13 Phase 32 tests](phase-32/test_bifiltration_operators.py). The dedicated CI matrix now includes Phase 32.
+
+
+## Phase 33 — global exact bifiltration rank ledger
+
+Phase 33 consumes the completed Phase 30 filtration and Phase 32 local square analysis. It applies finite two-dimensional telescoping to the whole declared rectangular grid: for every prefix endpoint \((L,D)\), \(r_{L,D}=\sum_{i=1}^{L}\sum_{j=0}^{D}(q_{i,j}-\omega_{i,j})\), and for every subrectangle \([a,b]\times[c,d]\), \(\sum(q-\omega)=r_{b,d}-r_{a-1,d}-r_{b,c-1}+r_{a-1,c-1}\).
+
+The axes use explicit boundary conventions only: \(r_{0,D}=0\) and \(r_{L,-1}=0\) are formal zero boundaries, never presented as computed Phase 30 cells; \(q\) on the axes is a one-sided rank difference and \(\omega=0\) there because no unit square exists. Interior \(\omega\) is consumed from Phase 32 and cross-checked against its exact intersection/complement data, never assumed to vanish.
+
+The ledger also resolves ranks by total matrix-word degree. For each degree it verifies local mixed differences, prefix and subrectangle telescoping, profile sums against the aggregate \(r\), \(q\) and \(\omega\), and exact recombination into the non-graded identity. Exhaustive rectangle enumeration is capped by `max_rectangle_checks`; exceeding the cap yields an explicit unresolved status rather than a truncated completion. \(\sum q\) is reported only as the sum of finite bounded quotient increments, not as a count of infinite T-ideal generators.
+
+See [Phase 33 report](phase-33/EXACT_BIFILTRATION_RANK_LEDGER.md), the [rank-ledger engine](phase-33/bifiltration_rank_ledger.py) and the [19 Phase 33 tests](phase-33/test_bifiltration_rank_ledger.py). The dedicated CI matrix now includes Phase 33.
+
+
+## GIZA PRIME — idealized multiscale digital twin (separate workstream)
+
+This is a physics-based research package, kept separate from the exact mathematical phase chronology. It is an **idealized reference model** of the Giza complex — three pyramids, the Great Sphinx parent massif and the shared bedrock — embedded in surrounding environmental, Earth and external-field domains. It is neither a historical claim nor a proof that Giza communicates with the cosmos.
+
+The package provides a machine-readable typed system graph, an evidence-class parameter registry, six controlled scenario families (`S0_CURRENT_OBSERVED`, `S1_PARENT_GEOLOGY_RECONSTRUCTION`, `S2_IDEALIZED_REFERENCE_COMPLEX`, `S3_PASSIVE_NULL`, `S4_CANDIDATE_COUPLING_FAMILIES`, `S5_ENVIRONMENTAL_DRIVERS`) and explicit scale-bridge records with carriers, directions, energy closure, status and falsifiers. Reduced-order mechanics computes modes and frequency response from assembled \(M\), \(C\), \(K\), \(B\) and \(C_r\) operators — no frequency is hardcoded as PRIME. Passive null and conservation-bound checks are applied before any hypothesis is interpreted.
+
+Because no external survey citation is attached, the numerical values are synthetic `idealized_design` / `assumption_for_sensitivity` inputs recorded as such; the source register explicitly declares that no external citation is attached. Modules that cannot be evaluated from the available data remain symbolic or `not_evaluable_missing_data`, and astronomical/cosmological links appear only as bounded hypotheses or analogies, never as computed couplings.
+
+For the declared **synthetic** 5-DOF fixture only, the model computes modes at approximately 0.067–0.114 Hz with Q ≈ 24–26, a Khufu→bedrock transfer peak near 0.0709 Hz, and a closed harmonic energy budget (input power = material dissipation + exported power) with a residual of order 1e-13 W. PRIME is reported as a 24-point Pareto envelope over computed objectives with `robust_joint_optimum_identifiable = false` — no frequency is preset. Acoustic, gas/thermal, hydrologic, electromagnetic, Earth-scale and cosmic links remain bridge-catalogue records in `not_evaluable_missing_data`, `bounded_negligible` or `analogy_only` status; no pyramid-local→cosmic bridge is asserted.
+
+See [GIZA PRIME multiscale model report](giza-prime-multiscale/GIZA_PRIME_IDEALIZED_MULTISCALE_MODEL.md), the [reduced-order model](giza-prime-multiscale/giza_multiscale_model.py) and the [79 model tests](giza-prime-multiscale/test_giza_multiscale_model.py). CI runs these in a separate job, not as a Phase 33 matrix entry.
