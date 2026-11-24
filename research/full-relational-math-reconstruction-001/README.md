@@ -442,3 +442,13 @@ The dedicated GitHub Actions pull-request workflow completed successfully on the
 - Phase 29 — 14 tests
 
 **136 tests passed across all 14 affine-IFS phase packages.** All 14 of 14 clean-checkout CI jobs succeeded. This validates these fourteen packages only; it does not claim that the complete repository or every earlier research phase passed CI.
+
+## Phase 30 — exact filtration and bounded minimal bases
+
+Phase 30 analyzes the nested two-parameter family R[L,D] from Phase 29. L bounds the length of words substituted into the fundamental trace identity; D bounds the total matrix-letter degree of trace-monomial multipliers. The maximum length of each multiplier trace word is fixed across one run.
+
+For every grid cell it computes the exact Q-dimension, the predecessor sum R[L-1,D]+R[L,D-1], the predecessor intersection dimension, and the quotient increment. It returns a cardinality-minimal Q-basis for each finite slice and a minimal complement basis for the corresponding quotient. Exact rational dependency certificates are recomputed to zero.
+
+Every basis vector inherits Phase 29's universal generic-matrix verification. Homogeneous rank profiles by total trace-word degree provide a finite Hilbert-like table. Final-step increments are explicitly descriptive; no infinite stabilization, Hilbert-series, or T-ideal minimal-generator claim is made.
+
+See [Phase 30 report](phase-30/EXACT_TRACE_RELATION_FILTRATION_AND_MINIMAL_BASES.md), the [filtration engine](phase-30/relation_filtration.py) and the [13 Phase 30 tests](phase-30/test_relation_filtration.py).

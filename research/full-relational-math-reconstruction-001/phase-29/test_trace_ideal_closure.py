@@ -103,6 +103,7 @@ class BoundedTraceIdealClosureTests(unittest.TestCase):
             result["derived_relation_candidate_count"],
         )
         self.assertEqual(result["unresolved_derived_relations"], "<0_2|0_3>")
+        self.assertIn("expanded_index_assignments", result["seed_verification_work"])
         decode = lambda value: int(value.split("_2|")[0][1:], 2)
         self.assertEqual(
             decode(result["independent_basis_count"]) + decode(result["exactly_dependent_count"]),
