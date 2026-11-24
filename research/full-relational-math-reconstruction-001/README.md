@@ -342,7 +342,7 @@ Phase 27 currently proves individual FTI instances for supplied word substitutio
 
 See [UNIVERSAL_TRACE_IDENTITIES_AND_GENERIC_MATRIX_PROOFS.md](phase-27/UNIVERSAL_TRACE_IDENTITIES_AND_GENERIC_MATRIX_PROOFS.md), the [implementation](phase-27/universal_trace_identities.py) and the [16 Phase 27 tests](phase-27/test_universal_trace_identities.py).
 
-### Validation status — phases 16–27
+### Historical validation status — phases 16–27 (before the Phase 28 symmetry correction)
 
 The dedicated GitHub Actions workflow [ifs-exact-comparator-tests.yml](../.github/workflows/ifs-exact-comparator-tests.yml) completed successfully on the clean pull-request checkout in [run 45269985159](https://github.com/AudioReclamaRu/universe-os/actions/runs/45269985159), testing branch head 7f31fea7742f62c7f4bfc38234816ab92af155a9.
 
@@ -375,7 +375,7 @@ The completion claim is bounded to the declared dimension, alphabet, word-length
 See [Phase 28 report](phase-28/BOUNDED_UNIVERSAL_TRACE_IDENTITY_CATALOG.md), the [catalog generator](phase-28/universal_trace_catalog.py) and the [15 catalog tests](phase-28/test_universal_trace_catalog.py).
 
 
-### Validation status — phases 16–28
+### Superseded historical validation — phases 16–28 (before the Phase 28 symmetry correction)
 
 The dedicated GitHub Actions pull-request workflow completed successfully on the clean checkout in [run 45283828089](https://github.com/AudioReclamaRu/universe-os/actions/runs/45283828089), testing branch head \`401da0631176d9d3e7651c4566b2b08132368c77\). All **13 of 13 jobs passed**.
 
@@ -409,3 +409,36 @@ An incremental exact sparse Gaussian-elimination procedure computes a linearly i
 This is a basis of the finite bounded consequence space, **not** a minimal generating set of the full infinite T-ideal. The global characteristic-zero Procesi–Razmyslov theorem supplies the theoretical basis for FTI generation; the actual computed catalog remains explicitly bounded.
 
 See [Phase 29 theory and implementation report](phase-29/BOUNDED_TRACE_IDENTITY_IDEAL_CLOSURE.md), the [closure engine](phase-29/trace_ideal_closure.py) and the [14 Phase 29 tests](phase-29/test_trace_ideal_closure.py).
+
+## Phase 27–29 mathematical correction — symmetric multilinearity of the FTI
+
+A direct check of the defining permutation formula established that the fundamental trace identity is **symmetric and multilinear** in its d+1 matrix arguments, not alternating. Argument permutations preserve the same trace polynomial. Repeated arguments do not generally vanish.
+
+The earlier Phase 28 implementation had incorrectly enumerated only combinations of distinct words and omitted repeated arguments. That bounded catalog was therefore incomplete even within its stated word-length vocabulary. The issue was corrected in the Phase 27–29 sources, tests and reports:
+
+- Phase 27 adds explicit exact controls for symmetry under argument permutation and a repeated-argument instance verified on generic matrices.
+- Phase 28 now enumerates multisets with replacement. For W words and d+1 argument slots, the complete bounded substitution count is C(W+d, d+1), before trace-polynomial deduplication.
+- Phase 29 retains repeated words in the multilinear expansion and proves that rational linear-combination substitutions are spanned by all word multisets in the declared vocabulary.
+
+The earlier 119-test validation is retained above only as historical evidence for the superseded revision. Its Phase 28 completeness claim must not be reused. The corrected revision is validated below.
+
+### Corrected validation status — phases 16–29
+
+The dedicated GitHub Actions pull-request workflow completed successfully on the clean checkout in [run 45293336787](https://github.com/AudioReclamaRu/universe-os/actions/runs/45293336787), testing branch head `846cad2a0c52697b85ca25275f29c1b1744f9d32`.
+
+- Phase 16 — 17 tests
+- Phase 17 — 9 tests
+- Phase 18 — 6 tests
+- Phase 19 — 10 tests
+- Phase 20 — 6 tests
+- Phase 21 — 7 tests
+- Phase 22 — 9 tests
+- Phase 23 — 6 tests
+- Phase 24 — 8 tests
+- Phase 25 — 6 tests
+- Phase 26 — 7 tests
+- Phase 27 — 16 tests
+- Phase 28 — 15 tests
+- Phase 29 — 14 tests
+
+**136 tests passed across all 14 affine-IFS phase packages.** All 14 of 14 clean-checkout CI jobs succeeded. This validates these fourteen packages only; it does not claim that the complete repository or every earlier research phase passed CI.
