@@ -1582,7 +1582,8 @@
       ],
       "kml_bytes": 37630,
       "kml_entry": "doc.kml",
-      "sha256_of_committed_json": "7f9010f36c0b83a0e8ad15a04474aab5a1030d26d593fc72f8085aef4ac2506a",
+      "sha256_method": "canonical JSON serialization, independent of line endings",
+      "sha256_of_committed_json": "53bca1fc0b7e811d89ff5c24e84b8393187e4033d61c5e984c3775a196c4b8e1",
       "sha256_of_kml": "94ca0d8b95529664ebb823c84ba8c10082d1f3a62306826bd27be514c0e66020",
       "source_file": "GPMP-Control-Monuments.kmz"
     }

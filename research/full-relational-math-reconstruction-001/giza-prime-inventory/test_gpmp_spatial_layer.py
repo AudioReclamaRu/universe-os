@@ -108,6 +108,14 @@ class GpmpParsingTests(unittest.TestCase):
         self.assertFalse(states["SOURCE_PROVENANCE_VERIFIED"])
         self.assertFalse(states["INDEPENDENTLY_CORROBORATED"])
 
+    def test_committed_json_sha_is_platform_independent(self):
+        source = self.snapshot["source"]
+        self.assertEqual(source["sha256_of_committed_json"],
+                         gsl.canonical_json_sha256(self.payload))
+        self.assertNotEqual(source["sha256_of_committed_json"],
+                            source["sha256_of_kml"])
+        self.assertIn("line endings", source["sha256_method"])
+
     def test_coordinate_system_is_not_guessed(self):
         system = self.snapshot["coordinate_system"]
         self.assertEqual(system["datum_status"], "unverified")
@@ -191,6 +199,23 @@ class GpmpNegativeTests(unittest.TestCase):
     def test_unknown_network_label_is_rejected(self):
         with self.assertRaises(gsl.SpatialValidationError):
             gsl.classify_network("Point No. X Description: Unknown Northing: 1 Easting: 2")
+
+    def test_line_ending_variants_give_identical_canonical_hash(self):
+        payload = gsl.load_source()
+        hashes = []
+        for newline in ("\n", "\r\n"):
+            handle = tempfile.NamedTemporaryFile(
+                mode="w", suffix=".json", dir=_temp_dir(), delete=False,
+                encoding="utf-8", newline=newline)
+            try:
+                json.dump(payload, handle)
+                handle.close()
+                hashes.append(gsl.build_spatial_snapshot(handle.name)[
+                    "source"]["sha256_of_committed_json"])
+            finally:
+                if os.path.isfile(handle.name):
+                    os.unlink(handle.name)
+        self.assertEqual(hashes[0], hashes[1])
 
     def test_missing_source_file_is_an_error(self):
         with self.assertRaises(gsl.SpatialValidationError):

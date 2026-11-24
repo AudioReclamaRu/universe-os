@@ -55,9 +55,16 @@ def _require(condition: bool, message: str) -> None:
         raise SpatialValidationError(message)
 
 
-def _sha256_of(path: str) -> str:
-    with open(path, "rb") as handle:
-        return hashlib.sha256(handle.read()).hexdigest()
+def canonical_json_sha256(payload: Dict[str, Any]) -> str:
+    """Hash a canonical serialization, not platform-dependent file bytes.
+
+    Git normalizes line endings on checkout, so hashing raw bytes makes an
+    offline build differ between Windows and Linux.  The canonical form is
+    stable on every platform and still identifies the committed JSON content.
+    """
+    blob = json.dumps(payload, sort_keys=True, separators=(",", ":"),
+                      ensure_ascii=False, allow_nan=False).encode("utf-8")
+    return hashlib.sha256(blob).hexdigest()
 
 
 def _number(match: Optional[re.Match], label: str, raw: str) -> float:
@@ -248,7 +255,8 @@ def build_spatial_snapshot(path: Optional[str] = None) -> Dict[str, Any]:
         "source": {
             "source_file": payload["source_file"],
             "sha256_of_kml": payload["sha256"],
-            "sha256_of_committed_json": _sha256_of(target),
+            "sha256_of_committed_json": canonical_json_sha256(payload),
+            "sha256_method": "canonical JSON serialization, independent of line endings",
             "kml_entry": payload["kml_entry"],
             "kml_bytes": payload["kml_bytes"],
             "folders": list(payload["folders"]),
