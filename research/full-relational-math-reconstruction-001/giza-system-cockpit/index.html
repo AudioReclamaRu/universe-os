@@ -684,6 +684,45 @@ function drawTime(){
   ctx.fillStyle='#39ff7a';ctx.fillText('A negative or null result is a valid result. No tuning ASTRAEA toward a desired harmony with Giza.',40,H-58);
   ctx.restore();
 }
+function drawCrossDomain(){
+  const cd=M.cross_domain_validation||{},tri=M.tri_pyramid_architecture||{};
+  const bridge=tri.world_bridge||{},worlds=bridge.world_records||[];
+  const pyr=tri.pyramids||[];
+  const y=Math.max(160,H/2),cols=[W/2-260,W/2,W/2+260],clr=['#00d4ff','#f5a623','#39ff7a'];
+  ctx.save();ctx.font='7px Martian Mono,monospace';
+  panel(W/2-170,16,340,36,'MEGABRAIN — ORCHESTRATION OF ALL PROCESSES','#8855ff');
+  ctx.fillStyle='#5a3800';ctx.textAlign='center';
+  ctx.fillText('human-owned goals · coordinates only · owns no scientific claim',W/2,46);
+  pyr.forEach((p,i)=>{
+    const x=cols[i]||W/2+(i-1)*260,c=clr[i]||'#f5a623',tw=Math.min(92,(W-120)/6),th=Math.min(52,H/6);
+    ctx.strokeStyle=c;ctx.beginPath();ctx.moveTo(x,y-th);ctx.lineTo(x+tw,y+th);ctx.lineTo(x-tw,y+th);ctx.closePath();ctx.stroke();
+    ctx.fillStyle=c;ctx.fillText(p.id,x,y-8);
+    ctx.fillStyle='#5a3800';ctx.fillText(p.role,x,y+6);
+    ctx.fillText(p.signal_domain,x,y+20);
+    ctx.fillText((p.mode||'—')+' / '+(p.data_scope||'—'),x,y+34);
+  });
+  [0,1].forEach(i=>{
+    const x1=cols[i],x2=cols[i+1],c=clr[i],gap=Math.min(100,(W-120)/8);
+    [1,-1].forEach((dir,k)=>{
+      const yy=y+dir*28;
+      ctx.strokeStyle=c;ctx.globalAlpha=k?0.45:1;
+      ctx.beginPath();ctx.moveTo(x1+gap,yy);ctx.lineTo(x2-gap,yy);ctx.stroke();
+      const tip=k?x1+gap:x2-gap,sgn=k?1:-1;
+      ctx.beginPath();ctx.moveTo(tip,yy);ctx.lineTo(tip+sgn*8,yy-4);ctx.lineTo(tip+sgn*8,yy+4);ctx.closePath();ctx.fill();
+    });ctx.globalAlpha=1;
+  });
+  ctx.fillStyle='#f5a623';ctx.textAlign='center';
+  ctx.fillText('ASTRAEA ⇄ COMPARATOR ⇄ NATURAL PHYSICS · hypothesis, never command',W/2,y+72);
+  const wl=worlds.length?worlds.map(w=>w.id+'/'+w.world).join(' · '):'BITCOIN/digital · UNIVERSE/analog · EARTH_EAR/informational';
+  ctx.fillStyle='#5a3800';
+  ctx.fillText('THREE DISTINCT ENERGY MARKERS: '+wl,W/2,H-88);
+  ctx.fillText('COMPARATOR: '+((bridge.comparison_subject)||'declared dimensionless ratios')+' · consistent both ways',W/2,H-70);
+  ctx.fillStyle='#ff3c54';
+  ctx.fillText('LOGICAL / DIMENSIONLESS BRIDGE: NO ENERGY TRANSFER · NO BIT→JOULE · NO WORLD REDUCED TO ANOTHER',W/2,H-52);
+  ctx.fillStyle='#5a3800';
+  ctx.fillText('promotable: '+(cd.promotable_candidates||0)+' · adapter: '+((cd.astraea_adapter_status)||'not_implemented')+' · paper / historical only',W/2,H-34);
+  ctx.restore();
+}
 function drawIntent(){
   const v=M.intent_vector_42||{};
   panel(20,20,W-40,H-50,'INTENT / CONTROL — VECTOR 42','#8855ff');
@@ -774,6 +813,10 @@ function drawHud(){
     relations:['FAMILIES',9,'RELATIONS',state.synth?SYNTH.relations.length:0,
       'ESTABLISHED',0,'STATUS','synthetic hypotheses only'],
     time:['SERIES',0,'LAG TESTS',0,'NULL MODELS','not run','HOLDOUT','not run'],
+    crossdomain:['PYRAMIDS',((M.tri_pyramid_architecture||{}).pyramids||[]).length,
+      'WORLDS',(((M.tri_pyramid_architecture||{}).world_bridge||{}).worlds||[]).length,
+      'PROMOTABLE',((M.cross_domain_validation||{}).promotable_candidates||0),
+      'MODE','paper / historical'],
     evidence:['SOURCES',0,'TRANSFORMS',0,'CLAIMS',0,'PROVENANCE','contract only'],
     intent:['TYPE','conceptual','UNIT','none','VALIDATION','not_validated','PHYSICAL','forbidden'],
     operations:['OWNER',M.human_owner||'—','GATES','not_implemented','CI','external','AUDIT','pending'],
@@ -792,6 +835,7 @@ function frame(){
   else if(state.view==='system')drawSystem();
   else if(state.view==='evidence')drawEvidence();
   else if(state.view==='time')drawTime();
+  else if(state.view==='crossdomain')drawCrossDomain();
   else if(state.view==='intent')drawIntent();
   else if(state.view==='operations')drawOperations();
   else if(state.view==='business')drawBusiness();
@@ -842,6 +886,8 @@ addLog('UNIVERSE OS cockpit loaded — '+M.manifest_id,'sig');
 addLog('0 verified sources · 0 real objects · 0 relations','err');
 addLog('Synthetic wireframe fixture enabled — not Giza inventory data','warn');
 addLog('Adapters: unavailable / not_implemented / conceptual — no simulation','sync');
+addLog('Tri-pyramid comparator: ASTRAEA ⇄ model ⇄ natural physics, bidirectional','sig');
+addLog('Three energy markers: BITCOIN / UNIVERSE / EARTH EAR — logical bridge only','vio');
 addLog('Vector 42: conceptual / project-defined — not physical energy','vio');
 addLog('Mouse: LMB rotate · SHIFT+LMB or RMB pan · WHEEL zoom','ok');
 </script>

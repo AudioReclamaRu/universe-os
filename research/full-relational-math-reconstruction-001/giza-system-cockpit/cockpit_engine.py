@@ -172,6 +172,10 @@ def validate_astraea_result(result: Dict[str, Any],
     """Astraea may report candidates; it may never become a trade command."""
     contract = system_contract() if contract is None else contract
     _require(result.get("project_id") == "ASTRAEA", "not an ASTRAEA result")
+    _require(result.get("mode") == "paper",
+             "ASTRAEA results are only allowed in paper mode")
+    _require(result.get("data_scope") == "historical",
+             "ASTRAEA hypotheses are only allowed on historical data")
     _require(result.get("auto_trade") is False,
              "ASTRAEA result must not authorize automatic trading")
     _require(result.get("claim") in ("candidate", "negative", "inconclusive"),
@@ -204,6 +208,7 @@ VIEWS: Sequence[Dict[str, str]] = (
     {"id": "system", "label": "SYSTEM ARCHITECTURE", "node": "MEGABRAIN"},
     {"id": "relations", "label": "RELATION GRAPH", "node": "GIZA_PRIME"},
     {"id": "time", "label": "TIME / SYNC", "node": "ASTRAEA"},
+    {"id": "crossdomain", "label": "CROSS-DOMAIN MODELS", "node": "UNIVERSE_OS"},
     {"id": "evidence", "label": "EVIDENCE / PROVENANCE", "node": "UNIVERSE_OS"},
     {"id": "intent", "label": "INTENT / VECTOR 42", "node": "EARTH_EAR"},
     {"id": "operations", "label": "OPERATIONS", "node": "MEGABRAIN"},
@@ -246,6 +251,7 @@ KNOWN_ITERATIONS: Sequence[Dict[str, str]] = (
 
 
 def cockpit_manifest() -> Dict[str, Any]:
+    import cross_domain
     contract = system_contract()
     registry = project_registry()
     return {
@@ -265,6 +271,9 @@ def cockpit_manifest() -> Dict[str, Any]:
         "unit_classes": contract["unit_classes"],
         "separation_rules": contract["separation_rules"],
         "adapters": adapter_summary(registry),
+        "cross_domain_validation": cross_domain.cross_domain_manifest(),
+        "cross_domain_demonstration": cross_domain.synthetic_pair(),
+        "tri_pyramid_architecture": cross_domain.tri_pyramid_manifest(),
         "iterations": list(KNOWN_ITERATIONS),
         "verified_geodetic_objects": 0,
         "verified_sources": 0,
@@ -294,6 +303,7 @@ def write_cockpit_data(path: str) -> str:
 
 
 def assert_cockpit_honesty() -> bool:
+    import cross_domain
     contract = system_contract()
     registry = project_registry()
     manifest = cockpit_manifest()
@@ -306,6 +316,13 @@ def assert_cockpit_honesty() -> bool:
         manifest["vector_42_is_physical_energy"] is False,
         manifest["astraea_auto_trade"] is False,
         adapter_summary(registry)["simulated_integrations"] == 0,
+        manifest["cross_domain_validation"]["promotable_candidates"] == 0,
+        manifest["cross_domain_validation"]["live_feed_forbidden"] is True,
+        manifest["cross_domain_validation"]["auto_trade_forbidden"] is True,
+        manifest["cross_domain_demonstration"]["assessment"]["promotable"] is False,
+        cross_domain.validate_bridge(
+            manifest["tri_pyramid_architecture"]["world_bridge"]),
+        manifest["tri_pyramid_architecture"]["orchestrator"]["autonomous_goal_change"] is False,
     )
     _require(all(checks), "cockpit honesty check failed")
     return True

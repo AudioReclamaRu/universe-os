@@ -185,34 +185,43 @@ class CrossDomainTests(unittest.TestCase):
         }
         self.assertTrue(ce.validate_cross_domain_link(link))
 
-    def test_astraea_candidate_requires_null_and_holdout(self):
-        result = {"project_id": "ASTRAEA", "auto_trade": False,
-                  "claim": "candidate", "null_models_checked": False,
-                  "holdout_checked": True}
-        with self.assertRaises(ce.CockpitContractError):
-            ce.validate_astraea_result(result)
-
-    def test_astraea_auto_trade_forbidden(self):
-        result = {"project_id": "ASTRAEA", "auto_trade": True,
+    def _astraea_result(self, **overrides):
+        result = {"project_id": "ASTRAEA", "mode": "paper",
+                  "data_scope": "historical", "auto_trade": False,
                   "claim": "candidate", "null_models_checked": True,
                   "holdout_checked": True}
+        result.update(overrides)
+        return result
+
+    def test_astraea_candidate_requires_null_and_holdout(self):
         with self.assertRaises(ce.CockpitContractError):
-            ce.validate_astraea_result(result)
+            ce.validate_astraea_result(
+                self._astraea_result(null_models_checked=False))
+
+    def test_astraea_auto_trade_forbidden(self):
+        with self.assertRaises(ce.CockpitContractError):
+            ce.validate_astraea_result(self._astraea_result(auto_trade=True))
+
+    def test_astraea_live_mode_forbidden(self):
+        with self.assertRaises(ce.CockpitContractError):
+            ce.validate_astraea_result(self._astraea_result(mode="live"))
+
+    def test_astraea_non_historical_scope_forbidden(self):
+        with self.assertRaises(ce.CockpitContractError):
+            ce.validate_astraea_result(self._astraea_result(data_scope="streaming"))
 
     def test_astraea_negative_result_is_valid(self):
-        result = {"project_id": "ASTRAEA", "auto_trade": False,
-                  "claim": "negative", "null_models_checked": True,
-                  "holdout_checked": True}
-        self.assertTrue(ce.validate_astraea_result(result))
+        self.assertTrue(ce.validate_astraea_result(
+            self._astraea_result(claim="negative")))
 
 
 class ManifestTests(unittest.TestCase):
-    def test_manifest_has_nine_views(self):
+    def test_manifest_has_ten_views(self):
         manifest = ce.cockpit_manifest()
-        self.assertEqual(len(manifest["views"]), 9)
+        self.assertEqual(len(manifest["views"]), 10)
         self.assertEqual({v["id"] for v in manifest["views"]},
-                         {"spatial", "system", "relations", "time", "evidence",
-                          "intent", "operations", "business", "versions"})
+                         {"spatial", "system", "relations", "time", "crossdomain",
+                          "evidence", "intent", "operations", "business", "versions"})
 
     def test_manifest_honesty_flags(self):
         manifest = ce.cockpit_manifest()
@@ -275,6 +284,13 @@ class HtmlShellTests(unittest.TestCase):
         lowered = self.html.lower()
         self.assertNotIn("auto_trade=true", lowered.replace(" ", ""))
         self.assertNotIn("giza communicates", lowered)
+
+    def test_crossdomain_shell_guards(self):
+        self.assertIn("state.view==='crossdomain'", self.html)
+        self.assertIn("THREE DISTINCT ENERGY MARKERS", self.html)
+        self.assertIn("NO BIT→JOULE", self.html)
+        self.assertIn("EARTH_EAR", self.html)
+        self.assertNotIn("digital_domain", self.html)
 
     def test_generated_payload_digest_matches_manifest(self):
         path = os.path.join(HERE, "cockpit_data.js")

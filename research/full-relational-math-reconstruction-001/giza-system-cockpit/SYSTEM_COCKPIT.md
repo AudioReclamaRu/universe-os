@@ -1,8 +1,8 @@
 # GIZA PRIME × UNIVERSE OS — Integrated System Cockpit
 
-**Implemented scope:** Issue #7 Stage A (architecture & contracts) + Stage G (visual cockpit shell core).
-**Status:** framework. 0 verified sources, 0 real geodetic objects, 0 live integrations.
-**Not implemented:** geodetic renderer/sheets, real source ingestion, ASTRAEA/Planetary Ear/MEGABRAIN adapters, release automation.
+**Implemented scope:** Issue #7 Stage A (architecture & contracts) + Stage G (visual cockpit shell core), plus the bidirectional cross-domain validation contract and the three-pyramid / three-world logical bridge.
+**Status:** framework. 0 verified sources, 0 real geodetic objects, 0 live integrations, 0 promotable hypotheses.
+**Not implemented:** geodetic renderer/sheets, real source ingestion, ASTRAEA/Planetary Ear/MEGABRAIN adapters, release automation, any validated physical bridge.
 
 ## Why a local web shell
 
@@ -21,8 +21,10 @@ Issue #7 §6 allows PySide6 or a local Python web UI. A dependency-free static s
 | `system_contract.json` | versioned `SystemEvent` (15 fields), 12 event types, 11 evidence statuses, 3 unit classes, 10 separation rules |
 | `project_registry.json` | 7 system nodes, 5 business sectors, adapter statuses, vector 42 specification, physical/informational channel split |
 | `cockpit_engine.py` | validators, domain guards, deterministic manifest, offline JS payload writer |
-| `test_cockpit_engine.py` | 38 controls (contracts, guards, manifest, static UI shell) |
-| `index.html` | interactive 9-view cockpit with free mouse rotate / pan / zoom and per-block detail drawers |
+| `cross_domain.py` | bidirectional GIZA ⇄ ASTRAEA hypothesis gate, three pyramids, three-world logical bridge |
+| `test_cockpit_engine.py` | 41 controls (contracts, guards, manifest, static UI shell) |
+| `test_cross_domain.py` | 35 controls (candidate/pair gates, three-world bridge, integration) |
+| `index.html` | interactive 10-view cockpit with free mouse rotate / pan / zoom and per-block detail drawers |
 | `cockpit_data.js` | generated manifest (do not edit by hand; regenerate with `python cockpit_engine.py`-equivalent call) |
 | `SYSTEM_COCKPIT.md` | this document |
 
@@ -42,25 +44,42 @@ evidence statuses and permissions may never be merged. Guards reject:
 - unknown uncertainty encoded as zero;
 - an integration claimed where the registry says `not_implemented`, `unavailable` or `conceptual`.
 
-## Nine views
+## Ten views
 
 1. **SPATIAL** — 3D wireframe stage, free rotation (LMB), pan (Shift/RMB), wheel zoom, clickable objects. Default shows a clearly watermarked synthetic fixture; real objects = 0.
 2. **SYSTEM ARCHITECTURE** — the seven nodes in 3D with directed declared contracts (dashed, not live data links), status-coloured.
 3. **RELATION GRAPH** — typed relations separated by class and epistemic status; established = 0.
 4. **TIME / SYNC** — alignment protocol from §14.6; no fabricated series.
-5. **EVIDENCE / PROVENANCE** — source → ingest → transform → model → view → claim chain; all unresolved.
-6. **INTENT / VECTOR 42** — conceptual gauge with explicit prohibition of physical units.
-7. **OPERATIONS** — MEGABRAIN health/gates board, all coordination adapters `not_implemented`.
-8. **BUSINESS SECTORS** — five separate informational sectors, no merged feed.
-9. **VERSION COMPARE** — software iteration timeline with compare line; explicitly no geodetic diff because there is no verified atlas version.
+5. **CROSS-DOMAIN MODELS** — three pyramids (ASTRAEA sensor ⇄ COMPARATOR ⇄ NATURAL PHYSICS), MEGABRAIN orchestration bar, three distinct energy markers (BITCOIN / UNIVERSE / EARTH EAR), and the honest `0 promotable` state.
+6. **EVIDENCE / PROVENANCE** — source → ingest → transform → model → view → claim chain; all unresolved.
+7. **INTENT / VECTOR 42** — conceptual gauge with explicit prohibition of physical units.
+8. **OPERATIONS** — MEGABRAIN health/gates board, all coordination adapters `not_implemented`.
+9. **BUSINESS SECTORS** — five separate informational sectors, no merged feed.
+10. **VERSION COMPARE** — software iteration timeline with compare line; explicitly no geodetic diff because there is no verified atlas version.
 
 Every rail block and every object opens a detail drawer. `SYNTH DEMO` can be disabled to see the honest empty state.
+
+## Three pyramids, three worlds, one logical bridge
+
+- **Pyramids:** `ASTRAEA` = sensor of its own environment (paper mode, historical data); `COMPARATOR` = the mathematical model / hypothesis generator; `NATURAL_PHYSICS` = Giza and the aggregate model of the already operating Universe.
+- **Orchestration:** `MEGABRAIN` coordinates all processes but owns no scientific claim, no autonomous goal change and no approval authority — goals, policies and gates stay human-owned.
+- **Worlds:** `BITCOIN` (digital, informational marker), `UNIVERSE` (analog, physical marker) and `EARTH_EAR` / Ухо Планеты (informational marker). Each is a **separate energy marker**; none is reduced to another.
+- **Bridge operations:** ratio evaluation, cross-world comparison, consistency check, rank order, phase lag, structural match — over declared **dimensionless ratios** only.
+- **Hard guards:** no physical energy transfer, no bit→joule conversion, no unit equivalence, no live feed, no auto trade, no causality from resemblance, negative/inconclusive results stay valid evidence.
+
+## Bidirectional promotion rule
+
+A positive hypothesis in one domain is not a result. It must be independently checked in the other domain before it can be promoted:
+
+`GIZA → ASTRAEA → GIZA` and `ASTRAEA → GIZA → ASTRAEA`.
+
+`validate_pair()` promotes only when **both** directions ran, all 11 stages passed, holdout and multiple-testing checks are confirmed, both claims are `candidate`, uncertainty is explicit, and the Giza side rests on verified data. A negative result is valid evidence; a synthetic fixture is never promotable. Currently `promotable_candidates = 0` because there are 0 verified sources and no ASTRAEA adapter.
 
 ## Verification
 
 ```
 $env:OPENBLAS_NUM_THREADS='1'
-python -m unittest discover -q -p "test_*.py"     # 38 tests, OK
+python -m unittest discover -q -p "test_*.py"     # 76 tests, OK (41 cockpit + 35 cross-domain)
 node --check <extracted inline script>             # syntax check, exit 0
 ```
 
