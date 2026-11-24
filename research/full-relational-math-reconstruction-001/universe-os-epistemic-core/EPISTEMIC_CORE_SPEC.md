@@ -67,13 +67,26 @@ Natural boundary (confirmed physical/material transition) and analytical boundar
 | PR-08 | Trace Survival | Formation/preservation/detection/selection stages recorded; no-trace ≠ no-phenomenon | negative + positive |
 | PR-09 | Classification Is a Claim | Classification change references a claim revision; physical entity_id unchanged | negative + positive |
 | PR-10 | Ontology Evolution | Seven typed concept relations; reality_changed declared; no silent Entity mutation | recorder guard |
-| PR-11 | Paraconsistent Isolation | Conflict propagation stays within disputed claims; no explosion event | negative + positive |
+| PR-11 | Paraconsistent Isolation | Registered isolation events and propagation stay within disputed claims; direct contract violations and explicit explosion events are rejected | negative + positive (contract only) |
 | PR-12 | Bitemporal Honesty | valid_time and transaction_time both present and declared distinct | negative + positive |
 | PR-13 | Computational Reproducibility | code/env/deps/checksums/params/algorithm/solver/convergence/discretisation/outputs/replayable + distinction | recorder guard |
 | PR-14 | Future Research Option Value | Option loss recorded structurally (lost methods, irreversibility, damage, limits), never one number | recorder guard |
 | PR-15 | Ontology Insufficient | Declared reason, raw data preserved, no forced classification, extension not self-accepted | negative + positive |
 
-`core.check_principles(graph)` returns all 15 results; `core.assert_principles(graph, require_evaluated=True)` refuses to accept vacuous green results as completion. Every result reports `evidentiary_status: "not_evaluable"`.
+`core.check_principles(graph)` returns all 15 results; `core.assert_principles(graph, require_evaluated=True)` refuses to accept unexercised/vacuous results as completion. Every result reports `evidentiary_status: "not_evaluable"`.
+
+### PR-11 enforcement boundary — contract is implemented; inference engine is not
+
+The machine-readable `principles_manifest()` explicitly reports `inference_engine_status = "not_implemented"` and lists the paraconsistent inference engine under `not_implemented`.
+
+The current PR-11 validator checks the **registered isolation contract**:
+- the event-contract registry validates `inference_isolation` records, including records inserted directly through the graph API;
+- propagation outside the conflict's declared disputed-claim set is rejected;
+- explicit conflict-explosion events are rejected.
+
+This does **not** implement or verify the semantics of a paraconsistent inference engine. There is currently no inference engine whose derivation behavior can be tested. Therefore a passing PR-11 check establishes only that the registered contract and event records satisfy the declared structural constraints; it does not establish semantic non-explosion, proof-theoretic soundness or complete paraconsistent reasoning.
+
+Future engine acceptance must test, at minimum: a consistent control case; a contradiction confined to a declared scope; proof that the contradiction does not entail arbitrary unrelated propositions; direct and transitive derivations; isolation of independent branches; and replayable derivation traces tied to a versioned rule set. Until that work exists, the status must remain `not_implemented`.
 
 ### Vocabulary details
 
@@ -164,7 +177,7 @@ This is a methodological obligation, not a claim of achieved all-knowingness.
 
 ```powershell
 $env:OPENBLAS_NUM_THREADS='1'
-python -m unittest discover -v -p "test_*.py"     # 86 tests, OK
+python -m unittest discover -v -p "test_*.py"     # 88 tests, OK
 python -c "import epistemic_core as ec; ec.write_epistemic_manifest('epistemic_manifest.json')"
 git diff --exit-code -- epistemic_manifest.json
 ```
