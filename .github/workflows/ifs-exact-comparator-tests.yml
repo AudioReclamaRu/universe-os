@@ -29,6 +29,7 @@ on:
       - "research/full-relational-math-reconstruction-001/giza-prime-multiscale/**"
       - "research/full-relational-math-reconstruction-001/giza-prime-inventory/**"
       - "research/full-relational-math-reconstruction-001/giza-system-cockpit/**"
+      - "research/full-relational-math-reconstruction-001/universe-os-epistemic-core/**"
       - "research/full-relational-math-reconstruction-001/README.md"
       - ".github/workflows/ifs-exact-comparator-tests.yml"
 
@@ -109,3 +110,25 @@ jobs:
         run: |
           python -c "import cockpit_engine as ce; ce.write_cockpit_data('cockpit_data.js')"
           git diff --exit-code -- cockpit_data.js
+
+  epistemic-core-tests:
+    name: UNIVERSE OS epistemic core tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run epistemic core acceptance and invariant tests
+        working-directory: research/full-relational-math-reconstruction-001/universe-os-epistemic-core
+        run: python -m unittest discover -v -p "test_*.py"
+
+      - name: Verify generated epistemic manifest is current
+        working-directory: research/full-relational-math-reconstruction-001/universe-os-epistemic-core
+        run: |
+          python -c "import epistemic_core as ec; ec.write_epistemic_manifest('epistemic_manifest.json')"
+          git diff --exit-code -- epistemic_manifest.json
