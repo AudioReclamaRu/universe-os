@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>GIZA PRIME // RELATION-FIRST ATLAS // SCHEMATIC</title>
+<title>GIZA PRIME // DUAL ATLAS // RELATION + SPATIAL</title>
 <!--
   Preferred design source: ASTRAEA-WARP v6.0 CLEAN/index.html (ASTREYA-HRONOS).
   Reused: palette, Martian Mono / Unbounded typography, numbered panels,
@@ -101,19 +101,71 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:0 1
   background:var(--panel);border-top:1px solid var(--border);font-size:10px;
   letter-spacing:2px;color:var(--amber-d);}
 .ft em{font-style:normal;color:var(--amber);}
+
+/* DUAL-ATLAS LAYER TABS */
+.layer-tabs{display:flex;gap:1px;flex:0 0 auto;padding:0;}
+.ltab{font-family:var(--head);font-size:10px;font-weight:900;letter-spacing:2px;
+  padding:11px 16px;color:var(--amber-d);cursor:pointer;user-select:none;
+  border-right:1px solid var(--border);background:var(--panel);}
+.ltab.active{color:var(--amber2);background:rgba(245,166,35,.06);
+  box-shadow:inset 0 -2px 0 var(--amber2);}
+.ltab:hover{color:var(--amber);}
+.layer-view{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;overflow:hidden;}
+.layer-view.hidden{display:none;}
+
+/* SPATIAL 3D SKELETON VIEW */
+.spatial-grid{display:grid;grid-template-columns:270px 1fr 320px;gap:1px;
+  background:var(--border);flex:1 1 auto;min-height:0;overflow:hidden;}
+.sp-col{display:flex;flex-direction:column;gap:1px;background:var(--border);
+  overflow-y:auto;min-height:0;}
+#sp-center{overflow:hidden;}
+.sp-canvas-panel{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;overflow:hidden;}
+#spatial-canvas{display:block;width:100%;flex:1 1 auto;min-height:0;height:100%;cursor:grab;}
+#spatial-canvas.dragging{cursor:grabbing;}
+.sp-cap{font-size:10px;letter-spacing:1px;color:var(--amber-d);text-align:center;
+  margin-top:6px;line-height:1.5;}
+.sp-controls{flex:0 0 auto;}
+.sp-control{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+.sp-btn{font-size:10px;letter-spacing:1px;padding:6px 9px;border:1px solid var(--border);
+  color:var(--amber-d);cursor:pointer;user-select:none;background:rgba(245,166,35,.02);}
+.sp-btn:hover{color:var(--amber);border-color:var(--amber-d);}
+.sp-btn.on{color:var(--green);border-color:rgba(57,255,122,.45);}
+.sp-search{width:100%;min-height:30px;border:1px solid var(--border);padding:7px 8px;
+  font-family:var(--mono);font-size:11px;color:var(--white);background:rgba(5,5,15,.6);
+  outline:none;user-select:text;cursor:text;}
+.sp-search:focus{border-color:var(--amber-d);}
+.sp-list{flex:1;overflow-y:auto;margin-top:8px;}
+.sp-list::-webkit-scrollbar{width:3px;}
+.sp-list::-webkit-scrollbar-thumb{background:var(--dim);}
+.plist-row{display:grid;grid-template-columns:78px 1fr 54px;gap:6px;padding:5px 4px;
+  border-bottom:1px solid rgba(30,30,53,.5);font-size:10px;cursor:pointer;}
+.plist-row:hover{background:rgba(245,166,35,.05);}
+.plist-row.sel{background:rgba(245,166,35,.11);}
+.plist-id{color:var(--white);}.plist-net{color:var(--violet);}
+.plist-z{color:var(--green);text-align:right;}
+.passport{font-size:11px;line-height:1.7;}
+.passport .lbl{display:inline-block;min-width:118px;color:var(--amber-d);}
+.passport .raw{word-break:break-all;font-size:9px;color:var(--amber-d);
+  border:1px solid var(--border);padding:6px;margin-top:6px;line-height:1.5;}
+.legend-row{display:flex;align-items:center;gap:8px;font-size:10px;padding:3px 0;color:var(--amber-d);}
+.legend-mark{width:12px;height:12px;border:1px solid currentColor;flex:0 0 auto;}
+.legend-mark.circle{border-radius:50%;background:var(--amber);color:var(--amber);}
+.legend-mark.diamond{transform:rotate(45deg);border-color:var(--violet);}
+.axis-key{font-size:9px;letter-spacing:1px;color:var(--amber-d);margin-top:6px;}
 </style>
 </head>
 <body>
 
 <header>
   <div>
-    <div class="logo">GIZA<span> PRIME</span><sub>RELATION-FIRST ATLAS</sub></div>
-    <div style="font-size:9px;letter-spacing:2px;color:var(--amber-d);margin-top:3px;">SCHEMATIC / NOT GEODETIC // EVIDENCE-GATED // NO PRESELECTED CORE</div>
+    <div class="logo">GIZA<span> PRIME</span><sub>DUAL ATLAS / RELATION + SPATIAL</sub></div>
+    <div style="font-size:9px;letter-spacing:2px;color:var(--amber-d);margin-top:3px;">SCHEMATIC / NOT GEODETIC // EVIDENCE-GATED // GPMP SOURCE POINTS ONLY</div>
   </div>
   <div class="hdr-kpis">
     <div class="kpi"><div class="kpi-v">0</div><div class="kpi-l">SRC VERIFIED</div></div>
     <div class="kpi"><div class="kpi-v">0</div><div class="kpi-l">REAL OBJECTS</div></div>
     <div class="kpi"><div class="kpi-v">0</div><div class="kpi-l">RELATIONS</div></div>
+    <div class="kpi"><div class="kpi-v" style="color:var(--cyan)">41</div><div class="kpi-l">GPMP PTS</div></div>
     <div class="kpi"><div class="kpi-v">14</div><div class="kpi-l">SLOTS</div></div>
     <div class="kpi"><div class="kpi-v" style="color:var(--violet)">SYMBOLIC</div><div class="kpi-l">TIER</div></div>
     <div class="kpi"><div class="kpi-v" style="font-size:12px;color:var(--red)">NOT_EVALUABLE</div><div class="kpi-l">CROSS CASES</div></div>
@@ -165,10 +217,66 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:0 1
 </div>
 
 <div class="col" id="center-col">
-  <div class="pnl map-panel">
-    <div class="pnl-title">[ 05 ] <em>RELATION MAP — SCHEMATIC</em><span id="map-count">0 relations</span></div>
-    <canvas id="map"></canvas>
-    <div class="map-cap">РАСПОЛОЖЕНИЕ УЗЛОВ НА ЭКРАНЕ НЕ ЯВЛЯЕТСЯ ГЕОГРАФИЧЕСКИМ. СВЯЗЕЙ НЕТ — ИСТОЧНИКИ НЕ ПРИСОЕДИНЕНЫ.</div>
+  <div class="layer-tabs">
+    <div class="ltab active" data-layer="relation">01 RELATION SKELETON</div>
+    <div class="ltab" data-layer="spatial">02 SPATIAL 3D SKELETON</div>
+  </div>
+  <div class="layer-view" id="view-relation">
+    <div class="pnl map-panel">
+      <div class="pnl-title">[ 05 ] <em>RELATION MAP — SCHEMATIC</em><span id="map-count">0 relations</span></div>
+      <canvas id="map"></canvas>
+      <div class="map-cap">РАСПОЛОЖЕНИЕ УЗЛОВ НА ЭКРАНЕ НЕ ЯВЛЯЕТСЯ ГЕОГРАФИЧЕСКИМ. СВЯЗЕЙ НЕТ — ИСТОЧНИКИ НЕ ПРИСОЕДИНЕНЫ.</div>
+    </div>
+  </div>
+  <div class="layer-view hidden" id="view-spatial">
+    <div class="spatial-grid">
+      <div class="sp-col">
+        <div class="pnl">
+          <div class="pnl-title">[ S1 ] <em>POINT INDEX</em><span>41 / 11 + 30</span></div>
+          <div class="sp-search" id="sp-search" contenteditable="true">SEARCH ID / NAME</div>
+          <div class="mono-line" style="margin-top:6px">CONTROL STATIONS — NOT ARCHAEOLOGICAL OBJECTS</div>
+        </div>
+        <div class="pnl grow"><div class="sp-list" id="sp-list"></div></div>
+      </div>
+      <div class="sp-col" id="sp-center">
+        <div class="pnl sp-canvas-panel">
+          <div class="pnl-title">[ S2 ] <em>GPMP CONTROL NETWORK — 3D PROJECTION</em><span id="sp-count">41 POINTS</span></div>
+          <canvas id="spatial-canvas"></canvas>
+          <div class="sp-cap">SOURCE POINTS / NOT A TERRAIN MODEL. GRID = GRAPHIC SUPPORT ONLY.</div>
+        </div>
+        <div class="pnl sp-controls">
+          <div class="pnl-title">[ S3 ] <em>VIEW CONTROL</em></div>
+          <div class="sp-control">
+            <div class="sp-btn on" data-toggle="main">MAIN 11</div>
+            <div class="sp-btn on" data-toggle="secondary">SECONDARY 30</div>
+            <div class="sp-btn on" data-toggle="labels">LABELS</div>
+            <div class="sp-btn on" data-toggle="grid">GRID</div>
+            <div class="sp-btn" data-act="ex-down">EX DOWN</div>
+            <div class="sp-btn" id="ex-value">EX 1.0</div>
+            <div class="sp-btn" data-act="ex-up">EX UP</div>
+            <div class="sp-btn" data-act="reset">RESET VIEW</div>
+          </div>
+          <div class="axis-key">VERTICAL EXAGGERATION DEFAULT = 1.0 · SOURCE VALUES UNCHANGED</div>
+          <div class="legend-row"><span class="legend-mark circle"></span>MAIN TRAVERSE — CIRCLE</div>
+          <div class="legend-row"><span class="legend-mark diamond"></span>SECONDARY NETWORK — DIAMOND</div>
+          <div class="legend-row">X EASTING / Y NORTHING / Z ELEVATION</div>
+        </div>
+      </div>
+      <div class="sp-col">
+        <div class="pnl">
+          <div class="pnl-title">[ S4 ] <em>SELECTED POINT PASSPORT</em></div>
+          <div class="passport" id="sp-passport">SELECT A CONTROL POINT.</div>
+        </div>
+        <div class="pnl">
+          <div class="pnl-title">[ S5 ] <em>SOURCE PROVENANCE</em></div>
+          <div class="passport" id="sp-provenance"></div>
+        </div>
+        <div class="pnl grow">
+          <div class="pnl-title">[ S6 ] <em>IDEALIZATION STATUS</em></div>
+          <div class="passport" id="sp-models"></div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -211,9 +319,1583 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:0 1
   <div class="ft">VERIFIED <em>0</em></div>
   <div class="ft">GEODETIC <em>NO</em></div>
   <div class="ft">MODE <em>NOT_EVALUABLE</em></div>
-  <div style="margin-left:auto;color:var(--border);letter-spacing:2px;">GIZA PRIME // RELATION-FIRST // SCHEMATIC / NOT GEODETIC // STATIC</div>
+  <div style="margin-left:auto;color:var(--border);letter-spacing:2px;">GIZA PRIME // DUAL ATLAS // RELATION + SPATIAL // OFFLINE</div>
 </footer>
 
+<script id="spatial-snapshot" type="application/json">
+{
+  "control_ranges": {
+    "easting": {
+      "max": 500634.775,
+      "min": 498718.109
+    },
+    "elevation": {
+      "max": 197.555,
+      "min": 19.57
+    },
+    "latitude": {
+      "max": 29.98056996,
+      "min": 29.96474083
+    },
+    "longitude": {
+      "max": 31.14077838,
+      "min": 31.1209192
+    },
+    "northing": {
+      "max": 100154.421,
+      "min": 98399.708
+    }
+  },
+  "control_values_for_this_file": {
+    "networks": {
+      "main_traverse": 11,
+      "secondary_network": 30
+    },
+    "total": 41
+  },
+  "coordinate_system": {
+    "conversion_to_epsg_wgs84": "not_performed",
+    "datum_status": "unverified",
+    "helmert_spheroid_of_reference_transform": "not_performed",
+    "kml_z_is_elevation": false,
+    "name": "GPMP local Northing/Easting + Elevation",
+    "units": "source units (metres claimed by publication; unverified here)"
+  },
+  "counts": {
+    "main_traverse": 11,
+    "real_objects": 0,
+    "relations": 0,
+    "secondary_network": 30,
+    "total": 41
+  },
+  "derived_geometry": {
+    "centering_origin": {
+      "easting": 499950.6676097561,
+      "elevation": 64.52653658536586,
+      "northing": 99541.71378048781
+    },
+    "least_squares_plane": {
+      "coefficient_a": -0.03758608307771318,
+      "coefficient_b": 0.008931675603096368,
+      "geometry_status": "DERIVED_GEOMETRY",
+      "intercept_c": -5.58501200640988e-13,
+      "interpretation": "ordinary least-squares plane over control points; NOT terrain",
+      "normal": [
+        0.03758608307771318,
+        -0.008931675603096368,
+        1.0
+      ],
+      "point_count": 41,
+      "residual_summary": {
+        "count": 41,
+        "max_absolute": 130.72403427858308,
+        "mean": 3.1411188013784915e-16,
+        "rms": 24.181766565522103
+      }
+    },
+    "not_terrain": true,
+    "status": "DERIVED_GEOMETRY"
+  },
+  "layer_id": "GIZA_PRIME_SPATIAL_3D_SKELETON",
+  "marking": "SOURCE POINTS / NOT A TERRAIN MODEL",
+  "model_contract": {
+    "instantiated_models_in_this_commit": 0,
+    "reason": "insufficient constraints for a validated idealized surface",
+    "required_model_fields": [
+      "model_id",
+      "model_type",
+      "source_ids",
+      "input_geometry_ids",
+      "method",
+      "parameters",
+      "parameter_units",
+      "assumptions",
+      "fit_residual",
+      "uncertainty",
+      "validity_domain",
+      "model_status",
+      "limitations",
+      "falsification_conditions"
+    ],
+    "statuses": [
+      "MEASURED_GEOMETRY",
+      "DERIVED_GEOMETRY",
+      "IDEALIZED_MODEL",
+      "HYPOTHETICAL_MODEL",
+      "UNKNOWN"
+    ]
+  },
+  "points": [
+    {
+      "datum_status": "unverified",
+      "description": "Point No. GEF1 Description: Secondary Network Northing: 99909.360 Easting: 500365.800 Elevation; 60.000 Longitude: 31.13799137 Latitude: 29.97835958 Sketch: None",
+      "extraction": {
+        "easting": "regex Easting: in description",
+        "elevation": "regex Elevation; in description (KML Z rejected)",
+        "longitude_latitude": "KML coordinates[0][0:2]",
+        "network": "regex Description: in description",
+        "northing": "regex Northing: in description"
+      },
+      "geometry": "Point",
+      "local_coordinates": {
+        "axis_order": "X=Easting, Y=Northing, Z=Elevation",
+        "coordinate_system": "GPMP local Northing/Easting + Elevation",
+        "datum_status": "unverified",
+        "easting": 500365.8,
+        "elevation": 60.0,
+        "northing": 99909.36,
+        "source_field": "description",
+        "units": "source units (metres claimed by publication; unverified here)"
+      },
+      "longitude_latitude": {
+        "datum_status": "unverified",
+        "kml_z": 0.0,
+        "kml_z_is_elevation": false,
+        "latitude": 29.97835958,
+        "longitude": 31.13799137,
+        "relation_to_local_system": "unresolved",
+        "source_field": "KML coordinates[0][:3]"
+      },
+      "name": "GEF1",
+      "network": "secondary_network",
+      "object_link": "UNRESOLVED",
+      "point_id": "GPMP:GEF1"
+    },
+    {
+      "datum_status": "unverified",
+      "description": "Point No. GEF2 Description: Secondary Network Northing: 99781.170 Easting: 500230.180 Elevation; 52.290 Longitude: 31.13658612 Latitude: 29.97720315 Sketch: None",
+      "extraction": {
+        "easting": "regex Easting: in description",
+        "elevation": "regex Elevation; in description (KML Z rejected)",
+        "longitude_latitude": "KML coordinates[0][0:2]",
+        "network": "regex Description: in description",
+        "northing": "regex Northing: in description"
+      },
+      "geometry": "Point",
+      "local_coordinates": {
+        "axis_order": "X=Easting, Y=Northing, Z=Elevation",
+        "coordinate_system": "GPMP local Northing/Easting + Elevation",
+        "datum_status": "unverified",
+        "easting": 500230.18,
+        "elevation": 52.29,
+        "northing": 99781.17,
+        "source_field": "description",
+        "units": "source units (metres claimed by publication; unverified here)"
+      },
+      "longitude_latitude": {
+        "datum_status": "unverified",
+        "kml_z": 0.0,
+        "kml_z_is_elevation": false,
+        "latitude": 29.97720315,
+        "longitude": 31.13658612,
+        "relation_to_local_system": "unresolved",
+        "source_field": "KML coordinates[0][:3]"
+      },
+      "name": "GEF2",
+      "network": "secondary_network",
+      "object_link": "UNRESOLVED",
+      "point_id": "GPMP:GEF2"
+    },
+    {
+      "datum_status": "unverified",
+      "description": "Point No. GEF3 Description: Secondary Network Northing: 99648.340 Easting: 500421.540 Elevation; 33.170 Longitude: 31.13856896 Latitude: 29.97600491 Sketch: None",
+      "extraction": {
+        "easting": "regex Easting: in description",
+        "elevation": "regex Elevation; in description (KML Z rejected)",
+        "longitude_latitude": "KML coordinates[0][0:2]",
+        "network": "regex Description: in description",
+        "northing": "regex Northing: in description"
+      },
+      "geometry": "Point",
+      "local_coordinates": {
+        "axis_order": "X=Easting, Y=Northing, Z=Elevation",
+        "coordinate_system": "GPMP local Northing/Easting + Elevation",
+        "datum_status": "unverified",
+        "easting": 500421.54,
+        "elevation": 33.17,
+        "northing": 99648.34,
+        "source_field": "description",
+        "units": "source units (metres claimed by publication; unverified here)"
+      },
+      "longitude_latitude": {
+        "datum_status": "unverified",
+        "kml_z": 0.0,
+        "kml_z_is_elevation": false,
+        "latitude": 29.97600491,
+        "longitude": 31.13856896,
+        "relation_to_local_system": "unresolved",
+        "source_field": "KML coordinates[0][:3]"
+      },
+      "name": "GEF3",
+      "network": "secondary_network",
+      "object_link": "UNRESOLVED",
+      "point_id": "GPMP:GEF3"
+    },
+    {
+      "datum_status": "unverified",
+      "description": "Point No. GEF4 Description: Secondary Network Northing: 100062.790 Easting: 500280.260 Elevation; 55.430 Longitude: 31.13710498 Latitude: 29.97974366 Sketch: None",
+      "extraction": {
+        "easting": "regex Easting: in description",
+        "elevation": "regex Elevation; in description (KML Z rejected)",
+        "longitude_latitude": "KML coordinates[0][0:2]",
+        "network": "regex Description: in description",
+        "northing": "regex Northing: in description"
+      },
+      "geometry": "Point",
+      "local_coordinates": {
+        "axis_order": "X=Easting, Y=Northing, Z=Elevation",
+        "coordinate_system": "GPMP local Northing/Easting + Elevation",
+        "datum_status": "unverified",
+        "easting": 500280.26,
+        "elevation": 55.43,
+        "northing": 100062.79,
+        "source_field": "description",
+        "units": "source units (metres claimed by publication; unverified here)"
+      },
+      "longitude_latitude": {
+        "datum_status": "unverified",
+        "kml_z": 0.0,
+        "kml_z_is_elevation": false,
+        "latitude": 29.97974366,
+        "longitude": 31.13710498,
+        "relation_to_local_system": "unresolved",
+        "source_field": "KML coordinates[0][:3]"
+      },
+      "name": "GEF4",
+      "network": "secondary_network",
+      "object_link": "UNRESOLVED",
+      "point_id": "GPMP:GEF4"
+    },
+    {
+      "datum_status": "unverified",
+      "description": "Point No. GEF5 Description: Secondary Network Northing: 100062.230 Easting: 500418.220 Elevation; 45.220 Longitude: 31.13853453 Latitude: 29.97973863 Sketch: None",
+      "extraction": {
+        "easting": "regex Easting: in description",
+        "elevation": "regex Elevation; in description (KML Z rejected)",
+        "longitude_latitude": "KML coordinates[0][0:2]",
+        "network": "regex Description: in description",
+        "northing": "regex Northing: in description"
+      },
+      "geometry": "Point",
+      "local_coordinates": {
+        "axis_order": "X=Easting, Y=Northing, Z=Elevation",
+        "coordinate_system": "GPMP local Northing/Easting + Elevation",
+        "datum_status": "unverified",
+        "easting": 500418.22,
+        "elevation": 45.22,
+        "northing": 100062.23,
+        "source_field": "description",
+        "units": "source units (metres claimed by publication; unverified here)"
+      },
+      "longitude_latitude": {
+        "datum_status": "unverified",
+        "kml_z": 0.0,
+        "kml_z_is_elevation": false,
+        "latitude": 29.97973863,
+        "longitude": 31.13853453,
+        "relation_to_local_system": "unresolved",
+        "source_field": "KML coordinates[0][:3]"
+      },
+      "name": "GEF5",
+      "network": "secondary_network",
+      "object_link": "UNRESOLVED",
+      "point_id": "GPMP:GEF5"
+    },
+    {
+      "datum_status": "unverified",
+      "description": "Point No. GEF6 Description: Secondary Network Northing: 100022.310 Easting: 500471.240 Elevation; 40.310 Longitude: 31.13908393 Latitude: 29.97937851 Sketch: None",
+      "extraction": {
+        "easting": "regex Easting: in description",
+        "elevation": "regex Elevation; in description (KML Z rejected)",
+        "longitude_latitude": "KML coordinates[0][0:2]",
+        "network": "regex Description: in description",
+        "northing": "regex Northing: in description"
+      },
+      "geometry": "Point",
+      "local_coordinates": {
+        "axis_order": "X=Easting, Y=Northing, Z=Elevation",
+        "coordinate_system": "GPMP local Northing/Easting + Elevation",
+        "datum_status": "unverified",
+        "easting": 500471.24,
+        "elevation": 40.31,
+        "northing": 100022.31,
+        "source_field": "description",
+        "units": "source units (metres claimed by publication; unverified here)"
+      },
+      "longitude_latitude": {
+        "datum_status": "unverified",
+        "kml_z": 0.0,
+        "kml_z_is_elevation": false,
+        "latitude": 29.97937851,
+        "longitude": 31.13908393,
+        "relation_to_local_system": "unresolved",
+        "source_field": "KML coordinates[0][:3]"
+      },
+      "name": "GEF6",
+      "network": "secondary_network",
+      "object_link": "UNRESOLVED",
+      "point_id": "GPMP:GEF6"
+    },
+    {
+      "datum_status": "unverified",
+      "description": "Point No. GEF7 Description: Secondary Network Northing: 99748.990 Easting: 500435.980 Elevation; 59.700 Longitude: 31.13871858 Latitude: 29.97691288 Sketch: None",
+      "extraction": {
+        "easting": "regex Easting: in description",
+        "elevation": "regex Elevation; in description (KML Z rejected)",
+        "longitude_latitude": "KML coordinates[0][0:2]",
+        "network": "regex Description: in description",
+        "northing": "regex Northing: in description"
+      },
+      "geometry": "Point",
+      "local_coordinates": {
+        "axis_order": "X=Easting, Y=Northing, Z=Elevation",
+        "coordinate_system": "GPMP local Northing/Easting + Elevation",
+        "datum_status": "unverified",
+        "easting": 500435.98,
+        "elevation": 59.7,
+        "northing": 99748.99,
+        "source_field": "description",
+        "units": "source units (metres claimed by publication; unverified here)"
+      },
+      "longitude_latitude": {
+        "datum_status": "unverified",
+        "kml_z": 0.0,
+        "kml_z_is_elevation": false,
+        "latitude": 29.97691288,
+        "longitude": 31.13871858,
+        "relation_to_local_system": "unresolved",
+        "source_field": "KML coordinates[0][:3]"
+      },
+      "name": "GEF7",
+      "network": "secondary_network",
+      "object_link": "UNRESOLVED",
+      "point_id": "GPMP:GEF7"
+    },
+    {
+      "datum_status": "unverified",
+      "description": "Point No. GS1 Description: Secondary Network Northing: 99537.480 Easting: 500413.560 Elevation; 23.170 Longitude: 31.13848628 Latitude: 29.97500484 Sketch: None",
+      "extraction": {
+        "easting": "regex Easting: in description",
+        "elevation": "regex Elevation; in description (KML Z rejected)",
+        "longitude_latitude": "KML coordinates[0][0:2]",
+        "network": "regex Description: in description",
+        "northing": "regex Northing: in description"
+      },
+      "geometry": "Point",
+      "local_coordinates": {
+        "axis_order": "X=Easting, Y=Northing, Z=Elevation",
+        "coordinate_system": "GPMP local Northing/Easting + Elevation",
+        "datum_status": "unverified",
+        "easting": 500413.56,
+        "elevation": 23.17,
+        "northing": 99537.48,
+        "source_field": "description",
+        "units": "source units (metres claimed by publication; unverified here)"
+      },
+      "longitude_latitude": {
+        "datum_status": "unverified",
+        "kml_z": 0.0,
+        "kml_z_is_elevation": false,
+        "latitude": 29.97500484,
+        "longitude": 31.13848628,
+        "relation_to_local_system": "unresolved",
+        "source_field": "KML coordinates[0][:3]"
+      },
+      "name": "GS1",
+      "network": "secondary_network",
+      "object_link": "UNRESOLVED",
+      "point_id": "GPMP:GS1"
+    },
+    {
+      "datum_status": "unverified",
+      "description": "Point No. GS2 Description: Secondary Network Northing: 99486.740 Easting: 500375.970 Elevation; 28.260 Longitude: 31.13809680 Latitude: 29.97454711 Sketch: None",
+      "extraction": {
+        "easting": "regex Easting: in description",
+        "elevation": "regex Elevation; in description (KML Z rejected)",
+        "longitude_latitude": "KML coordinates[0][0:2]",
+        "network": "regex Description: in description",
+        "northing": "regex Northing: in description"
+      },
+      "geometry": "Point",
+      "local_coordinates": {
+        "axis_order": "X=Easting, Y=Northing, Z=Elevation",
+        "coordinate_system": "GPMP local Northing/Easting + Elevation",
+        "datum_status": "unverified",
+        "easting": 500375.97,
+        "elevation": 28.26,
+        "northing": 99486.74,
+        "source_field": "description",
+        "units": "source units (metres claimed by publication; unverified here)"
+      },
+      "longitude_latitude": {
+        "datum_status": "unverified",
+        "kml_z": 0.0,
+        "kml_z_is_elevation": false,
+        "latitude": 29.97454711,
+        "longitude": 31.1380968,
+        "relation_to_local_system": "unresolved",
+        "source_field": "KML coordinates[0][:3]"
+      },
+      "name": "GS2",
+      "network": "secondary_network",
+      "object_link": "UNRESOLVED",
+      "point_id": "GPMP:GS2"
+    },
+    {
+      "datum_status": "unverified",
+      "description": "Point No. GE1 Description: Secondary Network Northing: 99224.997 Easting: 500634.775 Elevation; 24.190 Longitude: 31.14077838 Latitude: 29.97218591 Sketch: None",
+      "extraction": {
+        "easting": "regex Easting: in description",
+        "elevation": "regex Elevation; in description (KML Z rejected)",
+        "longitude_latitude": "KML coordinates[0][0:2]",
+        "network": "regex Description: in description",
+        "northing": "regex Northing: in description"
+      },
+      "geometry": "Point",
+      "local_coordinates": {
+        "axis_order": "X=Easting, Y=Northing, Z=Elevation",
+        "coordinate_system": "GPMP local Northing/Easting + Elevation",
+        "datum_status": "unverified",
+        "easting": 500634.775,
+        "elevation": 24.19,
+        "northing": 99224.997,
+        "source_field": "description",
+        "units": "source units (metres claimed by publication; unverified here)"
+      },
+      "longitude_latitude": {
+        "datum_status": "unverified",
+        "kml_z": 0.0,
+        "kml_z_is_elevation": false,
+        "latitude": 29.97218591,
+        "longitude": 31.14077838,
+        "relation_to_local_system": "unresolved",
+        "source_field": "KML coordinates[0][:3]"
+      },
+      "name": "GE1",
+      "network": "secondary_network",
+      "object_link": "UNRESOLVED",
+      "point_id": "GPMP:GE1"
+    },
+    {
+      "datum_status": "unverified",
+      "description": "Point No. GIII1 Description: Secondary Network-Z fixed Northing: 99281.871 Easting: 500234.612 Elevation; 19.570 Longitude: 31.13663216 Latitude: 29.97269896 Sketch: None",
+      "extraction": {
+        "easting": "regex Easting: in description",
+        "elevation": "regex Elevation; in description (KML Z rejected)",
+        "longitude_latitude": "KML coordinates[0][0:2]",
+        "network": "regex Description: in description",
+        "northing": "regex Northing: in description"
+      },
+      "geometry": "Point",
+      "local_coordinates": {
+        "axis_order": "X=Easting, Y=Northing, Z=Elevation",
+        "coordinate_system": "GPMP local Northing/Easting + Elevation",
+        "datum_status": "unverified",
+        "easting": 500234.612,
+        "elevation": 19.57,
+        "northing": 99281.871,
+        "source_field": "description",
+        "units": "source units (metres claimed by publication; unverified here)"
+      },
+      "longitude_latitude": {
+        "datum_status": "unverified",
+        "kml_z": 0.0,
+        "kml_z_is_elevation": false,
+        "latitude": 29.97269896,
+        "longitude": 31.13663216000001,
+        "relation_to_local_system": "unresolved",
+        "source_field": "KML coordinates[0][:3]"
+      },
+      "name": "GIII1",
+      "network": "secondary_network",
+      "object_link": "UNRESOLVED",
+      "point_id": "GPMP:GIII1"
+    },
+    {
+      "datum_status": "unverified",
+      "description": "Point No. GCF1 Description: Secondary Network Northing: 99388.414 Easting: 500120.037 Elevation; 43.020 Longitude: 31.13544497 Latitude: 29.97366006 Sketch: None",
+      "extraction": {
+        "easting": "regex Easting: in description",
+        "elevation": "regex Elevation; in description (KML Z rejected)",
+        "longitude_latitude": "KML coordinates[0][0:2]",
+        "network": "regex Description: in description",
+        "northing": "regex Northing: in description"
+      },
+      "geometry": "Point",
+      "local_coordinates": {
+        "axis_order": "X=Easting, Y=Northing, Z=Elevation",
+        "coordinate_system": "GPMP local Northing/Easting + Elevation",
+        "datum_status": "unverified",
+        "easting": 500120.037,
+        "elevation": 43.02,
+        "northing": 99388.414,
+        "source_field": "description",
+        "units": "source units (metres claimed by publication; unverified here)"
+      },
+      "longitude_latitude": {
+        "datum_status": "unverified",
+        "kml_z": 0.0,
+        "kml_z_is_elevation": false,
+        "latitude": 29.97366006,
+        "longitude": 31.13544497,
+        "relation_to_local_system": "unresolved",
+        "source_field": "KML coordinates[0][:3]"
+      },
+      "name": "GCF1",
+      "network": "secondary_network",
+      "object_link": "UNRESOLVED",
+      "point_id": "GPMP:GCF1"
+    },
+    {
+      "datum_status": "unverified",
+      "description": "Point No. GCF2 Description: Secondary Network Northing: 99539.320 Easting: 499933.770 Elevation; 60.010 Longitude: 31.13351490 Latitude: 29.97502132 Sketch: None",
+      "extraction": {
+        "easting": "regex Easting: in description",
+        "elevation": "regex Elevation; in description (KML Z rejected)",
+        "longitude_latitude": "KML coordinates[0][0:2]",
+        "network": "regex Description: in description",
+        "northing": "regex Northing: in description"
+      },
+      "geometry": "Point",
+      "local_coordinates": {
+        "axis_order": "X=Easting, Y=Northing, Z=Elevation",
+        "coordinate_system": "GPMP local Northing/Easting + Elevation",
+        "datum_status": "unverified",
+        "easting": 499933.77,
+        "elevation": 60.01,
+        "northing": 99539.32,
+        "source_field": "description",
+        "units": "source units (metres claimed by publication; unverified here)"
+      },
+      "longitude_latitude": {
+        "datum_status": "unverified",
+        "kml_z": 0.0,
+        "kml_z_is_elevation": false,
+        "latitude": 29.97502132,
+        "longitude": 31.13351490000001,
+        "relation_to_local_system": "unresolved",
+        "source_field": "KML coordinates[0][:3]"
+      },
+      "name": "GCF2",
+      "network": "secondary_network",
+      "object_link": "UNRESOLVED",
+      "point_id": "GPMP:GCF2"
+    },
+    {
+      "datum_status": "unverified",
+      "description": "Point No. GCF3 Description: Secondary Network Northing: 99447.090 Easting: 499882.990 Elevation; 57.630 Longitude: 31.13298880 Latitude: 29.97418928 Sketch: None",
+      "extraction": {
+        "easting": "regex Easting: in description",
+        "elevation": "regex Elevation; in description (KML Z rejected)",
+        "longitude_latitude": "KML coordinates[0][0:2]",
+        "network": "regex Description: in description",
+        "northing": "regex Northing: in description"
+      },
+      "geometry": "Point",
+      "local_coordinates": {
+        "axis_order": "X=Easting, Y=Northing, Z=Elevation",
+        "coordinate_system": "GPMP local Northing/Easting + Elevation",
+        "datum_status": "unverified",
+        "easting": 499882.99,
+        "elevation": 57.63,
+        "northing": 99447.09,
+        "source_field": "description",
+        "units": "source units (metres claimed by publication; unverified here)"
+      },
+      "longitude_latitude": {
+        "datum_status": "unverified",
+        "kml_z": 0.0,
+        "kml_z_is_elevation": false,
+        "latitude": 29.97418928,
+        "longitude": 31.1329888,
+        "relation_to_local_system": "unresolved",
+        "source_field": "KML coordinates[0][:3]"
+      },
+      "name": "GCF3",
+      "network": "secondary_network",
+      "object_link": "UNRESOLVED",
+      "point_id": "GPMP:GCF3"
+    },
+    {
+      "datum_status": "unverified",
+      "description": "Point No. GCF4 Description: Secondary Network Northing: 99283.990 Easting: 499928.260 Elevation; 45.680 Longitude: 31.13345795 Latitude: 29.97271797 Sketch: None",
+      "extraction": {
+        "easting": "regex Easting: in description",
+        "elevation": "regex Elevation; in description (KML Z rejected)",
+        "longitude_latitude": "KML coordinates[0][0:2]",
+        "network": "regex Description: in description",
+        "northing": "regex Northing: in description"
+      },
+      "geometry": "Point",
+      "local_coordinates": {
+        "axis_order": "X=Easting, Y=Northing, Z=Elevation",
+        "coordinate_system": "GPMP local Northing/Easting + Elevation",
+        "datum_status": "unverified",
+        "easting": 499928.26,
+        "elevation": 45.68,
+        "northing": 99283.99,
+        "source_field": "description",
+        "units": "source units (metres claimed by publication; unverified here)"
+      },
+      "longitude_latitude": {
+        "datum_status": "unverified",
+        "kml_z": 0.0,
+        "kml_z_is_elevation": false,
+        "latitude": 29.97271797,
+        "longitude": 31.13345795,
+        "relation_to_local_system": "unresolved",
+        "source_field": "KML coordinates[0][:3]"
+      },
+      "name": "GCF4",
+      "network": "secondary_network",
+      "object_link": "UNRESOLVED",
+      "point_id": "GPMP:GCF4"
+    },
+    {
+      "datum_status": "unverified",
+      "description": "Point No. GCF5 Description: Secondary Network Northing: 99635.910 Easting: 499961.360 Elevation; 60.440 Longitude: 31.13380073 Latitude: 29.97589267 Sketch: None",
+      "extraction": {
+        "easting": "regex Easting: in description",
+        "elevation": "regex Elevation; in description (KML Z rejected)",
+        "longitude_latitude": "KML coordinates[0][0:2]",
+        "network": "regex Description: in description",
+        "northing": "regex Northing: in description"
+      },
+      "geometry": "Point",
+      "local_coordinates": {
+        "axis_order": "X=Easting, Y=Northing, Z=Elevation",
+        "coordinate_system": "GPMP local Northing/Easting + Elevation",
+        "datum_status": "unverified",
+        "easting": 499961.36,
+        "elevation": 60.44,
+        "northing": 99635.91,
+        "source_field": "description",
+        "units": "source units (metres claimed by publication; unverified here)"
+      },
+      "longitude_latitude": {
+        "datum_status": "unverified",
+        "kml_z": 0.0,
+        "kml_z_is_elevation": false,
+        "latitude": 29.97589267,
+        "longitude": 31.13380073,
+        "relation_to_local_system": "unresolved",
+        "source_field": "KML coordinates[0][:3]"
+      },
+      "name": "GCF5",
+      "network": "secondary_network",
+      "object_link": "UNRESOLVED",
+      "point_id": "GPMP:GCF5"
+    },
+    {
+      "datum_status": "unverified",
+      "description": "Point No. GCF6 Description: Secondary Network Northing: 99597.120 Easting: 500103.860 Elevation; 46.490 Longitude: 31.13527728 Latitude: 29.97554280 Sketch: None",
+      "extraction": {
+        "easting": "regex Easting: in description",
+        "elevation": "regex Elevation; in description (KML Z rejected)",
+        "longitude_latitude": "KML coordinates[0][0:2]",
+        "network": "regex Description: in description",
+        "northing": "regex Northing: in description"
+      },
+      "geometry": "Point",
+      "local_coordinates": {
+        "axis_order": "X=Easting, Y=Northing, Z=Elevation",
+        "coordinate_system": "GPMP local Northing/Easting + Elevation",
+        "datum_status": "unverified",
+        "easting": 500103.86,
+        "elevation": 46.49,
+        "northing": 99597.12,
+        "source_field": "description",
+        "units": "source units (metres claimed by publication; unverified here)"
+      },
+      "longitude_latitude": {
+        "datum_status": "unverified",
+        "kml_z": 0.0,
+        "kml_z_is_elevation": false,
+        "latitude": 29.9755428,
+        "longitude": 31.13527728,
+        "relation_to_local_system": "unresolved",
+        "source_field": "KML coordinates[0][:3]"
+      },
+      "name": "GCF6",
+      "network": "secondary_network",
+      "object_link": "UNRESOLVED",
+      "point_id": "GPMP:GCF6"
+    },
+    {
+      "datum_status": "unverified",
+      "description": "Point No. GP3B Description: Secondary Network Northing: 98820.044 Easting: 499998.814 Elevation; 75.912 Longitude: 31.13418919 Latitude: 29.96853273 Sketch: None",
+      "extraction": {
+        "easting": "regex Easting: in description",
+        "elevation": "regex Elevation; in description (KML Z rejected)",
+        "longitude_latitude": "KML coordinates[0][0:2]",
+        "network": "regex Description: in description",
+        "northing": "regex Northing: in description"
+      },
+      "geometry": "Point",
+      "local_coordinates": {
+        "axis_order": "X=Easting, Y=Northing, Z=Elevation",
+        "coordinate_system": "GPMP local Northing/Easting + Elevation",
+        "datum_status": "unverified",
+        "easting": 499998.814,
+        "elevation": 75.912,
+        "northing": 98820.044,
+        "source_field": "description",
+        "units": "source units (metres claimed by publication; unverified here)"
+      },
+      "longitude_latitude": {
+        "datum_status": "unverified",
+        "kml_z": 0.0,
+        "kml_z_is_elevation": false,
+        "latitude": 29.96853273,
+        "longitude": 31.13418919,
+        "relation_to_local_system": "unresolved",
+        "source_field": "KML coordinates[0][:3]"
+      },
+      "name": "GP3B",
+      "network": "secondary_network",
+      "object_link": "UNRESOLVED",
+      "point_id": "GPMP:GP3B"
+    },
+    {
+      "datum_status": "unverified",
+      "description": "Point No. GSW1 Description: Secondary Network Northing: 99020.370 Easting: 499649.180 Elevation; 54.730 Longitude: 31.13056651 Latitude: 29.97033969 Sketch: None",
+      "extraction": {
+        "easting": "regex Easting: in description",
+        "elevation": "regex Elevation; in description (KML Z rejected)",
+        "longitude_latitude": "KML coordinates[0][0:2]",
+        "network": "regex Description: in description",
+        "northing": "regex Northing: in description"
+      },
+      "geometry": "Point",
+      "local_coordinates": {
+        "axis_order": "X=Easting, Y=Northing, Z=Elevation",
+        "coordinate_system": "GPMP local Northing/Easting + Elevation",
+        "datum_status": "unverified",
+        "easting": 499649.18,
+        "elevation": 54.73,
+        "northing": 99020.37,
+        "source_field": "description",
+        "units": "source units (metres claimed by publication; unverified here)"
+      },
+      "longitude_latitude": {
+        "datum_status": "unverified",
+        "kml_z": 0.0,
+        "kml_z_is_elevation": false,
+        "latitude": 29.97033969,
+        "longitude": 31.13056651,
+        "relation_to_local_system": "unresolved",
+        "source_field": "KML coordinates[0][:3]"
+      },
+      "name": "GSW1",
+      "network": "secondary_network",
+      "object_link": "UNRESOLVED",
+      "point_id": "GPMP:GSW1"
+    },
+    {
+      "datum_status": "unverified",
+      "description": "Point No. GSW2 Description: Secondary Network Northing: 99147.350 Easting: 499685.540 Elevation; 56.740 Longitude: 31.13094315 Latitude: 29.97148520 Sketch: None",
+      "extraction": {
+        "easting": "regex Easting: in description",
+        "elevation": "regex Elevation; in description (KML Z rejected)",
+        "longitude_latitude": "KML coordinates[0][0:2]",
+        "network": "regex Description: in description",
+        "northing": "regex Northing: in description"
+      },
+      "geometry": "Point",
+      "local_coordinates": {
+        "axis_order": "X=Easting, Y=Northing, Z=Elevation",
+        "coordinate_system": "GPMP local Northing/Easting + Elevation",
+        "datum_status": "unverified",
+        "easting": 499685.54,
+        "elevation": 56.74,
+        "northing": 99147.35,
+        "source_field": "description",
+        "units": "source units (metres claimed by publication; unverified here)"
+      },
+      "longitude_latitude": {
+        "datum_status": "unverified",
+        "kml_z": 0.0,
+        "kml_z_is_elevation": false,
+        "latitude": 29.9714852,
+        "longitude": 31.13094315,
+        "relation_to_local_system": "unresolved",
+        "source_field": "KML coordinates[0][:3]"
+      },
+      "name": "GSW2",
+      "network": "secondary_network",
+      "object_link": "UNRESOLVED",
+      "point_id": "GPMP:GSW2"
+    },
+    {
+      "datum_status": "unverified",
+      "description": "Point No. GSW3 Description: Secondary Network Northing: 99172.790 Easting: 499512.590 Elevation; 67.260 Longitude: 31.12915115 Latitude: 29.97171457 Sketch: None",
+      "extraction": {
+        "easting": "regex Easting: in description",
+        "elevation": "regex Elevation; in description (KML Z rejected)",
+        "longitude_latitude": "KML coordinates[0][0:2]",
+        "network": "regex Description: in description",
+        "northing": "regex Northing: in description"
+      },
+      "geometry": "Point",
+      "local_coordinates": {
+        "axis_order": "X=Easting, Y=Northing, Z=Elevation",
+        "coordinate_system": "GPMP local Northing/Easting + Elevation",
+        "datum_status": "unverified",
+        "easting": 499512.59,
+        "elevation": 67.26,
+        "northing": 99172.79,
+        "source_field": "description",
+        "units": "source units (metres claimed by publication; unverified here)"
+      },
+      "longitude_latitude": {
+        "datum_status": "unverified",
+        "kml_z": 0.0,
+        "kml_z_is_elevation": false,
+        "latitude": 29.97171457,
+        "longitude": 31.12915115,
+        "relation_to_local_system": "unresolved",
+        "source_field": "KML coordinates[0][:3]"
+      },
+      "name": "GSW3",
+      "network": "secondary_network",
+      "object_link": "UNRESOLVED",
+      "point_id": "GPMP:GSW3"
+    },
+    {
+      "datum_status": "unverified",
+      "description": "Point No. GII1 Description: Secondary Network Northing: 99664.270 Easting: 499867.350 Elevation; 75.000 Longitude: 31.13282662 Latitude: 29.97614846 Sketch: None",
+      "extraction": {
+        "easting": "regex Easting: in description",
+        "elevation": "regex Elevation; in description (KML Z rejected)",
+        "longitude_latitude": "KML coordinates[0][0:2]",
+        "network": "regex Description: in description",
+        "northing": "regex Northing: in description"
+      },
+      "geometry": "Point",
+      "local_coordinates": {
+        "axis_order": "X=Easting, Y=Northing, Z=Elevation",
+        "coordinate_system": "GPMP local Northing/Easting + Elevation",
+        "datum_status": "unverified",
+        "easting": 499867.35,
+        "elevation": 75.0,
+        "northing": 99664.27,
+        "source_field": "description",
+        "units": "source units (metres claimed by publication; unverified here)"
+      },
+      "longitude_latitude": {
+        "datum_status": "unverified",
+        "kml_z": 0.0,
+        "kml_z_is_elevation": false,
+        "latitude": 29.97614846,
+        "longitude": 31.13282662,
+        "relation_to_local_system": "unresolved",
+        "source_field": "KML coordinates[0][:3]"
+      },
+      "name": "GII1",
+      "network": "secondary_network",
+      "object_link": "UNRESOLVED",
+      "point_id": "GPMP:GII1"
+    },
+    {
+      "datum_status": "unverified",
+      "description": "Point No. GII2 Description: Secondary Network Northing: 99757.400 Easting: 499527.700 Elevation; 80.880 Longitude: 31.12930718 Latitude: 29.97698837 Sketch: None",
+      "extraction": {
+        "easting": "regex Easting: in description",
+        "elevation": "regex Elevation; in description (KML Z rejected)",
+        "longitude_latitude": "KML coordinates[0][0:2]",
+        "network": "regex Description: in description",
+        "northing": "regex Northing: in description"
+      },
+      "geometry": "Point",
+      "local_coordinates": {
+        "axis_order": "X=Easting, Y=Northing, Z=Elevation",
+        "coordinate_system": "GPMP local Northing/Easting + Elevation",
+        "datum_status": "unverified",
+        "easting": 499527.7,
+        "elevation": 80.88,
+        "northing": 99757.4,
+        "source_field": "description",
+        "units": "source units (metres claimed by publication; unverified here)"
+      },
+      "longitude_latitude": {
+        "datum_status": "unverified",
+        "kml_z": 0.0,
+        "kml_z_is_elevation": false,
+        "latitude": 29.97698837,
+        "longitude": 31.12930718,
+        "relation_to_local_system": "unresolved",
+        "source_field": "KML coordinates[0][:3]"
+      },
+      "name": "GII2",
+      "network": "secondary_network",
+      "object_link": "UNRESOLVED",
+      "point_id": "GPMP:GII2"
+    },
+    {
+      "datum_status": "unverified",
+      "description": "Point No. GII4 Description: Secondary Network Northing: 99524.230 Easting: 499783.460 Elevation; 69.740 Longitude: 31.13195747 Latitude: 29.97488511 Sketch: None",
+      "extraction": {
+        "easting": "regex Easting: in description",
+        "elevation": "regex Elevation; in description (KML Z rejected)",
+        "longitude_latitude": "KML coordinates[0][0:2]",
+        "network": "regex Description: in description",
+        "northing": "regex Northing: in description"
+      },
+      "geometry": "Point",
+      "local_coordinates": {
+        "axis_order": "X=Easting, Y=Northing, Z=Elevation",
+        "coordinate_system": "GPMP local Northing/Easting + Elevation",
+        "datum_status": "unverified",
+        "easting": 499783.46,
+        "elevation": 69.74,
+        "northing": 99524.23,
+        "source_field": "description",
+        "units": "source units (metres claimed by publication; unverified here)"
+      },
+      "longitude_latitude": {
+        "datum_status": "unverified",
+        "kml_z": 0.0,
+        "kml_z_is_elevation": false,
+        "latitude": 29.97488511,
+        "longitude": 31.13195747,
+        "relation_to_local_system": "unresolved",
+        "source_field": "KML coordinates[0][:3]"
+      },
+      "name": "GII4",
+      "network": "secondary_network",
+      "object_link": "UNRESOLVED",
+      "point_id": "GPMP:GII4"
+    },
+    {
+      "datum_status": "unverified",
+      "description": "Point No. GWF1 Description: Secondary Network Northing: 99861.350 Easting: 499791.910 Elevation; 74.420 Longitude: 31.13204480 Latitude: 29.97792629 Sketch: None",
+      "extraction": {
+        "easting": "regex Easting: in description",
+        "elevation": "regex Elevation; in description (KML Z rejected)",
+        "longitude_latitude": "KML coordinates[0][0:2]",
+        "network": "regex Description: in description",
+        "northing": "regex Northing: in description"
+      },
+      "geometry": "Point",
+      "local_coordinates": {
+        "axis_order": "X=Easting, Y=Northing, Z=Elevation",
+        "coordinate_system": "GPMP local Northing/Easting + Elevation",
+        "datum_status": "unverified",
+        "easting": 499791.91,
+        "elevation": 74.42,
+        "northing": 99861.35,
+        "source_field": "description",
+        "units": "source units (metres claimed by publication; unverified here)"
+      },
+      "longitude_latitude": {
+        "datum_status": "unverified",
+        "kml_z": 0.0,
+        "kml_z_is_elevation": false,
+        "latitude": 29.97792629,
+        "longitude": 31.1320448,
+        "relation_to_local_system": "unresolved",
+        "source_field": "KML coordinates[0][:3]"
+      },
+      "name": "GWF1",
+      "network": "secondary_network",
+      "object_link": "UNRESOLVED",
+      "point_id": "GPMP:GWF1"
+    },
+    {
+      "datum_status": "unverified",
+      "description": "Point No. GI1 Description: Secondary Network Northing: 100115.802 Easting: 500115.607 Elevation; 59.696 Longitude: 31.13539882 Latitude: 29.98022185 Sketch: None",
+      "extraction": {
+        "easting": "regex Easting: in description",
+        "elevation": "regex Elevation; in description (KML Z rejected)",
+        "longitude_latitude": "KML coordinates[0][0:2]",
+        "network": "regex Description: in description",
+        "northing": "regex Northing: in description"
+      },
+      "geometry": "Point",
+      "local_coordinates": {
+        "axis_order": "X=Easting, Y=Northing, Z=Elevation",
+        "coordinate_system": "GPMP local Northing/Easting + Elevation",
+        "datum_status": "unverified",
+        "easting": 500115.607,
+        "elevation": 59.696,
+        "northing": 100115.802,
+        "source_field": "description",
+        "units": "source units (metres claimed by publication; unverified here)"
+      },
+      "longitude_latitude": {
+        "datum_status": "unverified",
+        "kml_z": 0.0,
+        "kml_z_is_elevation": false,
+        "latitude": 29.98022185,
+        "longitude": 31.13539882,
+        "relation_to_local_system": "unresolved",
+        "source_field": "KML coordinates[0][:3]"
+      },
+      "name": "GI1",
+      "network": "secondary_network",
+      "object_link": "UNRESOLVED",
+      "point_id": "GPMP:GI1"
+    },
+    {
+      "datum_status": "unverified",
+      "description": "Point No. GI2 Description: Secondary Network Northing: 99884.402 Easting: 500115.858 Elevation; 59.374 Longitude: 31.13540150 Latitude: 29.97813438 Sketch: None",
+      "extraction": {
+        "easting": "regex Easting: in description",
+        "elevation": "regex Elevation; in description (KML Z rejected)",
+        "longitude_latitude": "KML coordinates[0][0:2]",
+        "network": "regex Description: in description",
+        "northing": "regex Northing: in description"
+      },
+      "geometry": "Point",
+      "local_coordinates": {
+        "axis_order": "X=Easting, Y=Northing, Z=Elevation",
+        "coordinate_system": "GPMP local Northing/Easting + Elevation",
+        "datum_status": "unverified",
+        "easting": 500115.858,
+        "elevation": 59.374,
+        "northing": 99884.402,
+        "source_field": "description",
+        "units": "source units (metres claimed by publication; unverified here)"
+      },
+      "longitude_latitude": {
+        "datum_status": "unverified",
+        "kml_z": 0.0,
+        "kml_z_is_elevation": false,
+        "latitude": 29.97813438,
+        "longitude": 31.1354015,
+        "relation_to_local_system": "unresolved",
+        "source_field": "KML coordinates[0][:3]"
+      },
+      "name": "GI2",
+      "network": "secondary_network",
+      "object_link": "UNRESOLVED",
+      "point_id": "GPMP:GI2"
+    },
+    {
+      "datum_status": "unverified",
+      "description": "Point No. GI3 Description: Secondary Network Northing: 99884.432 Easting: 499884.628 Elevation; 59.870 Longitude: 31.13300552 Latitude: 29.97813456 Sketch: None",
+      "extraction": {
+        "easting": "regex Easting: in description",
+        "elevation": "regex Elevation; in description (KML Z rejected)",
+        "longitude_latitude": "KML coordinates[0][0:2]",
+        "network": "regex Description: in description",
+        "northing": "regex Northing: in description"
+      },
+      "geometry": "Point",
+      "local_coordinates": {
+        "axis_order": "X=Easting, Y=Northing, Z=Elevation",
+        "coordinate_system": "GPMP local Northing/Easting + Elevation",
+        "datum_status": "unverified",
+        "easting": 499884.628,
+        "elevation": 59.87,
+        "northing": 99884.432,
+        "source_field": "description",
+        "units": "source units (metres claimed by publication; unverified here)"
+      },
+      "longitude_latitude": {
+        "datum_status": "unverified",
+        "kml_z": 0.0,
+        "kml_z_is_elevation": false,
+        "latitude": 29.97813456,
+        "longitude": 31.13300552,
+        "relation_to_local_system": "unresolved",
+        "source_field": "KML coordinates[0][:3]"
+      },
+      "name": "GI3",
+      "network": "secondary_network",
+      "object_link": "UNRESOLVED",
+      "point_id": "GPMP:GI3"
+    },
+    {
+      "datum_status": "unverified",
+      "description": "Point No. GI4 Description: Secondary Network Northing: 100115.591 Easting: 499884.148 Elevation; 59.603 Longitude: 31.13300041 Latitude: 29.98021985 Sketch: None",
+      "extraction": {
+        "easting": "regex Easting: in description",
+        "elevation": "regex Elevation; in description (KML Z rejected)",
+        "longitude_latitude": "KML coordinates[0][0:2]",
+        "network": "regex Description: in description",
+        "northing": "regex Northing: in description"
+      },
+      "geometry": "Point",
+      "local_coordinates": {
+        "axis_order": "X=Easting, Y=Northing, Z=Elevation",
+        "coordinate_system": "GPMP local Northing/Easting + Elevation",
+        "datum_status": "unverified",
+        "easting": 499884.148,
+        "elevation": 59.603,
+        "northing": 100115.591,
+        "source_field": "description",
+        "units": "source units (metres claimed by publication; unverified here)"
+      },
+      "longitude_latitude": {
+        "datum_status": "unverified",
+        "kml_z": 0.0,
+        "kml_z_is_elevation": false,
+        "latitude": 29.98021985,
+        "longitude": 31.13300041,
+        "relation_to_local_system": "unresolved",
+        "source_field": "KML coordinates[0][:3]"
+      },
+      "name": "GI4",
+      "network": "secondary_network",
+      "object_link": "UNRESOLVED",
+      "point_id": "GPMP:GI4"
+    },
+    {
+      "datum_status": "unverified",
+      "description": "Point No. GI5 Description: Secondary Network Northing: 99998.554 Easting: 499997.917 Elevation; 197.555 Longitude: 31.13417936 Latitude: 29.97916411 Sketch: None",
+      "extraction": {
+        "easting": "regex Easting: in description",
+        "elevation": "regex Elevation; in description (KML Z rejected)",
+        "longitude_latitude": "KML coordinates[0][0:2]",
+        "network": "regex Description: in description",
+        "northing": "regex Northing: in description"
+      },
+      "geometry": "Point",
+      "local_coordinates": {
+        "axis_order": "X=Easting, Y=Northing, Z=Elevation",
+        "coordinate_system": "GPMP local Northing/Easting + Elevation",
+        "datum_status": "unverified",
+        "easting": 499997.917,
+        "elevation": 197.555,
+        "northing": 99998.554,
+        "source_field": "description",
+        "units": "source units (metres claimed by publication; unverified here)"
+      },
+      "longitude_latitude": {
+        "datum_status": "unverified",
+        "kml_z": 0.0,
+        "kml_z_is_elevation": false,
+        "latitude": 29.97916411,
+        "longitude": 31.13417936,
+        "relation_to_local_system": "unresolved",
+        "source_field": "KML coordinates[0][:3]"
+      },
+      "name": "GI5",
+      "network": "secondary_network",
+      "object_link": "UNRESOLVED",
+      "point_id": "GPMP:GI5"
+    },
+    {
+      "datum_status": "unverified",
+      "description": "Point No. GP1 Description: Main Traverse Northing: 99136.777 Easting: 500354.168 Elevation; 59.396 Longitude: 31.13787094 Latitude: 29.97139008 Sketch: None",
+      "extraction": {
+        "easting": "regex Easting: in description",
+        "elevation": "regex Elevation; in description (KML Z rejected)",
+        "longitude_latitude": "KML coordinates[0][0:2]",
+        "network": "regex Description: in description",
+        "northing": "regex Northing: in description"
+      },
+      "geometry": "Point",
+      "local_coordinates": {
+        "axis_order": "X=Easting, Y=Northing, Z=Elevation",
+        "coordinate_system": "GPMP local Northing/Easting + Elevation",
+        "datum_status": "unverified",
+        "easting": 500354.168,
+        "elevation": 59.396,
+        "northing": 99136.777,
+        "source_field": "description",
+        "units": "source units (metres claimed by publication; unverified here)"
+      },
+      "longitude_latitude": {
+        "datum_status": "unverified",
+        "kml_z": 0.0,
+        "kml_z_is_elevation": false,
+        "latitude": 29.97139008,
+        "longitude": 31.13787094,
+        "relation_to_local_system": "unresolved",
+        "source_field": "KML coordinates[0][:3]"
+      },
+      "name": "GP1",
+      "network": "main_traverse",
+      "object_link": "UNRESOLVED",
+      "point_id": "GPMP:GP1"
+    },
+    {
+      "datum_status": "unverified",
+      "description": "Point No. GP2 Description: Main Traverse Northing: 98526.755 Easting: 500330.626 Elevation; 63.887 Longitude: 31.13762711 Latitude: 29.96588704 Sketch: None",
+      "extraction": {
+        "easting": "regex Easting: in description",
+        "elevation": "regex Elevation; in description (KML Z rejected)",
+        "longitude_latitude": "KML coordinates[0][0:2]",
+        "network": "regex Description: in description",
+        "northing": "regex Northing: in description"
+      },
+      "geometry": "Point",
+      "local_coordinates": {
+        "axis_order": "X=Easting, Y=Northing, Z=Elevation",
+        "coordinate_system": "GPMP local Northing/Easting + Elevation",
+        "datum_status": "unverified",
+        "easting": 500330.626,
+        "elevation": 63.887,
+        "northing": 98526.755,
+        "source_field": "description",
+        "units": "source units (metres claimed by publication; unverified here)"
+      },
+      "longitude_latitude": {
+        "datum_status": "unverified",
+        "kml_z": 0.0,
+        "kml_z_is_elevation": false,
+        "latitude": 29.96588704,
+        "longitude": 31.13762711,
+        "relation_to_local_system": "unresolved",
+        "source_field": "KML coordinates[0][:3]"
+      },
+      "name": "GP2",
+      "network": "main_traverse",
+      "object_link": "UNRESOLVED",
+      "point_id": "GPMP:GP2"
+    },
+    {
+      "datum_status": "unverified",
+      "description": "Point No. GP3A Description: Main Traverse Northing: 98399.708 Easting: 499946.262 Elevation; 80.958 Longitude: 31.13364492 Latitude: 29.96474083 Sketch: None",
+      "extraction": {
+        "easting": "regex Easting: in description",
+        "elevation": "regex Elevation; in description (KML Z rejected)",
+        "longitude_latitude": "KML coordinates[0][0:2]",
+        "network": "regex Description: in description",
+        "northing": "regex Northing: in description"
+      },
+      "geometry": "Point",
+      "local_coordinates": {
+        "axis_order": "X=Easting, Y=Northing, Z=Elevation",
+        "coordinate_system": "GPMP local Northing/Easting + Elevation",
+        "datum_status": "unverified",
+        "easting": 499946.262,
+        "elevation": 80.958,
+        "northing": 98399.708,
+        "source_field": "description",
+        "units": "source units (metres claimed by publication; unverified here)"
+      },
+      "longitude_latitude": {
+        "datum_status": "unverified",
+        "kml_z": 0.0,
+        "kml_z_is_elevation": false,
+        "latitude": 29.96474083,
+        "longitude": 31.13364492,
+        "relation_to_local_system": "unresolved",
+        "source_field": "KML coordinates[0][:3]"
+      },
+      "name": "GP3A",
+      "network": "main_traverse",
+      "object_link": "UNRESOLVED",
+      "point_id": "GPMP:GP3A"
+    },
+    {
+      "datum_status": "unverified",
+      "description": "Point No. GP4 Description: Main Traverse Northing: 98762.847 Easting: 499627.443 Elevation; 83.641 Longitude: 31.13034150 Latitude: 29.96801655 Sketch: None",
+      "extraction": {
+        "easting": "regex Easting: in description",
+        "elevation": "regex Elevation; in description (KML Z rejected)",
+        "longitude_latitude": "KML coordinates[0][0:2]",
+        "network": "regex Description: in description",
+        "northing": "regex Northing: in description"
+      },
+      "geometry": "Point",
+      "local_coordinates": {
+        "axis_order": "X=Easting, Y=Northing, Z=Elevation",
+        "coordinate_system": "GPMP local Northing/Easting + Elevation",
+        "datum_status": "unverified",
+        "easting": 499627.443,
+        "elevation": 83.641,
+        "northing": 98762.847,
+        "source_field": "description",
+        "units": "source units (metres claimed by publication; unverified here)"
+      },
+      "longitude_latitude": {
+        "datum_status": "unverified",
+        "kml_z": 0.0,
+        "kml_z_is_elevation": false,
+        "latitude": 29.96801655000001,
+        "longitude": 31.1303415,
+        "relation_to_local_system": "unresolved",
+        "source_field": "KML coordinates[0][:3]"
+      },
+      "name": "GP4",
+      "network": "main_traverse",
+      "object_link": "UNRESOLVED",
+      "point_id": "GPMP:GP4"
+    },
+    {
+      "datum_status": "unverified",
+      "description": "Point No. GP5 Description: Main Traverse Northing: 98936.506 Easting: 499182.962 Elevation; 85.662 Longitude: 31.12573609 Latitude: 29.96958274 Sketch: None",
+      "extraction": {
+        "easting": "regex Easting: in description",
+        "elevation": "regex Elevation; in description (KML Z rejected)",
+        "longitude_latitude": "KML coordinates[0][0:2]",
+        "network": "regex Description: in description",
+        "northing": "regex Northing: in description"
+      },
+      "geometry": "Point",
+      "local_coordinates": {
+        "axis_order": "X=Easting, Y=Northing, Z=Elevation",
+        "coordinate_system": "GPMP local Northing/Easting + Elevation",
+        "datum_status": "unverified",
+        "easting": 499182.962,
+        "elevation": 85.662,
+        "northing": 98936.506,
+        "source_field": "description",
+        "units": "source units (metres claimed by publication; unverified here)"
+      },
+      "longitude_latitude": {
+        "datum_status": "unverified",
+        "kml_z": 0.0,
+        "kml_z_is_elevation": false,
+        "latitude": 29.96958274,
+        "longitude": 31.12573609,
+        "relation_to_local_system": "unresolved",
+        "source_field": "KML coordinates[0][:3]"
+      },
+      "name": "GP5",
+      "network": "main_traverse",
+      "object_link": "UNRESOLVED",
+      "point_id": "GPMP:GP5"
+    },
+    {
+      "datum_status": "unverified",
+      "description": "Point No. GP6 Description: Main Traverse Northing: 99261.575 Easting: 498718.109 Elevation; 101.347 Longitude: 31.12091920 Latitude: 29.97251462 Sketch: None",
+      "extraction": {
+        "easting": "regex Easting: in description",
+        "elevation": "regex Elevation; in description (KML Z rejected)",
+        "longitude_latitude": "KML coordinates[0][0:2]",
+        "network": "regex Description: in description",
+        "northing": "regex Northing: in description"
+      },
+      "geometry": "Point",
+      "local_coordinates": {
+        "axis_order": "X=Easting, Y=Northing, Z=Elevation",
+        "coordinate_system": "GPMP local Northing/Easting + Elevation",
+        "datum_status": "unverified",
+        "easting": 498718.109,
+        "elevation": 101.347,
+        "northing": 99261.575,
+        "source_field": "description",
+        "units": "source units (metres claimed by publication; unverified here)"
+      },
+      "longitude_latitude": {
+        "datum_status": "unverified",
+        "kml_z": 0.0,
+        "kml_z_is_elevation": false,
+        "latitude": 29.97251462,
+        "longitude": 31.1209192,
+        "relation_to_local_system": "unresolved",
+        "source_field": "KML coordinates[0][:3]"
+      },
+      "name": "GP6",
+      "network": "main_traverse",
+      "object_link": "UNRESOLVED",
+      "point_id": "GPMP:GP6"
+    },
+    {
+      "datum_status": "unverified",
+      "description": "Point No. GP7 Description: Main Traverse Northing: 99576.900 Easting: 498855.725 Elevation; 105.547 Longitude: 31.12234460 Latitude: 29.97535936 Sketch: None",
+      "extraction": {
+        "easting": "regex Easting: in description",
+        "elevation": "regex Elevation; in description (KML Z rejected)",
+        "longitude_latitude": "KML coordinates[0][0:2]",
+        "network": "regex Description: in description",
+        "northing": "regex Northing: in description"
+      },
+      "geometry": "Point",
+      "local_coordinates": {
+        "axis_order": "X=Easting, Y=Northing, Z=Elevation",
+        "coordinate_system": "GPMP local Northing/Easting + Elevation",
+        "datum_status": "unverified",
+        "easting": 498855.725,
+        "elevation": 105.547,
+        "northing": 99576.9,
+        "source_field": "description",
+        "units": "source units (metres claimed by publication; unverified here)"
+      },
+      "longitude_latitude": {
+        "datum_status": "unverified",
+        "kml_z": 0.0,
+        "kml_z_is_elevation": false,
+        "latitude": 29.97535936,
+        "longitude": 31.1223446,
+        "relation_to_local_system": "unresolved",
+        "source_field": "KML coordinates[0][:3]"
+      },
+      "name": "GP7",
+      "network": "main_traverse",
+      "object_link": "UNRESOLVED",
+      "point_id": "GPMP:GP7"
+    },
+    {
+      "datum_status": "unverified",
+      "description": "Point No. GP8 Description: Main Traverse Northing: 99823.854 Easting: 499044.336 Elevation; 101.156 Longitude: 31.12429858 Latitude: 29.97758738 Sketch: None",
+      "extraction": {
+        "easting": "regex Easting: in description",
+        "elevation": "regex Elevation; in description (KML Z rejected)",
+        "longitude_latitude": "KML coordinates[0][0:2]",
+        "network": "regex Description: in description",
+        "northing": "regex Northing: in description"
+      },
+      "geometry": "Point",
+      "local_coordinates": {
+        "axis_order": "X=Easting, Y=Northing, Z=Elevation",
+        "coordinate_system": "GPMP local Northing/Easting + Elevation",
+        "datum_status": "unverified",
+        "easting": 499044.336,
+        "elevation": 101.156,
+        "northing": 99823.854,
+        "source_field": "description",
+        "units": "source units (metres claimed by publication; unverified here)"
+      },
+      "longitude_latitude": {
+        "datum_status": "unverified",
+        "kml_z": 0.0,
+        "kml_z_is_elevation": false,
+        "latitude": 29.97758738,
+        "longitude": 31.12429858,
+        "relation_to_local_system": "unresolved",
+        "source_field": "KML coordinates[0][:3]"
+      },
+      "name": "GP8",
+      "network": "main_traverse",
+      "object_link": "UNRESOLVED",
+      "point_id": "GPMP:GP8"
+    },
+    {
+      "datum_status": "unverified",
+      "description": "Point No. GP9 Description: Main Traverse Northing: 100154.421 Easting: 499593.613 Elevation; 79.874 Longitude: 31.12998982 Latitude: 29.98056996 Sketch: None",
+      "extraction": {
+        "easting": "regex Easting: in description",
+        "elevation": "regex Elevation; in description (KML Z rejected)",
+        "longitude_latitude": "KML coordinates[0][0:2]",
+        "network": "regex Description: in description",
+        "northing": "regex Northing: in description"
+      },
+      "geometry": "Point",
+      "local_coordinates": {
+        "axis_order": "X=Easting, Y=Northing, Z=Elevation",
+        "coordinate_system": "GPMP local Northing/Easting + Elevation",
+        "datum_status": "unverified",
+        "easting": 499593.613,
+        "elevation": 79.874,
+        "northing": 100154.421,
+        "source_field": "description",
+        "units": "source units (metres claimed by publication; unverified here)"
+      },
+      "longitude_latitude": {
+        "datum_status": "unverified",
+        "kml_z": 0.0,
+        "kml_z_is_elevation": false,
+        "latitude": 29.98056996,
+        "longitude": 31.12998982,
+        "relation_to_local_system": "unresolved",
+        "source_field": "KML coordinates[0][:3]"
+      },
+      "name": "GP9",
+      "network": "main_traverse",
+      "object_link": "UNRESOLVED",
+      "point_id": "GPMP:GP9"
+    },
+    {
+      "datum_status": "unverified",
+      "description": "Point No. GP10 Description: Main Traverse Northing: 100150.183 Easting: 500104.684 Elevation; 59.070 Longitude: 31.13528562 Latitude: 29.98053200 Sketch: None",
+      "extraction": {
+        "easting": "regex Easting: in description",
+        "elevation": "regex Elevation; in description (KML Z rejected)",
+        "longitude_latitude": "KML coordinates[0][0:2]",
+        "network": "regex Description: in description",
+        "northing": "regex Northing: in description"
+      },
+      "geometry": "Point",
+      "local_coordinates": {
+        "axis_order": "X=Easting, Y=Northing, Z=Elevation",
+        "coordinate_system": "GPMP local Northing/Easting + Elevation",
+        "datum_status": "unverified",
+        "easting": 500104.684,
+        "elevation": 59.07,
+        "northing": 100150.183,
+        "source_field": "description",
+        "units": "source units (metres claimed by publication; unverified here)"
+      },
+      "longitude_latitude": {
+        "datum_status": "unverified",
+        "kml_z": 0.0,
+        "kml_z_is_elevation": false,
+        "latitude": 29.980532,
+        "longitude": 31.13528562,
+        "relation_to_local_system": "unresolved",
+        "source_field": "KML coordinates[0][:3]"
+      },
+      "name": "GP10",
+      "network": "main_traverse",
+      "object_link": "UNRESOLVED",
+      "point_id": "GPMP:GP10"
+    },
+    {
+      "datum_status": "unverified",
+      "description": "Point No. GP11 Description: Main Traverse Northing: 99856.032 Easting: 500192.328 Elevation; 79.690 Longitude: 31.13619388 Latitude: 29.97787848 Sketch: None",
+      "extraction": {
+        "easting": "regex Easting: in description",
+        "elevation": "regex Elevation; in description (KML Z rejected)",
+        "longitude_latitude": "KML coordinates[0][0:2]",
+        "network": "regex Description: in description",
+        "northing": "regex Northing: in description"
+      },
+      "geometry": "Point",
+      "local_coordinates": {
+        "axis_order": "X=Easting, Y=Northing, Z=Elevation",
+        "coordinate_system": "GPMP local Northing/Easting + Elevation",
+        "datum_status": "unverified",
+        "easting": 500192.328,
+        "elevation": 79.69,
+        "northing": 99856.032,
+        "source_field": "description",
+        "units": "source units (metres claimed by publication; unverified here)"
+      },
+      "longitude_latitude": {
+        "datum_status": "unverified",
+        "kml_z": 0.0,
+        "kml_z_is_elevation": false,
+        "latitude": 29.97787848,
+        "longitude": 31.13619388,
+        "relation_to_local_system": "unresolved",
+        "source_field": "KML coordinates[0][:3]"
+      },
+      "name": "GP11",
+      "network": "main_traverse",
+      "object_link": "UNRESOLVED",
+      "point_id": "GPMP:GP11"
+    }
+  ],
+  "provenance_states": {
+    "INDEPENDENTLY_CORROBORATED": false,
+    "SOURCE_CONTENT_PARSED": true,
+    "SOURCE_FILE_PRESENT": true,
+    "SOURCE_PROVENANCE_VERIFIED": false,
+    "STRUCTURE_VALIDATED": true
+  },
+  "render_rules": {
+    "fabricated_lines": false,
+    "grid_is_graphic_support_only": true,
+    "kml_z_as_elevation": false,
+    "terrain_mesh": false,
+    "vertical_exaggeration_default": 1.0
+  },
+  "scientific_status": "control_network_only_no_monument_geometry",
+  "separation": {
+    "control_points_are_not_archaeological_objects": true,
+    "gpmp_and_arce_sphinx_grid": "separate",
+    "gpmp_to_arce_transform": "not_performed",
+    "object_link": "UNRESOLVED"
+  },
+  "source": {
+    "declared_placemark_count": 41,
+    "folders": [
+      "Points"
+    ],
+    "kml_bytes": 37630,
+    "kml_entry": "doc.kml",
+    "sha256_of_committed_json": "7f9010f36c0b83a0e8ad15a04474aab5a1030d26d593fc72f8085aef4ac2506a",
+    "sha256_of_kml": "94ca0d8b95529664ebb823c84ba8c10082d1f3a62306826bd27be514c0e66020",
+    "source_file": "GPMP-Control-Monuments.kmz"
+  }
+}
+</script>
 <script id="atlas-snapshot" type="application/json">
 {
   "atlas_id": "GIZA_RELATION_FIRST_ATLAS_SCHEMATIC",
@@ -574,6 +2256,308 @@ const ATLAS = JSON.parse(document.getElementById('atlas-snapshot').textContent);
   ctx.fillStyle='#ff3c54'; ctx.fillText('0 VERIFIED RELATIONS',cx,cy-8);
   ctx.font=Math.max(10,Math.min(16,Math.floor(W/70)))+'px Martian Mono,Consolas,monospace';
   ctx.fillStyle='#5a3800'; ctx.fillText('NODE POSITIONS = DISPLAY LAYOUT ONLY',cx,cy+22);
+})();
+</script>
+<script>
+/* LAYER 02 — interactive projection of source control points.
+   No network, no timers, no external libraries, no mutation of source values. */
+(function spatialLayer(){
+  const SP = JSON.parse(document.getElementById('spatial-snapshot').textContent);
+  const origin = SP.derived_geometry.centering_origin;
+  const canvas = document.getElementById('spatial-canvas');
+  const context = canvas.getContext('2d');
+  const points = SP.points.map(function(p){
+    return {
+      id: p.point_id, name: p.name, network: p.network,
+      x: p.local_coordinates.easting, y: p.local_coordinates.northing,
+      z: p.local_coordinates.elevation,
+      lon: p.longitude_latitude.longitude, lat: p.longitude_latitude.latitude,
+      kmlz: p.longitude_latitude.kml_z, description: p.description,
+      system: p.local_coordinates.coordinate_system, datum: p.datum_status,
+      extraction: p.extraction
+    };
+  });
+  const initial = {yaw:-0.70, pitch:0.45, zoom:1.0, panX:0, panY:0, ex:1.0};
+  const view = Object.assign({}, initial, {
+    labels:true, grid:true, main:true, secondary:true,
+    selected:null, dragging:false, dragMode:'rotate', lastX:0, lastY:0, moved:0
+  });
+  const exaggerations = [0.5, 1.0, 1.5, 2.0, 3.0, 5.0];
+  let width = 800, height = 500, scale = 1, baseRadius = 1, projected = [];
+
+  function escapeText(value){
+    return String(value).replace(/[&<>"]/g, function(ch){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch];
+    });
+  }
+  function computeRadius(){
+    let r = 1;
+    points.forEach(function(p){
+      const dx = p.x - origin.easting;
+      const dy = p.y - origin.northing;
+      const dz = p.z - origin.elevation;
+      r = Math.max(r, Math.sqrt(dx*dx + dy*dy + dz*dz));
+    });
+    baseRadius = r;
+  }
+  function rotate(vector){
+    const cy = Math.cos(view.yaw), sy = Math.sin(view.yaw);
+    const cp = Math.cos(view.pitch), sp = Math.sin(view.pitch);
+    const x1 = cy*vector[0] - sy*vector[1];
+    const y1 = sy*vector[0] + cy*vector[1];
+    return [x1, cp*y1 - sp*vector[2], sp*y1 + cp*vector[2]];
+  }
+  function projectVector(vector){
+    const rotated = rotate(vector);
+    return {
+      x: width/2 + rotated[0]*scale + view.panX,
+      y: height/2 - rotated[1]*scale + view.panY,
+      depth: rotated[2]
+    };
+  }
+  function projectPoint(p){
+    return projectVector([
+      p.x - origin.easting,
+      p.y - origin.northing,
+      (p.z - origin.elevation)*view.ex
+    ]);
+  }
+  function drawSegment(a, b, colour, lineWidth){
+    const pa = projectVector(a), pb = projectVector(b);
+    context.strokeStyle = colour; context.lineWidth = lineWidth || 1;
+    context.beginPath(); context.moveTo(pa.x, pa.y); context.lineTo(pb.x, pb.y);
+    context.stroke();
+  }
+  function drawMarker(p, screen, selected){
+    const size = selected ? 9 : 5;
+    const colour = p.network === 'main_traverse' ? '#f5a623' : '#8855ff';
+    context.save();
+    context.translate(screen.x, screen.y);
+    if (p.network === 'secondary_network'){
+      context.rotate(Math.PI/4);
+      context.strokeStyle = colour; context.lineWidth = 1.6;
+      context.strokeRect(-size/2, -size/2, size, size);
+    } else {
+      context.beginPath(); context.arc(0, 0, size/2, 0, 2*Math.PI);
+      context.fillStyle = colour; context.fill();
+    }
+    if (selected){
+      context.rotate(p.network === 'secondary_network' ? -Math.PI/4 : 0);
+      context.strokeStyle = '#ffcc44'; context.lineWidth = 1;
+      context.beginPath(); context.arc(0, 0, 13, 0, 2*Math.PI); context.stroke();
+      context.beginPath(); context.moveTo(-18,0); context.lineTo(-9,0);
+      context.moveTo(9,0); context.lineTo(18,0);
+      context.moveTo(0,-18); context.lineTo(0,-9);
+      context.moveTo(0,9); context.lineTo(0,18); context.stroke();
+    }
+    context.restore();
+    if (view.labels){
+      context.font = '9px Martian Mono, Consolas, monospace';
+      context.fillStyle = selected ? '#ffcc44' : '#5a3800';
+      context.textAlign = 'left'; context.textBaseline = 'middle';
+      context.fillText(p.name, screen.x + 9, screen.y - 8);
+    }
+  }
+  function draw(){
+    if (!canvas.offsetWidth) { return; }
+    width = canvas.width = canvas.offsetWidth;
+    height = canvas.height = canvas.offsetHeight;
+    scale = Math.min(width, height)*0.40/baseRadius*view.zoom;
+    context.clearRect(0, 0, width, height);
+    context.fillStyle = 'rgba(5,5,15,0.45)'; context.fillRect(0, 0, width, height);
+    const reach = baseRadius*1.06;
+    if (view.grid){
+      const step = reach/5;
+      for (let v = -reach; v <= reach + 0.001; v += step){
+        drawSegment([v,-reach,0], [v,reach,0], 'rgba(0,212,255,0.07)', 1);
+        drawSegment([-reach,v,0], [reach,v,0], 'rgba(0,212,255,0.07)', 1);
+      }
+    }
+    drawSegment([0,0,0], [reach,0,0], 'rgba(245,166,35,0.75)', 1.5);
+    drawSegment([0,0,0], [0,reach,0], 'rgba(0,212,255,0.75)', 1.5);
+    drawSegment([0,0,0], [0,0,reach], 'rgba(57,255,122,0.85)', 1.5);
+    context.font = '10px Unbounded, Arial Black, sans-serif';
+    const labelX = projectVector([reach,0,0]);
+    const labelY = projectVector([0,reach,0]);
+    const labelZ = projectVector([0,0,reach]);
+    context.fillStyle = '#f5a623'; context.fillText('X EASTING', labelX.x+6, labelX.y);
+    context.fillStyle = '#00d4ff'; context.fillText('Y NORTHING', labelY.x+6, labelY.y);
+    context.fillStyle = '#39ff7a'; context.fillText('Z ELEVATION', labelZ.x+6, labelZ.y);
+    projected = [];
+    points.forEach(function(p){
+      if (p.network === 'main_traverse' && !view.main){ return; }
+      if (p.network === 'secondary_network' && !view.secondary){ return; }
+      projected.push({point:p, screen:projectPoint(p)});
+    });
+    projected.sort(function(a,b){ return a.screen.depth - b.screen.depth; });
+    projected.forEach(function(item){
+      drawMarker(item.point, item.screen, view.selected === item.point.id);
+    });
+    context.font = '9px Martian Mono, Consolas, monospace';
+    context.textAlign = 'right'; context.textBaseline = 'bottom';
+    context.fillStyle = '#5a3800';
+    context.fillText('EX ' + view.ex.toFixed(1) + ' / SOURCE UNCHANGED', width-10, height-8);
+  }
+  function line(label, value, colour){
+    return '<div><span class="lbl">' + escapeText(label) + '</span>' +
+      '<span class="val ' + (colour || 'w') + '">' + escapeText(value) + '</span></div>';
+  }
+  function showPassport(p){
+    if (!p){ return; }
+    const box = document.getElementById('sp-passport');
+    box.innerHTML =
+      line('POINT ID', p.id) +
+      line('NETWORK', p.network, 'v') +
+      line('EASTING', p.x) +
+      line('NORTHING', p.y) +
+      line('ELEVATION', p.z + '  (description)', 'c') +
+      line('LONGITUDE', p.lon) +
+      line('LATITUDE', p.lat) +
+      line('KML Z', p.kmlz + '  NOT ELEVATION', 'r') +
+      line('COORD SYSTEM', p.system, 'v') +
+      line('DATUM', p.datum, 'r') +
+      line('OBJECT LINK', 'UNRESOLVED', 'r') +
+      '<div class="raw">' + escapeText(p.description) + '</div>';
+    view.selected = p.id;
+    Array.prototype.forEach.call(document.querySelectorAll('.plist-row'), function(row){
+      if (row.getAttribute('data-id') === p.id){ row.className = 'plist-row sel'; }
+      else { row.className = 'plist-row'; }
+    });
+    draw();
+  }
+  function renderProvenance(){
+    const source = SP.source, states = SP.provenance_states;
+    const box = document.getElementById('sp-provenance');
+    let markup = line('SOURCE FILE', source.source_file) +
+      line('COMMITTED JSON SHA', source.sha256_of_committed_json.slice(0,16), 'c') +
+      line('KML SHA (DECLARED)', source.sha256_of_kml.slice(0,16), 'c') +
+      line('PLACEMARKS', source.declared_placemark_count) +
+      line('DATUM STATUS', SP.coordinate_system.datum_status, 'r') +
+      line('CRS CONVERSION', 'not performed', 'r');
+    Object.keys(states).forEach(function(key){
+      markup += line(key, states[key] ? 'TRUE' : 'FALSE', states[key] ? 'on' : 'r');
+    });
+    box.innerHTML = markup;
+  }
+  function renderModels(){
+    const plane = SP.derived_geometry.least_squares_plane;
+    const contract = SP.model_contract;
+    const box = document.getElementById('sp-models');
+    box.innerHTML =
+      line('MEASURED_GEOMETRY', SP.counts.total + ' source points') +
+      line('DERIVED_GEOMETRY', '1 least-squares plane', 'c') +
+      line('FIT RMS', plane.residual_summary.rms.toFixed(3), 'r') +
+      line('IDEALIZED_MODEL', contract.instantiated_models_in_this_commit, 'r') +
+      line('HYPOTHETICAL_MODEL', 0, 'r') +
+      line('UNKNOWN', 'form not identifiable', 'r') +
+      '<div class="raw">Plane is derived over control points, NOT terrain. ' +
+      'A model record requires model_id, method, parameters, units, assumptions, ' +
+      'residual, uncertainty, validity domain, limitations and falsification conditions.</div>';
+  }
+  function renderList(){
+    const box = document.getElementById('sp-list');
+    const query = document.getElementById('sp-search').textContent.trim().toLowerCase();
+    box.innerHTML = '';
+    points.forEach(function(p){
+      if (p.network === 'main_traverse' && !view.main){ return; }
+      if (p.network === 'secondary_network' && !view.secondary){ return; }
+      if (query && query !== 'search id / name' &&
+          p.id.toLowerCase().indexOf(query) < 0 &&
+          p.name.toLowerCase().indexOf(query) < 0){ return; }
+      const row = document.createElement('div');
+      row.className = 'plist-row' + (view.selected === p.id ? ' sel' : '');
+      row.setAttribute('data-id', p.id);
+      row.innerHTML = '<span class="plist-id">' + escapeText(p.name) + '</span>' +
+        '<span class="plist-net">' + (p.network === 'main_traverse' ? 'MAIN' : 'SEC') + '</span>' +
+        '<span class="plist-z">' + p.z.toFixed(2) + '</span>';
+      row.addEventListener('click', function(){ showPassport(p); });
+      box.appendChild(row);
+    });
+  }
+  computeRadius(); renderProvenance(); renderModels(); renderList();
+  window.addEventListener('resize', draw);
+  document.getElementById('sp-search').addEventListener('focus', function(){
+    if (this.textContent.trim() === 'SEARCH ID / NAME'){ this.textContent = ''; }
+  });
+  document.getElementById('sp-search').addEventListener('input', renderList);
+
+  Array.prototype.forEach.call(document.querySelectorAll('.ltab'), function(tab){
+    tab.addEventListener('click', function(){
+      Array.prototype.forEach.call(document.querySelectorAll('.ltab'), function(other){
+        other.className = 'ltab' + (other === tab ? ' active' : '');
+      });
+      const spatial = tab.getAttribute('data-layer') === 'spatial';
+      document.getElementById('view-relation').className =
+        'layer-view' + (spatial ? ' hidden' : '');
+      document.getElementById('view-spatial').className =
+        'layer-view' + (spatial ? '' : ' hidden');
+      if (spatial){ draw(); }
+    });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-toggle]'), function(button){
+    button.addEventListener('click', function(){
+      const key = button.getAttribute('data-toggle');
+      view[key] = !view[key];
+      button.className = 'sp-btn' + (view[key] ? ' on' : '');
+      renderList(); draw();
+    });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-act]'), function(button){
+    button.addEventListener('click', function(){
+      const action = button.getAttribute('data-act');
+      if (action === 'reset'){
+        Object.assign(view, initial);
+        document.getElementById('ex-value').textContent = 'EX 1.0';
+      } else if (action === 'ex-up' || action === 'ex-down'){
+        let index = exaggerations.indexOf(view.ex);
+        if (index < 0){ index = 1; }
+        if (action === 'ex-up'){ index = Math.min(exaggerations.length-1, index+1); }
+        else { index = Math.max(0, index-1); }
+        view.ex = exaggerations[index];
+        document.getElementById('ex-value').textContent = 'EX ' + view.ex.toFixed(1);
+      }
+      draw();
+    });
+  });
+  canvas.addEventListener('mousedown', function(event){
+    event.preventDefault();
+    view.dragging = true; view.moved = 0;
+    view.dragMode = (event.button === 2 || event.shiftKey) ? 'pan' : 'rotate';
+    view.lastX = event.clientX; view.lastY = event.clientY;
+    canvas.className = 'dragging';
+  });
+  window.addEventListener('mousemove', function(event){
+    if (!view.dragging){ return; }
+    const dx = event.clientX - view.lastX, dy = event.clientY - view.lastY;
+    view.moved += Math.abs(dx) + Math.abs(dy);
+    view.lastX = event.clientX; view.lastY = event.clientY;
+    if (view.dragMode === 'pan'){ view.panX += dx; view.panY += dy; }
+    else { view.yaw += dx*0.008; view.pitch += dy*0.008;
+           view.pitch = Math.max(-1.4, Math.min(1.4, view.pitch)); }
+    draw();
+  });
+  window.addEventListener('mouseup', function(event){
+    if (!view.dragging){ return; }
+    view.dragging = false; canvas.className = '';
+    if (view.moved < 4 && event.target === canvas){
+      const rect = canvas.getBoundingClientRect();
+      const mx = event.clientX - rect.left, my = event.clientY - rect.top;
+      let best = null, bestDistance = 14*14;
+      projected.forEach(function(item){
+        const d = (item.screen.x-mx)*(item.screen.x-mx) +
+                  (item.screen.y-my)*(item.screen.y-my);
+        if (d < bestDistance){ bestDistance = d; best = item.point; }
+      });
+      if (best){ showPassport(best); }
+    }
+  });
+  canvas.addEventListener('contextmenu', function(event){ event.preventDefault(); });
+  canvas.addEventListener('wheel', function(event){
+    event.preventDefault();
+    view.zoom = Math.max(0.35, Math.min(4.0,
+      view.zoom * (event.deltaY < 0 ? 1.12 : 0.89)));
+    draw();
+  });
 })();
 </script>
 </body>
