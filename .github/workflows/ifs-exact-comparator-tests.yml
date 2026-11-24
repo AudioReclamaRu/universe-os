@@ -22,7 +22,8 @@ on:
       - "research/full-relational-math-reconstruction-001/phase-27/**"
       - "research/full-relational-math-reconstruction-001/phase-28/**"
       - "research/full-relational-math-reconstruction-001/phase-29/**"
-      - "research/full-relational-math-reconstruction-001/phase-30/**"\n      - "research/full-relational-math-reconstruction-001/phase-31/**"
+      - "research/full-relational-math-reconstruction-001/phase-30/**"
+      - "research/full-relational-math-reconstruction-001/phase-31/**"
       - "research/full-relational-math-reconstruction-001/README.md"
       - ".github/workflows/ifs-exact-comparator-tests.yml"
 
