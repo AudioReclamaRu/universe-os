@@ -476,3 +476,14 @@ The dedicated GitHub Actions pull-request workflow completed successfully on the
 **149 tests passed across all 15 affine-IFS phase packages.** This validates these fifteen packages on a clean PR checkout only; it does not claim that the complete repository or every earlier research phase passed CI.
 
 Phase 30's exact two-parameter filtration is a finite vector-space analysis. It provides minimum-cardinality Q-bases and quotient complements for the declared bounded slices; it does not prove minimal generators of the infinite T-ideal or stabilization outside the searched grid.
+
+
+## Phase 31 — exact basis transitions and predecessor intersections
+
+Phase 31 canonicalizes every completed bounded relation slice over \(\mathbb Q\), then exposes exact coordinate matrices for the inclusions from \(R_{L-1,D}\) and \(R_{L,D-1}\) into \(R_{L,D}\). It independently constructs the intersection of both predecessor spaces as the kernel of their difference map, returning exact coordinates in each predecessor basis.
+
+For each cell, the canonical predecessor-union basis is concatenated with Phase 30's quotient complement. The resulting adapted basis is expressed in the canonical target basis, and the inverse rational matrix is computed; both products are verified to be the exact identity. Canonicalization uses the unique reduced row-echelon form for lexicographically ordered canonical trace monomials.
+
+These are exact finite-dimensional coordinate statements only. No universal recurrence, infinite stabilization, infinite Hilbert series, or minimal generating set of the infinite T-ideal is inferred.
+
+See [Phase 31 report](phase-31/EXACT_TRACE_RELATION_BASIS_TRANSITIONS.md), the [basis-transition engine](phase-31/basis_transitions.py) and the [11 Phase 31 tests](phase-31/test_basis_transitions.py).
