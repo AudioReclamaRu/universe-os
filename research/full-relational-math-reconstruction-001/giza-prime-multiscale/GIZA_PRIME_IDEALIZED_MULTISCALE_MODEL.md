@@ -1,24 +1,32 @@
 # GIZA PRIME — Idealized Multiscale Digital Twin (Track B, Issue #6)
 
-**Status:** idealized reference model and software/physics controls. **Not** a historical reconstruction, **not** a 3D FEM/CFD solution, **not** evidence that the Giza complex communicates with the Earth or the cosmos.
+**Status:** corrected first software version (`physics_corrected_revision_2`) with an **open functional-landscape architecture** (`landscape_graph_revision_1`). It is an **idealized synthetic reference model**, not a historical reconstruction, not a 3D FEM/CFD solution, and not evidence that the Giza complex communicates with the Earth or the cosmos. The 9-DOF mechanics package is one synthetic projection of the open graph, never the whole Giza landscape or a privileged core.
 
-**Worktree / branch / HEAD:** `E:\GIZA_PRIME_LAB\universe-os-phase32`, `research/full-relational-math-reconstruction-001`, `42f13f146552de69d21fc2cf9e032b781ac8e014`. No commit, no push, no changes outside this directory.
+**Worktree / branch:** `E:\GIZA_PRIME_LAB\universe-os-phase32`, `research/full-relational-math-reconstruction-001`. Accepted pre-correction delivery HEAD was `9fb207d5e7c407093aeef10582c48f6624a721ce`; the final corrected HEAD and push/CI URLs are recorded in the delivery audit.
 
-**Evidence policy:** no external citation, survey value, coordinate, elevation, published measurement, URL or datum is attached. `synthetic_reference_fixture` is an internal placeholder, **not** a source. No source was fabricated. All activated numbers are `idealized_design` or `assumption_for_sensitivity`; unresolved quantities are `unknown` and stored as `null`.
+**Evidence policy:** no external citation, survey value, coordinate, elevation, published measurement, URL or datum is attached. `synthetic_reference_fixture` is an internal placeholder, **not** a source. No source was fabricated. Activated numbers are `idealized_design`, `assumption_for_sensitivity` or declared synthetic controls; unresolved quantities are `unknown` and stored as `null`. `functional_objects.json` is an open registry of synthetic functional objects, not a claim about historical assigned functions.
 
-**Verification (actual run):** `$env:OPENBLAS_NUM_THREADS='1'; & C:\Python314\python.exe -m unittest discover -v -p "test_*.py"` from this directory → **Ran 79 tests … OK** (79 passes, 0 failures, 0 errors). Standard library only; no installs, no downloads, no network.
+**Verification (actual run):** `$env:OPENBLAS_NUM_THREADS='1'; C:\Python314\python.exe -m unittest discover -q -p "test_*.py"` from this directory → **Ran 159 tests … OK** (159 passes, 0 failures, 0 errors). Standard library only; no installs, no downloads, no network.
+
+---
 
 ## 0. Package contents and reproduction
 
 | File | Role |
 |---|---|
-| `giza_multiscale_model.py` | Standard-library reference model: validation, typed graph, Jacobi eigensolver, complex response solver, energy budget, PRIME envelope, sensitivity, deterministic export |
-| `test_giza_multiscale_model.py` | 79 software/physics controls |
-| `scenario_schema.json` | Required scenario fields, evidence classes, statuses, layer taxonomy, conditional rules |
+| `giza_multiscale_model.py` | Standard-library reference model: validation, typed graph, Jacobi eigensolver, complex response solver, signed two-node springs/dashpots, radiation-impedance energy budget, PRIME envelope, sensitivity, deterministic export |
+| `test_giza_multiscale_model.py` | 129 software/physics controls, including physical-meaning, dimensional and landscape-integration tests |
+| `landscape_graph_engine.py` | Open graph engine for \\(\\mathcal G=(V,E,I,P,T,\\Theta)\\): validation, topology-only ensemble discovery, model projections and coverage gaps |
+| `test_landscape_graph_engine.py` | 30 architecture controls for open-world semantics, interfaces, processes, temporal states, PRIME scope and inventory gaps |
+| `functional_landscape_graph.json` | 10 object/interface classes, 9 synthetic seed instances, 22 relations, 6 interface classes, 8 process families, 9 temporal states, 7 model projections |
+| `inventory_coverage_register.json` | Zero catalogued real objects; explicit `not_inventoried` status and known gap for every category |
+| `scenario_schema.json` | Required scenario fields, evidence classes, bridge statuses, layer taxonomy and conditional rules |
 | `example_scenario_synthetic.json` | One explicitly labelled synthetic scenario (`S2_IDEALIZED_REFERENCE_COMPLEX`) |
-| `source_register.json` | Declares zero external sources; explains the synthetic fixture |
-| `parameter_registry.json` | 27 records with unit, value/interval, evidence class, frame/datum/epoch, transformation, uncertainty, confidence, activation, limitations, discriminating measurement |
-| `scale_bridge_catalog.json` | 14 structured inbound/outbound bridge records with all B4 fields, conservation bounds and explicit non-bridges |
+| `source_register.json` | Zero sources; `external_citations_attached: false` |
+| `parameter_registry.json` | 48 records with unit, value/interval, evidence class, frame/datum/epoch, transformation, uncertainty, confidence, activation, limitations and discriminating measurement |
+| `functional_objects.json` | 9 synthetic functional objects, 13 registry-driven contacts, 6 hypothesis couplings and 1 radiating port |
+| `real_source_ingestion_contract.json` | Empty future source layer (`sources: []`, `awaiting_verified_sources`); prepared, not attached |
+| `scale_bridge_catalog.json` | 19 structured inbound/outbound bridge and non-bridge records with B4 fields, conservation closure and explicit no-cosmic-jump rule |
 | `deterministic_report_example.json` | Deterministic JSON export produced by `write_deterministic_report()` |
 
 Reproduce the report and tests:
@@ -26,7 +34,7 @@ Reproduce the report and tests:
 ```powershell
 Set-Location 'E:\GIZA_PRIME_LAB\universe-os-phase32\research\full-relational-math-reconstruction-001\giza-prime-multiscale'
 $env:OPENBLAS_NUM_THREADS='1'
-& C:\Python314\python.exe -m unittest discover -v -p "test_*.py"
+& C:\Python314\python.exe -m unittest discover -q -p "test_*.py"
 & C:\Python314\python.exe -c "import giza_multiscale_model as g; g.write_deterministic_report('deterministic_report_example.json')"
 ```
 
@@ -34,195 +42,177 @@ Tolerances are floating-point controls, not exact Q algebra: eigen convergence `
 
 ---
 
-## B9-1. Map of spatial and temporal scales
+## 0A. Open functional-landscape architecture
 
-| Layer | Domain | Declared spatial scale (synthetic frame) | Time / band | State variables | Numerical status |
-|---|---|---|---|---|---|
-| 1 | Material / microscopic | homogenized continuum, no lattice resolution | bounds only | density, wave speed, loss idealized | represented; density/wave speed used in dimensional checks and bridge bounds only |
-| 2 | Blocks, joints, interfaces | lumped contact points at monument bases | static/linearized | contact stiffness | represented as linear springs; friction, slip, gaps, cavities **disabled** (no data) |
-| 3 | Monument & ensemble mechanics | 5 generalized vertical DOFs: Khufu, Khafre, Menkaure, Sphinx parent massif, bedrock | computed modes ~0.067–0.114 Hz for declared fixture | `u, u_dot, u_ddot` | **computed** (reduced order, not FEM) |
-| 4 | Acoustics / gas / thermal | no volume, passage or temperature field specified | not evaluable | pressure, temperature, flow | represented placeholder only |
-| 5 | Hydrology | no aquifer geometry or water table | not evaluable | pressure head, saturation | symbolic only |
-| 6 | EM / electrical | no conductivity tensor or circuit | not evaluable | current, field | symbolic only |
-| 7 | Site environment / geosphere | active bedrock DOF plus synthetic damping split | same band as layer 3 | bedrock displacement, exported power | **computed** for synthetic fixture; real boundary impedance missing |
-| 8 | Earth scale | not discretized | Earth normal-mode / ELF bands (context) | Earth-mode amplitude | not computed; energy bound only |
-| 9 | Planetary / solar / cosmic | not discretized | tidal, solar, fossil/cosmological context | external forcing, pattern analogies | inbound forcing represented in S5; no outbound bridge |
+The target object is the whole accessible functional landscape, not a shortlist of prominent monuments. `landscape_graph_engine.py` stores and validates the formal object
 
-Temporal ordering is explicit: geology G0 → anthropogenic residual G1 → present damaged state S0 → idealized reference S2 → passive null S3 → one-hypothesis S4 families → environmental drivers S5. No historical completion state is implied.
+```
+G = (V, E, I, P, T, Theta)
+```
 
-## B9-2. Component and interaction graph
+with 10 first-class categories (`monumental`, `architectural`, `linear`, `subsurface`, `geological`, `hydrological`, `infrastructural`, `natural`, `nonobvious`, `interface`), E relations, I interfaces, P processes carrying energy/mass/momentum, T diachronous states, and Θ uncertainties and coverage limits. Interfaces are first-class: a structure–bedrock contact, water–channel boundary or airflow–cavity boundary may matter more than the adjacent object.
 
-Typed graph built by `system_graph_for_scenario()`:
+The architecture has no primordial core. The current nine synthetic objects are seed instances in an open registry, not an axiomatic set. `discover_candidate_ensembles()` derives topology-only candidate groups from declared relations; it permits multi-membership and overlapping ensembles, assigns no priority by size, fame, beauty or traditional classification, and makes no physical or historical claim. `model_projection_summary()` exposes mechanical, acoustic, hydraulic, thermal, gas-dynamic, electromagnetic and combined projections; only the synthetic mechanical projection is currently evaluable. `coverage_gap_report()` records that all ten categories remain `not_inventoried` with `catalogued_real_objects = 0`. Absence from a catalogue is never treated as absence from the ancient system.
 
-- **Nodes (13 per scenario):** 5 core masses/medium (`khufu`, `khafre`, `menkaure`, `sphinx_parent_massif`, `bedrock` at layer 7), plus `material_domain` (1), `interfaces_domain` (2), `acoustic_domain` (4), `hydrology_domain` (5), `em_domain` (6), `environment_domain` (7), `earth_domain` (8), `cosmic_domain` (9).
-- **Edges:** carrier, direction, transfer model, uncertainty, status, falsifier and bridge id are mandatory. S0/S1/S2/S5 have 6 ordinary elastic substrate/foundation edges; S3 has **0** edges (independent subsystems); each S4 variant has 6 ordinary edges plus **exactly one** hypothesis-labelled edge; S5 adds one inbound environmental edge.
-- **Deliberate non-edges:** no core node is connected to `earth_domain` or `cosmic_domain`. Roles (`source, resonator, waveguide, filter, transducer, receiver, indicator, passive_boundary`) remain candidate labels on nodes, not assigned historical functions.
-- **P0/P1:** the Sphinx node is the *parent massif*; its present head/body profile is not assumed original. No cavity/neck/chamber is inserted; `cavity_inventory` is `null` and explicitly empty. Bedrock is an active DOF, not a rigid platform.
+PRIME is therefore defined as an emergent property of discovered interaction ensembles. The 9-DOF results in the next sections are a bounded synthetic projection that exercises the physical controls; they do not select the ensemble to which PRIME applies.
 
-## B9-3. Enabled and disabled physics modules
+## 1. Scale map and functional-object ensemble
 
-| Module | Enabled where | Numerically active? | Reason / limitation |
+| Layer | Domain | Declared status | Numerics |
 |---|---|---|---|
-| L1 homogenized material | all scenarios | No (density/wave speed in checks/bounds only) | No tensor, anisotropy, grain or porosity data |
-| L2 lumped interfaces | S0–S4 | Partly: as linear contact stiffness | Friction/slip/gaps/cavities unresolved |
-| L3 reduced-order mechanics (M,C,K,B,Cr) | S0–S5 | **Yes** | 5 DOF, symmetric SPD K, PSD C; reduced order, not full FEM |
-| L4 idealized acoustics placeholder | S2, S4_ACOUSTIC, S4_GAS_THERMAL, S4_MIXED | No | No cavity volume, gas state or boundary conditions |
-| L5 symbolic hydrology | S4_HYDROLOGIC | No (symbolic edge and registry fields) | Water table/permeability `unknown` |
-| L6 symbolic EM | S4_ELECTROMAGNETIC | No | Conductivity tensor, circuit and source power `unknown` |
-| L7 substrate environment | all scenarios | **Yes** (bedrock DOF + `C_export`) | Real site impedance absent; split of damping is idealized bookkeeping |
-| L8 Earth context | S5 | No | Energy bound only; no source–path–interface–receiver chain |
-| L9 cosmic context | S5 | No (inbound forcing represented) | No outbound communication claim |
-| Natural background comparator | S5 | No | 1000 W placeholder, `assumption_for_sensitivity`; not measured |
-| Hypothesis activation | S4 only, one at a time | elastic/gas/hydrologic change K or C; acoustic/EM/mixed add symmetric weak coupling | Every variant is compared against S3 |
+| 1 | Material / microscopic | homogenized continuum, no lattice resolution | density/wave speed in dimensional checks and bridge bounds only |
+| 2 | Blocks, joints, interfaces | lumped contact points | 13 signed linear contact springs; friction, slip, gaps and cavities disabled |
+| 3 | Monument & ensemble mechanics | 9 generalized vertical DOFs | computed modes and receptance from `M`, `C`, `K`, `B`, `Cr` |
+| 4 | Acoustics / gas / thermal | placeholder only; no cavity volume or temperature field | not evaluable |
+| 5 | Hydrology | no aquifer geometry or water table | symbolic only |
+| 6 | EM / electrical | no conductivity tensor or circuit | symbolic only |
+| 7 | Site environment / substrate | active bedrock and plateau-substrate DOFs plus radiation port | computed for the synthetic fixture; real impedance missing |
+| 8 | Earth scale | not discretized | conservation-bounded context only |
+| 9 | Planetary / solar / cosmic | not discretized | inbound context in S5; no outbound bridge |
 
-## B9-4. Source / parameter provenance and missing-data register
+The open synthetic core is: `khufu`, `khafre`, `menkaure`, `queens_pyramids`, `khafre_temple_causeway`, `sphinx_parent_massif`, `sphinx_temple_complex`, `bedrock`, `plateau_substrate`. Symbolic domains are represented, not computed: material, interfaces, acoustic, hydrology, EM, environment, Earth and cosmic contexts. The **mechanics projection graph** contains **17 nodes and 13 edges** for a coupled scenario; this is distinct from the open landscape graph signature (19 graph nodes: 10 classes + 9 synthetic seeds; 22 relations). No core object is connected directly to `earth_domain` or `cosmic_domain`.
+
+Temporal ordering remains explicit: geology G0 → anthropogenic residual G1 → present damaged state S0 → idealized reference S2 → passive null S3 → one-hypothesis S4 families → environmental drivers S5. No historical completion state is implied. The Sphinx node is the *parent massif*; its present head/body profile is not assumed original, and `cavity_inventory` is `null` and explicitly empty.
+
+## 2. Corrected physics contract
+
+The revision-1 arbitrary fixed export split was removed. There is no `radiation_export_fraction`, no `C_export`, and no synthetic `1000 W` competitor used to declare negligibility.
+
+Every two-node mechanical element uses the same physical sign pattern:
+
+```
+k[[1,-1],[-1,1]]   k in N/m, added to K
+c[[1,-1],[-1,1]]   c in N s/m, added to C
+```
+
+Positive off-diagonal coupling terms are therefore rejected even if the matrix remains SPD. Registry validation rejects an N/m parameter used as a viscous dashpot coefficient. Incomputable hypothesis channels add **no operator term** and remain `not_evaluable_missing_data`; they are not silently given a fabricated coefficient.
+
+The real radiative channel is a frequency-dependent low-`ka` resistance:
+
+```
+ka      = omega * sqrt(A/pi) / c_medium
+R_rad   = 0.5 * rho * c_medium * A * ka^2              [N s/m]
+C_dyn   = C + R_rad at the declared radiation port only   [N s/m]
+Z(omega)= K - omega^2 M + i omega C_dyn                  [N/m]
+H(omega)= Cr^T Z(omega)^-1 B                             [m/N]
+```
+
+If `ka` exceeds the declared validity bound, `R_rad` is `None`, the radiation port adds nothing, and the export channel is incomputable rather than approximated.
+
+Harmonic energy separation:
+
+```
+P_in       = 1/2 Re( F^* . (i omega u) )
+P_material = 1/2 omega^2 u^* C u
+P_export   = 1/2 R_rad omega^2 |u_port|^2
+P_stored   = 1/4 ( u^* K u + omega^2 u^* M u )
+P_in - P_material - P_export = 0
+```
+
+`P_export` is computed from radiation impedance, not from an arbitrary fraction of `P_material`. The exported fraction varies with the computed response and frequency.
+
+Controls added in revision 2 include exact two-node spring/dashpot sign patterns, zero row sums, rejection of N/m in `C`, off-diagonal sign checks after assembly, radiation-resistance dimensional exponent `(kg,m,s) = (1,0,-1)`, frequency-dependent export efficiency, conservation closure, bridge-status semantics, provenance restrictions, open-ensemble object checks, and the empty real-source ingestion contract.
+
+## 3. Evidence and provenance
 
 - `source_register.json`: `sources: []`, `external_citations_attached: false`. No reference is fabricated.
-- `parameter_registry.json`: every record carries `name, description, unit, value or interval, evidence_class, source_id, frame, vertical_datum, epoch, transformation, transformation_uncertainty, uncertainty, confidence, activated, activated_in, valid_frequency_range_hz, limitations, discriminating_measurement`.
-- Distinctions preserved: survey-grid control vs map proxies (none asserted), visible surface vs latent parent boundary (parent kept symbolic), measured roughness vs ideal planar simplification (no roughness claimed), damaged present state vs reconstructed intact candidate (S0 vs S1 vs S2 kept separate).
-- Unresolved parameters (stored `null`, evidence `unknown`, inactive): `sphinx_original_parent_geometry`, `groundwater_table_depth_m`, `contact_friction_coefficient`, `cavity_inventory`. No unmarked average or plausible guess was substituted.
-- No record uses `measured_current`, `published_measurement` or `historical_record`, because no such source is attached.
+- `real_source_ingestion_contract.json`: `sources: []`, `ingestion_state: awaiting_verified_sources`. It defines required source fields and first-layer targets (geometry, geology, material properties) for a later verified ingestion pass. It is a contract only.
+- Parameter classes requiring provenance are rejected unless sources exist. No record claims `measured_current`, `published_measurement`, `historical_record`, `reconstructed_uncertain` or `geologically_inferred`.
+- Synthetic Sphinx and Sphinx-bedrock values are explicitly `idealized_design`, not reconstructions.
+- Unresolved and inactive (`null`, `unknown`): `sphinx_original_parent_geometry`, `groundwater_table_depth_m`, `contact_friction_coefficient`, `cavity_inventory`.
+- Layer 4, 5, 6, 8 and 9 quantities remain symbolic or `not_evaluable_missing_data`.
 
-## B9-5. Governing equations and dimensional checks
+## 4. Computed results — synthetic fixture only
 
-```
-M u_dd + C u_d + K u = B s(t)
-Z(w) = K - w^2 M + i w C                     [N/m]
-H(w) = Cr^T Z(w)^-1 B                        [m/N]  (receptance)
-S = M^(-1/2) K M^(-1/2),  K phi_k = lambda_k M phi_k
-phi_k^T M phi_j = delta_kj,  w_k = sqrt(lambda_k),  f_k = w_k/(2*pi)
-C = C_material + C_export;  zeta_k = phi_k^T C phi_k/(2 w_k);  Q_k = 1/(2 zeta_k)
-```
+All numbers in this section are from `S2_IDEALIZED_REFERENCE_COMPLEX`, driver `khufu`, receiver `bedrock`, 9 DOF, declared synthetic parameters. They describe **this fixture only**.
 
-Units: `M [kg]`, `C [N s/m = kg/s]`, `K [N/m = kg/s^2]`, `F0 [N]`, `u [m]`, `w [rad/s]`, `H [m/N]`, power `[W]`, stored energy `[J]`. Exponent check: `(N/m)/kg = s^-2`; `sqrt → s^-1`; division by `2*pi` is dimensionless, so `f` has exponents `(kg,m,s) = (0,0,-1)`. `dimensional_checks()` reports `units_consistent = true`, `k_over_m_has_inverse_time_squared = true`, `frequency_scaling_consistent = true`, all matrix shapes `(5,5)` / `B (5,1)` / `Cr (1,5)`.
+### 4.1 Natural modes
 
-Harmonic steady state (phasor convention `Re[. e^{iwt}]`):
+| Mode | f (Hz) | omega (rad/s) | Q |
+|---:|---:|---:|---:|
+| 1 | 0.07968124 | 0.50065197 | 27.44 |
+| 2 | 0.08114982 | 0.50987939 | 28.20 |
+| 3 | 0.08708272 | 0.54715686 | 30.05 |
+| 4 | 0.09252230 | 0.58133476 | 30.06 |
+| 5 | 0.10402810 | 0.65362780 | 26.79 |
+| 6 | 0.10995043 | 0.69083891 | 26.84 |
+| 7 | 0.11850156 | 0.74456725 | 26.53 |
+| 8 | 0.12086109 | 0.75939260 | 26.91 |
+| 9 | 0.12644170 | 0.79445663 | 28.24 |
 
-```
-P_in       = 1/2 Re( F^* . (i w u) )
-P_material = 1/2 w^2 u^* C_material u
-P_export   = 1/2 w^2 u^* C_export u
-P_stored   = 1/4 ( u^* K u + w^2 u^* M u )
-P_in - P_material - P_export = 0   (internal transfer cancels)
-```
+Matrix shapes are `M: [9,9]`, `C: [9,9]`, `K: [9,9]`, `B: [9,1]`, `Cr: [1,9]`. Dimensional checks report `units_consistent = true`, `no_N_per_m_injected_into_damping = true`, `radiation_resistance_is_N_s_per_m = true`, `k_over_m_exponents_kg_m_s = [0,0,-2]`, and `frequency_exponents_kg_m_s = [0,0,-1]`.
 
-**Solved numerically:** natural modes and mass-normalized mode vectors by cyclic Jacobi; `H(w)`, phase, attenuation and group delay by complex Gaussian elimination with partial pivoting; energy budget at each evaluated frequency; PSD/SPD checks; reciprocity; zero-coupling limit; deterministic sweeps. **Not solved:** layers 1, 2 (nonlinear), 4, 5, 6, 8, 9; no finite elements, no CFD, no multiphysics.
+### 4.2 Frequency-response peak
 
-## B9-6. Active bridge records and explicit non-bridges
+`f = 0.0794338908 Hz`, `|H| = 1.12323169e-9 m/N`, phase `-1.26320752 rad`, attenuation `-178.9906 dB` relative to 1 m/N, group delay `40.7327 s`.
 
-All 14 records in `scale_bridge_catalog.json` carry the B4 fields: source layer/state, carrier, path/medium, interfaces/boundary conditions, receiver layer/output, overlap/coupling, phase/delay, attenuation/Q, transfer efficiency, input/output power, conservation closure, frequency/time and spatial validity, uncertainty/evidence, competing explanations, falsifier and status. Inbound and outbound are separate records.
+Closed-form controls recover `f = sqrt(k/m)/(2*pi)`, mass scaling `f ∝ m^-1/2`, stiffness scaling `f ∝ k^1/2`, and the declared beam-like `f ∝ L^-2` fixture. Reciprocity holds for symmetric operators with relative asymmetry `3.12e-16`; deliberately breaking symmetry fails the control.
 
-- **Computed/synthetic-only:** `B_IN_SEISMIC_SUBSTRATE_TO_MONUMENTS` and `B_OUT_KHUFU_TO_BEDROCK_ELASTIC` (`model_supported` within the declared fixture); `B_OUT_SPHINX_PARENT_TO_BEDROCK_ELASTIC` (`hypothesis_unverified` because parent geometry is unresolved).
-- **Bounded / unresolved:** tidal forcing (`bounded_negligible`), cosmic-ray deposition and ELF geomagnetic forcing (`not_evaluable_missing_data`), acoustic, gas/thermal, hydrologic and EM transducer hypotheses (`not_evaluable_missing_data`).
-- **Explicit non-bridges:** `B_OUT_BEDROCK_TO_EARTH_NORMAL_MODES_BOUNDED` (`bounded_negligible`); `B_NONBRIDGE_SCHUMANN_BAND_ANALOGY` (`analogy_only`; shared band is not causal communication); `B_NONBRIDGE_LOCAL_TO_COSMIC` (`bounded_negligible`; no direct pyramid-local → cosmic jump, layers 4–8 omitted and energy-bounded).
-- **Natural background comparator:** synthetic 1000 W placeholder, status `not_evaluable_missing_data`; no inbound or outbound attribution is permitted before a measured co-located background exists.
-- **Conservation bound:** any outbound channel `P_channel <= P_export <= P_in <= P_source_assumed`. With no measurable source power, unmodelled channels stay `not_evaluable_missing_data`, not detections.
-
-## B9-7. Scenario comparison (computed for the declared synthetic parameter set)
-
-Peak `|H|` from driver Khufu → receiver bedrock on each scenario's own modal band; all scenarios forbid an outbound communication claim.
-
-| Scenario | Coupling | Hypotheses | First mode (Hz) | Peak |H| (m/N) |
-|---|---|---|---|---|
-| S0_CURRENT_OBSERVED | ordinary substrate | none | 0.06736 | 6.86e-10 |
-| S1_PARENT_GEOLOGY_RECONSTRUCTION | ordinary substrate | none | 0.06736 | 6.86e-10 |
-| S2_IDEALIZED_REFERENCE_COMPLEX | ordinary substrate | none | 0.06736 | 6.86e-10 |
-| S3_PASSIVE_NULL | zero (`coupling_scale=0`) | none | 0.07118 | 0.0 (bedrock unreachable from Khufu) |
-| S4_ACOUSTIC | + acoustic hypothesis | 1 | 0.06736 | 6.86e-10 |
-| S4_ELASTIC | + elastic hypothesis | 1 | 0.06699 | 9.63e-10 |
-| S4_ELECTROMAGNETIC | + EM hypothesis | 1 | 0.06736 | 6.86e-10 |
-| S4_GAS_THERMAL | + gas/thermal hypothesis | 1 | 0.06736 | 6.85e-10 |
-| S4_HYDROLOGIC | + hydrologic hypothesis | 1 | 0.06735 | 6.73e-10 |
-| S4_MIXED | controlled combination | 1 | 0.06736 | 6.86e-10 |
-| S5_ENVIRONMENTAL_DRIVERS | ordinary substrate + inbound edge | none | 0.06736 | 6.86e-10 |
-
-S0–S2 and S5 coincide because the same declared numeric fixture is used while their *evidence meaning* differs; this is intentional and highlights that no real data have been inserted. S3's zero response is the passive-null control, **not** proof of absence in the real site.
-
-## B9-8. Modal and frequency response — computed model only
-
-Declared synthetic fixture, 5 DOF, `S2_IDEALIZED_REFERENCE_COMPLEX`:
-
-| Mode | f (Hz) | omega (rad/s) | Q (proportional damping) |
-|---|---|---|---|
-| 1 | 0.06735648 | 0.42320 | 23.55 |
-| 2 | 0.07037843 | 0.44210 | 24.46 |
-| 3 | 0.07306394 | 0.45906 | 25.38 |
-| 4 | 0.07840664 | 0.49264 | 25.23 |
-| 5 | 0.11387115 | 0.71542 | 25.66 |
-
-Response peak (Khufu → bedrock, synthetic driver amplitude 1e6 N): `f = 0.0709203271 Hz`, `|H| = 6.86155e-10 m/N`, phase `1.90520 rad`, attenuation `-183.27 dB` relative to 1 m/N, group delay `36.19 s`. Closed-form 1-DOF controls reproduce `f = sqrt(k/m)/(2*pi)`, mass scaling `f ∝ m^-1/2`, stiffness scaling `f ∝ k^1/2`, and a declared beam-like `f ∝ L^-2` fixture.
-
-**No PRIME frequency is hardcoded.** `prime_envelope()` maximizes/minimizes four computed objectives over the modal band and returns a normalized Pareto frontier with units: weakest triad transfer `[m/N]`, triad phase coherence `[1]`, export efficiency `[1]`, material loss per force squared `[W/N^2]`. For this fixture the frontier contains 24 candidate frequencies spanning the computed band; `robust_joint_optimum_identifiable = false` because all parameters are synthetic and unresolved unknowns dominate. The Pareto set is a trade-off envelope, not a selected resonance and not a historical design frequency.
-
-## B9-9. Energy budgets, conservation and sensitivity
-
-At the response peak (`f = 0.0709203271 Hz`):
+### 4.3 Energy budget at the peak
 
 | Quantity | Value | Unit |
-|---|---|---|
-| Input power `P_in` | 1133.04 | W |
-| Material dissipation `P_material` | 793.13 | W |
-| Exported/radiated `P_export` | 339.91 | W |
-| Time-averaged stored energy | 63023.68 | J |
-| Residual `P_in - P_material - P_export` | -5.68e-13 | W (relative 5.02e-16) |
+|---|---:|---|
+| Input power `P_in` | 1518.637047 | W |
+| Material dissipation `P_material` | 1518.180198 | W |
+| Radiated/exported power `P_export` | 0.456849 | W |
+| Export efficiency `P_export/P_in` | 0.00030083 | 1 |
+| Radiation resistance `R_rad` | 2.90732087e6 | N s/m |
+| Time-averaged stored energy | 84587.472558 | J |
+| Residual `P_in - P_material - P_export` | -3.52e-13 | W (relative 2.32e-16) |
 
-Passivity over 41 frequencies: minimum damping eigenvalue `4.90e7 kg/s` (PSD), minimum input power `0.302 W` (no net amplification), all energy balances closed. Reciprocity holds for symmetric M/C/K and matched ports (`relative asymmetry ~1e-17`) and fails when asymmetric damping is deliberately introduced (`~1.2e-2`), confirming the stated assumption. Zero-coupling limit reproduces independent subsystems exactly.
+Passivity over 41 frequencies: minimum damping eigenvalue `1.13137e7 kg/s`, minimum input power `0.21266 W`, all energy balances closed. Out-of-validity radiation states are tested separately and return `not_evaluable_missing_data` with no operator term.
 
-One-at-a-time deterministic sweeps (factors 0.5, 0.75, 1.0, 1.25, 1.5; no random sampling), normalized change in peak `|H|`:
+### 4.4 PRIME envelope
 
-| Parameter | Normalized peak-response range |
+`prime_envelope()` evaluates **81 synthetic grid points**, returns a **58-point discrete synthetic Pareto set** and **58 separately locally refined candidates**, with computed export-efficiency range `[2.3227313e-6, 0.01273449]`. Export efficiency is frequency-dependent (`true`). There is no hardcoded PRIME frequency (`hardcoded_prime_frequency_hz: null`), no continuous global physical optimum claim, and `robust_joint_optimum_identifiable = false`.
+
+Objectives are computed from the operators: minimum triad transfer `[m/N]`, triad phase coherence `[1]`, export efficiency `[1]`, and material loss per force squared `[W/N^2]`. Local refinement is a separate numerical bracket around coarse Pareto candidates, not a new physical claim.
+
+### 4.5 Scenario comparison
+
+| Scenario | Hypothesis activation | First mode (Hz) | Peak |H| (m/N) | Radiated power at peak (W) |
+|---|---|---:|---:|---:|
+| S0_CURRENT_OBSERVED | none | 0.07968124 | 1.12323e-9 | 0.456849 |
+| S1_PARENT_GEOLOGY_RECONSTRUCTION | none | 0.07968124 | 1.12323e-9 | 0.456849 |
+| S2_IDEALIZED_REFERENCE_COMPLEX | none | 0.07968124 | 1.12323e-9 | 0.456849 |
+| S3_PASSIVE_NULL | none, zero couplings | 0.07117625 | 0.0 | 0.0 |
+| S4_ACOUSTIC | evaluable synthetic dashpot, unverified | 0.07968124 | 1.12890e-9 | 0.461470 |
+| S4_ELASTIC | evaluable synthetic spring, unverified | 0.07984524 | 1.26528e-9 | 0.580393 |
+| S4_ELECTROMAGNETIC | incomputable, no operator term | 0.07968124 | 1.12323e-9 | 0.456849 |
+| S4_GAS_THERMAL | evaluable synthetic dashpot, unverified | 0.07968124 | 1.12576e-9 | 0.458906 |
+| S4_HYDROLOGIC | incomputable, no operator term | 0.07968124 | 1.12323e-9 | 0.456849 |
+| S4_MIXED | evaluable combined-control dashpot, unverified | 0.07968124 | 1.12664e-9 | 0.459628 |
+| S5_ENVIRONMENTAL_DRIVERS | none, inbound context only | 0.07968124 | 1.12323e-9 | 0.456849 |
+
+S0–S2 and S5 coincide numerically because the same declared fixture is used while their evidence meaning differs; this is intentional and highlights that no real data were inserted. S3's zero response is a passive-null control, **not** proof of absence in the real site.
+
+### 4.6 Sensitivity
+
+One-at-a-time deterministic sweeps use factors `0.5, 0.75, 1.0, 1.25, 1.5` with no random sampling. Dominant parameter for this fixture: `khufu_vertical_stiffness_N_per_m`, normalized peak-response range `1.40734`. Other normalized peak-response ranges: `damping_ratio_zeta` `0.99252`, `contact_khufu_bedrock_N_per_m` `0.20660`, `sphinx_parent_massif_mass_kg` `0.07021`. Dominance is synthetic-only and not archaeological.
+
+## 5. Represented only, not computed
+
+| Item | Status |
 |---|---|
-| `damping_ratio_zeta` | 1.085 (dominant for this fixture) |
-| `khufu_vertical_stiffness_N_per_m` | 0.934 |
-| `contact_khufu_bedrock_N_per_m` | 0.535 |
-| `sphinx_parent_mass_kg` | 0.343 |
+| Acoustic cavity spectrum | `not_evaluable_missing_data` — no cavity geometry |
+| Gas/thermal draft | `not_evaluable_missing_data` — no temperature field |
+| Hydrology | `not_evaluable_missing_data` — water table unresolved |
+| Electromagnetic radiation | `not_evaluable_missing_data` — no circuit or conductivity tensor |
+| Sphinx original form | `unknown` — no original geometry asserted |
+| Earth and cosmic outbound | `conservation_bounded_not_attributed` / `analogy_only` / `not_evaluable_missing_data`; no direct bridge |
 
-Dominance refers only to this synthetic fixture. Outbound bound at the peak: modelled export `339.91 W` ≤ input `1133.04 W`; ratio to the **synthetic** background comparator `0.34`. This is a conservation bound on a synthetic local channel; it is not a measured Giza emission and not a detection of Earth/cosmic coupling.
+The synthetic `1000 W` natural-background comparator is an `assumption_for_sensitivity`. At the peak, modelled export is `0.456849 W`, ratio `4.56849e-4` to that synthetic comparator. `negligibility_claim_allowed = false`, `attribution_allowed = false`, and `outbound_communication_claim = false`. No negligibility, detection or attribution conclusion may be drawn from this comparator.
 
-## B9-10. Strongest alternative explanations
+Bridge records separate inbound and outbound paths and include explicit non-bridges: shared bands are `analogy_only`; local-to-cosmic transfer is `conservation_bounded_not_attributed`; unmodelled channels remain `not_evaluable_missing_data`. There is no direct pyramid-local → Earth/cosmic bridge.
 
-- Ordinary ambient seismic/cultural noise, wind and thermal movement can produce the same band-limited peaks without any engineered coupling.
-- Local geology/site response can dominate foundation receptance; the synthetic bedrock stiffness is an assumption, not a measured impedance.
-- Shared frequency bands (e.g. Earth/ionosphere ELF) arise from unrelated global sources; pattern similarity is not causal communication.
-- Selection bias and numerical coincidence explain frequency-ratio analogies; fossil cosmological patterns are not present-day signals.
-- Instrument artefacts (cable pickup, thermal drift, pressure noise) are primary alternatives for any proposed EM, acoustic or thermal signature.
-- The passive-first null S3 must be rejected by measurement before any hypothesis is preferred; failing to reject it is not disproof of all mechanisms.
+## 6. Alternatives, falsifiers and limits
 
-## B9-11. Falsifier / next-measurement table
+Alternatives include ordinary ambient seismic/cultural noise, wind and thermal movement, local site response, unrelated shared frequency bands, selection bias, numerical coincidence, instrument artefacts, and failure to reject the passive null. A discriminating measurement requires datum-controlled geometry, sourced material properties, a demonstrable interface/path, measured forcing and receiver response, and a closed energy budget.
 
-| Candidate | Discriminating measurement | Falsifier / decision |
-|---|---|---|
-| Parent geology G0 / residual G1 | Datum-controlled stratigraphic mapping and subsurface imaging of the Sphinx parent massif | A documented parent boundary inconsistent with the declared synthetic mass/stiffness invalidates S1/S2 fixture geometry |
-| Elastic substrate coupling | Controlled-source vibration with receivers on monument bases and bedrock; measured transfer phases | Transfer function outside declared synthetic interval falsifies the active elastic bridge |
-| Acoustic/gas cavity family | Known-volume pressure and temperature mapping with closed volume/heat budget | No cavity geometry or inconsistent modal family ⇒ remains `not_evaluable_missing_data` |
-| Hydrologic path | Piezometer response under controlled loading with declared datum | No coherent pressure response or unclosed water budget falsifies the hypothesis |
-| EM transducer | Measured source power, circuit impedance, losses and received power | Missing power closure ⇒ no generator/transmitter claim |
-| Environmental drivers | Co-located calibrated seismic/acoustic/EM background over the same band | Signal below measured background ⇒ no attribution |
-| Earth/cosmic outbound | Complete source–path–interface–receiver record with conservation closure | Absence ⇒ `bounded_negligible` / `analogy_only` remains |
-| Material damping/stiffness | Laboratory and in-situ modulus/loss measurements | Values outside declared intervals change the computed spectrum; current numbers are synthetic |
+Not calculable: 3D geometry, cavities, anisotropy, roughness and damage; acoustic/gas/thermal spectra; hydrology; EM source/circuit/radiation; Earth and cosmic response; real natural background; historical function; historical PRIME target. Absence of evidence is not proof of absence, and lack of disproof is not proof of existence.
 
-## B9-12. What cannot currently be calculated and why
-
-- **3D geometry, cavities, anisotropy, roughness, damage:** no sourced coordinates, frames, datums or material tensors; the code deliberately does not invent them.
-- **Layer 4 acoustic/gas/thermal spectra:** no volume, passage, boundary condition or temperature field; no frequency may be hardcoded as PRIME.
-- **Layer 5 hydrology:** water table, porosity, permeability and paleo-state are `unknown`.
-- **Layer 6 EM radiation:** conductivity tensor, contact impedance, source power and circuit are absent; no generator/transmitter closure.
-- **Layer 8 Earth response and layer 9 cosmic response:** no modelled path through intervening layers; only conservation bounds and `analogy_only` records are permitted.
-- **Real natural background:** comparator is synthetic; interpretation of any inbound feature is blocked.
-- **Historical function or historical PRIME target:** requires evidence that is not attached; the model can only produce a synthetic Pareto envelope.
-
-## B9-13. Possible engineering design vs historical claim
-
-The "idealized reference complex" is a design-space fixture: a set of declared geometry, material, boundary and parameter choices used to exercise equations, test conservation and compare competing coupling hypotheses. A historical claim would require surveyed geometry with coordinate control, sourced material properties, a demonstrable constructed interface/path, a measurable output and a closed energy budget tied to an archaeological context. None of that is present. Consequently:
-
-- computed numbers describe **this synthetic parameter set only**;
-- bridge records are **candidate transfer operators or non-bridges**, not demonstrated ancient mechanisms;
-- roles are **candidate response interpretations**, not historically assigned functions;
-- PRIME is a **multi-objective computed envelope**, not a preset or discovered sacred frequency;
-- absence of evidence is not proof of absence, and lack of disproof is not proof of existence.
-
----
+Revision-1 numbers (5-DOF modes near `0.067–0.114 Hz`, `339.91 W` exported, `24-point` Pareto set) are **superseded** and must not be reported as corrected results. All final numeric statements above come from the regenerated `deterministic_report_example.json` on the corrected core.
 
 ## Final limitations summary
 
-No real citations, survey values, coordinates, units from external sources, published measurements or dates were introduced. The model is 5-DOF reduced order, linear, passive and deterministic; parameters are synthetic round numbers with documented uncertainty classes; unresolved parameters remain symbolic. All 79 tests pass on the specified Python and OpenBLAS setting. This package adds files only under `research/full-relational-math-reconstruction-001/giza-prime-multiscale/`; it does not modify any workflow, README, phase source, legacy file or memory document, and nothing was committed or pushed.
+No real citations, survey values, coordinates, external units, published measurements or dates were introduced. The evaluated mechanics model is a 9-DOF, linear, passive, deterministic synthetic projection; unresolved quantities stay symbolic. The open landscape graph has zero catalogued real objects, ten uncovered categories and no synchrony assumption. All 159 GIZA tests pass on the specified Python and OpenBLAS setting. The package adds files only under `research/full-relational-math-reconstruction-001/giza-prime-multiscale/` plus the shared README/CI integration; Phase 33 remains unchanged.

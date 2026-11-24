@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "GIZA_REAL_SOURCE_INGESTION_CONTRACT",
+  "external_citations_attached": false,
+  "sources": [],
+  "ingestion_state": "awaiting_verified_sources",
+  "purpose": "Prepared first real-data layer of the multiscale model. This is an INGESTION CONTRACT, not data. No source, measurement, coordinate, datum, material value or citation is attached yet.",
+  "rule": "A numeric value may be promoted from idealized_design to a provenance-bearing class only after a source record with a verifiable identifier, declared datum, method and uncertainty is attached AND external_citations_attached is switched to true by the project owner. Until then every numeric value stays synthetic and all missing quantities stay null/unknown.",
+  "required_source_fields": [
+    "source_id", "citation_or_dataset_identifier", "persistent_identifier",
+    "publisher_or_author", "publication_year", "measurement_method",
+    "instrument_and_calibration", "coordinate_frame", "vertical_datum",
+    "epoch_or_survey_date", "reported_value", "reported_unit",
+    "reported_uncertainty", "license_and_access", "reviewer", "review_date"
+  ],
+  "minimum_evidence_bar": [
+    "Identifier resolves to an independently checkable record.",
+    "Coordinate frame and vertical datum are stated; proxy/map-derived values are labelled separately from surveyed control points.",
+    "Present visible surface, latent parent-mass boundary and reconstructed intact candidate are kept as distinct fields.",
+    "Uncertainty and method are reported; missing fields remain null rather than being filled with averages.",
+    "At least one competing explanation is recorded for any causal interpretation."
+  ],
+  "first_layer_targets": [
+    {
+      "target": "monument_geometry",
+      "needed": "Survey-linked volume, footprint and orientation with declared datum and uncertainty",
+      "promotes": ["khufu_mass_kg", "khafre_mass_kg", "menkaure_mass_kg", "queens_pyramids_mass_kg"],
+      "current_status": "not_evaluable_missing_data"
+    },
+    {
+      "target": "bedrock_and_site_impedance",
+      "needed": "Borehole/logging profile, measured site impedance and a stated synthetic-to-real domain truncation",
+      "promotes": ["bedrock_vertical_stiffness_N_per_m", "plateau_substrate_vertical_stiffness_N_per_m", "contact_khufu_bedrock_N_per_m"],
+      "current_status": "not_evaluable_missing_data"
+    },
+    {
+      "target": "material_properties",
+      "needed": "Sourced density, elastic moduli and attenuation with laboratory method and sample provenance",
+      "promotes": ["homogenized_density_kg_per_m3", "elastic_wave_speed_m_per_s", "damping_ratio_zeta"],
+      "current_status": "not_evaluable_missing_data"
+    },
+    {
+      "target": "radiation_boundary",
+      "needed": "Measured radiating area, medium density/wave speed and a validated radiation-impedance model for the chosen band",
+      "promotes": ["radiation_aperture_area_m2", "radiation_medium_density_kg_per_m3", "radiation_medium_wave_speed_m_per_s"],
+      "current_status": "not_evaluable_missing_data"
+    },
+    {
+      "target": "natural_background",
+      "needed": "Co-located calibrated ambient seismic/acoustic/EM time series with matching band and time window",
+      "promotes": ["natural_background_power_W_synthetic"],
+      "current_status": "not_evaluable_missing_data"
+    },
+    {
+      "target": "hydrology_and_cavities",
+      "needed": "Documented water table, permeability and subsurface survey before any cavity or pressure-coupling term is added",
+      "promotes": ["groundwater_table_depth_m", "cavity_inventory"],
+      "current_status": "not_evaluable_missing_data"
+    }
+  ],
+  "forbidden_until_sources_verified": [
+    "Promoting any synthetic value to measured_current, published_measurement, historical_record, geologically_inferred or reconstructed_uncertain.",
+    "Asserting a historical function or role for any functional object.",
+    "Adding a cavity, chamber, conduit or original Sphinx form without survey evidence.",
+    "Using a synthetic background comparator to claim bounded_negligible or attribution.",
+    "Connecting a pyramid-local mode directly to a planetary or cosmic mode."
+  ],
+  "generated_by": "giza_multiscale_model.py (standard library only)"
+}

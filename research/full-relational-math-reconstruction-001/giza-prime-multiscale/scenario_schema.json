@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "schema_id": "GIZA_SCENARIO_SCHEMA",
-  "description": "Machine-readable contract for GIZA PRIME scenario JSON files. Validation is implemented without third-party dependencies in giza_multiscale_model.py (validate_scenario).",
+  "description": "Machine-readable contract for GIZA PRIME scenario JSON files. Validation is implemented without third-party dependencies in giza_multiscale_model.py (validate_scenario). Revision 2 removes the arbitrary radiation_export_fraction and enforces physical units.",
   "evidence_classes": [
     "measured_current",
     "published_measurement",
@@ -13,15 +13,25 @@
     "speculative_hypothesis",
     "unknown"
   ],
+  "provenance_restricted_classes_without_sources": [
+    "measured_current",
+    "published_measurement",
+    "historical_record",
+    "geologically_inferred",
+    "reconstructed_uncertain"
+  ],
   "bridge_statuses": [
     "measured",
     "literature_supported",
     "model_supported",
+    "idealized_model_only",
+    "conservation_bounded_not_attributed",
     "bounded_negligible",
     "analogy_only",
     "hypothesis_unverified",
     "not_evaluable_missing_data"
   ],
+  "bounded_negligible_rule": "bounded_negligible is forbidden while external_citations_attached is false; a measured co-located background is required. Use conservation_bounded_not_attributed instead.",
   "layer_taxonomy": {
     "1": "material_and_microscopic_response",
     "2": "blocks_masonry_interfaces_cavities",
@@ -52,7 +62,13 @@
     "electromagnetic",
     "mixed"
   ],
-  "core_nodes": ["khufu", "khafre", "menkaure", "sphinx_parent_massif", "bedrock"],
+  "functional_objects": [
+    "khufu", "khafre", "menkaure", "queens_pyramids",
+    "khafre_temple_causeway", "sphinx_parent_massif", "sphinx_temple_complex",
+    "bedrock", "plateau_substrate"
+  ],
+  "functional_object_registry_file": "functional_objects.json",
+  "open_ensemble_note": "The object set is an OPEN registry. Arbitrary further functional objects and combinations may be added; the ensemble is not limited to three pyramids and one stump.",
   "scenario_id_pattern": "^S[0-5](?:_[A-Z0-9_]+)?$",
   "required_fields": [
     "schema_version", "scenario_id", "label", "description", "synthetic",
@@ -73,9 +89,9 @@
     "enabled_modules": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
     "enabled_hypotheses": {"type": "array", "items": {"type": "string"}, "uniqueItems": true, "maxItems": 1, "note": "One hypothesis at a time; S4 requires exactly one."},
     "coupling_families": {"type": "array", "items": {"enum": "coupling_families"}, "minItems": 1},
-    "driver_node": {"type": "string", "enum": "core_nodes"},
-    "receiver_node": {"type": "string", "enum": "core_nodes"},
-    "parameter_overrides": {"type": "object", "additionalProperties": {"type": "number"}},
+    "driver_node": {"type": "string", "enum": "functional_objects"},
+    "receiver_node": {"type": "string", "enum": "functional_objects"},
+    "parameter_overrides": {"type": "object", "additionalProperties": {"type": "number"}, "note": "Keys must be declared numeric parameters; radiation_export_fraction is NOT a valid key (removed in revision 2)."},
     "coupling_scale": {"type": "number", "minimum": 0.0, "maximum": 1.0},
     "falsifiers": {"type": "array", "items": {"type": "string"}, "minItems": 1},
     "notes": {"type": "string"},
@@ -91,6 +107,8 @@
   "honesty_rules": [
     "A synthetic scenario is a declared design/reference or software control, never a historical reconstruction claim.",
     "No scenario enables an outbound Giza-to-cosmos communication claim; conservation bounds and non-bridges are used instead.",
-    "S4 variants must be evaluated one hypothesis at a time against S3_PASSIVE_NULL."
+    "S4 variants must be evaluated one hypothesis at a time against S3_PASSIVE_NULL.",
+    "Contact springs are signed k[[1,-1],[-1,1]]; N/m may never be injected into C (N s/m).",
+    "Radiated power comes from a radiation-impedance port, never from a fixed fraction of structural damping."
   ]
 }
