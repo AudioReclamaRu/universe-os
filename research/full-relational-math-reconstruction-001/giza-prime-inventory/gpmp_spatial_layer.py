@@ -10,6 +10,8 @@ HARD RULES
   are never silently equated with the local Northing/Easting system.
 * The 41/11/30 counts are control values for THIS file, not universal laws.
 * A malformed value raises; it is never replaced by zero or a plausible guess.
+* Network idealization describes the control stations only.  It never becomes
+  terrain, monument geometry, a datum transform or a measured connection.
 """
 
 from __future__ import annotations
@@ -22,6 +24,7 @@ import re
 from typing import Any, Dict, List, Optional, Sequence, Tuple
 
 import spatial_geometry as sg
+import network_idealization as ni
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DEFAULT_SOURCE = os.path.join(HERE, "source_samples", "GPMP-Control-Monuments.json")
@@ -242,11 +245,14 @@ def build_spatial_snapshot(path: Optional[str] = None) -> Dict[str, Any]:
             _require(abs(got[side] - want) < 0.001,
                      "%s %s drifted from control" % (key, side))
 
-    centered = sg.center_points(
-        [(p["local_coordinates"]["easting"],
-          p["local_coordinates"]["northing"],
-          p["local_coordinates"]["elevation"]) for p in points])
+    source_geometry = [
+        (p["local_coordinates"]["easting"],
+         p["local_coordinates"]["northing"],
+         p["local_coordinates"]["elevation"]) for p in points]
+    centered = sg.center_points(source_geometry)
     plane = sg.fit_plane_least_squares(centered["points"])
+    idealization = ni.build_network_idealization(
+        source_geometry, [p["point_id"] for p in points])
 
     return {
         "layer_id": "GIZA_PRIME_SPATIAL_3D_SKELETON",
@@ -300,6 +306,7 @@ def build_spatial_snapshot(path: Optional[str] = None) -> Dict[str, Any]:
             "status": sg.DERIVED_GEOMETRY,
             "not_terrain": True,
         },
+        "network_idealization": idealization,
         "separation": {
             "gpmp_and_arce_sphinx_grid": "separate",
             "gpmp_to_arce_transform": "not_performed",
@@ -309,6 +316,8 @@ def build_spatial_snapshot(path: Optional[str] = None) -> Dict[str, Any]:
         "render_rules": {
             "terrain_mesh": False,
             "fabricated_lines": False,
+            "idealized_model_overlays": True,
+            "idealized_overlays_are_not_measurements": True,
             "kml_z_as_elevation": False,
             "vertical_exaggeration_default": 1.0,
             "grid_is_graphic_support_only": True,
@@ -316,8 +325,12 @@ def build_spatial_snapshot(path: Optional[str] = None) -> Dict[str, Any]:
         "model_contract": {
             "statuses": list(sg.MODEL_STATUSES),
             "required_model_fields": list(sg.MODEL_RECORD_FIELDS),
-            "instantiated_models_in_this_commit": 0,
-            "reason": "insufficient constraints for a validated idealized surface",
+            "instantiated_models_in_this_commit": len(idealization["model_ids"]),
+            "instantiated_model_ids": list(idealization["model_ids"]),
+            "model_scope": "control_network_only_not_terrain_not_monument",
+            "idealized_surface_models": 0,
+            "reason": "network-level idealizations are justified by the sampled stations; "
+                      "terrain and monument surfaces remain unidentified",
         },
     }
 

@@ -14,7 +14,9 @@ The committed GPMP control JSON is parsed into 41 source points (11 main,
 30 secondary) with elevation taken only from the description.  KML Z = 0 is
 rejected as a height; no datum conversion, terrain mesh or invented line is
 produced.  Provenance states are kept separate: the file is present, parsed and
-structure-validated, but not independently corroborated.
+structure-validated, but not independently corroborated.  The control network
+itself is idealized (centre, principal axes, plan hull, spacing and residuals)
+as four IDEALIZED_MODEL records; no terrain or monument surface is claimed.
 
 The script refuses to build if the inventory honesty gate fails or if the GPMP
 source is structurally unexpected.  No network calls are made.  The relation
@@ -414,6 +416,13 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:0 1
 .legend-mark.circle{border-radius:50%;background:var(--amber);color:var(--amber);}
 .legend-mark.diamond{transform:rotate(45deg);border-color:var(--violet);}
 .axis-key{font-size:9px;letter-spacing:1px;color:var(--amber-d);margin-top:6px;}
+@media (max-width:1400px){
+  .spatial-grid{grid-template-columns:1fr;grid-template-rows:auto minmax(320px,1fr) auto;
+    overflow-y:auto;}
+  .sp-col{overflow-y:visible;}
+  #sp-center,.sp-canvas-panel{min-height:320px;}
+  .sp-list{max-height:220px;}
+}
 </style>
 </head>
 <body>
@@ -513,6 +522,8 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:0 1
             <div class="sp-btn on" data-toggle="secondary">SECONDARY __N_SECOND__</div>
             <div class="sp-btn on" data-toggle="labels">LABELS</div>
             <div class="sp-btn on" data-toggle="grid">GRID</div>
+            <div class="sp-btn" data-toggle="axes">MODEL AXES</div>
+            <div class="sp-btn" data-toggle="hull">MODEL HULL</div>
             <div class="sp-btn" data-act="ex-down">EX DOWN</div>
             <div class="sp-btn" id="ex-value">EX 1.0</div>
             <div class="sp-btn" data-act="ex-up">EX UP</div>
@@ -522,6 +533,7 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:0 1
           <div class="legend-row"><span class="legend-mark circle"></span>MAIN TRAVERSE — CIRCLE</div>
           <div class="legend-row"><span class="legend-mark diamond"></span>SECONDARY NETWORK — DIAMOND</div>
           <div class="legend-row">X EASTING / Y NORTHING / Z ELEVATION</div>
+          <div class="axis-key">MODEL AXES / HULL ARE IDEALIZED NETWORK GEOMETRY, NOT MEASURED LINES.</div>
         </div>
       </div>
       <div class="sp-col">
@@ -642,9 +654,11 @@ const ATLAS = JSON.parse(document.getElementById('atlas-snapshot').textContent);
       extraction: p.extraction
     };
   });
+  const ideal = SP.network_idealization;
+  const idealGeometry = ideal.geometry;
   const initial = {yaw:-0.70, pitch:0.45, zoom:1.0, panX:0, panY:0, ex:1.0};
   const view = Object.assign({}, initial, {
-    labels:true, grid:true, main:true, secondary:true,
+    labels:true, grid:true, main:true, secondary:true, axes:false, hull:false,
     selected:null, dragging:false, dragMode:'rotate', lastX:0, lastY:0, moved:0
   });
   const exaggerations = [0.5, 1.0, 1.5, 2.0, 3.0, 5.0];
@@ -723,6 +737,38 @@ const ATLAS = JSON.parse(document.getElementById('atlas-snapshot').textContent);
       context.fillText(p.name, screen.x + 9, screen.y - 8);
     }
   }
+  function toVector(sourcePoint){
+    return [
+      sourcePoint[0] - origin.easting,
+      sourcePoint[1] - origin.northing,
+      (sourcePoint[2] - origin.elevation)*view.ex
+    ];
+  }
+  function drawIdealization(){
+    const hull = idealGeometry.plan_convex_hull;
+    if (view.hull && hull.vertices.length > 2){
+      for (let i = 0; i < hull.vertices.length; i++){
+        const a = hull.vertices[i];
+        const b = hull.vertices[(i+1) % hull.vertices.length];
+        drawSegment(toVector(a), toVector(b), 'rgba(245,166,35,0.62)', 1.4);
+      }
+    }
+    if (view.axes){
+      const c = idealGeometry.centroid;
+      const length = baseRadius*0.42;
+      const colours = ['rgba(245,166,35,0.95)', 'rgba(0,212,255,0.95)', 'rgba(57,255,122,0.95)'];
+      idealGeometry.principal_axes.axes.forEach(function(axis, index){
+        const v = axis.vector;
+        const a = [c[0]-v[0]*length, c[1]-v[1]*length, c[2]-v[2]*length];
+        const b = [c[0]+v[0]*length, c[1]+v[1]*length, c[2]+v[2]*length];
+        drawSegment(toVector(a), toVector(b), colours[index], 1.6);
+        const tip = projectVector(toVector(b));
+        context.font = '9px Martian Mono, Consolas, monospace';
+        context.fillStyle = colours[index];
+        context.fillText(axis.axis_id, tip.x+5, tip.y-5);
+      });
+    }
+  }
   function draw(){
     if (!canvas.offsetWidth) { return; }
     width = canvas.width = canvas.offsetWidth;
@@ -748,6 +794,7 @@ const ATLAS = JSON.parse(document.getElementById('atlas-snapshot').textContent);
     context.fillStyle = '#f5a623'; context.fillText('X EASTING', labelX.x+6, labelX.y);
     context.fillStyle = '#00d4ff'; context.fillText('Y NORTHING', labelY.x+6, labelY.y);
     context.fillStyle = '#39ff7a'; context.fillText('Z ELEVATION', labelZ.x+6, labelZ.y);
+    drawIdealization();
     projected = [];
     points.forEach(function(p){
       if (p.network === 'main_traverse' && !view.main){ return; }
@@ -807,17 +854,33 @@ const ATLAS = JSON.parse(document.getElementById('atlas-snapshot').textContent);
   function renderModels(){
     const plane = SP.derived_geometry.least_squares_plane;
     const contract = SP.model_contract;
+    const g = idealGeometry;
+    const frame = g.principal_axes;
+    const hull = g.plan_convex_hull;
+    const env = g.ellipsoidal_envelope;
+    const spacing = g.spacing;
     const box = document.getElementById('sp-models');
-    box.innerHTML =
+    let markup =
       line('MEASURED_GEOMETRY', SP.counts.total + ' source points') +
       line('DERIVED_GEOMETRY', '1 least-squares plane', 'c') +
       line('FIT RMS', plane.residual_summary.rms.toFixed(3), 'r') +
-      line('IDEALIZED_MODEL', contract.instantiated_models_in_this_commit, 'r') +
+      line('IDEALIZED_MODEL', contract.instantiated_models_in_this_commit, 'on') +
       line('HYPOTHETICAL_MODEL', 0, 'r') +
-      line('UNKNOWN', 'form not identifiable', 'r') +
-      '<div class="raw">Plane is derived over control points, NOT terrain. ' +
-      'A model record requires model_id, method, parameters, units, assumptions, ' +
-      'residual, uncertainty, validity domain, limitations and falsification conditions.</div>';
+      line('UNKNOWN', 'surface form not identifiable', 'r') +
+      line('CENTROID XYZ', g.centroid.map(function(v){ return v.toFixed(2); }).join(' / ')) +
+      line('ANISOTROPY', frame.anisotropy_ratio.toFixed(2), 'c') +
+      line('HULL VERTICES', String(hull.vertex_count), 'c') +
+      line('HULL AREA', hull.area.toFixed(0), 'c') +
+      line('NN MEDIAN', spacing.nearest_neighbor_distance.median.toFixed(2), 'c') +
+      line('OUTSIDE ENVELOPE', env.points_outside + ' / ' + SP.counts.total, 'r');
+    ideal.models.forEach(function(model){
+      markup += line(model.model_id.replace('IDEAL-GPMP-NETWORK-', ''),
+                     model.model_status, 'v');
+    });
+    markup += '<div class="raw">All idealized records describe the control network only. ' +
+      'No terrain, monument surface or measured line is implied. Source values unchanged. ' +
+      'Model axes are directions, not to scale; hull vertices are measured stations.</div>';
+    box.innerHTML = markup;
   }
   function renderList(){
     const box = document.getElementById('sp-list');

@@ -89,6 +89,25 @@ class DualAtlasStructureTests(unittest.TestCase):
                       "addEventListener('mousedown'"):
             self.assertIn(token, self.html, token)
 
+    def test_network_idealization_is_exposed_in_the_snapshot(self):
+        spatial = self._script("spatial-snapshot")
+        ideal = spatial["network_idealization"]
+        self.assertEqual(ideal["scope"], "GPMP_CONTROL_NETWORK_ONLY")
+        self.assertEqual(len(ideal["model_ids"]), 4)
+        self.assertEqual(len(ideal["models"]), 4)
+        self.assertEqual(spatial["model_contract"][
+            "instantiated_models_in_this_commit"], 4)
+        for record in ideal["models"]:
+            self.assertIn(record["model_id"], self.html)
+            self.assertEqual(record["model_status"], "IDEALIZED_MODEL")
+
+    def test_idealized_overlays_are_opt_in_and_not_measured_lines(self):
+        self.assertIn('data-toggle="axes"', self.html)
+        self.assertIn('data-toggle="hull"', self.html)
+        self.assertIn('axes:false, hull:false', self.html)
+        self.assertIn('MODEL AXES / HULL ARE IDEALIZED NETWORK GEOMETRY', self.html)
+        self.assertIn('drawIdealization()', self.html)
+
     def test_no_external_dependencies(self):
         for token in ("http://", "https://", "<link ", "src=\"/", "cdn", "unpkg"):
             self.assertNotIn(token, self.html, token)

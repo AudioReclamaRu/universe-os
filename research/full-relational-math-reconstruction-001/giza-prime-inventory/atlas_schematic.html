@@ -152,6 +152,13 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:0 1
 .legend-mark.circle{border-radius:50%;background:var(--amber);color:var(--amber);}
 .legend-mark.diamond{transform:rotate(45deg);border-color:var(--violet);}
 .axis-key{font-size:9px;letter-spacing:1px;color:var(--amber-d);margin-top:6px;}
+@media (max-width:1400px){
+  .spatial-grid{grid-template-columns:1fr;grid-template-rows:auto minmax(320px,1fr) auto;
+    overflow-y:auto;}
+  .sp-col{overflow-y:visible;}
+  #sp-center,.sp-canvas-panel{min-height:320px;}
+  .sp-list{max-height:220px;}
+}
 </style>
 </head>
 <body>
@@ -251,6 +258,8 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:0 1
             <div class="sp-btn on" data-toggle="secondary">SECONDARY 30</div>
             <div class="sp-btn on" data-toggle="labels">LABELS</div>
             <div class="sp-btn on" data-toggle="grid">GRID</div>
+            <div class="sp-btn" data-toggle="axes">MODEL AXES</div>
+            <div class="sp-btn" data-toggle="hull">MODEL HULL</div>
             <div class="sp-btn" data-act="ex-down">EX DOWN</div>
             <div class="sp-btn" id="ex-value">EX 1.0</div>
             <div class="sp-btn" data-act="ex-up">EX UP</div>
@@ -260,6 +269,7 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:0 1
           <div class="legend-row"><span class="legend-mark circle"></span>MAIN TRAVERSE — CIRCLE</div>
           <div class="legend-row"><span class="legend-mark diamond"></span>SECONDARY NETWORK — DIAMOND</div>
           <div class="legend-row">X EASTING / Y NORTHING / Z ELEVATION</div>
+          <div class="axis-key">MODEL AXES / HULL ARE IDEALIZED NETWORK GEOMETRY, NOT MEASURED LINES.</div>
         </div>
       </div>
       <div class="sp-col">
@@ -399,8 +409,16 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:0 1
   "layer_id": "GIZA_PRIME_SPATIAL_3D_SKELETON",
   "marking": "SOURCE POINTS / NOT A TERRAIN MODEL",
   "model_contract": {
-    "instantiated_models_in_this_commit": 0,
-    "reason": "insufficient constraints for a validated idealized surface",
+    "idealized_surface_models": 0,
+    "instantiated_model_ids": [
+      "IDEAL-GPMP-NETWORK-FRAME-001",
+      "IDEAL-GPMP-NETWORK-HULL-001",
+      "IDEAL-GPMP-NETWORK-ELLIPSOID-001",
+      "IDEAL-GPMP-NETWORK-SPACING-001"
+    ],
+    "instantiated_models_in_this_commit": 4,
+    "model_scope": "control_network_only_not_terrain_not_monument",
+    "reason": "network-level idealizations are justified by the sampled stations; terrain and monument surfaces remain unidentified",
     "required_model_fields": [
       "model_id",
       "model_type",
@@ -424,6 +442,635 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:0 1
       "HYPOTHETICAL_MODEL",
       "UNKNOWN"
     ]
+  },
+  "network_idealization": {
+    "geometry": {
+      "centroid": [
+        499950.6676097561,
+        99541.71378048781,
+        64.52653658536586
+      ],
+      "ellipsoidal_envelope": {
+        "geometry_status": "DERIVED_GEOMETRY",
+        "interpretation": "descriptive envelope of sampled stations; NOT a terrain surface and NOT a statistical confidence region",
+        "normalized_radial_distance": {
+          "count": 41,
+          "max": 2.7513287475363413,
+          "mean": 0.7350862586624264,
+          "median": 0.6544614937701195,
+          "min": 0.10785057916764054,
+          "rms": 0.8660254037844388
+        },
+        "outside_point_indices": [
+          29,
+          31,
+          32,
+          34,
+          35,
+          36,
+          37
+        ],
+        "outside_positive_residual": {
+          "count": 7,
+          "max": 1.7513287475363413,
+          "mean": 0.49298093528030656,
+          "median": 0.3817588469023201,
+          "min": 0.041675756282223864,
+          "rms": 0.7241964261804295
+        },
+        "points_outside": 7,
+        "scale": 2.0,
+        "semi_axes": [
+          946.5516040992378,
+          806.8199082247472,
+          48.327359976928754
+        ]
+      },
+      "plan_convex_hull": {
+        "area": 2278161.9279403687,
+        "coordinate_plane": "X=Easting, Y=Northing",
+        "geometry_status": "DERIVED_GEOMETRY",
+        "interpretation": "boundary of sampled plan footprint; interior NOT surveyed",
+        "perimeter": 5679.68937395932,
+        "vertex_count": 10,
+        "vertex_elevation_max": 105.547,
+        "vertex_elevation_min": 24.19,
+        "vertices": [
+          [
+            498718.109,
+            99261.575,
+            101.347
+          ],
+          [
+            499946.262,
+            98399.708,
+            80.958
+          ],
+          [
+            500330.626,
+            98526.755,
+            63.887
+          ],
+          [
+            500634.775,
+            99224.997,
+            24.19
+          ],
+          [
+            500471.24,
+            100022.31,
+            40.31
+          ],
+          [
+            500418.22,
+            100062.23,
+            45.22
+          ],
+          [
+            500104.684,
+            100150.183,
+            59.07
+          ],
+          [
+            499593.613,
+            100154.421,
+            79.874
+          ],
+          [
+            499044.336,
+            99823.854,
+            101.156
+          ],
+          [
+            498855.725,
+            99576.9,
+            105.547
+          ]
+        ]
+      },
+      "principal_axes": {
+        "anisotropy_ratio": 383.62106727591976,
+        "axes": [
+          {
+            "axis_id": "PC1",
+            "eigenvalue": 223989.98480571006,
+            "explained_variance_ratio": 0.5783170695975134,
+            "sqrt_eigenvalue": 473.2758020496189,
+            "vector": [
+              0.648034185712222,
+              0.7614078083547211,
+              -0.017602372702507234
+            ]
+          },
+          {
+            "axis_id": "PC2",
+            "eigenvalue": 162739.59107694737,
+            "explained_variance_ratio": 0.4201754087387153,
+            "sqrt_eigenvalue": 403.4099541123736,
+            "vector": [
+              0.7606784841291918,
+              -0.6482111399805988,
+              -0.03450451837032249
+            ]
+          },
+          {
+            "axis_id": "PC3",
+            "eigenvalue": 583.8834305849139,
+            "explained_variance_ratio": 0.0015075216637712924,
+            "sqrt_eigenvalue": 24.163679988464377,
+            "vector": [
+              0.037682063786538045,
+              -0.008970361281084072,
+              0.9992495157303177
+            ]
+          }
+        ],
+        "centroid": [
+          499950.6676097561,
+          99541.71378048781,
+          64.52653658536586
+        ],
+        "degenerate": false,
+        "geometry_status": "DERIVED_GEOMETRY",
+        "interpretation": "descriptive frame of sampled control stations; NOT terrain",
+        "orthonormal_basis": true,
+        "total_variance": 387313.45931324235
+      },
+      "spacing": {
+        "geometry_status": "DERIVED_GEOMETRY",
+        "interpretation": "sampling density of control stations; NOT monument density",
+        "k_nearest": 5,
+        "k_nearest_mean_distance": {
+          "count": 41,
+          "max": 662.2640869201884,
+          "mean": 281.97798935197056,
+          "median": 214.18190050567188,
+          "min": 135.91874847795629,
+          "rms": 315.13572484641145
+        },
+        "nearest_neighbor_distance": {
+          "count": 41,
+          "max": 405.9844586237471,
+          "mean": 175.60843522822773,
+          "median": 138.33842307901924,
+          "min": 36.07986926252364,
+          "rms": 206.28173905454264
+        },
+        "pairwise_distance": {
+          "count": 820,
+          "max": 1918.5670976770923,
+          "mean": 786.4281634419065,
+          "median": 718.7026473388225,
+          "min": 36.07986926252364,
+          "rms": 891.0626193439757
+        },
+        "spacing_density_index": 0.0035463760923260573
+      }
+    },
+    "model_ids": [
+      "IDEAL-GPMP-NETWORK-FRAME-001",
+      "IDEAL-GPMP-NETWORK-HULL-001",
+      "IDEAL-GPMP-NETWORK-ELLIPSOID-001",
+      "IDEAL-GPMP-NETWORK-SPACING-001"
+    ],
+    "models": [
+      {
+        "assumptions": [
+          "the 41 stations are one sampled network, not one population of terrain points",
+          "source units are used without datum conversion",
+          "the frame is descriptive of the sample only"
+        ],
+        "falsification_conditions": [
+          "additional control stations move the frame outside its residual bounds",
+          "an independently verified datum changes the axis ordering"
+        ],
+        "fit_residual": {
+          "orthonormal_basis": true,
+          "total_variance": 387313.45931324235
+        },
+        "input_geometry_ids": [
+          "GPMP-CONTROL-NETWORK-41",
+          "GPMP-CENTERED-POINTS",
+          "GPMP-LEAST-SQUARES-PLANE"
+        ],
+        "limitations": [
+          "no terrain, monument or surface geometry is implied",
+          "no datum or CRS conversion was performed",
+          "principal axes are not archaeological orientations"
+        ],
+        "method": "Jacobi eigendecomposition of the population covariance matrix",
+        "model_id": "IDEAL-GPMP-NETWORK-FRAME-001",
+        "model_status": "IDEALIZED_MODEL",
+        "model_type": "principal_axis_network_frame",
+        "parameter_units": {
+          "anisotropy_ratio": "dimensionless",
+          "pc1_eigenvalue": "source units squared",
+          "pc1_x": "dimensionless",
+          "pc1_y": "dimensionless",
+          "pc1_z": "dimensionless",
+          "pc2_eigenvalue": "source units squared",
+          "pc2_x": "dimensionless",
+          "pc2_y": "dimensionless",
+          "pc2_z": "dimensionless",
+          "pc3_eigenvalue": "source units squared",
+          "pc3_x": "dimensionless",
+          "pc3_y": "dimensionless",
+          "pc3_z": "dimensionless"
+        },
+        "parameters": {
+          "anisotropy_ratio": 383.62106727591976,
+          "pc1_eigenvalue": 223989.98480571006,
+          "pc1_x": 0.648034185712222,
+          "pc1_y": 0.7614078083547211,
+          "pc1_z": -0.017602372702507234,
+          "pc2_eigenvalue": 162739.59107694737,
+          "pc2_x": 0.7606784841291918,
+          "pc2_y": -0.6482111399805988,
+          "pc2_z": -0.03450451837032249,
+          "pc3_eigenvalue": 583.8834305849139,
+          "pc3_x": 0.037682063786538045,
+          "pc3_y": -0.008970361281084072,
+          "pc3_z": 0.9992495157303177
+        },
+        "source_ids": [
+          "GPMP:GEF1",
+          "GPMP:GEF2",
+          "GPMP:GEF3",
+          "GPMP:GEF4",
+          "GPMP:GEF5",
+          "GPMP:GEF6",
+          "GPMP:GEF7",
+          "GPMP:GS1",
+          "GPMP:GS2",
+          "GPMP:GE1",
+          "GPMP:GIII1",
+          "GPMP:GCF1",
+          "GPMP:GCF2",
+          "GPMP:GCF3",
+          "GPMP:GCF4",
+          "GPMP:GCF5",
+          "GPMP:GCF6",
+          "GPMP:GP3B",
+          "GPMP:GSW1",
+          "GPMP:GSW2",
+          "GPMP:GSW3",
+          "GPMP:GII1",
+          "GPMP:GII2",
+          "GPMP:GII4",
+          "GPMP:GWF1",
+          "GPMP:GI1",
+          "GPMP:GI2",
+          "GPMP:GI3",
+          "GPMP:GI4",
+          "GPMP:GI5",
+          "GPMP:GP1",
+          "GPMP:GP2",
+          "GPMP:GP3A",
+          "GPMP:GP4",
+          "GPMP:GP5",
+          "GPMP:GP6",
+          "GPMP:GP7",
+          "GPMP:GP8",
+          "GPMP:GP9",
+          "GPMP:GP10",
+          "GPMP:GP11"
+        ],
+        "uncertainty": {
+          "degenerate_sample": false,
+          "explained_variance_ratio": [
+            0.5783170695975134,
+            0.4201754087387153,
+            0.0015075216637712924
+          ]
+        },
+        "validity_domain": "sampled GPMP control network only"
+      },
+      {
+        "assumptions": [
+          "the plan footprint boundary is meaningful for control stations",
+          "the hull interior is unsurveyed and carries no elevation claim"
+        ],
+        "falsification_conditions": [
+          "a new station lies outside the declared hull",
+          "an independent survey redefines the plan footprint"
+        ],
+        "fit_residual": {
+          "vertices_reused_from_source": 10
+        },
+        "input_geometry_ids": [
+          "GPMP-CONTROL-NETWORK-41",
+          "GPMP-CENTERED-POINTS",
+          "GPMP-LEAST-SQUARES-PLANE"
+        ],
+        "limitations": [
+          "not a terrain boundary, site boundary or monument outline",
+          "no surface is drawn inside the polygon"
+        ],
+        "method": "monotone-chain convex hull in Easting/Northing through measured vertices",
+        "model_id": "IDEAL-GPMP-NETWORK-HULL-001",
+        "model_status": "IDEALIZED_MODEL",
+        "model_type": "plan_view_convex_envelope",
+        "parameter_units": {
+          "area": "source units squared",
+          "perimeter": "source units (metres claimed by publication; unverified here)",
+          "vertex_count": "count",
+          "vertex_elevation_max": "source units (metres claimed by publication; unverified here)",
+          "vertex_elevation_min": "source units (metres claimed by publication; unverified here)"
+        },
+        "parameters": {
+          "area": 2278161.9279403687,
+          "perimeter": 5679.68937395932,
+          "vertex_count": 10.0,
+          "vertex_elevation_max": 105.547,
+          "vertex_elevation_min": 24.19
+        },
+        "source_ids": [
+          "GPMP:GEF1",
+          "GPMP:GEF2",
+          "GPMP:GEF3",
+          "GPMP:GEF4",
+          "GPMP:GEF5",
+          "GPMP:GEF6",
+          "GPMP:GEF7",
+          "GPMP:GS1",
+          "GPMP:GS2",
+          "GPMP:GE1",
+          "GPMP:GIII1",
+          "GPMP:GCF1",
+          "GPMP:GCF2",
+          "GPMP:GCF3",
+          "GPMP:GCF4",
+          "GPMP:GCF5",
+          "GPMP:GCF6",
+          "GPMP:GP3B",
+          "GPMP:GSW1",
+          "GPMP:GSW2",
+          "GPMP:GSW3",
+          "GPMP:GII1",
+          "GPMP:GII2",
+          "GPMP:GII4",
+          "GPMP:GWF1",
+          "GPMP:GI1",
+          "GPMP:GI2",
+          "GPMP:GI3",
+          "GPMP:GI4",
+          "GPMP:GI5",
+          "GPMP:GP1",
+          "GPMP:GP2",
+          "GPMP:GP3A",
+          "GPMP:GP4",
+          "GPMP:GP5",
+          "GPMP:GP6",
+          "GPMP:GP7",
+          "GPMP:GP8",
+          "GPMP:GP9",
+          "GPMP:GP10",
+          "GPMP:GP11"
+        ],
+        "uncertainty": {
+          "coordinate_plane": "X=Easting, Y=Northing",
+          "interior_sampled": false
+        },
+        "validity_domain": "boundary of the sampled plan footprint only"
+      },
+      {
+        "assumptions": [
+          "the scale factor is a descriptive envelope choice, not a fitted confidence level",
+          "station scatter is treated symmetrically around the sample centroid"
+        ],
+        "falsification_conditions": [
+          "a measured station falls outside the envelope beyond its declared residual",
+          "a different scale factor is required by an independently stated criterion"
+        ],
+        "fit_residual": {
+          "count": 7,
+          "max": 1.7513287475363413,
+          "mean": 0.49298093528030656,
+          "median": 0.3817588469023201,
+          "min": 0.041675756282223864,
+          "rms": 0.7241964261804295
+        },
+        "input_geometry_ids": [
+          "GPMP-CONTROL-NETWORK-41",
+          "GPMP-CENTERED-POINTS",
+          "GPMP-LEAST-SQUARES-PLANE"
+        ],
+        "limitations": [
+          "not a statistical confidence region for a wider population",
+          "not a landscape or monument surface"
+        ],
+        "method": "centroid plus principal axes scaled by the declared factor",
+        "model_id": "IDEAL-GPMP-NETWORK-ELLIPSOID-001",
+        "model_status": "IDEALIZED_MODEL",
+        "model_type": "two_sigma_ellipsoidal_envelope",
+        "parameter_units": {
+          "points_outside": "count",
+          "scale": "dimensionless",
+          "semi_axis_1": "source units (metres claimed by publication; unverified here)",
+          "semi_axis_2": "source units (metres claimed by publication; unverified here)",
+          "semi_axis_3": "source units (metres claimed by publication; unverified here)"
+        },
+        "parameters": {
+          "points_outside": 7.0,
+          "scale": 2.0,
+          "semi_axis_1": 946.5516040992378,
+          "semi_axis_2": 806.8199082247472,
+          "semi_axis_3": 48.327359976928754
+        },
+        "source_ids": [
+          "GPMP:GEF1",
+          "GPMP:GEF2",
+          "GPMP:GEF3",
+          "GPMP:GEF4",
+          "GPMP:GEF5",
+          "GPMP:GEF6",
+          "GPMP:GEF7",
+          "GPMP:GS1",
+          "GPMP:GS2",
+          "GPMP:GE1",
+          "GPMP:GIII1",
+          "GPMP:GCF1",
+          "GPMP:GCF2",
+          "GPMP:GCF3",
+          "GPMP:GCF4",
+          "GPMP:GCF5",
+          "GPMP:GCF6",
+          "GPMP:GP3B",
+          "GPMP:GSW1",
+          "GPMP:GSW2",
+          "GPMP:GSW3",
+          "GPMP:GII1",
+          "GPMP:GII2",
+          "GPMP:GII4",
+          "GPMP:GWF1",
+          "GPMP:GI1",
+          "GPMP:GI2",
+          "GPMP:GI3",
+          "GPMP:GI4",
+          "GPMP:GI5",
+          "GPMP:GP1",
+          "GPMP:GP2",
+          "GPMP:GP3A",
+          "GPMP:GP4",
+          "GPMP:GP5",
+          "GPMP:GP6",
+          "GPMP:GP7",
+          "GPMP:GP8",
+          "GPMP:GP9",
+          "GPMP:GP10",
+          "GPMP:GP11"
+        ],
+        "uncertainty": {
+          "normalized_radial_distance": {
+            "count": 41,
+            "max": 2.7513287475363413,
+            "mean": 0.7350862586624264,
+            "median": 0.6544614937701195,
+            "min": 0.10785057916764054,
+            "rms": 0.8660254037844388
+          },
+          "outside_point_indices": [
+            29,
+            31,
+            32,
+            34,
+            35,
+            36,
+            37
+          ]
+        },
+        "validity_domain": "sampled control stations only"
+      },
+      {
+        "assumptions": [
+          "the sample spacing describes survey density, not object density",
+          "source distances are used without a verified datum transform"
+        ],
+        "falsification_conditions": [
+          "new stations materially shift the median nearest-neighbour distance",
+          "an independent survey shows the spacing is an acquisition artefact"
+        ],
+        "fit_residual": {
+          "nearest_neighbor_distance": {
+            "count": 41,
+            "max": 405.9844586237471,
+            "mean": 175.60843522822773,
+            "median": 138.33842307901924,
+            "min": 36.07986926252364,
+            "rms": 206.28173905454264
+          }
+        },
+        "input_geometry_ids": [
+          "GPMP-CONTROL-NETWORK-41",
+          "GPMP-CENTERED-POINTS",
+          "GPMP-LEAST-SQUARES-PLANE"
+        ],
+        "limitations": [
+          "not the density of monuments, settlements or terrain samples",
+          "uneven campaign strategy is not removed by this statistic"
+        ],
+        "method": "all pairwise distances plus nearest and k-nearest station distances",
+        "model_id": "IDEAL-GPMP-NETWORK-SPACING-001",
+        "model_status": "IDEALIZED_MODEL",
+        "model_type": "sampling_spacing_distribution",
+        "parameter_units": {
+          "density_index": "inverse source units",
+          "k_nearest_mean": "source units (metres claimed by publication; unverified here)",
+          "nearest_median": "source units (metres claimed by publication; unverified here)",
+          "pairwise_count": "count"
+        },
+        "parameters": {
+          "density_index": 0.0035463760923260573,
+          "k_nearest_mean": 281.97798935197056,
+          "nearest_median": 138.33842307901924,
+          "pairwise_count": 820.0
+        },
+        "source_ids": [
+          "GPMP:GEF1",
+          "GPMP:GEF2",
+          "GPMP:GEF3",
+          "GPMP:GEF4",
+          "GPMP:GEF5",
+          "GPMP:GEF6",
+          "GPMP:GEF7",
+          "GPMP:GS1",
+          "GPMP:GS2",
+          "GPMP:GE1",
+          "GPMP:GIII1",
+          "GPMP:GCF1",
+          "GPMP:GCF2",
+          "GPMP:GCF3",
+          "GPMP:GCF4",
+          "GPMP:GCF5",
+          "GPMP:GCF6",
+          "GPMP:GP3B",
+          "GPMP:GSW1",
+          "GPMP:GSW2",
+          "GPMP:GSW3",
+          "GPMP:GII1",
+          "GPMP:GII2",
+          "GPMP:GII4",
+          "GPMP:GWF1",
+          "GPMP:GI1",
+          "GPMP:GI2",
+          "GPMP:GI3",
+          "GPMP:GI4",
+          "GPMP:GI5",
+          "GPMP:GP1",
+          "GPMP:GP2",
+          "GPMP:GP3A",
+          "GPMP:GP4",
+          "GPMP:GP5",
+          "GPMP:GP6",
+          "GPMP:GP7",
+          "GPMP:GP8",
+          "GPMP:GP9",
+          "GPMP:GP10",
+          "GPMP:GP11"
+        ],
+        "uncertainty": {
+          "k_nearest": 5,
+          "k_nearest_mean_distance": {
+            "count": 41,
+            "max": 662.2640869201884,
+            "mean": 281.97798935197056,
+            "median": 214.18190050567188,
+            "min": 135.91874847795629,
+            "rms": 315.13572484641145
+          }
+        },
+        "validity_domain": "sampled control network only"
+      }
+    ],
+    "not_monument_geometry": true,
+    "not_terrain": true,
+    "point_count": 41,
+    "scope": "GPMP_CONTROL_NETWORK_ONLY",
+    "source_values_unmodified": true,
+    "status": "IDEALIZED_MODEL",
+    "validation": {
+      "all_records_valid": true,
+      "full_contract_fields": [
+        "model_id",
+        "model_type",
+        "source_ids",
+        "input_geometry_ids",
+        "method",
+        "parameters",
+        "parameter_units",
+        "assumptions",
+        "fit_residual",
+        "uncertainty",
+        "validity_domain",
+        "model_status",
+        "limitations",
+        "falsification_conditions"
+      ],
+      "record_count": 4,
+      "statuses": [
+        "IDEALIZED_MODEL"
+      ]
+    }
   },
   "points": [
     {
@@ -1872,6 +2519,8 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:0 1
   "render_rules": {
     "fabricated_lines": false,
     "grid_is_graphic_support_only": true,
+    "idealized_model_overlays": true,
+    "idealized_overlays_are_not_measurements": true,
     "kml_z_as_elevation": false,
     "terrain_mesh": false,
     "vertical_exaggeration_default": 1.0
@@ -2278,9 +2927,11 @@ const ATLAS = JSON.parse(document.getElementById('atlas-snapshot').textContent);
       extraction: p.extraction
     };
   });
+  const ideal = SP.network_idealization;
+  const idealGeometry = ideal.geometry;
   const initial = {yaw:-0.70, pitch:0.45, zoom:1.0, panX:0, panY:0, ex:1.0};
   const view = Object.assign({}, initial, {
-    labels:true, grid:true, main:true, secondary:true,
+    labels:true, grid:true, main:true, secondary:true, axes:false, hull:false,
     selected:null, dragging:false, dragMode:'rotate', lastX:0, lastY:0, moved:0
   });
   const exaggerations = [0.5, 1.0, 1.5, 2.0, 3.0, 5.0];
@@ -2359,6 +3010,38 @@ const ATLAS = JSON.parse(document.getElementById('atlas-snapshot').textContent);
       context.fillText(p.name, screen.x + 9, screen.y - 8);
     }
   }
+  function toVector(sourcePoint){
+    return [
+      sourcePoint[0] - origin.easting,
+      sourcePoint[1] - origin.northing,
+      (sourcePoint[2] - origin.elevation)*view.ex
+    ];
+  }
+  function drawIdealization(){
+    const hull = idealGeometry.plan_convex_hull;
+    if (view.hull && hull.vertices.length > 2){
+      for (let i = 0; i < hull.vertices.length; i++){
+        const a = hull.vertices[i];
+        const b = hull.vertices[(i+1) % hull.vertices.length];
+        drawSegment(toVector(a), toVector(b), 'rgba(245,166,35,0.62)', 1.4);
+      }
+    }
+    if (view.axes){
+      const c = idealGeometry.centroid;
+      const length = baseRadius*0.42;
+      const colours = ['rgba(245,166,35,0.95)', 'rgba(0,212,255,0.95)', 'rgba(57,255,122,0.95)'];
+      idealGeometry.principal_axes.axes.forEach(function(axis, index){
+        const v = axis.vector;
+        const a = [c[0]-v[0]*length, c[1]-v[1]*length, c[2]-v[2]*length];
+        const b = [c[0]+v[0]*length, c[1]+v[1]*length, c[2]+v[2]*length];
+        drawSegment(toVector(a), toVector(b), colours[index], 1.6);
+        const tip = projectVector(toVector(b));
+        context.font = '9px Martian Mono, Consolas, monospace';
+        context.fillStyle = colours[index];
+        context.fillText(axis.axis_id, tip.x+5, tip.y-5);
+      });
+    }
+  }
   function draw(){
     if (!canvas.offsetWidth) { return; }
     width = canvas.width = canvas.offsetWidth;
@@ -2384,6 +3067,7 @@ const ATLAS = JSON.parse(document.getElementById('atlas-snapshot').textContent);
     context.fillStyle = '#f5a623'; context.fillText('X EASTING', labelX.x+6, labelX.y);
     context.fillStyle = '#00d4ff'; context.fillText('Y NORTHING', labelY.x+6, labelY.y);
     context.fillStyle = '#39ff7a'; context.fillText('Z ELEVATION', labelZ.x+6, labelZ.y);
+    drawIdealization();
     projected = [];
     points.forEach(function(p){
       if (p.network === 'main_traverse' && !view.main){ return; }
@@ -2443,17 +3127,33 @@ const ATLAS = JSON.parse(document.getElementById('atlas-snapshot').textContent);
   function renderModels(){
     const plane = SP.derived_geometry.least_squares_plane;
     const contract = SP.model_contract;
+    const g = idealGeometry;
+    const frame = g.principal_axes;
+    const hull = g.plan_convex_hull;
+    const env = g.ellipsoidal_envelope;
+    const spacing = g.spacing;
     const box = document.getElementById('sp-models');
-    box.innerHTML =
+    let markup =
       line('MEASURED_GEOMETRY', SP.counts.total + ' source points') +
       line('DERIVED_GEOMETRY', '1 least-squares plane', 'c') +
       line('FIT RMS', plane.residual_summary.rms.toFixed(3), 'r') +
-      line('IDEALIZED_MODEL', contract.instantiated_models_in_this_commit, 'r') +
+      line('IDEALIZED_MODEL', contract.instantiated_models_in_this_commit, 'on') +
       line('HYPOTHETICAL_MODEL', 0, 'r') +
-      line('UNKNOWN', 'form not identifiable', 'r') +
-      '<div class="raw">Plane is derived over control points, NOT terrain. ' +
-      'A model record requires model_id, method, parameters, units, assumptions, ' +
-      'residual, uncertainty, validity domain, limitations and falsification conditions.</div>';
+      line('UNKNOWN', 'surface form not identifiable', 'r') +
+      line('CENTROID XYZ', g.centroid.map(function(v){ return v.toFixed(2); }).join(' / ')) +
+      line('ANISOTROPY', frame.anisotropy_ratio.toFixed(2), 'c') +
+      line('HULL VERTICES', String(hull.vertex_count), 'c') +
+      line('HULL AREA', hull.area.toFixed(0), 'c') +
+      line('NN MEDIAN', spacing.nearest_neighbor_distance.median.toFixed(2), 'c') +
+      line('OUTSIDE ENVELOPE', env.points_outside + ' / ' + SP.counts.total, 'r');
+    ideal.models.forEach(function(model){
+      markup += line(model.model_id.replace('IDEAL-GPMP-NETWORK-', ''),
+                     model.model_status, 'v');
+    });
+    markup += '<div class="raw">All idealized records describe the control network only. ' +
+      'No terrain, monument surface or measured line is implied. Source values unchanged. ' +
+      'Model axes are directions, not to scale; hull vertices are measured stations.</div>';
+    box.innerHTML = markup;
   }
   function renderList(){
     const box = document.getElementById('sp-list');
