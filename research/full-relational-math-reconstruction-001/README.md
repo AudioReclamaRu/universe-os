@@ -487,3 +487,29 @@ For each cell, the canonical predecessor-union basis is concatenated with Phase 
 These are exact finite-dimensional coordinate statements only. No universal recurrence, infinite stabilization, infinite Hilbert series, or minimal generating set of the infinite T-ideal is inferred.
 
 See [Phase 31 report](phase-31/EXACT_TRACE_RELATION_BASIS_TRANSITIONS.md), the [basis-transition engine](phase-31/basis_transitions.py) and the [12 Phase 31 tests](phase-31/test_basis_transitions.py).
+
+
+### Corrected validation status — phases 16–31
+
+The dedicated GitHub Actions push workflow completed successfully in [run 45298187862](https://github.com/AudioReclamaRu/universe-os/actions/runs/45298187862), testing the exact branch head `70de7823b5858fa31e1d6c2a9896a950d645a9fa). All **16 of 16 jobs passed**, including the new Phase 31 package.
+
+- Phase 16 — 17 tests
+- Phase 17 — 9 tests
+- Phase 18 — 6 tests
+- Phase 19 — 10 tests
+- Phase 20 — 6 tests
+- Phase 21 — 7 tests
+- Phase 22 — 9 tests
+- Phase 23 — 6 tests
+- Phase 24 — 8 tests
+- Phase 25 — 6 tests
+- Phase 26 — 7 tests
+- Phase 27 — 16 tests
+- Phase 28 — 15 tests
+- Phase 29 — 14 tests
+- Phase 30 — 13 tests
+- Phase 31 — 12 tests
+
+**161 tests passed across all 16 affine-IFS phase packages.** This validates these sixteen packages on the clean checkout at the cited commit only; it does not claim that the complete repository or every earlier research phase passed CI.
+
+Phase 31's 12 tests specifically verify canonical RREF basis order-independence, exact inclusion maps, predecessor intersection coordinates, quotient-complement dimensions, bidirectional adapted-basis matrices and exact inverse products, unresolved-bound propagation and input validation. All arithmetic in the transition engine is rational and exact.
