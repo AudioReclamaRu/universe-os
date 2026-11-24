@@ -1,0 +1,4442 @@
+{
+  "categories_present": [
+    "HYPOTHESIS",
+    "MEASURED_CORRESPONDENCE",
+    "STATISTICAL_PATTERN"
+  ],
+  "category_contract": [
+    "COINCIDENCE_CANDIDATE",
+    "EXACT_IDENTITY",
+    "HYPOTHESIS",
+    "IDEALIZED_INVARIANT",
+    "MEASURED_CORRESPONDENCE",
+    "NUMERICAL_APPROXIMATION",
+    "REJECTED",
+    "STATISTICAL_PATTERN"
+  ],
+  "cross_campaign_geometric_relations": 0,
+  "cross_campaign_reason": "no verified coordinate-system compatibility; Euclidean distance across campaigns is withheld as proof of any physical relation",
+  "physical_hypotheses": {
+    "acoustic": null,
+    "electromagnetic": null,
+    "frequency_assignment": null,
+    "hydraulic": null,
+    "reason": "section 20: geometry, materials and boundary conditions are not yet established"
+  },
+  "relation_count": 154,
+  "relations": [
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50017 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:000129",
+        "GDFS-2016:000130",
+        "GDFS-2016:000131",
+        "GDFS-2016:000132",
+        "GDFS-2016:000133",
+        "GDFS-2016:000134",
+        "GDFS-2016:000135",
+        "GDFS-2016:000136",
+        "GDFS-2016:000137",
+        "GDFS-2016:000138",
+        "GDFS-2016:000139",
+        "GDFS-2016:000140",
+        "GDFS-2016:000141",
+        "GDFS-2016:000142",
+        "GDFS-2016:000143",
+        "GDFS-2016:000144",
+        "GDFS-2016:000145",
+        "GDFS-2016:000146",
+        "GDFS-2016:000147",
+        "GDFS-2016:000148"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50017",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 20,
+        "plan_span": 4.522827986995757
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50037 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:002540",
+        "GDFS-2016:002541",
+        "GDFS-2016:002542",
+        "GDFS-2016:002543",
+        "GDFS-2016:002544"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50037",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 5,
+        "plan_span": 0.9589296116121072
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50038 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:002545",
+        "GDFS-2016:002546",
+        "GDFS-2016:002547",
+        "GDFS-2016:002548",
+        "GDFS-2016:002549"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50038",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 5,
+        "plan_span": 0.8578257398922878
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50039 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:002550",
+        "GDFS-2016:002551",
+        "GDFS-2016:002552",
+        "GDFS-2016:002553",
+        "GDFS-2016:002554"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50039",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 5,
+        "plan_span": 0.8072000990933653
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50043 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:002555",
+        "GDFS-2016:002600",
+        "GDFS-2016:002601",
+        "GDFS-2016:002602",
+        "GDFS-2016:002603",
+        "GDFS-2016:002604"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50043",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 6,
+        "plan_span": 0.6379670838154815
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50044 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:002556",
+        "GDFS-2016:002557",
+        "GDFS-2016:002558",
+        "GDFS-2016:002559",
+        "GDFS-2016:002560"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50044",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 5,
+        "plan_span": 0.6524515307615809
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50078 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:002563",
+        "GDFS-2016:002564",
+        "GDFS-2016:002565",
+        "GDFS-2016:002566",
+        "GDFS-2016:002567"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50078",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 5,
+        "plan_span": 0.8291356945720676
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50129 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:002568",
+        "GDFS-2016:002569",
+        "GDFS-2016:002570",
+        "GDFS-2016:002571",
+        "GDFS-2016:002572",
+        "GDFS-2016:002573"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50129",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 6,
+        "plan_span": 0.6810469881344435
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50130 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:002574",
+        "GDFS-2016:002575",
+        "GDFS-2016:002576",
+        "GDFS-2016:002577",
+        "GDFS-2016:002578"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50130",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 5,
+        "plan_span": 0.5991034969082222
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50131 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:002579",
+        "GDFS-2016:002580",
+        "GDFS-2016:002581",
+        "GDFS-2016:002582",
+        "GDFS-2016:002583"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50131",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 5,
+        "plan_span": 0.8324307778715822
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50132 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:002584",
+        "GDFS-2016:002585",
+        "GDFS-2016:002586",
+        "GDFS-2016:002587",
+        "GDFS-2016:002588",
+        "GDFS-2016:002589"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50132",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 6,
+        "plan_span": 1.0868606166546388
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50133 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:002590",
+        "GDFS-2016:002591",
+        "GDFS-2016:002592",
+        "GDFS-2016:002593",
+        "GDFS-2016:002594"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50133",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 5,
+        "plan_span": 0.9128504806286081
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50134 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:002595",
+        "GDFS-2016:002596",
+        "GDFS-2016:002597",
+        "GDFS-2016:002598",
+        "GDFS-2016:002599"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50134",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 5,
+        "plan_span": 0.6551030453438665
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50136 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003780",
+        "GDFS-2016:003781",
+        "GDFS-2016:003782",
+        "GDFS-2016:003783",
+        "GDFS-2016:003784",
+        "GDFS-2016:003785"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50136",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 6,
+        "plan_span": 2.8934361924619263
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50137 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003786",
+        "GDFS-2016:003787",
+        "GDFS-2016:003788",
+        "GDFS-2016:003789",
+        "GDFS-2016:003790"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50137",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 5,
+        "plan_span": 1.6057309861793625
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50138 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003791",
+        "GDFS-2016:003792",
+        "GDFS-2016:003793",
+        "GDFS-2016:003794"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50138",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 4,
+        "plan_span": 2.2284786290324665
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50139 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003795",
+        "GDFS-2016:003796",
+        "GDFS-2016:003797",
+        "GDFS-2016:003798"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50139",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 4,
+        "plan_span": 2.089059597026687
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50140 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003799",
+        "GDFS-2016:003800",
+        "GDFS-2016:003801",
+        "GDFS-2016:003802",
+        "GDFS-2016:003803",
+        "GDFS-2016:003804",
+        "GDFS-2016:003805",
+        "GDFS-2016:003806",
+        "GDFS-2016:003807",
+        "GDFS-2016:003808"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50140",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 10,
+        "plan_span": 3.850110258181188
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50141 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003809",
+        "GDFS-2016:003810",
+        "GDFS-2016:003811",
+        "GDFS-2016:003812"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50141",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 4,
+        "plan_span": 0.7013422844866076
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50142 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003813",
+        "GDFS-2016:003814",
+        "GDFS-2016:003815",
+        "GDFS-2016:003816",
+        "GDFS-2016:003817"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50142",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 5,
+        "plan_span": 1.1083726809891377
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50181 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003060",
+        "GDFS-2016:003061",
+        "GDFS-2016:003062",
+        "GDFS-2016:003063",
+        "GDFS-2016:003064",
+        "GDFS-2016:003065",
+        "GDFS-2016:003066",
+        "GDFS-2016:003067",
+        "GDFS-2016:003068",
+        "GDFS-2016:003069",
+        "GDFS-2016:003070",
+        "GDFS-2016:003071",
+        "GDFS-2016:003072",
+        "GDFS-2016:003073",
+        "GDFS-2016:003074",
+        "GDFS-2016:003075",
+        "GDFS-2016:003076",
+        "GDFS-2016:003077",
+        "GDFS-2016:003078",
+        "GDFS-2016:003079",
+        "GDFS-2016:003080",
+        "GDFS-2016:003081",
+        "GDFS-2016:003082",
+        "GDFS-2016:003083",
+        "GDFS-2016:003084",
+        "GDFS-2016:003085",
+        "GDFS-2016:003086",
+        "GDFS-2016:003087",
+        "GDFS-2016:003088",
+        "GDFS-2016:003089",
+        "GDFS-2016:003090",
+        "GDFS-2016:003091",
+        "GDFS-2016:003092",
+        "GDFS-2016:003093",
+        "GDFS-2016:003094",
+        "GDFS-2016:003095",
+        "GDFS-2016:003096",
+        "GDFS-2016:003097",
+        "GDFS-2016:003098",
+        "GDFS-2016:003099",
+        "GDFS-2016:003100",
+        "GDFS-2016:003101",
+        "GDFS-2016:003102",
+        "GDFS-2016:003103",
+        "GDFS-2016:003104",
+        "GDFS-2016:003105",
+        "GDFS-2016:003106"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50181",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 47,
+        "plan_span": 49.35879546749287
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50182 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003107",
+        "GDFS-2016:003108",
+        "GDFS-2016:003109",
+        "GDFS-2016:003110",
+        "GDFS-2016:003111",
+        "GDFS-2016:003112",
+        "GDFS-2016:003113",
+        "GDFS-2016:003114",
+        "GDFS-2016:003115",
+        "GDFS-2016:003116",
+        "GDFS-2016:003117",
+        "GDFS-2016:003118",
+        "GDFS-2016:003119",
+        "GDFS-2016:003120",
+        "GDFS-2016:003121",
+        "GDFS-2016:003122",
+        "GDFS-2016:003123",
+        "GDFS-2016:003124",
+        "GDFS-2016:003125",
+        "GDFS-2016:003126",
+        "GDFS-2016:003127",
+        "GDFS-2016:003128",
+        "GDFS-2016:003129",
+        "GDFS-2016:003130",
+        "GDFS-2016:003131",
+        "GDFS-2016:003132",
+        "GDFS-2016:003133",
+        "GDFS-2016:003134",
+        "GDFS-2016:003135",
+        "GDFS-2016:003136",
+        "GDFS-2016:003137",
+        "GDFS-2016:003138",
+        "GDFS-2016:003139",
+        "GDFS-2016:003140",
+        "GDFS-2016:003141",
+        "GDFS-2016:003142",
+        "GDFS-2016:003143",
+        "GDFS-2016:003144",
+        "GDFS-2016:003145",
+        "GDFS-2016:003146",
+        "GDFS-2016:003147",
+        "GDFS-2016:003148",
+        "GDFS-2016:003149",
+        "GDFS-2016:003150"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50182",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 44,
+        "plan_span": 57.584010871053714
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50183 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:000000",
+        "GDFS-2016:000001",
+        "GDFS-2016:000002",
+        "GDFS-2016:000003",
+        "GDFS-2016:000004",
+        "GDFS-2016:000005",
+        "GDFS-2016:000006",
+        "GDFS-2016:000007",
+        "GDFS-2016:000008",
+        "GDFS-2016:000009",
+        "GDFS-2016:000010",
+        "GDFS-2016:000011",
+        "GDFS-2016:000012",
+        "GDFS-2016:000013",
+        "GDFS-2016:000014",
+        "GDFS-2016:000015",
+        "GDFS-2016:000016",
+        "GDFS-2016:000017",
+        "GDFS-2016:000018",
+        "GDFS-2016:000019",
+        "GDFS-2016:000020",
+        "GDFS-2016:000021",
+        "GDFS-2016:000022",
+        "GDFS-2016:000023",
+        "GDFS-2016:000024",
+        "GDFS-2016:000025",
+        "GDFS-2016:000026",
+        "GDFS-2016:000027",
+        "GDFS-2016:000028",
+        "GDFS-2016:000029",
+        "GDFS-2016:000030",
+        "GDFS-2016:000031",
+        "GDFS-2016:000032",
+        "GDFS-2016:000033",
+        "GDFS-2016:000034",
+        "GDFS-2016:000035",
+        "GDFS-2016:000036",
+        "GDFS-2016:000037",
+        "GDFS-2016:000038",
+        "GDFS-2016:000039",
+        "GDFS-2016:000040",
+        "GDFS-2016:000041",
+        "GDFS-2016:000042",
+        "GDFS-2016:000043",
+        "GDFS-2016:000044",
+        "GDFS-2016:000045",
+        "GDFS-2016:000046",
+        "GDFS-2016:000047",
+        "GDFS-2016:000048",
+        "GDFS-2016:000049",
+        "GDFS-2016:000050",
+        "GDFS-2016:000051",
+        "GDFS-2016:000052",
+        "GDFS-2016:000053",
+        "GDFS-2016:000054",
+        "GDFS-2016:000055",
+        "GDFS-2016:000056",
+        "GDFS-2016:000057",
+        "GDFS-2016:000058",
+        "GDFS-2016:000059",
+        "GDFS-2016:000060",
+        "GDFS-2016:000061",
+        "GDFS-2016:000062",
+        "GDFS-2016:000063",
+        "GDFS-2016:000064",
+        "GDFS-2016:000065",
+        "GDFS-2016:000066",
+        "GDFS-2016:000067",
+        "GDFS-2016:000068",
+        "GDFS-2016:000069",
+        "GDFS-2016:000070",
+        "GDFS-2016:000071",
+        "GDFS-2016:000072",
+        "GDFS-2016:000073",
+        "GDFS-2016:000074",
+        "GDFS-2016:000075",
+        "GDFS-2016:000076",
+        "GDFS-2016:000077",
+        "GDFS-2016:000078",
+        "GDFS-2016:000079",
+        "GDFS-2016:000080",
+        "GDFS-2016:000081",
+        "GDFS-2016:000082",
+        "GDFS-2016:000083",
+        "GDFS-2016:000084",
+        "GDFS-2016:000085",
+        "GDFS-2016:000086"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50183",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 87,
+        "plan_span": 65.18146799513497
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50184 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003151",
+        "GDFS-2016:003152",
+        "GDFS-2016:003153",
+        "GDFS-2016:003154",
+        "GDFS-2016:003155",
+        "GDFS-2016:003156",
+        "GDFS-2016:003157",
+        "GDFS-2016:003158",
+        "GDFS-2016:003159",
+        "GDFS-2016:003160",
+        "GDFS-2016:003161",
+        "GDFS-2016:003162"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50184",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 12,
+        "plan_span": 16.732909400352103
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50185 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003163",
+        "GDFS-2016:003164",
+        "GDFS-2016:003165",
+        "GDFS-2016:003166",
+        "GDFS-2016:003167",
+        "GDFS-2016:003168",
+        "GDFS-2016:003169",
+        "GDFS-2016:003170",
+        "GDFS-2016:003171",
+        "GDFS-2016:003172",
+        "GDFS-2016:003173",
+        "GDFS-2016:003174",
+        "GDFS-2016:003175",
+        "GDFS-2016:003176",
+        "GDFS-2016:003177",
+        "GDFS-2016:003178",
+        "GDFS-2016:003179",
+        "GDFS-2016:003180",
+        "GDFS-2016:003181",
+        "GDFS-2016:003182",
+        "GDFS-2016:003183",
+        "GDFS-2016:003184",
+        "GDFS-2016:003185",
+        "GDFS-2016:003186",
+        "GDFS-2016:003187",
+        "GDFS-2016:003188",
+        "GDFS-2016:003189",
+        "GDFS-2016:003190",
+        "GDFS-2016:003191",
+        "GDFS-2016:003192",
+        "GDFS-2016:003193",
+        "GDFS-2016:003194",
+        "GDFS-2016:003195",
+        "GDFS-2016:003196",
+        "GDFS-2016:003197"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50185",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 35,
+        "plan_span": 27.93659351100217
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50186 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003198",
+        "GDFS-2016:003199",
+        "GDFS-2016:003200",
+        "GDFS-2016:003201",
+        "GDFS-2016:003202",
+        "GDFS-2016:003203",
+        "GDFS-2016:003204",
+        "GDFS-2016:003205",
+        "GDFS-2016:003206"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50186",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 9,
+        "plan_span": 9.03154261463931
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50187 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:004443",
+        "GDFS-2016:004444",
+        "GDFS-2016:004445",
+        "GDFS-2016:004446",
+        "GDFS-2016:004447",
+        "GDFS-2016:004448",
+        "GDFS-2016:004449",
+        "GDFS-2016:004450",
+        "GDFS-2016:004451",
+        "GDFS-2016:004452",
+        "GDFS-2016:004453",
+        "GDFS-2016:004454",
+        "GDFS-2016:004455",
+        "GDFS-2016:004456",
+        "GDFS-2016:004457",
+        "GDFS-2016:004458",
+        "GDFS-2016:004459",
+        "GDFS-2016:004460",
+        "GDFS-2016:004461",
+        "GDFS-2016:004462",
+        "GDFS-2016:004463",
+        "GDFS-2016:004464",
+        "GDFS-2016:004465",
+        "GDFS-2016:004466",
+        "GDFS-2016:004467",
+        "GDFS-2016:004468",
+        "GDFS-2016:004469"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50187",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 27,
+        "plan_span": 12.119255752725675
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50188 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003207",
+        "GDFS-2016:003208",
+        "GDFS-2016:003209",
+        "GDFS-2016:003210"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50188",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 4,
+        "plan_span": 1.1077729911614753
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50189 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003211",
+        "GDFS-2016:003212"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50189",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 2,
+        "plan_span": 0.9690371509787132
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50190 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003213",
+        "GDFS-2016:003214"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50190",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 2,
+        "plan_span": 0.9271418445733087
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50191 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003215",
+        "GDFS-2016:003216",
+        "GDFS-2016:003217",
+        "GDFS-2016:003218"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50191",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 4,
+        "plan_span": 1.5775677481286448
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50192 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003219",
+        "GDFS-2016:003220",
+        "GDFS-2016:003221",
+        "GDFS-2016:003222"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50192",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 4,
+        "plan_span": 1.3127547372028006
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50193 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003223",
+        "GDFS-2016:003224",
+        "GDFS-2016:003225",
+        "GDFS-2016:003226"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50193",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 4,
+        "plan_span": 1.3296322800175218
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50194 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003227",
+        "GDFS-2016:003228",
+        "GDFS-2016:003229",
+        "GDFS-2016:003230"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50194",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 4,
+        "plan_span": 1.356855556046356
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50200 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003818",
+        "GDFS-2016:003819",
+        "GDFS-2016:003820",
+        "GDFS-2016:003821"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50200",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 4,
+        "plan_span": 8.206260841560157
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50201 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:004470",
+        "GDFS-2016:004471",
+        "GDFS-2016:004472",
+        "GDFS-2016:004473"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50201",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 4,
+        "plan_span": 4.081107692761203
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50202 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003822",
+        "GDFS-2016:003823",
+        "GDFS-2016:003824"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50202",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 3,
+        "plan_span": 4.957620901225846
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50203 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:004474",
+        "GDFS-2016:004475",
+        "GDFS-2016:004476",
+        "GDFS-2016:004477"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50203",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 4,
+        "plan_span": 4.239960613034351
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50204 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003231",
+        "GDFS-2016:003232",
+        "GDFS-2016:003233",
+        "GDFS-2016:003234",
+        "GDFS-2016:003235",
+        "GDFS-2016:003236"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50204",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 6,
+        "plan_span": 3.874486933805377
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50205 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003825",
+        "GDFS-2016:003826",
+        "GDFS-2016:003827",
+        "GDFS-2016:003828",
+        "GDFS-2016:003829"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50205",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 5,
+        "plan_span": 3.42214260371393
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50206 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:004478",
+        "GDFS-2016:004479"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50206",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 2,
+        "plan_span": 2.245505956334052
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50207 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:002829",
+        "GDFS-2016:002830",
+        "GDFS-2016:002831",
+        "GDFS-2016:002832",
+        "GDFS-2016:002833",
+        "GDFS-2016:002834",
+        "GDFS-2016:002835",
+        "GDFS-2016:002836",
+        "GDFS-2016:002837",
+        "GDFS-2016:002838",
+        "GDFS-2016:002839",
+        "GDFS-2016:002840",
+        "GDFS-2016:002841",
+        "GDFS-2016:002842",
+        "GDFS-2016:002843",
+        "GDFS-2016:002844",
+        "GDFS-2016:002845",
+        "GDFS-2016:002846",
+        "GDFS-2016:002847",
+        "GDFS-2016:002848",
+        "GDFS-2016:002849",
+        "GDFS-2016:002850",
+        "GDFS-2016:002851",
+        "GDFS-2016:002852",
+        "GDFS-2016:002853",
+        "GDFS-2016:002854",
+        "GDFS-2016:002855",
+        "GDFS-2016:002856",
+        "GDFS-2016:002857",
+        "GDFS-2016:002858",
+        "GDFS-2016:002859",
+        "GDFS-2016:002860",
+        "GDFS-2016:002861",
+        "GDFS-2016:002862",
+        "GDFS-2016:002863",
+        "GDFS-2016:002864",
+        "GDFS-2016:002865",
+        "GDFS-2016:002866",
+        "GDFS-2016:002867",
+        "GDFS-2016:002868",
+        "GDFS-2016:002869",
+        "GDFS-2016:002870",
+        "GDFS-2016:002871",
+        "GDFS-2016:002872",
+        "GDFS-2016:002873",
+        "GDFS-2016:002874",
+        "GDFS-2016:002875",
+        "GDFS-2016:002876",
+        "GDFS-2016:002877",
+        "GDFS-2016:002878",
+        "GDFS-2016:002879",
+        "GDFS-2016:002880",
+        "GDFS-2016:002929",
+        "GDFS-2016:002930",
+        "GDFS-2016:002931",
+        "GDFS-2016:002932",
+        "GDFS-2016:002933",
+        "GDFS-2016:002934",
+        "GDFS-2016:002935",
+        "GDFS-2016:002936",
+        "GDFS-2016:002937",
+        "GDFS-2016:002938",
+        "GDFS-2016:002939",
+        "GDFS-2016:002940",
+        "GDFS-2016:002941",
+        "GDFS-2016:002942",
+        "GDFS-2016:002943",
+        "GDFS-2016:002944",
+        "GDFS-2016:002945",
+        "GDFS-2016:002946",
+        "GDFS-2016:002947",
+        "GDFS-2016:002948",
+        "GDFS-2016:002949",
+        "GDFS-2016:002950",
+        "GDFS-2016:002951",
+        "GDFS-2016:002952",
+        "GDFS-2016:002953",
+        "GDFS-2016:002954",
+        "GDFS-2016:002955",
+        "GDFS-2016:002956",
+        "GDFS-2016:002957",
+        "GDFS-2016:002958",
+        "GDFS-2016:002959",
+        "GDFS-2016:002960",
+        "GDFS-2016:002961",
+        "GDFS-2016:002962",
+        "GDFS-2016:002963",
+        "GDFS-2016:002964",
+        "GDFS-2016:002965",
+        "GDFS-2016:002966",
+        "GDFS-2016:002967",
+        "GDFS-2016:002968",
+        "GDFS-2016:002969",
+        "GDFS-2016:002970",
+        "GDFS-2016:002971",
+        "GDFS-2016:002972",
+        "GDFS-2016:002973",
+        "GDFS-2016:002974",
+        "GDFS-2016:002975",
+        "GDFS-2016:002976",
+        "GDFS-2016:002977",
+        "GDFS-2016:002978",
+        "GDFS-2016:002979",
+        "GDFS-2016:002980",
+        "GDFS-2016:002981",
+        "GDFS-2016:002982",
+        "GDFS-2016:002983",
+        "GDFS-2016:002984",
+        "GDFS-2016:002985",
+        "GDFS-2016:002986",
+        "GDFS-2016:002987",
+        "GDFS-2016:002988",
+        "GDFS-2016:002989",
+        "GDFS-2016:002990",
+        "GDFS-2016:002991",
+        "GDFS-2016:002992",
+        "GDFS-2016:002993",
+        "GDFS-2016:002994",
+        "GDFS-2016:002995",
+        "GDFS-2016:002996",
+        "GDFS-2016:002997",
+        "GDFS-2016:002998",
+        "GDFS-2016:002999",
+        "GDFS-2016:003000",
+        "GDFS-2016:003001",
+        "GDFS-2016:003002",
+        "GDFS-2016:003003",
+        "GDFS-2016:003004",
+        "GDFS-2016:003005",
+        "GDFS-2016:003006",
+        "GDFS-2016:003007",
+        "GDFS-2016:003008",
+        "GDFS-2016:003009",
+        "GDFS-2016:003010",
+        "GDFS-2016:003011",
+        "GDFS-2016:003012",
+        "GDFS-2016:003013",
+        "GDFS-2016:003014",
+        "GDFS-2016:003015",
+        "GDFS-2016:003016",
+        "GDFS-2016:003017",
+        "GDFS-2016:003018"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50207",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 142,
+        "plan_span": 36.328375755040454
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50208 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:002881",
+        "GDFS-2016:002882",
+        "GDFS-2016:002883",
+        "GDFS-2016:002884",
+        "GDFS-2016:002885",
+        "GDFS-2016:002886",
+        "GDFS-2016:002887",
+        "GDFS-2016:002888",
+        "GDFS-2016:002889",
+        "GDFS-2016:002890",
+        "GDFS-2016:002891",
+        "GDFS-2016:002892",
+        "GDFS-2016:002893",
+        "GDFS-2016:002894",
+        "GDFS-2016:002895",
+        "GDFS-2016:002896",
+        "GDFS-2016:002897",
+        "GDFS-2016:002898",
+        "GDFS-2016:002899",
+        "GDFS-2016:002900",
+        "GDFS-2016:002901",
+        "GDFS-2016:002902",
+        "GDFS-2016:002903",
+        "GDFS-2016:002904",
+        "GDFS-2016:002905",
+        "GDFS-2016:002906",
+        "GDFS-2016:002907",
+        "GDFS-2016:002908",
+        "GDFS-2016:002909",
+        "GDFS-2016:002910",
+        "GDFS-2016:002911",
+        "GDFS-2016:002912",
+        "GDFS-2016:002913",
+        "GDFS-2016:002914",
+        "GDFS-2016:002915",
+        "GDFS-2016:002916",
+        "GDFS-2016:002917",
+        "GDFS-2016:002918",
+        "GDFS-2016:002919",
+        "GDFS-2016:002920",
+        "GDFS-2016:002921",
+        "GDFS-2016:002922",
+        "GDFS-2016:002923",
+        "GDFS-2016:002924",
+        "GDFS-2016:002925",
+        "GDFS-2016:002926",
+        "GDFS-2016:002927",
+        "GDFS-2016:002928"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50208",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 48,
+        "plan_span": 7.091437442445552
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50209 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003830",
+        "GDFS-2016:003831",
+        "GDFS-2016:003832",
+        "GDFS-2016:003833",
+        "GDFS-2016:003834",
+        "GDFS-2016:003835"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50209",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 6,
+        "plan_span": 3.150753560677202
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50210 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003836",
+        "GDFS-2016:003837",
+        "GDFS-2016:003838",
+        "GDFS-2016:003839",
+        "GDFS-2016:003840"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50210",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 5,
+        "plan_span": 3.113053966789731
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50211 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003841",
+        "GDFS-2016:003842",
+        "GDFS-2016:003843",
+        "GDFS-2016:003844",
+        "GDFS-2016:003845",
+        "GDFS-2016:003846",
+        "GDFS-2016:003847",
+        "GDFS-2016:003848",
+        "GDFS-2016:003849"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50211",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 9,
+        "plan_span": 4.390448268678835
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50212 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003850",
+        "GDFS-2016:003851",
+        "GDFS-2016:003852",
+        "GDFS-2016:003853",
+        "GDFS-2016:003854"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50212",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 5,
+        "plan_span": 2.483193508358269
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50213 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:004480",
+        "GDFS-2016:004481",
+        "GDFS-2016:004482",
+        "GDFS-2016:004483"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50213",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 4,
+        "plan_span": 1.5334722038404363
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50214 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:004484",
+        "GDFS-2016:004485",
+        "GDFS-2016:004486",
+        "GDFS-2016:004487"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50214",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 4,
+        "plan_span": 2.21176061091935
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50215 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:004488",
+        "GDFS-2016:004489",
+        "GDFS-2016:004490",
+        "GDFS-2016:004491",
+        "GDFS-2016:004492",
+        "GDFS-2016:004493",
+        "GDFS-2016:004494",
+        "GDFS-2016:004495"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50215",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 8,
+        "plan_span": 4.33805209743279
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50216 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003237",
+        "GDFS-2016:003238",
+        "GDFS-2016:003239",
+        "GDFS-2016:003240",
+        "GDFS-2016:003241"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50216",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 5,
+        "plan_span": 2.9313800504191394
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50217 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003855",
+        "GDFS-2016:003856",
+        "GDFS-2016:003857",
+        "GDFS-2016:003858",
+        "GDFS-2016:003859",
+        "GDFS-2016:003860",
+        "GDFS-2016:003861",
+        "GDFS-2016:003862",
+        "GDFS-2016:003863",
+        "GDFS-2016:003864",
+        "GDFS-2016:003865",
+        "GDFS-2016:003866"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50217",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 12,
+        "plan_span": 9.66282013699555
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50218 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003867",
+        "GDFS-2016:003868",
+        "GDFS-2016:003869",
+        "GDFS-2016:003870",
+        "GDFS-2016:003871",
+        "GDFS-2016:003872",
+        "GDFS-2016:003873",
+        "GDFS-2016:003874",
+        "GDFS-2016:003875",
+        "GDFS-2016:003876",
+        "GDFS-2016:003877",
+        "GDFS-2016:003878",
+        "GDFS-2016:003879",
+        "GDFS-2016:003880",
+        "GDFS-2016:003881",
+        "GDFS-2016:003882",
+        "GDFS-2016:003883",
+        "GDFS-2016:003884",
+        "GDFS-2016:003885",
+        "GDFS-2016:003886",
+        "GDFS-2016:003887",
+        "GDFS-2016:003888",
+        "GDFS-2016:003889",
+        "GDFS-2016:003890",
+        "GDFS-2016:003891",
+        "GDFS-2016:003892",
+        "GDFS-2016:003893",
+        "GDFS-2016:003894",
+        "GDFS-2016:003895"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50218",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 29,
+        "plan_span": 10.060490097395387
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50222 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003896",
+        "GDFS-2016:003897",
+        "GDFS-2016:003898",
+        "GDFS-2016:003899",
+        "GDFS-2016:003900",
+        "GDFS-2016:003901",
+        "GDFS-2016:003902",
+        "GDFS-2016:003903",
+        "GDFS-2016:003904",
+        "GDFS-2016:003905",
+        "GDFS-2016:003906",
+        "GDFS-2016:003907",
+        "GDFS-2016:003908"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50222",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 13,
+        "plan_span": 5.951253061357435
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50223 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003242",
+        "GDFS-2016:003243",
+        "GDFS-2016:003244",
+        "GDFS-2016:003245"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50223",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 4,
+        "plan_span": 1.503220875331039
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50224 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003909",
+        "GDFS-2016:003910",
+        "GDFS-2016:003911",
+        "GDFS-2016:003912",
+        "GDFS-2016:003913",
+        "GDFS-2016:003914",
+        "GDFS-2016:003915",
+        "GDFS-2016:003916",
+        "GDFS-2016:003917",
+        "GDFS-2016:003918",
+        "GDFS-2016:003919",
+        "GDFS-2016:003920"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50224",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 12,
+        "plan_span": 3.7563739164072714
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50225 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003921",
+        "GDFS-2016:003922",
+        "GDFS-2016:003923",
+        "GDFS-2016:003924",
+        "GDFS-2016:003925",
+        "GDFS-2016:003926",
+        "GDFS-2016:003927",
+        "GDFS-2016:003928"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50225",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 8,
+        "plan_span": 6.447126646787623
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50226 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003929",
+        "GDFS-2016:003930",
+        "GDFS-2016:003931",
+        "GDFS-2016:003932",
+        "GDFS-2016:003933",
+        "GDFS-2016:003934",
+        "GDFS-2016:003935",
+        "GDFS-2016:003936",
+        "GDFS-2016:003937",
+        "GDFS-2016:003938"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50226",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 10,
+        "plan_span": 6.751428663616228
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50227 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003939",
+        "GDFS-2016:003940",
+        "GDFS-2016:003941",
+        "GDFS-2016:003942",
+        "GDFS-2016:003943",
+        "GDFS-2016:003944",
+        "GDFS-2016:003945",
+        "GDFS-2016:003946",
+        "GDFS-2016:003947",
+        "GDFS-2016:003948"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50227",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 10,
+        "plan_span": 4.837511963833509
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50228 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003949",
+        "GDFS-2016:003950",
+        "GDFS-2016:003951",
+        "GDFS-2016:003952",
+        "GDFS-2016:003953",
+        "GDFS-2016:003954",
+        "GDFS-2016:003955",
+        "GDFS-2016:003956"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50228",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 8,
+        "plan_span": 4.611000975908178
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50229 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:004496",
+        "GDFS-2016:004497",
+        "GDFS-2016:004498",
+        "GDFS-2016:004499"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50229",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 4,
+        "plan_span": 3.2802393205256113
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50230 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:004500",
+        "GDFS-2016:004501",
+        "GDFS-2016:004502",
+        "GDFS-2016:004503"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50230",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 4,
+        "plan_span": 1.5561092506556617
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50231 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:004504",
+        "GDFS-2016:004505",
+        "GDFS-2016:004506",
+        "GDFS-2016:004507"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50231",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 4,
+        "plan_span": 2.1110078161779
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50232 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:004508",
+        "GDFS-2016:004509",
+        "GDFS-2016:004510",
+        "GDFS-2016:004511",
+        "GDFS-2016:004512",
+        "GDFS-2016:004513"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50232",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 6,
+        "plan_span": 3.5515272771012087
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50233 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:004514",
+        "GDFS-2016:004519",
+        "GDFS-2016:004520",
+        "GDFS-2016:004521"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50233",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 4,
+        "plan_span": 2.7371331718131695
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50234 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:004515",
+        "GDFS-2016:004516",
+        "GDFS-2016:004517",
+        "GDFS-2016:004518"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50234",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 4,
+        "plan_span": 3.344906874641559
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50235 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:004522",
+        "GDFS-2016:004523",
+        "GDFS-2016:004524",
+        "GDFS-2016:004525"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50235",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 4,
+        "plan_span": 2.954638725783813
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50245 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003246",
+        "GDFS-2016:003247"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50245",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 2,
+        "plan_span": 1.2838555214731715
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50246 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003248",
+        "GDFS-2016:003249",
+        "GDFS-2016:003250",
+        "GDFS-2016:003251",
+        "GDFS-2016:003252",
+        "GDFS-2016:003253",
+        "GDFS-2016:003254",
+        "GDFS-2016:003255",
+        "GDFS-2016:003256",
+        "GDFS-2016:003257"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50246",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 10,
+        "plan_span": 4.229362126852126
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50247 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003258",
+        "GDFS-2016:003259",
+        "GDFS-2016:003260",
+        "GDFS-2016:003261",
+        "GDFS-2016:003262",
+        "GDFS-2016:003263",
+        "GDFS-2016:003264",
+        "GDFS-2016:003265"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50247",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 8,
+        "plan_span": 7.789301958473686
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50248 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003266",
+        "GDFS-2016:003267",
+        "GDFS-2016:003268",
+        "GDFS-2016:003269"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50248",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 4,
+        "plan_span": 2.3909590126151805
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50250 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:004526",
+        "GDFS-2016:004527",
+        "GDFS-2016:004528",
+        "GDFS-2016:004529"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50250",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 4,
+        "plan_span": 3.1183627113973653
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50251 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003270",
+        "GDFS-2016:003271",
+        "GDFS-2016:003272"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50251",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 3,
+        "plan_span": 2.128146846444481
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50258 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003957",
+        "GDFS-2016:003958",
+        "GDFS-2016:003959",
+        "GDFS-2016:003960",
+        "GDFS-2016:003961",
+        "GDFS-2016:003962",
+        "GDFS-2016:003963"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50258",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 7,
+        "plan_span": 4.88475710755381
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50261 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003964",
+        "GDFS-2016:003965",
+        "GDFS-2016:003966",
+        "GDFS-2016:003967",
+        "GDFS-2016:003968",
+        "GDFS-2016:003969",
+        "GDFS-2016:003970",
+        "GDFS-2016:003971"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50261",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 8,
+        "plan_span": 5.5465472142567105
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50263 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003972",
+        "GDFS-2016:003973",
+        "GDFS-2016:003974",
+        "GDFS-2016:003975",
+        "GDFS-2016:003976",
+        "GDFS-2016:003977",
+        "GDFS-2016:003978",
+        "GDFS-2016:003979",
+        "GDFS-2016:003980",
+        "GDFS-2016:003981",
+        "GDFS-2016:003982"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50263",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 11,
+        "plan_span": 5.188207493927837
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50264 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003983",
+        "GDFS-2016:003984",
+        "GDFS-2016:003985",
+        "GDFS-2016:003986",
+        "GDFS-2016:003987",
+        "GDFS-2016:003988",
+        "GDFS-2016:003989",
+        "GDFS-2016:003990",
+        "GDFS-2016:003991",
+        "GDFS-2016:003992",
+        "GDFS-2016:003993",
+        "GDFS-2016:003994",
+        "GDFS-2016:003995",
+        "GDFS-2016:003996",
+        "GDFS-2016:003997",
+        "GDFS-2016:003998",
+        "GDFS-2016:003999",
+        "GDFS-2016:004000",
+        "GDFS-2016:004001",
+        "GDFS-2016:004002",
+        "GDFS-2016:004003",
+        "GDFS-2016:004004",
+        "GDFS-2016:004005",
+        "GDFS-2016:004006",
+        "GDFS-2016:004007",
+        "GDFS-2016:004008",
+        "GDFS-2016:004009",
+        "GDFS-2016:004010",
+        "GDFS-2016:004011",
+        "GDFS-2016:004012",
+        "GDFS-2016:004013"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50264",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 31,
+        "plan_span": 15.945153652437824
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50265 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:004014",
+        "GDFS-2016:004015",
+        "GDFS-2016:004016",
+        "GDFS-2016:004017",
+        "GDFS-2016:004018",
+        "GDFS-2016:004019",
+        "GDFS-2016:004020"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50265",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 7,
+        "plan_span": 5.076358241895006
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50266 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:004021",
+        "GDFS-2016:004022",
+        "GDFS-2016:004023",
+        "GDFS-2016:004024",
+        "GDFS-2016:004025",
+        "GDFS-2016:004026",
+        "GDFS-2016:004027",
+        "GDFS-2016:004028",
+        "GDFS-2016:004029"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50266",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 9,
+        "plan_span": 5.483885483851973
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50267 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:004030",
+        "GDFS-2016:004031",
+        "GDFS-2016:004032",
+        "GDFS-2016:004033",
+        "GDFS-2016:004034",
+        "GDFS-2016:004035",
+        "GDFS-2016:004036",
+        "GDFS-2016:004037",
+        "GDFS-2016:004038",
+        "GDFS-2016:004039",
+        "GDFS-2016:004040"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50267",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 11,
+        "plan_span": 7.579991358817358
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50271 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:004041",
+        "GDFS-2016:004042",
+        "GDFS-2016:004043",
+        "GDFS-2016:004044",
+        "GDFS-2016:004045",
+        "GDFS-2016:004046",
+        "GDFS-2016:004047",
+        "GDFS-2016:004048",
+        "GDFS-2016:004049",
+        "GDFS-2016:004057",
+        "GDFS-2016:004058",
+        "GDFS-2016:004059",
+        "GDFS-2016:004060",
+        "GDFS-2016:004061",
+        "GDFS-2016:004062",
+        "GDFS-2016:004063"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50271",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 16,
+        "plan_span": 8.277220789592473
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50272 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:004050",
+        "GDFS-2016:004051",
+        "GDFS-2016:004052",
+        "GDFS-2016:004053",
+        "GDFS-2016:004054",
+        "GDFS-2016:004055",
+        "GDFS-2016:004056"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50272",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 7,
+        "plan_span": 4.4435935908004724
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50273 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:004064",
+        "GDFS-2016:004065",
+        "GDFS-2016:004066",
+        "GDFS-2016:004067",
+        "GDFS-2016:004068",
+        "GDFS-2016:004069",
+        "GDFS-2016:004070",
+        "GDFS-2016:004071",
+        "GDFS-2016:004072",
+        "GDFS-2016:004073"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50273",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 10,
+        "plan_span": 5.445527430846779
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50274 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:004074",
+        "GDFS-2016:004075",
+        "GDFS-2016:004076",
+        "GDFS-2016:004077",
+        "GDFS-2016:004078",
+        "GDFS-2016:004079",
+        "GDFS-2016:004080",
+        "GDFS-2016:004081",
+        "GDFS-2016:004082",
+        "GDFS-2016:004083",
+        "GDFS-2016:004084"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50274",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 11,
+        "plan_span": 5.660550503284041
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50275 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:004085",
+        "GDFS-2016:004086",
+        "GDFS-2016:004087",
+        "GDFS-2016:004088",
+        "GDFS-2016:004089",
+        "GDFS-2016:004090",
+        "GDFS-2016:004091",
+        "GDFS-2016:004092",
+        "GDFS-2016:004093"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50275",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 9,
+        "plan_span": 5.0302414455200735
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50276 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:004094",
+        "GDFS-2016:004095",
+        "GDFS-2016:004096",
+        "GDFS-2016:004097",
+        "GDFS-2016:004098",
+        "GDFS-2016:004099",
+        "GDFS-2016:004100",
+        "GDFS-2016:004101",
+        "GDFS-2016:004102"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50276",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 9,
+        "plan_span": 3.8159377615498533
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50277 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:004103",
+        "GDFS-2016:004104",
+        "GDFS-2016:004105",
+        "GDFS-2016:004106",
+        "GDFS-2016:004107",
+        "GDFS-2016:004108",
+        "GDFS-2016:004109",
+        "GDFS-2016:004110",
+        "GDFS-2016:004111"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50277",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 9,
+        "plan_span": 4.6509810793335955
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50278 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:004112",
+        "GDFS-2016:004113",
+        "GDFS-2016:004114",
+        "GDFS-2016:004115",
+        "GDFS-2016:004116",
+        "GDFS-2016:004117",
+        "GDFS-2016:004118",
+        "GDFS-2016:004119",
+        "GDFS-2016:004120",
+        "GDFS-2016:004121",
+        "GDFS-2016:004122",
+        "GDFS-2016:004123",
+        "GDFS-2016:004124",
+        "GDFS-2016:004125"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50278",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 14,
+        "plan_span": 8.616783680686527
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50279 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:003273",
+        "GDFS-2016:003274",
+        "GDFS-2016:003275",
+        "GDFS-2016:003276",
+        "GDFS-2016:003277",
+        "GDFS-2016:003278",
+        "GDFS-2016:003279",
+        "GDFS-2016:003280",
+        "GDFS-2016:003281",
+        "GDFS-2016:003282",
+        "GDFS-2016:003283",
+        "GDFS-2016:003284",
+        "GDFS-2016:003285",
+        "GDFS-2016:003286",
+        "GDFS-2016:003287",
+        "GDFS-2016:003288",
+        "GDFS-2016:003289",
+        "GDFS-2016:003290",
+        "GDFS-2016:003291",
+        "GDFS-2016:003292",
+        "GDFS-2016:003293",
+        "GDFS-2016:003294",
+        "GDFS-2016:003295",
+        "GDFS-2016:003296",
+        "GDFS-2016:003297",
+        "GDFS-2016:003298",
+        "GDFS-2016:003299",
+        "GDFS-2016:003300",
+        "GDFS-2016:003301",
+        "GDFS-2016:003302",
+        "GDFS-2016:003303",
+        "GDFS-2016:003304",
+        "GDFS-2016:003305",
+        "GDFS-2016:003306",
+        "GDFS-2016:003307",
+        "GDFS-2016:003308",
+        "GDFS-2016:003309",
+        "GDFS-2016:003310",
+        "GDFS-2016:003311",
+        "GDFS-2016:003312",
+        "GDFS-2016:003313",
+        "GDFS-2016:003314",
+        "GDFS-2016:003315",
+        "GDFS-2016:003316",
+        "GDFS-2016:003317",
+        "GDFS-2016:003318",
+        "GDFS-2016:003319",
+        "GDFS-2016:003320",
+        "GDFS-2016:003321",
+        "GDFS-2016:003322",
+        "GDFS-2016:003323",
+        "GDFS-2016:003324",
+        "GDFS-2016:003325",
+        "GDFS-2016:003326",
+        "GDFS-2016:003327",
+        "GDFS-2016:003328",
+        "GDFS-2016:003329",
+        "GDFS-2016:003330",
+        "GDFS-2016:003331",
+        "GDFS-2016:003332",
+        "GDFS-2016:003333",
+        "GDFS-2016:003334",
+        "GDFS-2016:003335",
+        "GDFS-2016:003336",
+        "GDFS-2016:003337",
+        "GDFS-2016:003338",
+        "GDFS-2016:003339"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50279",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 67,
+        "plan_span": 34.35644226342201
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50280 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:004126",
+        "GDFS-2016:004127",
+        "GDFS-2016:004128",
+        "GDFS-2016:004129",
+        "GDFS-2016:004130",
+        "GDFS-2016:004131",
+        "GDFS-2016:004132",
+        "GDFS-2016:004133",
+        "GDFS-2016:004134",
+        "GDFS-2016:004135",
+        "GDFS-2016:004136",
+        "GDFS-2016:004137",
+        "GDFS-2016:004138",
+        "GDFS-2016:004139",
+        "GDFS-2016:004140",
+        "GDFS-2016:004141"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50280",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 16,
+        "plan_span": 6.044767737498542
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50281 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:004142",
+        "GDFS-2016:004143",
+        "GDFS-2016:004144",
+        "GDFS-2016:004145",
+        "GDFS-2016:004146",
+        "GDFS-2016:004147",
+        "GDFS-2016:004148",
+        "GDFS-2016:004149",
+        "GDFS-2016:004150",
+        "GDFS-2016:004151",
+        "GDFS-2016:004152",
+        "GDFS-2016:004153"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50281",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 12,
+        "plan_span": 4.80765472970502
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50283 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:004154",
+        "GDFS-2016:004155",
+        "GDFS-2016:004156",
+        "GDFS-2016:004157",
+        "GDFS-2016:004158",
+        "GDFS-2016:004159",
+        "GDFS-2016:004160",
+        "GDFS-2016:004161",
+        "GDFS-2016:004162",
+        "GDFS-2016:004163",
+        "GDFS-2016:004164",
+        "GDFS-2016:004165",
+        "GDFS-2016:004166",
+        "GDFS-2016:004167"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50283",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 14,
+        "plan_span": 11.936822106408501
+      }
+    },
+    {
+      "alternative_explanation": "feature label may be a cataloguing class, not one physical object",
+      "dimensions": "count / length",
+      "falsification_condition": "independent survey shows members belong to different features",
+      "formula": "group members share Feature:50284 in the source description",
+      "independent_check": "re-read the original KMZ description for this feature",
+      "input_observation_ids": [
+        "GDFS-2016:004168",
+        "GDFS-2016:004169",
+        "GDFS-2016:004170",
+        "GDFS-2016:004171",
+        "GDFS-2016:004172",
+        "GDFS-2016:004173"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "MEASURED_CORRESPONDENCE",
+      "relation_id": "REL-FEATURE-50284",
+      "relation_kind": "documented_feature_grouping",
+      "residual": null,
+      "sensitivity": "span depends on the single unverified local grid",
+      "status": "DERIVED_FROM_SOURCE",
+      "units": "source xy units",
+      "value": {
+        "member_count": 6,
+        "plan_span": 4.049632205482756
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22939 - 22951'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:000000"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-000000",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22939 - 22951"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22939 - 22951'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:000001"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-000001",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22939 - 22951"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22939 - 22951'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:000002"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-000002",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22939 - 22951"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22939 - 22951'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:000003"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-000003",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22939 - 22951"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22939 - 22951'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:000004"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-000004",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22939 - 22951"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22939 - 22951'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:000433"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-000433",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22939 - 22951"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22939 - 22951'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:000434"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-000434",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22939 - 22951"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22939 - 22951'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:000435"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-000435",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22939 - 22951"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22939 - 22951'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:000436"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-000436",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22939 - 22951"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22939 - 22951'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:000437"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-000437",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22939 - 22951"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22939 - 22951'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:000438"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-000438",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22939 - 22951"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22939 - 22951'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:000439"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-000439",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22939 - 22951"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22939 - 22951'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:000440"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-000440",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22939 - 22951"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22939 - 22951'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:000441"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-000441",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22939 - 22951"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22939 - 22951'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:000442"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-000442",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22939 - 22951"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22939 - 22951'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:000443"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-000443",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22939 - 22951"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22939 - 22951'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:000444"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-000444",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22939 - 22951"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22939 - 22951'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:000445"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-000445",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22939 - 22951"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22952 - 22958'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:004296"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-004296",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22952 - 22958"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22952 - 22958'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:004297"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-004297",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22952 - 22958"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22952 - 22958'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:004298"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-004298",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22952 - 22958"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22952 - 22958'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:004299"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-004299",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22952 - 22958"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22952 - 22958'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:004300"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-004300",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22952 - 22958"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22959 - 22966'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:004301"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-004301",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22959 - 22966"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22959 - 22966'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:004302"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-004302",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22959 - 22966"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22959 - 22966'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:004303"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-004303",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22959 - 22966"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22959 - 22966'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:004304"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-004304",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22959 - 22966"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22967 - 22974'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:004305"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-004305",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22967 - 22974"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22967 - 22974'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:004306"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-004306",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22967 - 22974"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22967 - 22974'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:004307"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-004307",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22967 - 22974"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22967 - 22974'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:004308"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-004308",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22967 - 22974"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22952 - 22958'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:004406"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-004406",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22952 - 22958"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22952 - 22958'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:004407"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-004407",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22952 - 22958"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22952 - 22958'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:004408"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-004408",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22952 - 22958"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22952 - 22958'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:004409"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-004409",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22952 - 22958"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22952 - 22958'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:004410"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-004410",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22952 - 22958"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22952 - 22958'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:004411"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-004411",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22952 - 22958"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22952 - 22958'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:004412"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-004412",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22952 - 22958"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22959 - 22966'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:004413"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-004413",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22959 - 22966"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22959 - 22966'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:004414"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-004414",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22959 - 22966"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22959 - 22966'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:004415"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-004415",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22959 - 22966"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22959 - 22966'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:004416"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-004416",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22959 - 22966"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22959 - 22966'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:004417"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-004417",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22959 - 22966"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22959 - 22966'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:004418"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-004418",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22959 - 22966"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22959 - 22966'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:004419"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-004419",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22959 - 22966"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22959 - 22966'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:004420"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-004420",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22959 - 22966"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22967 - 22974'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:004421"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-004421",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22967 - 22974"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22967 - 22974'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:004422"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-004422",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22967 - 22974"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22967 - 22974'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:004423"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-004423",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22967 - 22974"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22967 - 22974'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:004424"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-004424",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22967 - 22974"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22967 - 22974'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:004425"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-004425",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22967 - 22974"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22967 - 22974'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:004426"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-004426",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22967 - 22974"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22967 - 22974'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:004427"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-004427",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22967 - 22974"
+      }
+    },
+    {
+      "alternative_explanation": "note may refer to a separate campaign not present in these files",
+      "dimensions": "count",
+      "falsification_condition": "the referenced stations are shown to be a different physical set",
+      "formula": "source note: 'reshoot it with TS # 22967 - 22974'",
+      "independent_check": "read the original KMZ description",
+      "input_observation_ids": [
+        "GDFS-2018:004428"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "HYPOTHESIS",
+      "relation_id": "REL-RESHOOT-GDFS-2018-004428",
+      "relation_kind": "documented_remeasurement_note",
+      "residual": null,
+      "sensitivity": "station range is a label; no measured coordinates for those stations",
+      "status": "CANDIDATE_ONLY",
+      "units": "station range (unitless)",
+      "value": {
+        "total_station_range": "22967 - 22974"
+      }
+    },
+    {
+      "alternative_explanation": "coverage may reflect survey logistics rather than site structure",
+      "dimensions": "length",
+      "falsification_condition": "a new station extends the observed envelope",
+      "formula": "axis-aligned extents of sampled stations in the declared local grid",
+      "independent_check": "compare against the original KMZ point cloud",
+      "input_observation_ids": [
+        "GDFS-2012:000000",
+        "GDFS-2012:000001",
+        "GDFS-2012:000002",
+        "GDFS-2012:000003",
+        "GDFS-2012:000004"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "STATISTICAL_PATTERN",
+      "relation_id": "REL-EXTENT-GDFS-2012",
+      "relation_kind": "within_campaign_plan_extent",
+      "residual": null,
+      "sensitivity": "extents depend on campaign coverage, not on monument boundaries",
+      "status": "DESCRIPTIVE_ONLY",
+      "units": "source xy units",
+      "value": {
+        "easting_max": 500413.537,
+        "easting_min": 499321.76,
+        "northing_max": 100121.278,
+        "northing_min": 99106.136,
+        "sample_count": 1539
+      }
+    },
+    {
+      "alternative_explanation": "coverage may reflect survey logistics rather than site structure",
+      "dimensions": "length",
+      "falsification_condition": "a new station extends the observed envelope",
+      "formula": "axis-aligned extents of sampled stations in the declared local grid",
+      "independent_check": "compare against the original KMZ point cloud",
+      "input_observation_ids": [
+        "GDFS-2015:000000",
+        "GDFS-2015:000001",
+        "GDFS-2015:000002",
+        "GDFS-2015:000003",
+        "GDFS-2015:000004"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "STATISTICAL_PATTERN",
+      "relation_id": "REL-EXTENT-GDFS-2015",
+      "relation_kind": "within_campaign_plan_extent",
+      "residual": null,
+      "sensitivity": "extents depend on campaign coverage, not on monument boundaries",
+      "status": "DESCRIPTIVE_ONLY",
+      "units": "source xy units",
+      "value": {
+        "easting_max": 500169.681,
+        "easting_min": 499871.512,
+        "northing_max": 100171.924,
+        "northing_min": 99871.081,
+        "sample_count": 1100
+      }
+    },
+    {
+      "alternative_explanation": "coverage may reflect survey logistics rather than site structure",
+      "dimensions": "length",
+      "falsification_condition": "a new station extends the observed envelope",
+      "formula": "axis-aligned extents of sampled stations in the declared local grid",
+      "independent_check": "compare against the original KMZ point cloud",
+      "input_observation_ids": [
+        "GDFS-2016:000000",
+        "GDFS-2016:000001",
+        "GDFS-2016:000002",
+        "GDFS-2016:000003",
+        "GDFS-2016:000004"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "STATISTICAL_PATTERN",
+      "relation_id": "REL-EXTENT-GDFS-2016",
+      "relation_kind": "within_campaign_plan_extent",
+      "residual": null,
+      "sensitivity": "extents depend on campaign coverage, not on monument boundaries",
+      "status": "DESCRIPTIVE_ONLY",
+      "units": "source xy units",
+      "value": {
+        "easting_max": 500202.345,
+        "easting_min": 499836.759,
+        "northing_max": 100208.552,
+        "northing_min": 99830.999,
+        "sample_count": 4746
+      }
+    },
+    {
+      "alternative_explanation": "coverage may reflect survey logistics rather than site structure",
+      "dimensions": "length",
+      "falsification_condition": "a new station extends the observed envelope",
+      "formula": "axis-aligned extents of sampled stations in the declared local grid",
+      "independent_check": "compare against the original KMZ point cloud",
+      "input_observation_ids": [
+        "GDFS-2018:000000",
+        "GDFS-2018:000001",
+        "GDFS-2018:000002",
+        "GDFS-2018:000003",
+        "GDFS-2018:000004"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "STATISTICAL_PATTERN",
+      "relation_id": "REL-EXTENT-GDFS-2018",
+      "relation_kind": "within_campaign_plan_extent",
+      "residual": null,
+      "sensitivity": "extents depend on campaign coverage, not on monument boundaries",
+      "status": "DESCRIPTIVE_ONLY",
+      "units": "source xy units",
+      "value": {
+        "easting_max": 500406.896,
+        "easting_min": 500275.547,
+        "northing_max": 99644.865,
+        "northing_min": 99532.934,
+        "sample_count": 4569
+      }
+    },
+    {
+      "alternative_explanation": "coverage may reflect survey logistics rather than site structure",
+      "dimensions": "length",
+      "falsification_condition": "a new station extends the observed envelope",
+      "formula": "axis-aligned extents of sampled stations in the declared local grid",
+      "independent_check": "compare against the original KMZ point cloud",
+      "input_observation_ids": [
+        "GIZA_CORNER:000000",
+        "GIZA_CORNER:000001",
+        "GIZA_CORNER:000002",
+        "GIZA_CORNER:000003",
+        "GIZA_CORNER:000004"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "STATISTICAL_PATTERN",
+      "relation_id": "REL-EXTENT-GIZA_CORNER",
+      "relation_kind": "within_campaign_plan_extent",
+      "residual": null,
+      "sensitivity": "extents depend on campaign coverage, not on monument boundaries",
+      "status": "DESCRIPTIVE_ONLY",
+      "units": "source xy units",
+      "value": {
+        "easting_max": 500115.32,
+        "easting_min": 499373.47,
+        "northing_max": 100115.278,
+        "northing_min": 99206.931,
+        "sample_count": 15
+      }
+    },
+    {
+      "alternative_explanation": "coverage may reflect survey logistics rather than site structure",
+      "dimensions": "length",
+      "falsification_condition": "a new station extends the observed envelope",
+      "formula": "axis-aligned extents of sampled stations in the declared local grid",
+      "independent_check": "compare against the original KMZ point cloud",
+      "input_observation_ids": [
+        "GPMP:000000",
+        "GPMP:000001",
+        "GPMP:000002",
+        "GPMP:000003",
+        "GPMP:000004"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "STATISTICAL_PATTERN",
+      "relation_id": "REL-EXTENT-GPMP",
+      "relation_kind": "within_campaign_plan_extent",
+      "residual": null,
+      "sensitivity": "extents depend on campaign coverage, not on monument boundaries",
+      "status": "DESCRIPTIVE_ONLY",
+      "units": "source xy units",
+      "value": {
+        "easting_max": 500634.775,
+        "easting_min": 498718.109,
+        "northing_max": 100154.421,
+        "northing_min": 98399.708,
+        "sample_count": 41
+      }
+    },
+    {
+      "alternative_explanation": "coverage may reflect survey logistics rather than site structure",
+      "dimensions": "length",
+      "falsification_condition": "a new station extends the observed envelope",
+      "formula": "axis-aligned extents of sampled stations in the declared local grid",
+      "independent_check": "compare against the original KMZ point cloud",
+      "input_observation_ids": [
+        "PETRIE:000000",
+        "PETRIE:000001",
+        "PETRIE:000002",
+        "PETRIE:000003",
+        "PETRIE:000004"
+      ],
+      "physical_mechanism_claimed": false,
+      "relation_category": "STATISTICAL_PATTERN",
+      "relation_id": "REL-EXTENT-PETRIE",
+      "relation_kind": "within_campaign_plan_extent",
+      "residual": null,
+      "sensitivity": "extents depend on campaign coverage, not on monument boundaries",
+      "status": "DESCRIPTIVE_ONLY",
+      "units": "source xy units",
+      "value": {
+        "easting_max": 500288.822,
+        "easting_min": 499250.449,
+        "northing_max": 100362.353,
+        "northing_min": 99044.321,
+        "sample_count": 68
+      }
+    }
+  ],
+  "report_id": "PHASE_B_RELATION_CANDIDATES",
+  "schema_version": "phase_b_relations_v1"
+}

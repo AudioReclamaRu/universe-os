@@ -1,0 +1,32 @@
+{
+  "independence_note": "a structurally valid file is not a corroborated source; a mathematically correct model is not a validated historical object",
+  "levels": [
+    "FILE_PRESENT",
+    "FILE_HASHED",
+    "SOURCE_CONTENT_PARSED",
+    "STRUCTURE_VALIDATED",
+    "ORIGINAL_ARCHIVE_MATCHED",
+    "SOURCE_DOCUMENT_IDENTIFIED",
+    "SOURCE_PROVENANCE_VERIFIED",
+    "COORDINATE_SYSTEM_DOCUMENTED",
+    "COORDINATE_SYSTEM_VERIFIED",
+    "INDEPENDENTLY_CORROBORATED",
+    "GEOMETRY_VALIDATED",
+    "MODEL_VALIDATED"
+  ],
+  "report_id": "PHASE_B_EPISTEMIC_REPORT",
+  "states": {
+    "COORDINATE_SYSTEM_DOCUMENTED": true,
+    "COORDINATE_SYSTEM_VERIFIED": false,
+    "FILE_HASHED": true,
+    "FILE_PRESENT": true,
+    "GEOMETRY_VALIDATED": true,
+    "INDEPENDENTLY_CORROBORATED": false,
+    "MODEL_VALIDATED": false,
+    "ORIGINAL_ARCHIVE_MATCHED": true,
+    "SOURCE_CONTENT_PARSED": true,
+    "SOURCE_DOCUMENT_IDENTIFIED": false,
+    "SOURCE_PROVENANCE_VERIFIED": false,
+    "STRUCTURE_VALIDATED": true
+  }
+}

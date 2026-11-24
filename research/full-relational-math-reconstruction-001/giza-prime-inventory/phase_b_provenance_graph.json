@@ -1,0 +1,104 @@
+{
+  "edges": [
+    {
+      "archive_match": true,
+      "declared_kml_sha256_in_json": "b34c0775674d8a1669373de1ecc37fbe97b30fe08aea43d9edff40a85d4d44da",
+      "derived_json": "GDFS-2012-for-GE-21vii18.json",
+      "raw_kmz": "GDFS-2012-for-GE-21vii18.kmz",
+      "raw_kmz_sha256": "b34c0775674d8a1669373de1ecc37fbe97b30fe08aea43d9edff40a85d4d44da"
+    },
+    {
+      "archive_match": true,
+      "declared_kml_sha256_in_json": "f2d331bd88c8b2555f3a2e9b9dbbd7dc3f327e08357707a5206e2eb2381eef5c",
+      "derived_json": "GDFS-2015-Master-25iii17-edited-child.json",
+      "raw_kmz": "GDFS-2015-Master-25iii17-edited-child.kmz",
+      "raw_kmz_sha256": "f2d331bd88c8b2555f3a2e9b9dbbd7dc3f327e08357707a5206e2eb2381eef5c"
+    },
+    {
+      "archive_match": true,
+      "declared_kml_sha256_in_json": "40bb2cf2c2d46ba426f491564b2fd6892d95a821840b4ea39139da5e71f1260e",
+      "derived_json": "GDFS-2016-23ix18.json",
+      "raw_kmz": "GDFS-2016-23ix18.kmz",
+      "raw_kmz_sha256": "40bb2cf2c2d46ba426f491564b2fd6892d95a821840b4ea39139da5e71f1260e"
+    },
+    {
+      "archive_match": true,
+      "declared_kml_sha256_in_json": "ed0faca84e77dfc3b2e08d7f75767c650755f669a5c01c5e66644ae85f5b4bf5",
+      "derived_json": "GDFS-2018-12xii18.json",
+      "raw_kmz": "GDFS-2018-12xii18.kmz",
+      "raw_kmz_sha256": "ed0faca84e77dfc3b2e08d7f75767c650755f669a5c01c5e66644ae85f5b4bf5"
+    },
+    {
+      "archive_match": true,
+      "declared_kml_sha256_in_json": "94ca0d8b95529664ebb823c84ba8c10082d1f3a62306826bd27be514c0e66020",
+      "derived_json": "GPMP-Control-Monuments.json",
+      "raw_kmz": "GPMP-Control-Monuments.kmz",
+      "raw_kmz_sha256": "94ca0d8b95529664ebb823c84ba8c10082d1f3a62306826bd27be514c0e66020"
+    },
+    {
+      "archive_match": true,
+      "declared_kml_sha256_in_json": "02bded8e81b5fabbf41dba0668207c4ffe85efba7eaef552b39640dc8903c439",
+      "derived_json": "Giza-Corner-Points-2v17.json",
+      "raw_kmz": "Giza-Corner-Points-2v17.kmz",
+      "raw_kmz_sha256": "02bded8e81b5fabbf41dba0668207c4ffe85efba7eaef552b39640dc8903c439"
+    },
+    {
+      "archive_match": true,
+      "declared_kml_sha256_in_json": "8ea1d064b44b5e8637b90c553d3a67c951b381242e894dae74dd61eaf62cdef5",
+      "derived_json": "Petries-Stations.json",
+      "raw_kmz": "Petries-Stations.kmz",
+      "raw_kmz_sha256": "8ea1d064b44b5e8637b90c553d3a67c951b381242e894dae74dd61eaf62cdef5"
+    }
+  ],
+  "nodes": [
+    {
+      "canonical_sha256": "ce4a7566b002c05c0b16af2a3070ffcda098002286e8129e50fba118aed53066",
+      "kind": "source_file",
+      "node_id": "GDFS-2012-for-GE-21vii18.json",
+      "sha256": "45c2987d2cd2e873408a5fea824bffb3e83995f8da29724925980950d4277a7a"
+    },
+    {
+      "canonical_sha256": "71e36f748291716b99e390df01fedd704bba0cc542956c80ce5136faffd9e27b",
+      "kind": "source_file",
+      "node_id": "GDFS-2015-Master-25iii17-edited-child.json",
+      "sha256": "ae2734f316bad558d31563e1d873dd767f4a45f31fee71130330d26af269b6e4"
+    },
+    {
+      "canonical_sha256": "0348146ddf6d11ea18eb0058d0e6828f264e254d9c2a88f374005977180ee5a8",
+      "kind": "source_file",
+      "node_id": "GDFS-2016-23ix18.json",
+      "sha256": "fbf3471c453e6fcf229cd95f7ea31e4236a467716cd7fc3d6d0397a40723358f"
+    },
+    {
+      "canonical_sha256": "71e4525a4aaccd538834da24163ef4e03c7cd46d42521e76310d2f47d80d9a06",
+      "kind": "source_file",
+      "node_id": "GDFS-2018-12xii18.json",
+      "sha256": "4d0bd5cb9e11df4b0d93cc11dba07fecf9a266463b5c1a0467ce3ed3baf70a04"
+    },
+    {
+      "canonical_sha256": "53bca1fc0b7e811d89ff5c24e84b8393187e4033d61c5e984c3775a196c4b8e1",
+      "kind": "source_file",
+      "node_id": "GPMP-Control-Monuments.json",
+      "sha256": "7f9010f36c0b83a0e8ad15a04474aab5a1030d26d593fc72f8085aef4ac2506a"
+    },
+    {
+      "canonical_sha256": "6fedd3e0f20028c7cc708f12f11c3d3bb81eb1ba716df9fe02a47142e7f38660",
+      "kind": "source_file",
+      "node_id": "Giza-Corner-Points-2v17.json",
+      "sha256": "4036a83524338350bc8c363d3c096a04655a5a468e8532e72fe53fe64042de42"
+    },
+    {
+      "canonical_sha256": "f957edca2c329d57003dd522970f8c857c26d3b391049bc2cfd29f1537c20b6e",
+      "kind": "source_file",
+      "node_id": "Petries-Stations.json",
+      "sha256": "d2694e640fcf76fd27aa06bda556c3e91a6bc13007d8de220fe71755fd96cb9d"
+    },
+    {
+      "canonical_sha256": null,
+      "kind": "source_file",
+      "node_id": "all_kmz_points.csv",
+      "sha256": "32f5f9a752533b821face34b86daa2e5ef379b088749c8860b110e3e2c3ecde8"
+    }
+  ],
+  "report_id": "PHASE_B_PROVENANCE_GRAPH"
+}

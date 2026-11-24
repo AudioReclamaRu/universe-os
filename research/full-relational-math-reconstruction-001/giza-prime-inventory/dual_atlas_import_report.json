@@ -8,6 +8,23 @@
     "no_terrain_mesh": true,
     "source_points_only": true
   },
+  "phase_b_campaign_layer": {
+    "campaign_count": 7,
+    "campaign_order": [
+      "GDFS-2012",
+      "GDFS-2015",
+      "GDFS-2016",
+      "GDFS-2018",
+      "GIZA_CORNER",
+      "GPMP",
+      "PETRIE"
+    ],
+    "canonical_sha256": "756b14c1c682dad2f4f1c883f1e4a5e4c56839549e933b7b1b31004fb4877219",
+    "no_cross_campaign_projection": true,
+    "observation_count": 12078,
+    "one_campaign_at_a_time": true,
+    "relation_skeleton_untouched": true
+  },
   "relation_layer": {
     "honesty_gate": true,
     "real_objects": 0,

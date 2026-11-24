@@ -18,10 +18,18 @@ structure-validated, but not independently corroborated.  The control network
 itself is idealized (centre, principal axes, plan hull, spacing and residuals)
 as four IDEALIZED_MODEL records; no terrain or monument surface is claimed.
 
-The script refuses to build if the inventory honesty gate fails or if the GPMP
-source is structurally unexpected.  No network calls are made.  The relation
-snapshot still emits no coordinates; the spatial snapshot is a separate inline
-document.  Rebuild with:  python build_atlas_schematic.py
+LAYER 03 — CAMPAIGN OBSERVATIONS
+--------------------------------
+All 12,078 Phase B observations are projected from deterministic artifacts,
+one campaign at a time.  Campaigns are NEVER overlaid: their coordinate systems
+are separately registered and unverified.  Elevation stays null where absent;
+features remain candidates.  The artifact layer re-validates every invariant
+and aborts the build on drift.  The Layer 01 relation skeleton is untouched.
+
+The script refuses to build if the inventory honesty gate fails or if either
+spatial source is structurally unexpected.  No network calls are made.  The
+relation snapshot still emits no coordinates; spatial snapshots are separate
+inline documents.  Rebuild with:  python build_atlas_schematic.py
 """
 
 from __future__ import annotations
@@ -36,6 +44,7 @@ from typing import Any, Dict, Optional
 import inventory_engine as ie
 import gpmp_spatial_layer as gsl
 import spatial_geometry as sg
+import phase_b_atlas_layer as pbal
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUTPUT = "atlas_schematic.html"
@@ -134,9 +143,15 @@ def build_spatial_snapshot() -> Dict[str, Any]:
     return gsl.build_spatial_snapshot()
 
 
+def build_campaign_snapshot() -> Dict[str, Any]:
+    """Third layer: compact Phase B campaigns, one local grid at a time."""
+    return pbal.build_campaign_snapshot()
+
+
 def write_import_report(path: Optional[str] = None) -> str:
     """Machine-readable record of what the build actually imported."""
     spatial = build_spatial_snapshot()
+    campaign = build_campaign_snapshot()
     target = os.path.join(HERE, IMPORT_REPORT if path is None else path)
     payload = {
         "report_id": "GIZA_PRIME_DUAL_ATLAS_IMPORT_REPORT",
@@ -147,6 +162,15 @@ def write_import_report(path: Optional[str] = None) -> str:
             "relations": 0,
         },
         "spatial_layer": spatial,
+        "phase_b_campaign_layer": {
+            "observation_count": campaign["observation_count"],
+            "campaign_count": campaign["campaign_count"],
+            "campaign_order": campaign["campaign_order"],
+            "canonical_sha256": campaign["canonical_sha256"],
+            "one_campaign_at_a_time": True,
+            "no_cross_campaign_projection": True,
+            "relation_skeleton_untouched": True,
+        },
         "build_contract": {
             "source_points_only": True,
             "no_terrain_mesh": True,
@@ -229,17 +253,27 @@ def _gate_rows(snapshot: Dict[str, Any]) -> str:
 
 
 def render_html(snapshot: Dict[str, Any],
-                spatial: Optional[Dict[str, Any]] = None) -> str:
+                spatial: Optional[Dict[str, Any]] = None,
+                campaign: Optional[Dict[str, Any]] = None) -> str:
     counts = snapshot["counts"]
     spatial = build_spatial_snapshot() if spatial is None else spatial
+    campaign = build_campaign_snapshot() if campaign is None else campaign
     # '<\/' prevents any register text from closing the inline JSON script tag.
     safe_json = json.dumps(
         snapshot, ensure_ascii=False, indent=2, sort_keys=True).replace("</", "<\\/")
     safe_spatial = json.dumps(
         spatial, ensure_ascii=False, indent=2, sort_keys=True).replace("</", "<\\/")
+    safe_campaign = json.dumps(
+        campaign, ensure_ascii=False, indent=2, sort_keys=True).replace("</", "<\\/")
     ctx = {
         "SNAPSHOT": safe_json,
         "SPATIAL_SNAPSHOT": safe_spatial,
+        "CAMPAIGN_SNAPSHOT": safe_campaign,
+        "N_PHASE_B_OBS": str(campaign["observation_count"]),
+        "N_CAMPAIGNS": str(campaign["campaign_count"]),
+        "N_PHASE_B_MODELS": str(campaign["models"]["model_count"]),
+        "N_PHASE_B_RELATIONS": str(campaign["relations"]["relation_count"]),
+        "CAMPAIGN_SHA": campaign["canonical_sha256"][:12],
         "N_GPMP": str(spatial["counts"]["total"]),
         "N_MAIN": str(spatial["counts"]["main_traverse"]),
         "N_SECOND": str(spatial["counts"]["secondary_network"]),
@@ -416,6 +450,36 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:0 1
 .legend-mark.circle{border-radius:50%;background:var(--amber);color:var(--amber);}
 .legend-mark.diamond{transform:rotate(45deg);border-color:var(--violet);}
 .axis-key{font-size:9px;letter-spacing:1px;color:var(--amber-d);margin-top:6px;}
+
+/* PHASE B CAMPAIGN OBSERVATION VIEW */
+.camp-grid{display:grid;grid-template-columns:270px 1fr 320px;gap:1px;
+  background:var(--border);flex:1 1 auto;min-height:0;overflow:hidden;}
+.camp-col{display:flex;flex-direction:column;gap:1px;background:var(--border);
+  overflow-y:auto;min-height:0;}
+#camp-center{overflow:hidden;}
+.camp-canvas-panel{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;overflow:hidden;}
+#campaign-canvas{display:block;width:100%;flex:1 1 auto;min-height:0;height:100%;}
+.camp-list{flex:1;overflow-y:auto;margin-top:8px;}
+.camp-row{display:grid;grid-template-columns:1fr 58px;gap:6px;padding:6px 5px;
+  border-bottom:1px solid rgba(30,30,53,.5);font-size:10px;cursor:pointer;}
+.camp-row:hover{background:rgba(245,166,35,.05);}
+.camp-row.sel{background:rgba(245,166,35,.11);}
+.camp-row-id{color:var(--white);}
+.camp-row-meta{color:var(--amber-d);font-size:9px;margin-top:3px;}
+.camp-row-n{color:var(--green);text-align:right;}
+.camp-filters{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;}
+.camp-chip{font-size:9px;letter-spacing:1px;padding:4px 7px;border:1px solid var(--border);
+  color:var(--amber-d);cursor:pointer;user-select:none;background:rgba(245,166,35,.02);}
+.camp-chip:hover{color:var(--amber);border-color:var(--amber-d);}
+.camp-chip.on{color:var(--cyan);border-color:rgba(0,212,255,.4);}
+.camp-note{font-size:9px;letter-spacing:1px;color:var(--red);margin-top:6px;line-height:1.5;}
+@media (max-width:1400px){
+  .camp-grid{grid-template-columns:1fr;grid-template-rows:auto minmax(320px,1fr) auto;
+    overflow-y:auto;}
+  .camp-col{overflow-y:visible;}
+  #camp-center,.camp-canvas-panel{min-height:320px;}
+  .camp-list{max-height:220px;}
+}
 @media (max-width:1400px){
   .spatial-grid{grid-template-columns:1fr;grid-template-rows:auto minmax(320px,1fr) auto;
     overflow-y:auto;}
@@ -491,6 +555,7 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:0 1
   <div class="layer-tabs">
     <div class="ltab active" data-layer="relation">01 RELATION SKELETON</div>
     <div class="ltab" data-layer="spatial">02 SPATIAL 3D SKELETON</div>
+    <div class="ltab" data-layer="campaign">03 CAMPAIGN OBSERVATIONS</div>
   </div>
   <div class="layer-view" id="view-relation">
     <div class="pnl map-panel">
@@ -552,6 +617,49 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:0 1
       </div>
     </div>
   </div>
+
+  <div class="layer-view hidden" id="view-campaign">
+    <div class="camp-grid">
+      <div class="camp-col">
+        <div class="pnl">
+          <div class="pnl-title">[ B1 ] <em>CAMPAIGN INDEX</em><span>__N_CAMPAIGNS__ / __N_PHASE_B_OBS__</span></div>
+          <div class="camp-filters" id="camp-source"></div>
+          <div class="camp-filters" id="camp-year"></div>
+          <div class="camp-filters" id="camp-crs"></div>
+          <div class="camp-filters" id="camp-geometry"></div>
+          <div class="camp-filters" id="camp-status"></div>
+          <div class="mono-line" style="margin-top:6px">ФИЛЬТРЫ ВЫБИРАЮТ ОДНУ КАМПАНИЮ. НЕТ GEOMETRY ИЛИ STATUS — НЕТ ДАННЫХ ДЛЯ ПОКАЗА.</div>
+        </div>
+        <div class="pnl grow"><div class="camp-list" id="camp-list"></div></div>
+      </div>
+      <div class="camp-col" id="camp-center">
+        <div class="pnl camp-canvas-panel">
+          <div class="pnl-title">[ B2 ] <em>LOCAL PLAN PROJECTION</em><span id="camp-count">0 OBSERVATIONS</span></div>
+          <canvas id="campaign-canvas"></canvas>
+          <div class="camp-note">ОДНА КАМПАНИЯ = ОДНА СЕТЬ. СОВМЕСТНАЯ ПРОЕКЦИЯ НЕ ВЫПОЛНЯЕТСЯ: DATUM НЕ ПРОВЕРЕН.</div>
+        </div>
+        <div class="pnl">
+          <div class="pnl-title">[ B3 ] <em>SELECTED OBSERVATION</em></div>
+          <div class="passport" id="camp-passport">SELECT AN OBSERVATION.</div>
+        </div>
+      </div>
+      <div class="camp-col">
+        <div class="pnl">
+          <div class="pnl-title">[ B4 ] <em>IDENTITY / RELATIONS</em></div>
+          <div class="passport" id="camp-identity"></div>
+        </div>
+        <div class="pnl">
+          <div class="pnl-title">[ B5 ] <em>IDEALIZED MODELS</em></div>
+          <div class="passport" id="camp-models"></div>
+        </div>
+        <div class="pnl grow">
+          <div class="pnl-title">[ B6 ] <em>PROVENANCE</em></div>
+          <div class="passport" id="camp-provenance"></div>
+          <div class="mono-line" style="margin-top:6px">CAMPAIGN SNAPSHOT SHA __CAMPAIGN_SHA__ · 12078 SOURCE RECORDS PRESERVED</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="col">
@@ -602,6 +710,9 @@ __SPATIAL_SNAPSHOT__
 <script id="atlas-snapshot" type="application/json">
 __SNAPSHOT__
 </script>
+<script id="campaign-snapshot" type="application/json">
+__CAMPAIGN_SNAPSHOT__
+</script>
 <script>
 /* No network, no timers, no controls. Display-only rendering of a validated snapshot. */
 const ATLAS = JSON.parse(document.getElementById('atlas-snapshot').textContent);
@@ -633,6 +744,215 @@ const ATLAS = JSON.parse(document.getElementById('atlas-snapshot').textContent);
   ctx.fillStyle='#ff3c54'; ctx.fillText('0 VERIFIED RELATIONS',cx,cy-8);
   ctx.font=Math.max(10,Math.min(16,Math.floor(W/70)))+'px Martian Mono,Consolas,monospace';
   ctx.fillStyle='#5a3800'; ctx.fillText('NODE POSITIONS = DISPLAY LAYOUT ONLY',cx,cy+22);
+})();
+</script>
+<script>
+/* LAYER 03 — Phase B campaign observations.  One local grid at a time. */
+var campaignDraw = function(){};
+(function campaignLayer(){
+  const CS = JSON.parse(document.getElementById('campaign-snapshot').textContent);
+  const canvas = document.getElementById('campaign-canvas');
+  const context = canvas.getContext('2d');
+  const campaigns = CS.campaigns;
+  const byId = {};
+  campaigns.forEach(function(c){ byId[c.campaign_id] = c; });
+  const state = {campaign:null, source:'ALL', year:'ALL', crs:'ALL',
+                 geometry:'ALL', status:'ALL', selected:null, screen:[]};
+  const sources = ['ALL'];
+  campaigns.forEach(function(c){
+    if (sources.indexOf(c.source_file) < 0){ sources.push(c.source_file); }
+  });
+  const years = ['ALL'];
+  campaigns.forEach(function(c){
+    const value = c.year === null ? 'UNKNOWN' : String(c.year);
+    if (years.indexOf(value) < 0){ years.push(value); }
+  });
+  const crss = ['ALL'];
+  campaigns.forEach(function(c){
+    if (crss.indexOf(c.crs) < 0){ crss.push(c.crs); }
+  });
+  const geometries = ['ALL'];
+  campaigns.forEach(function(c){
+    if (geometries.indexOf(c.geometry) < 0){ geometries.push(c.geometry); }
+  });
+  const statuses = ['ALL'];
+  campaigns.forEach(function(c){
+    if (statuses.indexOf(c.status) < 0){ statuses.push(c.status); }
+  });
+
+  function esc(value){
+    return String(value).replace(/[&<>"]/g, function(ch){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch];
+    });
+  }
+  function yearOf(c){ return c.year === null ? 'UNKNOWN' : String(c.year); }
+  function chips(container, values, active, kind){
+    container.innerHTML = '';
+    values.forEach(function(value){
+      const chip = document.createElement('div');
+      chip.className = 'camp-chip' + (active === value ? ' on' : '');
+      chip.textContent = value;
+      chip.addEventListener('click', function(){
+        state[kind] = value;
+        if (state.campaign && !visible().some(function(c){
+              return c.campaign_id === state.campaign;
+            })){
+          state.campaign = null; state.selected = null;
+        }
+        renderChips(); renderList(); draw(); renderPassport();
+      });
+      container.appendChild(chip);
+    });
+  }
+  function renderChips(){
+    chips(document.getElementById('camp-source'), sources, state.source, 'source');
+    chips(document.getElementById('camp-year'), years, state.year, 'year');
+    chips(document.getElementById('camp-crs'), crss, state.crs, 'crs');
+    chips(document.getElementById('camp-geometry'), geometries, state.geometry, 'geometry');
+    chips(document.getElementById('camp-status'), statuses, state.status, 'status');
+  }
+  function visible(){
+    return campaigns.filter(function(c){
+      if (state.source !== 'ALL' && c.source_file !== state.source){ return false; }
+      if (state.year !== 'ALL' && yearOf(c) !== state.year){ return false; }
+      if (state.crs !== 'ALL' && c.crs !== state.crs){ return false; }
+      if (state.geometry !== 'ALL' && c.geometry !== state.geometry){ return false; }
+      if (state.status !== 'ALL' && c.status !== state.status){ return false; }
+      return true;
+    });
+  }
+  function renderList(){
+    const box = document.getElementById('camp-list');
+    box.innerHTML = '';
+    visible().forEach(function(c){
+      const row = document.createElement('div');
+      row.className = 'camp-row' + (state.campaign === c.campaign_id ? ' sel' : '');
+      row.innerHTML = '<div><div class="camp-row-id">' + esc(c.campaign_id) +
+        '</div><div class="camp-row-meta">' + esc(yearOf(c)) + ' · ' +
+        esc(c.crs) + ' · ' + esc(c.geometry) + '</div></div>' +
+        '<div class="camp-row-n">' + c.points.length + '</div>';
+      row.addEventListener('click', function(){
+        state.campaign = c.campaign_id; state.selected = null;
+        renderList(); draw(); renderPassport();
+      });
+      box.appendChild(row);
+    });
+  }
+  function draw(){
+    const W = canvas.width = canvas.offsetWidth || 800;
+    const H = canvas.height = canvas.offsetHeight || 420;
+    context.clearRect(0,0,W,H);
+    context.fillStyle = 'rgba(5,5,15,0.4)'; context.fillRect(0,0,W,H);
+    state.screen = [];
+    const c = byId[state.campaign];
+    document.getElementById('camp-count').textContent = c ?
+      (c.points.length + ' OBSERVATIONS') : '0 OBSERVATIONS';
+    if (!c){ return; }
+    const e0 = c.extent.easting_min, e1 = c.extent.easting_max;
+    const n0 = c.extent.northing_min, n1 = c.extent.northing_max;
+    const de = Math.max(1e-9, e1-e0), dn = Math.max(1e-9, n1-n0);
+    const pad = 18;
+    const sx = (W - pad*2) / de, sy = (H - pad*2) / dn;
+    const scale = Math.min(sx, sy);
+    const ox = (W - de*scale)/2, oy = (H - dn*scale)/2;
+    context.strokeStyle = 'rgba(245,166,35,0.10)'; context.lineWidth = 1;
+    for (let i = 1; i < 5; i++){
+      const gx = ox + de*scale*i/5, gy = oy + dn*scale*i/5;
+      context.beginPath(); context.moveTo(gx,pad); context.lineTo(gx,H-pad); context.stroke();
+      context.beginPath(); context.moveTo(pad,gy); context.lineTo(W-pad,gy); context.stroke();
+    }
+    c.points.forEach(function(p){
+      const x = ox + (p[1]-e0)*scale, y = H - oy - (p[2]-n0)*scale;
+      state.screen.push({x:x, y:y, point:p});
+      const isFeature = !!p[4];
+      context.fillStyle = p[3] === null ? '#ff3c54' : (isFeature ? '#8855ff' : '#39ff7a');
+      const size = state.selected === p[0] ? 5 : 2;
+      context.fillRect(x-size/2, y-size/2, size, size);
+    });
+    context.textAlign = 'left'; context.textBaseline = 'top';
+    context.font = '10px Consolas,monospace'; context.fillStyle = '#5a3800';
+    context.fillText('X EASTING / Y NORTHING — ' + c.crs, 8, 8);
+    context.fillText('E ' + e0.toFixed(2) + '..' + e1.toFixed(2) +
+      '  N ' + n0.toFixed(2) + '..' + n1.toFixed(2), 8, 22);
+  }
+  function renderPassport(){
+    const box = document.getElementById('camp-passport');
+    const c = byId[state.campaign];
+    if (!c){ box.textContent = 'SELECT A CAMPAIGN.'; return; }
+    if (!state.selected){
+      box.innerHTML = '<span class="lbl">CAMPAIGN</span>' + esc(c.campaign_id) +
+        '<br><span class="lbl">SOURCE</span>' + esc(c.source_file) +
+        '<br><span class="lbl">OBSERVATIONS</span>' + c.points.length +
+        '<br><span class="lbl">YEAR</span>' + esc(yearOf(c)) +
+        '<br><span class="lbl">CRS</span>' + esc(c.crs) +
+        '<br><span class="lbl">VERTICAL</span>' + esc(c.vertical_reference) +
+        '<br><span class="lbl">ROLE</span>' + esc(c.semantic_role) +
+        '<br><span class="lbl">UNITS</span>' + esc(c.source_units) +
+        '<div class="raw">SELECT A POINT IN THE PLOT FOR ITS OBSERVATION PASSPORT.</div>';
+      return;
+    }
+    const point = c.points.filter(function(p){ return p[0] === state.selected; })[0];
+    if (!point){ box.textContent = 'OBSERVATION NOT FOUND.'; return; }
+    box.innerHTML = '<span class="lbl">OBSERVATION</span>' + esc(point[0]) +
+      '<br><span class="lbl">EASTING</span>' + point[1].toFixed(3) +
+      '<br><span class="lbl">NORTHING</span>' + point[2].toFixed(3) +
+      '<br><span class="lbl">ELEVATION</span>' +
+        (point[3] === null ? 'UNKNOWN (NULL)' : point[3].toFixed(3)) +
+      '<br><span class="lbl">FEATURE CANDIDATE</span>' +
+        (point[4] ? esc(point[4]) : 'NONE') +
+      '<br><span class="lbl">GEOMETRY</span>' + esc(c.geometry) +
+      '<br><span class="lbl">STATUS</span>' + esc(c.status) +
+      '<br><span class="lbl">CRS</span>' + esc(c.crs) +
+      '<div class="raw">ONE MEASUREMENT IS NOT NECESSARILY ONE OBJECT. ' +
+      'KML Z IS NOT HEIGHT. NO DATUM TRANSFORM PERFORMED.</div>';
+  }
+  function renderMeta(){
+    const ident = CS.identity;
+    document.getElementById('camp-identity').innerHTML =
+      '<span class="lbl">OBSERVATIONS</span>' + ident.source_observations +
+      '<br><span class="lbl">ENTITY CANDIDATES</span>' + ident.entity_candidates +
+      '<br><span class="lbl">IDENTITY CONFIRMED</span>' + ident.identity_confirmed +
+      '<br><span class="lbl">REMEASUREMENT CAND.</span>' + ident.remeasurement_candidates +
+      '<br><span class="lbl">RESHOOT NOTES</span>' + ident.documented_reshoot_notes +
+      '<br><span class="lbl">CONFIRMED UNIQUE STATIONS</span>' +
+        (ident.confirmed_unique_stations === null ? 'NOT ESTABLISHED' : ident.confirmed_unique_stations) +
+      '<br><span class="lbl">RELATIONS</span>' + CS.relations.relation_count +
+      '<br><span class="lbl">CROSS-CAMPAIGN RELATIONS</span>' +
+        CS.relations.cross_campaign_geometric_relations +
+      '<div class="raw">COORDINATE COINCIDENCE AND FEATURE LABELS ARE ' +
+      'CANDIDATES, NOT PROOF OF PHYSICAL IDENTITY.</div>';
+    document.getElementById('camp-models').innerHTML =
+      '<span class="lbl">IDEALIZED MODELS</span>' + CS.models.model_count +
+      '<br><span class="lbl">SURFACE STATUS</span>' + esc(CS.models.surface_status) +
+      '<br><span class="lbl">WITHHELD CAMPAIGNS</span>' + CS.models.skipped.length +
+      '<div class="raw">ELLIPSOID SCALE 2.0 IS DECLARED, NOT FITTED. ' +
+      'HULL INTERIOR IS NOT SURVEYED SURFACE.</div>';
+    document.getElementById('camp-provenance').innerHTML =
+      '<span class="lbl">SOURCE PROVENANCE VERIFIED</span>' +
+        CS.epistemic.source_provenance_verified +
+      '<br><span class="lbl">COORDINATE SYSTEM VERIFIED</span>' +
+        CS.epistemic.coordinate_system_verified +
+      '<br><span class="lbl">INDEPENDENTLY CORROBORATED</span>' +
+        CS.epistemic.independently_corroborated +
+      '<br><span class="lbl">MODEL VALIDATED</span>' + CS.epistemic.model_validated +
+      '<br><span class="lbl">TRANSFORMS PERFORMED</span>' +
+        CS.coordinate_systems.transformations_performed.length +
+      '<div class="raw">A VALID FILE IS NOT A CORROBORATED SOURCE. ' +
+      'A CORRECT MODEL IS NOT A VALIDATED HISTORICAL OBJECT.</div>';
+  }
+  canvas.addEventListener('click', function(event){
+    const rect = canvas.getBoundingClientRect();
+    const mx = event.clientX - rect.left, my = event.clientY - rect.top;
+    let best = null, bestDistance = 64;
+    state.screen.forEach(function(item){
+      const d = (item.x-mx)*(item.x-mx) + (item.y-my)*(item.y-my);
+      if (d < bestDistance){ bestDistance = d; best = item.point; }
+    });
+    if (best){ state.selected = best[0]; draw(); renderPassport(); }
+  });
+  window.addEventListener('resize', draw);
+  renderChips(); renderList(); renderMeta(); draw(); renderPassport();
+  campaignDraw = draw;
 })();
 </script>
 <script>
@@ -914,12 +1234,13 @@ const ATLAS = JSON.parse(document.getElementById('atlas-snapshot').textContent);
       Array.prototype.forEach.call(document.querySelectorAll('.ltab'), function(other){
         other.className = 'ltab' + (other === tab ? ' active' : '');
       });
-      const spatial = tab.getAttribute('data-layer') === 'spatial';
-      document.getElementById('view-relation').className =
-        'layer-view' + (spatial ? ' hidden' : '');
-      document.getElementById('view-spatial').className =
-        'layer-view' + (spatial ? '' : ' hidden');
-      if (spatial){ draw(); }
+      const layer = tab.getAttribute('data-layer');
+      ['relation','spatial','campaign'].forEach(function(name){
+        document.getElementById('view-' + name).className =
+          'layer-view' + (layer === name ? '' : ' hidden');
+      });
+      if (layer === 'spatial'){ draw(); }
+      if (layer === 'campaign'){ campaignDraw(); }
     });
   });
   Array.prototype.forEach.call(document.querySelectorAll('[data-toggle]'), function(button){
@@ -996,9 +1317,10 @@ const ATLAS = JSON.parse(document.getElementById('atlas-snapshot').textContent);
 def main() -> str:
     snapshot = build_snapshot()
     spatial = build_spatial_snapshot()
+    campaign = build_campaign_snapshot()
     path = os.path.join(HERE, OUTPUT)
     with open(path, "w", encoding="utf-8", newline="\n") as handle:
-        handle.write(render_html(snapshot, spatial))
+        handle.write(render_html(snapshot, spatial, campaign))
     write_import_report()
     return path
 

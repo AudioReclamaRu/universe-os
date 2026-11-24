@@ -1,0 +1,20 @@
+{
+  "checks": {
+    "all_expected_sets_parsed": true,
+    "all_observations_preserved": true,
+    "cross_campaign_transform_performed": false,
+    "expected_total_matches": true,
+    "no_kml_z_promoted": true,
+    "no_monument_surface": true,
+    "no_terrain_mesh": true,
+    "observation_ids_unique": true
+  },
+  "negative_results": [
+    "no source provenance independently corroborated",
+    "no datum or coordinate system verified",
+    "no terrain or monument surface constructed",
+    "no identity confirmed between campaigns",
+    "no acoustic/hydraulic/electromagnetic claim asserted"
+  ],
+  "report_id": "PHASE_B_VALIDATION_REPORT"
+}

@@ -1,0 +1,878 @@
+{
+  "counts": {
+    "delta": 0,
+    "derived_files": 8,
+    "expected_total": 12078,
+    "observed_total": 12078,
+    "raw_files": 15
+  },
+  "derived_files": [
+    {
+      "bytes": 754543,
+      "canonical_json_sha256": "ce4a7566b002c05c0b16af2a3070ffcda098002286e8129e50fba118aed53066",
+      "detected_format": "JSON",
+      "extension": ".json",
+      "git_blob_sha1": "d1e4d9343f8e7aef590091b76a5b8f809cbdf4ac",
+      "modified_utc": "2026-11-19T15:54:42Z",
+      "name": "GDFS-2012-for-GE-21vii18.json",
+      "parse": {
+        "canonical_json_sha256": "ce4a7566b002c05c0b16af2a3070ffcda098002286e8129e50fba118aed53066",
+        "crs_hint_frequency": {
+          "Easting": 1539,
+          "Northing": 1539
+        },
+        "declared_sha256_of_kml": "b34c0775674d8a1669373de1ecc37fbe97b30fe08aea43d9edff40a85d4d44da",
+        "folders": [
+          "Points"
+        ],
+        "geometry_types": {
+          "Point": 1539
+        },
+        "kml_bytes": 1373875,
+        "kml_entry": "doc.kml",
+        "parse_status": "PARSED",
+        "parser_version": "phase_b_derived_json_v1",
+        "record_count": 1539,
+        "warnings": []
+      },
+      "raw_sha256": "45c2987d2cd2e873408a5fea824bffb3e83995f8da29724925980950d4277a7a",
+      "readable": true,
+      "relative_path": "kmz\\GDFS-2012-for-GE-21vii18.json",
+      "warnings": []
+    },
+    {
+      "bytes": 550989,
+      "canonical_json_sha256": "71e36f748291716b99e390df01fedd704bba0cc542956c80ce5136faffd9e27b",
+      "detected_format": "JSON",
+      "extension": ".json",
+      "git_blob_sha1": "740cdee4e17c4d62cb84870dc7556cac5ecdbf8d",
+      "modified_utc": "2026-11-19T15:54:42Z",
+      "name": "GDFS-2015-Master-25iii17-edited-child.json",
+      "parse": {
+        "canonical_json_sha256": "71e36f748291716b99e390df01fedd704bba0cc542956c80ce5136faffd9e27b",
+        "crs_hint_frequency": {
+          "Easting": 1100,
+          "Northing": 1100
+        },
+        "declared_sha256_of_kml": "f2d331bd88c8b2555f3a2e9b9dbbd7dc3f327e08357707a5206e2eb2381eef5c",
+        "folders": [
+          "Points"
+        ],
+        "geometry_types": {
+          "Point": 1100
+        },
+        "kml_bytes": 995064,
+        "kml_entry": "doc.kml",
+        "parse_status": "PARSED",
+        "parser_version": "phase_b_derived_json_v1",
+        "record_count": 1100,
+        "warnings": []
+      },
+      "raw_sha256": "ae2734f316bad558d31563e1d873dd767f4a45f31fee71130330d26af269b6e4",
+      "readable": true,
+      "relative_path": "kmz\\GDFS-2015-Master-25iii17-edited-child.json",
+      "warnings": []
+    },
+    {
+      "bytes": 2329300,
+      "canonical_json_sha256": "0348146ddf6d11ea18eb0058d0e6828f264e254d9c2a88f374005977180ee5a8",
+      "detected_format": "JSON",
+      "extension": ".json",
+      "git_blob_sha1": "97dd5b9ae974658936de54817f4815e9ac2102e8",
+      "modified_utc": "2026-11-19T15:54:42Z",
+      "name": "GDFS-2016-23ix18.json",
+      "parse": {
+        "canonical_json_sha256": "0348146ddf6d11ea18eb0058d0e6828f264e254d9c2a88f374005977180ee5a8",
+        "crs_hint_frequency": {
+          "Easting": 4746,
+          "Northing": 4746
+        },
+        "declared_sha256_of_kml": "40bb2cf2c2d46ba426f491564b2fd6892d95a821840b4ea39139da5e71f1260e",
+        "folders": [
+          "CourtLine",
+          "Drain",
+          "LargeRockCutHole >40cm",
+          "LeverSocket",
+          "Limestone-Quarry Block",
+          "MediumRockCutHole 20 to 40 cm",
+          "MinorRockCutHole <20 cm",
+          "Other",
+          "Quarry-RockCut-Court-BurialCut",
+          "Quarry-RockCutChannel",
+          "Socket",
+          "Wall-Fence"
+        ],
+        "geometry_types": {
+          "Point": 4746
+        },
+        "kml_bytes": 3981486,
+        "kml_entry": "doc.kml",
+        "parse_status": "PARSED",
+        "parser_version": "phase_b_derived_json_v1",
+        "record_count": 4746,
+        "warnings": []
+      },
+      "raw_sha256": "fbf3471c453e6fcf229cd95f7ea31e4236a467716cd7fc3d6d0397a40723358f",
+      "readable": true,
+      "relative_path": "kmz\\GDFS-2016-23ix18.json",
+      "warnings": []
+    },
+    {
+      "bytes": 2511929,
+      "canonical_json_sha256": "71e4525a4aaccd538834da24163ef4e03c7cd46d42521e76310d2f47d80d9a06",
+      "detected_format": "JSON",
+      "extension": ".json",
+      "git_blob_sha1": "1721fe9d1843790b19a8200f91b4fffe41a4599e",
+      "modified_utc": "2026-11-19T15:54:43Z",
+      "name": "GDFS-2018-12xii18.json",
+      "parse": {
+        "canonical_json_sha256": "71e4525a4aaccd538834da24163ef4e03c7cd46d42521e76310d2f47d80d9a06",
+        "crs_hint_frequency": {
+          "Easting": 4569,
+          "Northing": 4569
+        },
+        "declared_sha256_of_kml": "ed0faca84e77dfc3b2e08d7f75767c650755f669a5c01c5e66644ae85f5b4bf5",
+        "folders": [
+          "Big Depression",
+          "Drill Hole",
+          "Fissure",
+          "Huge Depression",
+          "Large Lever Socket",
+          "Large Rock Cut Hole",
+          "Major Fissure",
+          "Medium Rock Cut Hole",
+          "Minor Rock Cut Hole",
+          "Modern",
+          "Not Classified",
+          "Sphinx Body",
+          "Sphinx Ditch",
+          "Unfinished Rock Cut Feature"
+        ],
+        "geometry_types": {
+          "Point": 4569
+        },
+        "kml_bytes": 4121132,
+        "kml_entry": "doc.kml",
+        "parse_status": "PARSED",
+        "parser_version": "phase_b_derived_json_v1",
+        "record_count": 4569,
+        "warnings": []
+      },
+      "raw_sha256": "4d0bd5cb9e11df4b0d93cc11dba07fecf9a266463b5c1a0467ce3ed3baf70a04",
+      "readable": true,
+      "relative_path": "kmz\\GDFS-2018-12xii18.json",
+      "warnings": []
+    },
+    {
+      "bytes": 19326,
+      "canonical_json_sha256": "53bca1fc0b7e811d89ff5c24e84b8393187e4033d61c5e984c3775a196c4b8e1",
+      "detected_format": "JSON",
+      "extension": ".json",
+      "git_blob_sha1": "fed67974dd64c7c666557fe2063038626977ea12",
+      "modified_utc": "2026-11-19T15:54:43Z",
+      "name": "GPMP-Control-Monuments.json",
+      "parse": {
+        "canonical_json_sha256": "53bca1fc0b7e811d89ff5c24e84b8393187e4033d61c5e984c3775a196c4b8e1",
+        "crs_hint_frequency": {
+          "Easting": 41,
+          "Northing": 41
+        },
+        "declared_sha256_of_kml": "94ca0d8b95529664ebb823c84ba8c10082d1f3a62306826bd27be514c0e66020",
+        "folders": [
+          "Points"
+        ],
+        "geometry_types": {
+          "Point": 41
+        },
+        "kml_bytes": 37630,
+        "kml_entry": "doc.kml",
+        "parse_status": "PARSED",
+        "parser_version": "phase_b_derived_json_v1",
+        "record_count": 41,
+        "warnings": []
+      },
+      "raw_sha256": "7f9010f36c0b83a0e8ad15a04474aab5a1030d26d593fc72f8085aef4ac2506a",
+      "readable": true,
+      "relative_path": "kmz\\GPMP-Control-Monuments.json",
+      "warnings": []
+    },
+    {
+      "bytes": 7104,
+      "canonical_json_sha256": "6fedd3e0f20028c7cc708f12f11c3d3bb81eb1ba716df9fe02a47142e7f38660",
+      "detected_format": "JSON",
+      "extension": ".json",
+      "git_blob_sha1": "edcef0b9a4c8634c8dce237fb1a670b17053bb5b",
+      "modified_utc": "2026-11-19T15:54:43Z",
+      "name": "Giza-Corner-Points-2v17.json",
+      "parse": {
+        "canonical_json_sha256": "6fedd3e0f20028c7cc708f12f11c3d3bb81eb1ba716df9fe02a47142e7f38660",
+        "crs_hint_frequency": {
+          "Easting": 15,
+          "Northing": 15
+        },
+        "declared_sha256_of_kml": "02bded8e81b5fabbf41dba0668207c4ffe85efba7eaef552b39640dc8903c439",
+        "folders": [
+          "Points"
+        ],
+        "geometry_types": {
+          "Point": 15
+        },
+        "kml_bytes": 13155,
+        "kml_entry": "doc.kml",
+        "parse_status": "PARSED",
+        "parser_version": "phase_b_derived_json_v1",
+        "record_count": 15,
+        "warnings": []
+      },
+      "raw_sha256": "4036a83524338350bc8c363d3c096a04655a5a468e8532e72fe53fe64042de42",
+      "readable": true,
+      "relative_path": "kmz\\Giza-Corner-Points-2v17.json",
+      "warnings": []
+    },
+    {
+      "bytes": 33678,
+      "canonical_json_sha256": "f957edca2c329d57003dd522970f8c857c26d3b391049bc2cfd29f1537c20b6e",
+      "detected_format": "JSON",
+      "extension": ".json",
+      "git_blob_sha1": "b081aea5494edb9ce81e6aa63dd2c500ff953b0d",
+      "modified_utc": "2026-11-19T15:54:43Z",
+      "name": "Petries-Stations.json",
+      "parse": {
+        "canonical_json_sha256": "f957edca2c329d57003dd522970f8c857c26d3b391049bc2cfd29f1537c20b6e",
+        "crs_hint_frequency": {
+          "Easting": 68,
+          "GPMP": 68,
+          "Northing": 68
+        },
+        "declared_sha256_of_kml": "8ea1d064b44b5e8637b90c553d3a67c951b381242e894dae74dd61eaf62cdef5",
+        "folders": [
+          "Stations"
+        ],
+        "geometry_types": {
+          "Point": 68
+        },
+        "kml_bytes": 53092,
+        "kml_entry": "doc.kml",
+        "parse_status": "PARSED",
+        "parser_version": "phase_b_derived_json_v1",
+        "record_count": 68,
+        "warnings": []
+      },
+      "raw_sha256": "d2694e640fcf76fd27aa06bda556c3e91a6bc13007d8de220fe71755fd96cb9d",
+      "readable": true,
+      "relative_path": "kmz\\Petries-Stations.json",
+      "warnings": []
+    },
+    {
+      "bytes": 4228841,
+      "canonical_json_sha256": null,
+      "detected_format": "CSV",
+      "extension": ".csv",
+      "git_blob_sha1": "58c3a499924edd194175fa515309a28f41c8d625",
+      "modified_utc": "2026-11-19T15:54:43Z",
+      "name": "all_kmz_points.csv",
+      "parse": {
+        "data_rows": 12078,
+        "header": [
+          "source_file",
+          "source_sha256",
+          "placemark_index",
+          "placemark_name",
+          "geometry",
+          "vertex_index",
+          "longitude",
+          "latitude",
+          "altitude",
+          "description",
+          "extended"
+        ],
+        "parse_status": "PARSED",
+        "parser_version": "phase_b_csv_v1",
+        "warnings": []
+      },
+      "raw_sha256": "32f5f9a752533b821face34b86daa2e5ef379b088749c8860b110e3e2c3ecde8",
+      "readable": true,
+      "relative_path": "kmz\\all_kmz_points.csv",
+      "warnings": []
+    }
+  ],
+  "expected_set_status": {
+    "GDFS-2012-for-GE-21vii18.json": {
+      "actual_record_count": 1539,
+      "count_matches": true,
+      "expected": 1539,
+      "found": true,
+      "parsed": true,
+      "reason": ""
+    },
+    "GDFS-2015-Master-25iii17-edited-child.json": {
+      "actual_record_count": 1100,
+      "count_matches": true,
+      "expected": 1100,
+      "found": true,
+      "parsed": true,
+      "reason": ""
+    },
+    "GDFS-2016-23ix18.json": {
+      "actual_record_count": 4746,
+      "count_matches": true,
+      "expected": 4746,
+      "found": true,
+      "parsed": true,
+      "reason": ""
+    },
+    "GDFS-2018-12xii18.json": {
+      "actual_record_count": 4569,
+      "count_matches": true,
+      "expected": 4569,
+      "found": true,
+      "parsed": true,
+      "reason": ""
+    },
+    "GPMP-Control-Monuments.json": {
+      "actual_record_count": 41,
+      "count_matches": true,
+      "expected": 41,
+      "found": true,
+      "parsed": true,
+      "reason": ""
+    },
+    "Giza-Corner-Points-2v17.json": {
+      "actual_record_count": 15,
+      "count_matches": true,
+      "expected": 15,
+      "found": true,
+      "parsed": true,
+      "reason": ""
+    },
+    "Petries-Stations.json": {
+      "actual_record_count": 68,
+      "count_matches": true,
+      "expected": 68,
+      "found": true,
+      "parsed": true,
+      "reason": ""
+    }
+  },
+  "identifier_policy": {
+    "canonical_json_sha256": "SHA-256 of sorted-key UTF-8 JSON, fixed separators, allow_nan=False; independent of CRLF/LF",
+    "git_blob_sha1": "git blob object id computed from header + bytes",
+    "interchangeable": false,
+    "raw_sha256": "SHA-256 over actual file bytes"
+  },
+  "provenance_states": {
+    "FILE_HASHED": true,
+    "FILE_PRESENT": true,
+    "INDEPENDENTLY_CORROBORATED": false,
+    "ORIGINAL_ARCHIVE_MATCHED": true,
+    "SOURCE_CONTENT_PARSED": true,
+    "SOURCE_PROVENANCE_VERIFIED": false,
+    "STRUCTURE_VALIDATED": true
+  },
+  "raw_archive_reconciliation": [
+    {
+      "archive_match": true,
+      "declared_kml_sha256_in_json": "b34c0775674d8a1669373de1ecc37fbe97b30fe08aea43d9edff40a85d4d44da",
+      "derived_json": "GDFS-2012-for-GE-21vii18.json",
+      "raw_kmz": "GDFS-2012-for-GE-21vii18.kmz",
+      "raw_kmz_sha256": "b34c0775674d8a1669373de1ecc37fbe97b30fe08aea43d9edff40a85d4d44da"
+    },
+    {
+      "archive_match": true,
+      "declared_kml_sha256_in_json": "f2d331bd88c8b2555f3a2e9b9dbbd7dc3f327e08357707a5206e2eb2381eef5c",
+      "derived_json": "GDFS-2015-Master-25iii17-edited-child.json",
+      "raw_kmz": "GDFS-2015-Master-25iii17-edited-child.kmz",
+      "raw_kmz_sha256": "f2d331bd88c8b2555f3a2e9b9dbbd7dc3f327e08357707a5206e2eb2381eef5c"
+    },
+    {
+      "archive_match": true,
+      "declared_kml_sha256_in_json": "40bb2cf2c2d46ba426f491564b2fd6892d95a821840b4ea39139da5e71f1260e",
+      "derived_json": "GDFS-2016-23ix18.json",
+      "raw_kmz": "GDFS-2016-23ix18.kmz",
+      "raw_kmz_sha256": "40bb2cf2c2d46ba426f491564b2fd6892d95a821840b4ea39139da5e71f1260e"
+    },
+    {
+      "archive_match": true,
+      "declared_kml_sha256_in_json": "ed0faca84e77dfc3b2e08d7f75767c650755f669a5c01c5e66644ae85f5b4bf5",
+      "derived_json": "GDFS-2018-12xii18.json",
+      "raw_kmz": "GDFS-2018-12xii18.kmz",
+      "raw_kmz_sha256": "ed0faca84e77dfc3b2e08d7f75767c650755f669a5c01c5e66644ae85f5b4bf5"
+    },
+    {
+      "archive_match": true,
+      "declared_kml_sha256_in_json": "94ca0d8b95529664ebb823c84ba8c10082d1f3a62306826bd27be514c0e66020",
+      "derived_json": "GPMP-Control-Monuments.json",
+      "raw_kmz": "GPMP-Control-Monuments.kmz",
+      "raw_kmz_sha256": "94ca0d8b95529664ebb823c84ba8c10082d1f3a62306826bd27be514c0e66020"
+    },
+    {
+      "archive_match": true,
+      "declared_kml_sha256_in_json": "02bded8e81b5fabbf41dba0668207c4ffe85efba7eaef552b39640dc8903c439",
+      "derived_json": "Giza-Corner-Points-2v17.json",
+      "raw_kmz": "Giza-Corner-Points-2v17.kmz",
+      "raw_kmz_sha256": "02bded8e81b5fabbf41dba0668207c4ffe85efba7eaef552b39640dc8903c439"
+    },
+    {
+      "archive_match": true,
+      "declared_kml_sha256_in_json": "8ea1d064b44b5e8637b90c553d3a67c951b381242e894dae74dd61eaf62cdef5",
+      "derived_json": "Petries-Stations.json",
+      "raw_kmz": "Petries-Stations.kmz",
+      "raw_kmz_sha256": "8ea1d064b44b5e8637b90c553d3a67c951b381242e894dae74dd61eaf62cdef5"
+    }
+  ],
+  "raw_files": [
+    {
+      "bytes": 1036154,
+      "canonical_json_sha256": null,
+      "detected_format": "UNKNOWN",
+      "extension": ".pdf",
+      "git_blob_sha1": "24da6d06f152effb5062fff802b7b1763feefdf8",
+      "modified_utc": "2026-11-19T15:52:52Z",
+      "name": "AERAGRAM16_2_GDash.pdf",
+      "parse": {
+        "parse_status": "NOT_PARSED",
+        "warnings": []
+      },
+      "raw_sha256": "71e48499746d060317a4a7ac357b8a246866387b4d77fc3bfe3ca71fbe253391",
+      "readable": true,
+      "relative_path": "dash_foundation\\AERAGRAM16_2_GDash.pdf",
+      "warnings": []
+    },
+    {
+      "bytes": 1575179,
+      "canonical_json_sha256": null,
+      "detected_format": "UNKNOWN",
+      "extension": ".pdf",
+      "git_blob_sha1": "887750129f91d430a9e319edf79ab83002532870",
+      "modified_utc": "2026-11-19T15:53:20Z",
+      "name": "AG14_1_True_North_singles.pdf",
+      "parse": {
+        "parse_status": "NOT_PARSED",
+        "warnings": []
+      },
+      "raw_sha256": "67feb30ccbe6712645f1037f5aa36deb4f397036c695bc49e3f26779a0b95d53",
+      "readable": true,
+      "relative_path": "dash_foundation\\AG14_1_True_North_singles.pdf",
+      "warnings": []
+    },
+    {
+      "bytes": 9373455,
+      "canonical_json_sha256": null,
+      "detected_format": "UNKNOWN",
+      "extension": ".pdf",
+      "git_blob_sha1": "3cdd41ae99106da8a8dc4b3e4c3f2c0c0539bb3a",
+      "modified_utc": "2026-11-19T15:53:17Z",
+      "name": "Aeragram12-2_Alignmments.pdf",
+      "parse": {
+        "parse_status": "NOT_PARSED",
+        "warnings": []
+      },
+      "raw_sha256": "ff4930d26c20132bbb37bab37850ae0b0cfe9dead1aa17915c6311a9bea738ee",
+      "readable": true,
+      "relative_path": "dash_foundation\\Aeragram12-2_Alignmments.pdf",
+      "warnings": []
+    },
+    {
+      "bytes": 1048576,
+      "canonical_json_sha256": null,
+      "detected_format": "UNKNOWN",
+      "extension": ".pdf",
+      "git_blob_sha1": "55085abef6b04a0fd14c13ce307cb16cdb4b4f8f",
+      "modified_utc": "2026-11-19T15:52:59Z",
+      "name": "Aeragram18-1_Petrie.pdf",
+      "parse": {
+        "parse_status": "NOT_PARSED",
+        "warnings": []
+      },
+      "raw_sha256": "d5ed7ba2c7a657b2ac5bda60ff0ec4b60dff113b2f55e470346f817cbcd2e15f",
+      "readable": true,
+      "relative_path": "dash_foundation\\Aeragram18-1_Petrie.pdf",
+      "warnings": []
+    },
+    {
+      "bytes": 3603998,
+      "canonical_json_sha256": null,
+      "detected_format": "UNKNOWN",
+      "extension": ".pdf",
+      "git_blob_sha1": "6c004c51c4c408d4fb731a1b09f13c1467da2297",
+      "modified_utc": "2026-11-19T16:06:14Z",
+      "name": "Aeragram18-1_Petrie_v2.pdf",
+      "parse": {
+        "parse_status": "NOT_PARSED",
+        "warnings": []
+      },
+      "raw_sha256": "b98a9204c9408ea83829c7d6c00be9edde225d5e6d5e3ed368c4c8722d094cff",
+      "readable": true,
+      "relative_path": "dash_foundation\\Aeragram18-1_Petrie_v2.pdf",
+      "warnings": []
+    },
+    {
+      "bytes": 87816,
+      "canonical_json_sha256": null,
+      "detected_format": "KMZ",
+      "extension": ".kmz",
+      "git_blob_sha1": "68a32a1de388ef2a19a542fd856e6ad3c64c2ac5",
+      "modified_utc": "2026-11-19T15:51:10Z",
+      "name": "GDFS-2012-for-GE-21vii18.kmz",
+      "parse": {
+        "extended_data_counts": {
+          "doc.kml": 1539
+        },
+        "folders": {
+          "doc.kml": [
+            "Points"
+          ]
+        },
+        "geometry_types": {
+          "doc.kml": {
+            "Point": 1539
+          }
+        },
+        "kml_entries": [
+          "doc.kml"
+        ],
+        "parse_status": "PARSED",
+        "parser_version": "phase_b_kmz_v1",
+        "placemark_counts": {
+          "doc.kml": 1539
+        },
+        "warnings": [],
+        "zip_entries": [
+          "doc.kml"
+        ]
+      },
+      "raw_sha256": "b34c0775674d8a1669373de1ecc37fbe97b30fe08aea43d9edff40a85d4d44da",
+      "readable": true,
+      "relative_path": "dash_foundation\\GDFS-2012-for-GE-21vii18.kmz",
+      "warnings": []
+    },
+    {
+      "bytes": 56979,
+      "canonical_json_sha256": null,
+      "detected_format": "KMZ",
+      "extension": ".kmz",
+      "git_blob_sha1": "639115651cdb55e4984fb05f6b64d8b3db0f24e4",
+      "modified_utc": "2026-11-19T15:51:12Z",
+      "name": "GDFS-2015-Master-25iii17-edited-child.kmz",
+      "parse": {
+        "extended_data_counts": {
+          "doc.kml": 1100
+        },
+        "folders": {
+          "doc.kml": [
+            "Points"
+          ]
+        },
+        "geometry_types": {
+          "doc.kml": {
+            "Point": 1100
+          }
+        },
+        "kml_entries": [
+          "doc.kml"
+        ],
+        "parse_status": "PARSED",
+        "parser_version": "phase_b_kmz_v1",
+        "placemark_counts": {
+          "doc.kml": 1100
+        },
+        "warnings": [],
+        "zip_entries": [
+          "doc.kml"
+        ]
+      },
+      "raw_sha256": "f2d331bd88c8b2555f3a2e9b9dbbd7dc3f327e08357707a5206e2eb2381eef5c",
+      "readable": true,
+      "relative_path": "dash_foundation\\GDFS-2015-Master-25iii17-edited-child.kmz",
+      "warnings": []
+    },
+    {
+      "bytes": 262180,
+      "canonical_json_sha256": null,
+      "detected_format": "KMZ",
+      "extension": ".kmz",
+      "git_blob_sha1": "6d34b5a921220aff9d9b059907b6505064f1875d",
+      "modified_utc": "2026-11-19T15:51:15Z",
+      "name": "GDFS-2016-23ix18.kmz",
+      "parse": {
+        "extended_data_counts": {
+          "doc.kml": 4746
+        },
+        "folders": {
+          "doc.kml": [
+            "Wall-Fence",
+            "Socket",
+            "CourtLine",
+            "MediumRockCutHole 20 to 40 cm",
+            "MinorRockCutHole <20 cm",
+            "LeverSocket",
+            "LargeRockCutHole >40cm",
+            "Drain",
+            "Quarry-RockCut-Court-BurialCut",
+            "Other",
+            "Limestone-Quarry Block",
+            "Quarry-RockCutChannel"
+          ]
+        },
+        "geometry_types": {
+          "doc.kml": {
+            "Point": 4746
+          }
+        },
+        "kml_entries": [
+          "doc.kml"
+        ],
+        "parse_status": "PARSED",
+        "parser_version": "phase_b_kmz_v1",
+        "placemark_counts": {
+          "doc.kml": 4746
+        },
+        "warnings": [],
+        "zip_entries": [
+          "doc.kml"
+        ]
+      },
+      "raw_sha256": "40bb2cf2c2d46ba426f491564b2fd6892d95a821840b4ea39139da5e71f1260e",
+      "readable": true,
+      "relative_path": "dash_foundation\\GDFS-2016-23ix18.kmz",
+      "warnings": []
+    },
+    {
+      "bytes": 222582,
+      "canonical_json_sha256": null,
+      "detected_format": "KMZ",
+      "extension": ".kmz",
+      "git_blob_sha1": "a2ae87769cbcf0ecc010e6f030c22e1bb0dfb865",
+      "modified_utc": "2026-11-19T15:45:59Z",
+      "name": "GDFS-2018-12xii18.kmz",
+      "parse": {
+        "extended_data_counts": {
+          "doc.kml": 4569
+        },
+        "folders": {
+          "doc.kml": [
+            "Big Depression",
+            "Drill Hole",
+            "Fissure",
+            "Huge Depression",
+            "Large Lever Socket",
+            "Large Rock Cut Hole",
+            "Major Fissure",
+            "Medium Rock Cut Hole",
+            "Minor Rock Cut Hole",
+            "Modern",
+            "Not Classified",
+            "Sphinx Body",
+            "Sphinx Ditch",
+            "Unfinished Rock Cut Feature"
+          ]
+        },
+        "geometry_types": {
+          "doc.kml": {
+            "Point": 4569
+          }
+        },
+        "kml_entries": [
+          "doc.kml"
+        ],
+        "parse_status": "PARSED",
+        "parser_version": "phase_b_kmz_v1",
+        "placemark_counts": {
+          "doc.kml": 4569
+        },
+        "warnings": [],
+        "zip_entries": [
+          "doc.kml"
+        ]
+      },
+      "raw_sha256": "ed0faca84e77dfc3b2e08d7f75767c650755f669a5c01c5e66644ae85f5b4bf5",
+      "readable": true,
+      "relative_path": "dash_foundation\\GDFS-2018-12xii18.kmz",
+      "warnings": []
+    },
+    {
+      "bytes": 3871,
+      "canonical_json_sha256": null,
+      "detected_format": "KMZ",
+      "extension": ".kmz",
+      "git_blob_sha1": "c319ac98cc24a270e6c8fb8e9bae170bc5f20ebc",
+      "modified_utc": "2026-11-19T15:52:42Z",
+      "name": "GPMP-Control-Monuments.kmz",
+      "parse": {
+        "extended_data_counts": {
+          "doc.kml": 41
+        },
+        "folders": {
+          "doc.kml": [
+            "Points"
+          ]
+        },
+        "geometry_types": {
+          "doc.kml": {
+            "Point": 41
+          }
+        },
+        "kml_entries": [
+          "doc.kml"
+        ],
+        "parse_status": "PARSED",
+        "parser_version": "phase_b_kmz_v1",
+        "placemark_counts": {
+          "doc.kml": 41
+        },
+        "warnings": [],
+        "zip_entries": [
+          "doc.kml"
+        ]
+      },
+      "raw_sha256": "94ca0d8b95529664ebb823c84ba8c10082d1f3a62306826bd27be514c0e66020",
+      "readable": true,
+      "relative_path": "dash_foundation\\GPMP-Control-Monuments.kmz",
+      "warnings": []
+    },
+    {
+      "bytes": 1920,
+      "canonical_json_sha256": null,
+      "detected_format": "KMZ",
+      "extension": ".kmz",
+      "git_blob_sha1": "ffd6aa3c973ed928559dae4151bbcbba8d6deb59",
+      "modified_utc": "2026-11-19T15:51:18Z",
+      "name": "Giza-Corner-Points-2v17.kmz",
+      "parse": {
+        "extended_data_counts": {
+          "doc.kml": 15
+        },
+        "folders": {
+          "doc.kml": [
+            "Points"
+          ]
+        },
+        "geometry_types": {
+          "doc.kml": {
+            "Point": 15
+          }
+        },
+        "kml_entries": [
+          "doc.kml"
+        ],
+        "parse_status": "PARSED",
+        "parser_version": "phase_b_kmz_v1",
+        "placemark_counts": {
+          "doc.kml": 15
+        },
+        "warnings": [],
+        "zip_entries": [
+          "doc.kml"
+        ]
+      },
+      "raw_sha256": "02bded8e81b5fabbf41dba0668207c4ffe85efba7eaef552b39640dc8903c439",
+      "readable": true,
+      "relative_path": "dash_foundation\\Giza-Corner-Points-2v17.kmz",
+      "warnings": []
+    },
+    {
+      "bytes": 6067,
+      "canonical_json_sha256": null,
+      "detected_format": "KMZ",
+      "extension": ".kmz",
+      "git_blob_sha1": "4162fe45c732bfaac82e5e280f097aa2abbc437f",
+      "modified_utc": "2026-11-19T15:52:48Z",
+      "name": "Petries-Stations.kmz",
+      "parse": {
+        "extended_data_counts": {
+          "doc.kml": 68
+        },
+        "folders": {
+          "doc.kml": [
+            "Stations"
+          ]
+        },
+        "geometry_types": {
+          "doc.kml": {
+            "Point": 68
+          }
+        },
+        "kml_entries": [
+          "doc.kml"
+        ],
+        "parse_status": "PARSED",
+        "parser_version": "phase_b_kmz_v1",
+        "placemark_counts": {
+          "doc.kml": 68
+        },
+        "warnings": [],
+        "zip_entries": [
+          "doc.kml"
+        ]
+      },
+      "raw_sha256": "8ea1d064b44b5e8637b90c553d3a67c951b381242e894dae74dd61eaf62cdef5",
+      "readable": true,
+      "relative_path": "dash_foundation\\Petries-Stations.kmz",
+      "warnings": []
+    },
+    {
+      "bytes": 9801,
+      "canonical_json_sha256": null,
+      "detected_format": "UNKNOWN",
+      "extension": ".htm",
+      "git_blob_sha1": "f8605cead0fc4b84027bbef0d33554eef57af473",
+      "modified_utc": "2026-11-19T15:45:44Z",
+      "name": "Surveys-at-Giza.htm",
+      "parse": {
+        "parse_status": "NOT_PARSED",
+        "warnings": []
+      },
+      "raw_sha256": "8c2b385a611c5c0c630403219a79d8fc72db263d78f4c62b8748832bb1d271e7",
+      "readable": true,
+      "relative_path": "dash_foundation\\Surveys-at-Giza.htm",
+      "warnings": []
+    },
+    {
+      "bytes": 1142,
+      "canonical_json_sha256": null,
+      "detected_format": "JSON",
+      "extension": ".json",
+      "git_blob_sha1": "0d93672780678880002c8f4b72df4ebdc7ec01eb",
+      "modified_utc": "2026-11-19T15:45:59Z",
+      "name": "manifest.json",
+      "parse": {
+        "error": "CatalogError: derived JSON missing 'source_file': E:\\GIZA_PRIME_LAB\\gizalab\\data\\raw\\dash_foundation\\manifest.json",
+        "parse_status": "PARSE_ERROR",
+        "warnings": []
+      },
+      "raw_sha256": "fbaf91f48c8b5789a5bddfd5f55507af6926868d930a4000b094fb6a643ccea7",
+      "readable": false,
+      "relative_path": "dash_foundation\\manifest.json",
+      "warnings": []
+    },
+    {
+      "bytes": 6085,
+      "canonical_json_sha256": null,
+      "detected_format": "JSON",
+      "extension": ".json",
+      "git_blob_sha1": "44360da1122e3aedef2e51561618f42c6bca4e05",
+      "modified_utc": "2026-11-19T15:53:20Z",
+      "name": "manifest_archived_data.json",
+      "parse": {
+        "error": "CatalogError: derived JSON must be an object: E:\\GIZA_PRIME_LAB\\gizalab\\data\\raw\\dash_foundation\\manifest_archived_data.json",
+        "parse_status": "PARSE_ERROR",
+        "warnings": []
+      },
+      "raw_sha256": "fb651534cfbf4aa80384628b5131e595e083ebaab0cf315543343e305394f85c",
+      "readable": false,
+      "relative_path": "dash_foundation\\manifest_archived_data.json",
+      "warnings": []
+    }
+  ],
+  "report_id": "PHASE_B_SOURCE_CATALOG",
+  "roots": {
+    "derived": "E:\\GIZA_PRIME_LAB\\gizalab\\data\\derived\\phase2\\kmz",
+    "raw": "E:\\GIZA_PRIME_LAB\\gizalab\\data\\raw\\dash_foundation"
+  },
+  "scan_policy": "exact owner-nominated directories only; no fallback search",
+  "schema_version": "phase_b_catalog_v1",
+  "warnings": [
+    "Petrie Stations descriptions carry no Elevation; height is UNKNOWN, not zero.",
+    "GDFS 2016/2018 descriptions use the swapped label 'LongItude' for the latitude-like value; KML coordinate order stays [longitude, latitude, Z]."
+  ]
+}

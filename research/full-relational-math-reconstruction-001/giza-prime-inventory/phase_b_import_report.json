@@ -1,0 +1,28 @@
+{
+  "entity_candidate_count": 345,
+  "idealization_model_count": 24,
+  "import_contract": {
+    "normalization_version": "phase_b_observation_schema_v1",
+    "parser_versions": {
+      "catalog": "phase_b_catalog_v1",
+      "identity": "phase_b_identity_v1",
+      "models": "phase_b_model_v1",
+      "observations": "phase_b_observation_v1",
+      "relations": "phase_b_relations_v1"
+    },
+    "source_bytes_modified": 0,
+    "sources_copied": false
+  },
+  "observation_count": 12078,
+  "relation_count": 154,
+  "report_id": "PHASE_B_IMPORT_REPORT",
+  "source_counts": {
+    "GDFS-2012": 1539,
+    "GDFS-2015": 1100,
+    "GDFS-2016": 4746,
+    "GDFS-2018": 4569,
+    "GIZA_CORNER": 15,
+    "GPMP": 41,
+    "PETRIE": 68
+  }
+}
