@@ -1,0 +1,709 @@
+{
+  "source_file": "GPMP-Control-Monuments.kmz",
+  "sha256": "94ca0d8b95529664ebb823c84ba8c10082d1f3a62306826bd27be514c0e66020",
+  "kml_entry": "doc.kml",
+  "kml_bytes": 37630,
+  "folders": [
+    "Points"
+  ],
+  "placemark_count": 41,
+  "placemarks": [
+    {
+      "name": "GEF1",
+      "description": "Point No. GEF1 Description: Secondary Network Northing: 99909.360 Easting: 500365.800 Elevation; 60.000 Longitude: 31.13799137 Latitude: 29.97835958 Sketch: None",
+      "geometry": "Point",
+      "coordinates": [
+        [
+          31.13799137,
+          29.97835958,
+          0.0
+        ]
+      ],
+      "extended": {},
+      "crs_hints": [
+        "Easting",
+        "Northing"
+      ]
+    },
+    {
+      "name": "GEF2",
+      "description": "Point No. GEF2 Description: Secondary Network Northing: 99781.170 Easting: 500230.180 Elevation; 52.290 Longitude: 31.13658612 Latitude: 29.97720315 Sketch: None",
+      "geometry": "Point",
+      "coordinates": [
+        [
+          31.13658612,
+          29.97720315,
+          0.0
+        ]
+      ],
+      "extended": {},
+      "crs_hints": [
+        "Easting",
+        "Northing"
+      ]
+    },
+    {
+      "name": "GEF3",
+      "description": "Point No. GEF3 Description: Secondary Network Northing: 99648.340 Easting: 500421.540 Elevation; 33.170 Longitude: 31.13856896 Latitude: 29.97600491 Sketch: None",
+      "geometry": "Point",
+      "coordinates": [
+        [
+          31.13856896,
+          29.97600491,
+          0.0
+        ]
+      ],
+      "extended": {},
+      "crs_hints": [
+        "Easting",
+        "Northing"
+      ]
+    },
+    {
+      "name": "GEF4",
+      "description": "Point No. GEF4 Description: Secondary Network Northing: 100062.790 Easting: 500280.260 Elevation; 55.430 Longitude: 31.13710498 Latitude: 29.97974366 Sketch: None",
+      "geometry": "Point",
+      "coordinates": [
+        [
+          31.13710498,
+          29.97974366,
+          0.0
+        ]
+      ],
+      "extended": {},
+      "crs_hints": [
+        "Easting",
+        "Northing"
+      ]
+    },
+    {
+      "name": "GEF5",
+      "description": "Point No. GEF5 Description: Secondary Network Northing: 100062.230 Easting: 500418.220 Elevation; 45.220 Longitude: 31.13853453 Latitude: 29.97973863 Sketch: None",
+      "geometry": "Point",
+      "coordinates": [
+        [
+          31.13853453,
+          29.97973863,
+          0.0
+        ]
+      ],
+      "extended": {},
+      "crs_hints": [
+        "Easting",
+        "Northing"
+      ]
+    },
+    {
+      "name": "GEF6",
+      "description": "Point No. GEF6 Description: Secondary Network Northing: 100022.310 Easting: 500471.240 Elevation; 40.310 Longitude: 31.13908393 Latitude: 29.97937851 Sketch: None",
+      "geometry": "Point",
+      "coordinates": [
+        [
+          31.13908393,
+          29.97937851,
+          0.0
+        ]
+      ],
+      "extended": {},
+      "crs_hints": [
+        "Easting",
+        "Northing"
+      ]
+    },
+    {
+      "name": "GEF7",
+      "description": "Point No. GEF7 Description: Secondary Network Northing: 99748.990 Easting: 500435.980 Elevation; 59.700 Longitude: 31.13871858 Latitude: 29.97691288 Sketch: None",
+      "geometry": "Point",
+      "coordinates": [
+        [
+          31.13871858,
+          29.97691288,
+          0.0
+        ]
+      ],
+      "extended": {},
+      "crs_hints": [
+        "Easting",
+        "Northing"
+      ]
+    },
+    {
+      "name": "GS1",
+      "description": "Point No. GS1 Description: Secondary Network Northing: 99537.480 Easting: 500413.560 Elevation; 23.170 Longitude: 31.13848628 Latitude: 29.97500484 Sketch: None",
+      "geometry": "Point",
+      "coordinates": [
+        [
+          31.13848628,
+          29.97500484,
+          0.0
+        ]
+      ],
+      "extended": {},
+      "crs_hints": [
+        "Easting",
+        "Northing"
+      ]
+    },
+    {
+      "name": "GS2",
+      "description": "Point No. GS2 Description: Secondary Network Northing: 99486.740 Easting: 500375.970 Elevation; 28.260 Longitude: 31.13809680 Latitude: 29.97454711 Sketch: None",
+      "geometry": "Point",
+      "coordinates": [
+        [
+          31.1380968,
+          29.97454711,
+          0.0
+        ]
+      ],
+      "extended": {},
+      "crs_hints": [
+        "Easting",
+        "Northing"
+      ]
+    },
+    {
+      "name": "GE1",
+      "description": "Point No. GE1 Description: Secondary Network Northing: 99224.997 Easting: 500634.775 Elevation; 24.190 Longitude: 31.14077838 Latitude: 29.97218591 Sketch: None",
+      "geometry": "Point",
+      "coordinates": [
+        [
+          31.14077838,
+          29.97218591,
+          0.0
+        ]
+      ],
+      "extended": {},
+      "crs_hints": [
+        "Easting",
+        "Northing"
+      ]
+    },
+    {
+      "name": "GIII1",
+      "description": "Point No. GIII1 Description: Secondary Network-Z fixed Northing: 99281.871 Easting: 500234.612 Elevation; 19.570 Longitude: 31.13663216 Latitude: 29.97269896 Sketch: None",
+      "geometry": "Point",
+      "coordinates": [
+        [
+          31.13663216000001,
+          29.97269896,
+          0.0
+        ]
+      ],
+      "extended": {},
+      "crs_hints": [
+        "Easting",
+        "Northing"
+      ]
+    },
+    {
+      "name": "GCF1",
+      "description": "Point No. GCF1 Description: Secondary Network Northing: 99388.414 Easting: 500120.037 Elevation; 43.020 Longitude: 31.13544497 Latitude: 29.97366006 Sketch: None",
+      "geometry": "Point",
+      "coordinates": [
+        [
+          31.13544497,
+          29.97366006,
+          0.0
+        ]
+      ],
+      "extended": {},
+      "crs_hints": [
+        "Easting",
+        "Northing"
+      ]
+    },
+    {
+      "name": "GCF2",
+      "description": "Point No. GCF2 Description: Secondary Network Northing: 99539.320 Easting: 499933.770 Elevation; 60.010 Longitude: 31.13351490 Latitude: 29.97502132 Sketch: None",
+      "geometry": "Point",
+      "coordinates": [
+        [
+          31.13351490000001,
+          29.97502132,
+          0.0
+        ]
+      ],
+      "extended": {},
+      "crs_hints": [
+        "Easting",
+        "Northing"
+      ]
+    },
+    {
+      "name": "GCF3",
+      "description": "Point No. GCF3 Description: Secondary Network Northing: 99447.090 Easting: 499882.990 Elevation; 57.630 Longitude: 31.13298880 Latitude: 29.97418928 Sketch: None",
+      "geometry": "Point",
+      "coordinates": [
+        [
+          31.1329888,
+          29.97418928,
+          0.0
+        ]
+      ],
+      "extended": {},
+      "crs_hints": [
+        "Easting",
+        "Northing"
+      ]
+    },
+    {
+      "name": "GCF4",
+      "description": "Point No. GCF4 Description: Secondary Network Northing: 99283.990 Easting: 499928.260 Elevation; 45.680 Longitude: 31.13345795 Latitude: 29.97271797 Sketch: None",
+      "geometry": "Point",
+      "coordinates": [
+        [
+          31.13345795,
+          29.97271797,
+          0.0
+        ]
+      ],
+      "extended": {},
+      "crs_hints": [
+        "Easting",
+        "Northing"
+      ]
+    },
+    {
+      "name": "GCF5",
+      "description": "Point No. GCF5 Description: Secondary Network Northing: 99635.910 Easting: 499961.360 Elevation; 60.440 Longitude: 31.13380073 Latitude: 29.97589267 Sketch: None",
+      "geometry": "Point",
+      "coordinates": [
+        [
+          31.13380073,
+          29.97589267,
+          0.0
+        ]
+      ],
+      "extended": {},
+      "crs_hints": [
+        "Easting",
+        "Northing"
+      ]
+    },
+    {
+      "name": "GCF6",
+      "description": "Point No. GCF6 Description: Secondary Network Northing: 99597.120 Easting: 500103.860 Elevation; 46.490 Longitude: 31.13527728 Latitude: 29.97554280 Sketch: None",
+      "geometry": "Point",
+      "coordinates": [
+        [
+          31.13527728,
+          29.9755428,
+          0.0
+        ]
+      ],
+      "extended": {},
+      "crs_hints": [
+        "Easting",
+        "Northing"
+      ]
+    },
+    {
+      "name": "GP3B",
+      "description": "Point No. GP3B Description: Secondary Network Northing: 98820.044 Easting: 499998.814 Elevation; 75.912 Longitude: 31.13418919 Latitude: 29.96853273 Sketch: None",
+      "geometry": "Point",
+      "coordinates": [
+        [
+          31.13418919,
+          29.96853273,
+          0.0
+        ]
+      ],
+      "extended": {},
+      "crs_hints": [
+        "Easting",
+        "Northing"
+      ]
+    },
+    {
+      "name": "GSW1",
+      "description": "Point No. GSW1 Description: Secondary Network Northing: 99020.370 Easting: 499649.180 Elevation; 54.730 Longitude: 31.13056651 Latitude: 29.97033969 Sketch: None",
+      "geometry": "Point",
+      "coordinates": [
+        [
+          31.13056651,
+          29.97033969,
+          0.0
+        ]
+      ],
+      "extended": {},
+      "crs_hints": [
+        "Easting",
+        "Northing"
+      ]
+    },
+    {
+      "name": "GSW2",
+      "description": "Point No. GSW2 Description: Secondary Network Northing: 99147.350 Easting: 499685.540 Elevation; 56.740 Longitude: 31.13094315 Latitude: 29.97148520 Sketch: None",
+      "geometry": "Point",
+      "coordinates": [
+        [
+          31.13094315,
+          29.9714852,
+          0.0
+        ]
+      ],
+      "extended": {},
+      "crs_hints": [
+        "Easting",
+        "Northing"
+      ]
+    },
+    {
+      "name": "GSW3",
+      "description": "Point No. GSW3 Description: Secondary Network Northing: 99172.790 Easting: 499512.590 Elevation; 67.260 Longitude: 31.12915115 Latitude: 29.97171457 Sketch: None",
+      "geometry": "Point",
+      "coordinates": [
+        [
+          31.12915115,
+          29.97171457,
+          0.0
+        ]
+      ],
+      "extended": {},
+      "crs_hints": [
+        "Easting",
+        "Northing"
+      ]
+    },
+    {
+      "name": "GII1",
+      "description": "Point No. GII1 Description: Secondary Network Northing: 99664.270 Easting: 499867.350 Elevation; 75.000 Longitude: 31.13282662 Latitude: 29.97614846 Sketch: None",
+      "geometry": "Point",
+      "coordinates": [
+        [
+          31.13282662,
+          29.97614846,
+          0.0
+        ]
+      ],
+      "extended": {},
+      "crs_hints": [
+        "Easting",
+        "Northing"
+      ]
+    },
+    {
+      "name": "GII2",
+      "description": "Point No. GII2 Description: Secondary Network Northing: 99757.400 Easting: 499527.700 Elevation; 80.880 Longitude: 31.12930718 Latitude: 29.97698837 Sketch: None",
+      "geometry": "Point",
+      "coordinates": [
+        [
+          31.12930718,
+          29.97698837,
+          0.0
+        ]
+      ],
+      "extended": {},
+      "crs_hints": [
+        "Easting",
+        "Northing"
+      ]
+    },
+    {
+      "name": "GII4",
+      "description": "Point No. GII4 Description: Secondary Network Northing: 99524.230 Easting: 499783.460 Elevation; 69.740 Longitude: 31.13195747 Latitude: 29.97488511 Sketch: None",
+      "geometry": "Point",
+      "coordinates": [
+        [
+          31.13195747,
+          29.97488511,
+          0.0
+        ]
+      ],
+      "extended": {},
+      "crs_hints": [
+        "Easting",
+        "Northing"
+      ]
+    },
+    {
+      "name": "GWF1",
+      "description": "Point No. GWF1 Description: Secondary Network Northing: 99861.350 Easting: 499791.910 Elevation; 74.420 Longitude: 31.13204480 Latitude: 29.97792629 Sketch: None",
+      "geometry": "Point",
+      "coordinates": [
+        [
+          31.1320448,
+          29.97792629,
+          0.0
+        ]
+      ],
+      "extended": {},
+      "crs_hints": [
+        "Easting",
+        "Northing"
+      ]
+    },
+    {
+      "name": "GI1",
+      "description": "Point No. GI1 Description: Secondary Network Northing: 100115.802 Easting: 500115.607 Elevation; 59.696 Longitude: 31.13539882 Latitude: 29.98022185 Sketch: None",
+      "geometry": "Point",
+      "coordinates": [
+        [
+          31.13539882,
+          29.98022185,
+          0.0
+        ]
+      ],
+      "extended": {},
+      "crs_hints": [
+        "Easting",
+        "Northing"
+      ]
+    },
+    {
+      "name": "GI2",
+      "description": "Point No. GI2 Description: Secondary Network Northing: 99884.402 Easting: 500115.858 Elevation; 59.374 Longitude: 31.13540150 Latitude: 29.97813438 Sketch: None",
+      "geometry": "Point",
+      "coordinates": [
+        [
+          31.1354015,
+          29.97813438,
+          0.0
+        ]
+      ],
+      "extended": {},
+      "crs_hints": [
+        "Easting",
+        "Northing"
+      ]
+    },
+    {
+      "name": "GI3",
+      "description": "Point No. GI3 Description: Secondary Network Northing: 99884.432 Easting: 499884.628 Elevation; 59.870 Longitude: 31.13300552 Latitude: 29.97813456 Sketch: None",
+      "geometry": "Point",
+      "coordinates": [
+        [
+          31.13300552,
+          29.97813456,
+          0.0
+        ]
+      ],
+      "extended": {},
+      "crs_hints": [
+        "Easting",
+        "Northing"
+      ]
+    },
+    {
+      "name": "GI4",
+      "description": "Point No. GI4 Description: Secondary Network Northing: 100115.591 Easting: 499884.148 Elevation; 59.603 Longitude: 31.13300041 Latitude: 29.98021985 Sketch: None",
+      "geometry": "Point",
+      "coordinates": [
+        [
+          31.13300041,
+          29.98021985,
+          0.0
+        ]
+      ],
+      "extended": {},
+      "crs_hints": [
+        "Easting",
+        "Northing"
+      ]
+    },
+    {
+      "name": "GI5",
+      "description": "Point No. GI5 Description: Secondary Network Northing: 99998.554 Easting: 499997.917 Elevation; 197.555 Longitude: 31.13417936 Latitude: 29.97916411 Sketch: None",
+      "geometry": "Point",
+      "coordinates": [
+        [
+          31.13417936,
+          29.97916411,
+          0.0
+        ]
+      ],
+      "extended": {},
+      "crs_hints": [
+        "Easting",
+        "Northing"
+      ]
+    },
+    {
+      "name": "GP1",
+      "description": "Point No. GP1 Description: Main Traverse Northing: 99136.777 Easting: 500354.168 Elevation; 59.396 Longitude: 31.13787094 Latitude: 29.97139008 Sketch: None",
+      "geometry": "Point",
+      "coordinates": [
+        [
+          31.13787094,
+          29.97139008,
+          0.0
+        ]
+      ],
+      "extended": {},
+      "crs_hints": [
+        "Easting",
+        "Northing"
+      ]
+    },
+    {
+      "name": "GP2",
+      "description": "Point No. GP2 Description: Main Traverse Northing: 98526.755 Easting: 500330.626 Elevation; 63.887 Longitude: 31.13762711 Latitude: 29.96588704 Sketch: None",
+      "geometry": "Point",
+      "coordinates": [
+        [
+          31.13762711,
+          29.96588704,
+          0.0
+        ]
+      ],
+      "extended": {},
+      "crs_hints": [
+        "Easting",
+        "Northing"
+      ]
+    },
+    {
+      "name": "GP3A",
+      "description": "Point No. GP3A Description: Main Traverse Northing: 98399.708 Easting: 499946.262 Elevation; 80.958 Longitude: 31.13364492 Latitude: 29.96474083 Sketch: None",
+      "geometry": "Point",
+      "coordinates": [
+        [
+          31.13364492,
+          29.96474083,
+          0.0
+        ]
+      ],
+      "extended": {},
+      "crs_hints": [
+        "Easting",
+        "Northing"
+      ]
+    },
+    {
+      "name": "GP4",
+      "description": "Point No. GP4 Description: Main Traverse Northing: 98762.847 Easting: 499627.443 Elevation; 83.641 Longitude: 31.13034150 Latitude: 29.96801655 Sketch: None",
+      "geometry": "Point",
+      "coordinates": [
+        [
+          31.1303415,
+          29.96801655000001,
+          0.0
+        ]
+      ],
+      "extended": {},
+      "crs_hints": [
+        "Easting",
+        "Northing"
+      ]
+    },
+    {
+      "name": "GP5",
+      "description": "Point No. GP5 Description: Main Traverse Northing: 98936.506 Easting: 499182.962 Elevation; 85.662 Longitude: 31.12573609 Latitude: 29.96958274 Sketch: None",
+      "geometry": "Point",
+      "coordinates": [
+        [
+          31.12573609,
+          29.96958274,
+          0.0
+        ]
+      ],
+      "extended": {},
+      "crs_hints": [
+        "Easting",
+        "Northing"
+      ]
+    },
+    {
+      "name": "GP6",
+      "description": "Point No. GP6 Description: Main Traverse Northing: 99261.575 Easting: 498718.109 Elevation; 101.347 Longitude: 31.12091920 Latitude: 29.97251462 Sketch: None",
+      "geometry": "Point",
+      "coordinates": [
+        [
+          31.1209192,
+          29.97251462,
+          0.0
+        ]
+      ],
+      "extended": {},
+      "crs_hints": [
+        "Easting",
+        "Northing"
+      ]
+    },
+    {
+      "name": "GP7",
+      "description": "Point No. GP7 Description: Main Traverse Northing: 99576.900 Easting: 498855.725 Elevation; 105.547 Longitude: 31.12234460 Latitude: 29.97535936 Sketch: None",
+      "geometry": "Point",
+      "coordinates": [
+        [
+          31.1223446,
+          29.97535936,
+          0.0
+        ]
+      ],
+      "extended": {},
+      "crs_hints": [
+        "Easting",
+        "Northing"
+      ]
+    },
+    {
+      "name": "GP8",
+      "description": "Point No. GP8 Description: Main Traverse Northing: 99823.854 Easting: 499044.336 Elevation; 101.156 Longitude: 31.12429858 Latitude: 29.97758738 Sketch: None",
+      "geometry": "Point",
+      "coordinates": [
+        [
+          31.12429858,
+          29.97758738,
+          0.0
+        ]
+      ],
+      "extended": {},
+      "crs_hints": [
+        "Easting",
+        "Northing"
+      ]
+    },
+    {
+      "name": "GP9",
+      "description": "Point No. GP9 Description: Main Traverse Northing: 100154.421 Easting: 499593.613 Elevation; 79.874 Longitude: 31.12998982 Latitude: 29.98056996 Sketch: None",
+      "geometry": "Point",
+      "coordinates": [
+        [
+          31.12998982,
+          29.98056996,
+          0.0
+        ]
+      ],
+      "extended": {},
+      "crs_hints": [
+        "Easting",
+        "Northing"
+      ]
+    },
+    {
+      "name": "GP10",
+      "description": "Point No. GP10 Description: Main Traverse Northing: 100150.183 Easting: 500104.684 Elevation; 59.070 Longitude: 31.13528562 Latitude: 29.98053200 Sketch: None",
+      "geometry": "Point",
+      "coordinates": [
+        [
+          31.13528562,
+          29.980532,
+          0.0
+        ]
+      ],
+      "extended": {},
+      "crs_hints": [
+        "Easting",
+        "Northing"
+      ]
+    },
+    {
+      "name": "GP11",
+      "description": "Point No. GP11 Description: Main Traverse Northing: 99856.032 Easting: 500192.328 Elevation; 79.690 Longitude: 31.13619388 Latitude: 29.97787848 Sketch: None",
+      "geometry": "Point",
+      "coordinates": [
+        [
+          31.13619388,
+          29.97787848,
+          0.0
+        ]
+      ],
+      "extended": {},
+      "crs_hints": [
+        "Easting",
+        "Northing"
+      ]
+    }
+  ]
+}

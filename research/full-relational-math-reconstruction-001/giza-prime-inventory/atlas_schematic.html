@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>GIZA PRIME // RELATION-FIRST ATLAS // SCHEMATIC</title>
+<!--
+  Preferred design source: ASTRAEA-WARP v6.0 CLEAN/index.html (ASTREYA-HRONOS).
+  Reused: palette, Martian Mono / Unbounded typography, numbered panels,
+  scanline + vignette, thin gauges, terminal log, three-column telemetry grid.
+  Deliberately NOT reused: live feed, trading controls, exchange API, weather claims.
+  This file is a static snapshot. Rebuild: python build_atlas_schematic.py
+-->
+<style>
+:root{
+  --ink:#09090f;--panel:#0d0d18;--surface:#111120;--border:#1e1e35;
+  --amber:#f5a623;--amber2:#ffcc44;--amber-d:#5a3800;
+  --green:#39ff7a;--red:#ff3c54;--cyan:#00d4ff;--violet:#8855ff;
+  --white:#e8e4d8;--dim:#2a2840;--pink:#ff88cc;
+  --mono:'Martian Mono','Consolas',monospace;--head:'Unbounded','Arial Black',sans-serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;background:var(--ink);color:var(--amber);font-family:var(--mono);font-size:14px;overflow:hidden;cursor:crosshair;}
+body::after{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.07) 2px,rgba(0,0,0,0.07) 4px);}
+body::before{content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;
+  background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,0.55) 100%);}
+body{display:grid;grid-template-rows:64px 1fr 28px;}
+
+/* HEADER */
+header{display:flex;align-items:center;justify-content:space-between;padding:0 20px;
+  background:var(--panel);border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
+header::before{content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(245,166,35,0.025),transparent);
+  animation:scanH 5s linear infinite;}
+@keyframes scanH{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+.logo{font-family:var(--head);font-size:18px;font-weight:900;letter-spacing:5px;color:var(--amber);
+  text-shadow:0 0 20px rgba(245,166,35,.45),0 0 60px rgba(245,166,35,.1);}
+.logo span{color:var(--amber2);}
+.logo sub{font-size:9px;color:var(--amber-d);letter-spacing:3px;vertical-align:middle;margin-left:10px;}
+.hdr-kpis{display:flex;gap:1px;align-items:stretch;height:100%;}
+.kpi{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:0 14px;border-left:1px solid var(--border);min-width:86px;}
+.kpi-v{font-family:var(--head);font-size:15px;font-weight:700;color:var(--amber2);letter-spacing:1px;line-height:1;}
+.kpi-l{font-size:9px;letter-spacing:2px;color:var(--amber-d);margin-top:4px;}
+.hdr-r{display:flex;align-items:center;gap:12px;font-size:11px;}
+#conn-dot{width:8px;height:8px;border-radius:50%;background:#1a1a2a;}
+#conn-lbl{color:var(--amber-d);letter-spacing:2px;}
+#clock{color:var(--amber);letter-spacing:2px;font-weight:500;}
+
+/* MAIN */
+main{display:grid;grid-template-columns:340px 1fr 340px;gap:1px;background:var(--border);overflow:hidden;}
+.col{display:flex;flex-direction:column;gap:1px;background:var(--border);overflow-y:auto;}
+.pnl{background:var(--panel);padding:12px 14px;flex-shrink:0;}
+.pnl.grow{flex:1;overflow:hidden;display:flex;flex-direction:column;}
+.pnl-title{font-size:9px;letter-spacing:3px;color:var(--amber-d);border-bottom:1px solid var(--border);
+  padding-bottom:7px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;}
+.pnl-title em{font-style:normal;color:var(--amber);}
+.row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;gap:8px;}
+.lbl{font-size:11px;color:var(--amber-d);letter-spacing:1px;}
+.val{font-size:12px;color:var(--amber);font-weight:500;}
+.val.w{color:var(--white);}.val.r{color:var(--red);}.val.c{color:var(--cyan);}.val.v{color:var(--violet);}
+.zero{color:var(--amber-d);}.on{color:var(--green);}
+.banner{border:1px solid var(--amber2);padding:9px 12px;font-size:13px;color:var(--amber2);
+  margin-bottom:10px;min-height:48px;line-height:1.6;word-break:break-word;
+  background:rgba(255,204,68,.03);animation:glow 2.4s infinite alternate;}
+@keyframes glow{from{box-shadow:none}to{box-shadow:0 0 12px rgba(255,204,68,.22)}}
+.mono-line{font-size:10px;color:var(--amber-d);letter-spacing:1px;line-height:1.7;}
+.gauge-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:8px;}
+.gauge{background:rgba(245,166,35,.02);border:1px solid var(--border);padding:7px 9px;}
+.gauge-lbl{font-size:9px;letter-spacing:1px;color:var(--amber-d);margin-bottom:4px;}
+.gauge-bar{height:3px;background:var(--dim);margin-bottom:4px;}
+.gauge-fill{height:3px;}
+.gauge-val{font-size:11px;font-weight:500;}
+
+/* SCHEMATIC MAP — central object fills the available space */
+#center-col .map-panel{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;}
+.slot-panel{flex:1 1 auto;min-height:200px;display:flex;flex-direction:column;overflow:hidden;}
+.term-panel{flex:0 0 auto;max-height:170px;display:flex;flex-direction:column;}
+#map{display:block;width:100%;flex:1 1 auto;min-height:0;height:100%;}
+.map-cap{font-size:10px;letter-spacing:1px;color:var(--amber-d);text-align:center;margin-top:6px;line-height:1.5;}
+.slots{flex:1;overflow-y:auto;margin-top:8px;}
+.slots::-webkit-scrollbar,#term::-webkit-scrollbar{width:3px;}
+.slots::-webkit-scrollbar-thumb,#term::-webkit-scrollbar-thumb{background:var(--dim);}
+.srow{display:grid;grid-template-columns:140px 30px 85px 24px 1fr;gap:6px;padding:5px 0;
+  border-bottom:1px solid rgba(30,30,53,.5);font-size:10px;align-items:baseline;}
+.sid{color:var(--white);}.skind{color:var(--violet);}.scov{color:var(--amber-d);}
+.szero{color:var(--red);}.sgap{color:var(--amber-d);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.rrow{display:flex;justify-content:space-between;font-size:11px;padding:5px 0;gap:8px;
+  border-bottom:1px solid rgba(30,30,53,.5);}
+.trow2{display:flex;justify-content:space-between;font-size:10px;padding:6px 0;
+  border-bottom:1px solid rgba(30,30,53,.5);gap:8px;}
+.tname{color:var(--amber2);}.treq{color:var(--amber-d);text-align:right;line-height:1.4;}
+#term{overflow-y:auto;flex:1;padding:6px;font-size:10px;line-height:1.7;}
+.ll{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.ll.ok{color:var(--dim);}.ll.sig{color:var(--amber);}.ll.err{color:rgba(255,60,84,.75);}
+.ll.warn{color:rgba(245,166,35,.7);}.ll.sync{color:rgba(0,212,255,.8);}
+
+/* FOOTER */
+footer{display:flex;align-items:center;justify-content:space-between;padding:0 16px;
+  background:var(--panel);border-top:1px solid var(--border);font-size:10px;
+  letter-spacing:2px;color:var(--amber-d);}
+.ft em{font-style:normal;color:var(--amber);}
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="logo">GIZA<span> PRIME</span><sub>RELATION-FIRST ATLAS</sub></div>
+    <div style="font-size:9px;letter-spacing:2px;color:var(--amber-d);margin-top:3px;">SCHEMATIC / NOT GEODETIC // EVIDENCE-GATED // NO PRESELECTED CORE</div>
+  </div>
+  <div class="hdr-kpis">
+    <div class="kpi"><div class="kpi-v">0</div><div class="kpi-l">SRC VERIFIED</div></div>
+    <div class="kpi"><div class="kpi-v">0</div><div class="kpi-l">REAL OBJECTS</div></div>
+    <div class="kpi"><div class="kpi-v">0</div><div class="kpi-l">RELATIONS</div></div>
+    <div class="kpi"><div class="kpi-v">14</div><div class="kpi-l">SLOTS</div></div>
+    <div class="kpi"><div class="kpi-v" style="color:var(--violet)">SYMBOLIC</div><div class="kpi-l">TIER</div></div>
+    <div class="kpi"><div class="kpi-v" style="font-size:12px;color:var(--red)">NOT_EVALUABLE</div><div class="kpi-l">CROSS CASES</div></div>
+  </div>
+  <div class="hdr-r">
+    <div><div id="conn-dot"></div></div><span id="conn-lbl">STATIC SNAPSHOT</span>
+    <span id="clock">SHA af4de26760c1</span>
+  </div>
+</header>
+
+<main>
+<div class="col">
+  <div class="pnl">
+    <div class="pnl-title">[ 01 ] <em>ATLAS STATE</em></div>
+    <div class="banner">SCHEMATIC / NOT GEODETIC<br>Каркас ожидания данных, а не реконструкция Гизы.</div>
+    <div class="row"><span class="lbl">VERIFIED SOURCES</span><span class="val r">0</span></div>
+    <div class="row"><span class="lbl">REAL OBJECTS</span><span class="val r">0</span></div>
+    <div class="row"><span class="lbl">NATURAL STRUCTURES</span><span class="val r">0</span></div>
+    <div class="row"><span class="lbl">RELATIONS</span><span class="val r">0</span></div>
+    <div class="row"><span class="lbl">MODEL TIER</span><span class="val v">symbolic</span></div>
+    <div class="gauge-grid">
+      <div class="gauge"><div class="gauge-lbl">SOURCE VERIFIED</div><div class="gauge-bar"><div class="gauge-fill" style="background:var(--red);width:0%"></div></div><div class="gauge-val" style="color:var(--red)">0 / 0</div></div>
+      <div class="gauge"><div class="gauge-lbl">INVENTORIED</div><div class="gauge-bar"><div class="gauge-fill" style="background:var(--red);width:0%"></div></div><div class="gauge-val" style="color:var(--red)">0 / 14</div></div>
+    </div>
+  </div>
+  <div class="pnl">
+    <div class="pnl-title">[ 02 ] <em>SOURCE GATE</em></div>
+    <div class="mono-line">Только <span style="color:var(--green)">verified</span> источник допускает реальную запись. pending / rejected — не свидетельство.</div>
+    <div style="margin-top:6px"><div class="rrow"><span>no_source_no_record</span><span class="on">TRUE</span></div><div class="rrow"><span>pending_is_not_evidence</span><span class="on">TRUE</span></div><div class="rrow"><span>rejected_is_not_evidence</span><span class="on">TRUE</span></div><div class="rrow"><span>no_fabricated_substitute</span><span class="on">TRUE</span></div></div>
+  </div>
+  <div class="pnl slot-panel">
+    <div class="pnl-title">[ 06 ] <em>SLOT REGISTER</em><span>14 / 0 inventoried</span></div>
+    <div style="display:grid;grid-template-columns:140px 30px 85px 24px 1fr;gap:6px;font-size:9px;letter-spacing:1px;color:var(--amber-d);padding-bottom:6px;border-bottom:1px solid var(--border)">
+      <span>SLOT</span><span>KIND</span><span>COVERAGE</span><span>VERIFIED</span><span>KNOWN GAP</span>
+    </div>
+    <div class="slots"><div class="srow"><span class="sid">large_pyramid_complexes</span><span class="skind">ANT</span><span class="scov">not_inventoried</span><span class="szero">0</span><span class="sgap">No datum-controlled geometry, coordinates, elevations or sources attached</span></div><div class="srow"><span class="sid">small_satellite_unfinished_pyramids</span><span class="skind">ANT</span><span class="scov">not_inventoried</span><span class="szero">0</span><span class="sgap">No complete inventory of small and unfinished pyramids</span></div><div class="srow"><span class="sid">mastabas_necropolis_fields</span><span class="skind">ANT</span><span class="scov">not_inventoried</span><span class="szero">0</span><span class="sgap">Necropolis fields are not enumerated; burial density and extent unknown</span></div><div class="srow"><span class="sid">mortuary_valley_temples</span><span class="skind">ANT</span><span class="scov">not_inventoried</span><span class="szero">0</span><span class="sgap">No temple inventory or adaptation history attached</span></div><div class="srow"><span class="sid">platforms_enclosures_walls</span><span class="skind">ANT</span><span class="scov">not_inventoried</span><span class="szero">0</span><span class="sgap">No enclosure or wall network mapped</span></div><div class="srow"><span class="sid">sphinx_and_temple_complex</span><span class="skind">ANT</span><span class="scov">not_inventoried</span><span class="szero">0</span><span class="sgap">No verified geometry, parent-rock relation or original form claim attached</span></div><div class="srow"><span class="sid">causeways_roads_ramps_passages</span><span class="skind">ANT</span><span class="scov">not_inventoried</span><span class="szero">0</span><span class="sgap">Linear connectivity not mapped; buried and truncated segments unaccounted</span></div><div class="srow"><span class="sid">boat_pits_shafts_wells_chambers_galleries</span><span class="skind">ANT</span><span class="scov">not_inventoried</span><span class="szero">0</span><span class="sgap">No explicit cavity inventory; cavities are not inferred from external shape</span></div><div class="srow"><span class="sid">quarries_workshops_settlements_storage</span><span class="skind">ANT</span><span class="scov">not_inventoried</span><span class="szero">0</span><span class="sgap">No complete production and logistics landscape inventory</span></div><div class="srow"><span class="sid">ancient_channels_hydrogeology</span><span class="skind">NAT</span><span class="scov">not_inventoried</span><span class="szero">0</span><span class="sgap">Water table, palaeo-flow paths and aquifer properties unresolved</span></div><div class="srow"><span class="sid">bedrock_massifs_fractures_faults</span><span class="skind">NAT</span><span class="scov">not_inventoried</span><span class="szero">0</span><span class="sgap">No geological surface or subsurface model and no structural network attached</span></div><div class="srow"><span class="sid">natural_processes</span><span class="skind">NAT</span><span class="scov">not_inventoried</span><span class="szero">0</span><span class="sgap">No measured forcing fields or long-baseline environmental records</span></div><div class="srow"><span class="sid">destroyed_buried_ambiguous</span><span class="skind">ANT</span><span class="scov">not_inventoried</span><span class="szero">0</span><span class="sgap">Detection limits unstated; unknown unknowns are not countable</span></div><div class="srow"><span class="sid">interfaces_boundaries</span><span class="skind">NAT</span><span class="scov">not_inventoried</span><span class="szero">0</span><span class="sgap">No measured contact, boundary or transfer interface attached</span></div></div>
+  </div>
+  <div class="pnl term-panel">
+    <div class="pnl-title">[ 04 ] <em>EPISTEMIC TERMINAL</em></div>
+    <div id="term">
+      <div class="ll warn">// offline static snapshot — no feed attached</div>
+      <div class="ll err">verified_sources = 0 → real registers stay empty</div>
+      <div class="ll err">no coordinates, elevations or materials asserted</div>
+      <div class="ll sig">inventory honesty gate: TRUE</div>
+      <div class="ll ok">A_RICHAT / B_GIZA / C_ASTRAEA: not_evaluable</div>
+      <div class="ll sync">rebuild: python build_atlas_schematic.py</div>
+    </div>
+  </div>
+</div>
+
+<div class="col" id="center-col">
+  <div class="pnl map-panel">
+    <div class="pnl-title">[ 05 ] <em>RELATION MAP — SCHEMATIC</em><span id="map-count">0 relations</span></div>
+    <canvas id="map"></canvas>
+    <div class="map-cap">РАСПОЛОЖЕНИЕ УЗЛОВ НА ЭКРАНЕ НЕ ЯВЛЯЕТСЯ ГЕОГРАФИЧЕСКИМ. СВЯЗЕЙ НЕТ — ИСТОЧНИКИ НЕ ПРИСОЕДИНЕНЫ.</div>
+  </div>
+</div>
+
+<div class="col">
+  <div class="pnl">
+    <div class="pnl-title">[ 03 ] <em>MODELLING TIERS</em></div>
+    <div class="trow2"><span class="tname">NUMERIC</span><span class="treq">coordinates, coordinate_system, geometry, elevations, material, preservation_state, temporal_intervals, source_ids</span></div><div class="trow2"><span class="tname">INTERVAL</span><span class="treq">bounded_geometry, elevation_range, source_ids</span></div><div class="trow2"><span class="tname">SYMBOLIC</span><span class="treq">none</span></div>
+  </div>
+  <div class="pnl">
+    <div class="pnl-title">[ 07 ] <em>RELATION FAMILIES</em><span>9</span></div>
+    <div class="rrow"><span>spatial</span><span class="zero">0</span></div><div class="rrow"><span>geological</span><span class="zero">0</span></div><div class="rrow"><span>mechanical</span><span class="zero">0</span></div><div class="rrow"><span>acoustic</span><span class="zero">0</span></div><div class="rrow"><span>hydraulic</span><span class="zero">0</span></div><div class="rrow"><span>thermal</span><span class="zero">0</span></div><div class="rrow"><span>gas_dynamic</span><span class="zero">0</span></div><div class="rrow"><span>electromagnetic</span><span class="zero">0</span></div><div class="rrow"><span>functional</span><span class="zero">0</span></div>
+  </div>
+  <div class="pnl">
+    <div class="pnl-title">[ 08 ] <em>EPISTEMIC STATUSES</em></div>
+    <div class="rrow"><span>established_documented</span><span class="zero">0</span></div>
+    <div class="rrow"><span>inferred_indirect</span><span class="zero">0</span></div>
+    <div class="rrow"><span>hypothesized_unverified</span><span class="zero">0</span></div>
+    <div class="mono-line" style="margin-top:6px">Статусы не объединяются. Синтетика не становится established.</div>
+  </div>
+  <div class="pnl">
+    <div class="pnl-title">[ 09 ] <em>COVERAGE / INCOMPLETENESS</em></div>
+    <div class="rrow"><span>surveyed</span><span class="zero">unknown</span></div><div class="rrow"><span>source_known</span><span class="zero">unknown</span></div><div class="rrow"><span>indirectly_detected</span><span class="zero">unknown</span></div><div class="rrow"><span>hidden_or_destroyed</span><span class="zero">unknown</span></div><div class="rrow"><span>unknown</span><span class="zero">unknown</span></div>
+    <div class="mono-line" style="margin-top:6px">Отсутствие в каталоге не есть отсутствие в системе.</div>
+  </div>
+  <div class="pnl grow">
+    <div class="pnl-title">[ 10 ] <em>PROVENANCE OF THIS VIEW</em></div>
+    <div class="row"><span class="lbl">ATLAS</span><span class="val w">GIZA_RELATION_FIRST_ATLAS_SCHEMATIC</span></div>
+    <div class="row"><span class="lbl">EXTERNAL CITATIONS</span><span class="val r">false</span></div>
+    <div class="row"><span class="lbl">COORDINATE CLAIMS</span><span class="val r">false</span></div>
+    <div class="row"><span class="lbl">SOURCE SHA</span><span class="val c">af4de26760c1</span></div>
+    <div class="row"><span class="lbl">LIVE ADAPTERS</span><span class="val r">0</span></div>
+    <div class="row"><span class="lbl">PROMOTABLE CLAIMS</span><span class="val r">0</span></div>
+    <div class="mono-line" style="margin-top:8px">Это средство отображения состояния доказательной базы. Оно не заменяет исследование Гизы.</div>
+  </div>
+</div>
+</main>
+
+<footer>
+  <div class="ft">EQUIVALENT <em>NONE</em></div>
+  <div class="ft">VERIFIED <em>0</em></div>
+  <div class="ft">GEODETIC <em>NO</em></div>
+  <div class="ft">MODE <em>NOT_EVALUABLE</em></div>
+  <div style="margin-left:auto;color:var(--border);letter-spacing:2px;">GIZA PRIME // RELATION-FIRST // SCHEMATIC / NOT GEODETIC // STATIC</div>
+</footer>
+
+<script id="atlas-snapshot" type="application/json">
+{
+  "atlas_id": "GIZA_RELATION_FIRST_ATLAS_SCHEMATIC",
+  "coordinate_claims": false,
+  "counts": {
+    "inventory_slots": 14,
+    "natural_structures": 0,
+    "real_objects": 0,
+    "relation_classes": 9,
+    "relations": 0,
+    "verified_sources": 0
+  },
+  "coverage_completeness": "incomplete_unknown",
+  "coverage_states": [
+    "surveyed",
+    "source_known",
+    "indirectly_detected",
+    "hidden_or_destroyed",
+    "unknown"
+  ],
+  "external_citations_attached": false,
+  "honesty": {
+    "absence_is_not_absence_from_system": true,
+    "assert_inventory_honesty": true,
+    "cross_cases": {
+      "A_RICHAT": "not_evaluable_no_primary_sources",
+      "B_GIZA": "not_evaluable_no_verified_objects",
+      "C_ASTRAEA": "not_evaluable_no_adapter"
+    },
+    "live_adapters": 0,
+    "no_fabricated_coordinates": true,
+    "no_preselected_core": true,
+    "promotable_claims": 0
+  },
+  "input_sha256": {
+    "epistemic_manifest": "4e73804f8e2894bd60a0609a05e01a385826dce7c819d592b0e5d85670f74da1",
+    "incompleteness_map.json": "410d92b86603e42c433b3a0a1c48d1fad75f25721229b5fc592f4ae2b17253f8",
+    "inventory_source_contract.json": "89e27dff010003f60cdd9257a7cea3511149d0fd925b9875151cb2e086c1b54e",
+    "object_registry.json": "af4de26760c1ec4ad577a694957d2c0c33fb25336053e3d61d2b7e78aaa34611",
+    "relation_graph.json": "7ee90d0619ec338f5057ca3d7a3cc3a1424465d3c751106f691b64c941445357"
+  },
+  "marking": "SCHEMATIC / NOT GEODETIC",
+  "modeling_tiers": {
+    "interval": {
+      "requires": [
+        "bounded_geometry",
+        "elevation_range",
+        "source_ids"
+      ],
+      "rule": "Partial verified data expressed as explicit bounds; interval analysis only."
+    },
+    "numeric": {
+      "requires": [
+        "coordinates",
+        "coordinate_system",
+        "geometry",
+        "elevations",
+        "material",
+        "preservation_state",
+        "temporal_intervals",
+        "source_ids"
+      ],
+      "rule": "All required fields present from a verified source; numeric analysis permitted."
+    },
+    "symbolic": {
+      "requires": [],
+      "rule": "No verified data; representation stays symbolic and unresolved."
+    }
+  },
+  "relation_classes": [
+    {
+      "class_id": "spatial",
+      "epistemic_statuses": [
+        "established_documented",
+        "inferred_indirect",
+        "hypothesized_unverified"
+      ],
+      "verified_relations": 0
+    },
+    {
+      "class_id": "geological",
+      "epistemic_statuses": [
+        "established_documented",
+        "inferred_indirect",
+        "hypothesized_unverified"
+      ],
+      "verified_relations": 0
+    },
+    {
+      "class_id": "mechanical",
+      "epistemic_statuses": [
+        "established_documented",
+        "inferred_indirect",
+        "hypothesized_unverified"
+      ],
+      "verified_relations": 0
+    },
+    {
+      "class_id": "acoustic",
+      "epistemic_statuses": [
+        "established_documented",
+        "inferred_indirect",
+        "hypothesized_unverified"
+      ],
+      "verified_relations": 0
+    },
+    {
+      "class_id": "hydraulic",
+      "epistemic_statuses": [
+        "established_documented",
+        "inferred_indirect",
+        "hypothesized_unverified"
+      ],
+      "verified_relations": 0
+    },
+    {
+      "class_id": "thermal",
+      "epistemic_statuses": [
+        "established_documented",
+        "inferred_indirect",
+        "hypothesized_unverified"
+      ],
+      "verified_relations": 0
+    },
+    {
+      "class_id": "gas_dynamic",
+      "epistemic_statuses": [
+        "established_documented",
+        "inferred_indirect",
+        "hypothesized_unverified"
+      ],
+      "verified_relations": 0
+    },
+    {
+      "class_id": "electromagnetic",
+      "epistemic_statuses": [
+        "established_documented",
+        "inferred_indirect",
+        "hypothesized_unverified"
+      ],
+      "verified_relations": 0
+    },
+    {
+      "class_id": "functional",
+      "epistemic_statuses": [
+        "established_documented",
+        "inferred_indirect",
+        "hypothesized_unverified"
+      ],
+      "verified_relations": 0
+    }
+  ],
+  "relation_gate": {
+    "inferred_cannot_be_promoted_without_new_evidence": true,
+    "no_direct_pyramid_to_planetary_or_cosmic_bridge": true,
+    "require_epistemic_status": true,
+    "require_verified_source_ids": true,
+    "source_contract_ref": "inventory_source_contract.json",
+    "synthetic_relation_cannot_be_established": true
+  },
+  "scientific_status": "evidence_gate_empty_no_reconstruction",
+  "slots": [
+    {
+      "category": "monumental",
+      "coverage_status": "not_inventoried",
+      "known_gap": "No datum-controlled geometry, coordinates, elevations or sources attached",
+      "label": "Large pyramid complexes — ordinary records, no core status",
+      "natural_structure": false,
+      "required_survey_layer": "datum-controlled archaeological survey with phase and preservation state",
+      "slot_id": "large_pyramid_complexes",
+      "verified_object_count": 0
+    },
+    {
+      "category": "monumental",
+      "coverage_status": "not_inventoried",
+      "known_gap": "No complete inventory of small and unfinished pyramids",
+      "label": "Small, satellite and unfinished pyramids",
+      "natural_structure": false,
+      "required_survey_layer": "datum-controlled archaeological inventory with construction phase",
+      "slot_id": "small_satellite_unfinished_pyramids",
+      "verified_object_count": 0
+    },
+    {
+      "category": "monumental",
+      "coverage_status": "not_inventoried",
+      "known_gap": "Necropolis fields are not enumerated; burial density and extent unknown",
+      "label": "Mastabas and necropolis fields",
+      "natural_structure": false,
+      "required_survey_layer": "systematic cemetery survey with mapped graves and detection limits",
+      "slot_id": "mastabas_necropolis_fields",
+      "verified_object_count": 0
+    },
+    {
+      "category": "architectural",
+      "coverage_status": "not_inventoried",
+      "known_gap": "No temple inventory or adaptation history attached",
+      "label": "Mortuary temples and valley temples",
+      "natural_structure": false,
+      "required_survey_layer": "datum-controlled architectural survey with modification record",
+      "slot_id": "mortuary_valley_temples",
+      "verified_object_count": 0
+    },
+    {
+      "category": "architectural",
+      "coverage_status": "not_inventoried",
+      "known_gap": "No enclosure or wall network mapped",
+      "label": "Platforms, enclosures and walls",
+      "natural_structure": false,
+      "required_survey_layer": "architectural survey with connected-feature mapping",
+      "slot_id": "platforms_enclosures_walls",
+      "verified_object_count": 0
+    },
+    {
+      "category": "monumental",
+      "coverage_status": "not_inventoried",
+      "known_gap": "No verified geometry, parent-rock relation or original form claim attached",
+      "label": "Sphinx and associated temple complex — ordinary records, no core status",
+      "natural_structure": false,
+      "required_survey_layer": "datum-controlled survey distinguishing carved massif from later form",
+      "slot_id": "sphinx_and_temple_complex",
+      "verified_object_count": 0
+    },
+    {
+      "category": "linear",
+      "coverage_status": "not_inventoried",
+      "known_gap": "Linear connectivity not mapped; buried and truncated segments unaccounted",
+      "label": "Causeways, roads, ramps, embankments and passages",
+      "natural_structure": false,
+      "required_survey_layer": "connected linear-feature survey with endpoints, gradients and burial state",
+      "slot_id": "causeways_roads_ramps_passages",
+      "verified_object_count": 0
+    },
+    {
+      "category": "subsurface",
+      "coverage_status": "not_inventoried",
+      "known_gap": "No explicit cavity inventory; cavities are not inferred from external shape",
+      "label": "Boat pits, shafts, wells, chambers and galleries",
+      "natural_structure": false,
+      "required_survey_layer": "subsurface imaging with datum and confidence map",
+      "slot_id": "boat_pits_shafts_wells_chambers_galleries",
+      "verified_object_count": 0
+    },
+    {
+      "category": "infrastructural",
+      "coverage_status": "not_inventoried",
+      "known_gap": "No complete production and logistics landscape inventory",
+      "label": "Quarries, stone-working areas, settlements and storage zones",
+      "natural_structure": false,
+      "required_survey_layer": "settlement and quarry survey with material-flow and phase evidence",
+      "slot_id": "quarries_workshops_settlements_storage",
+      "verified_object_count": 0
+    },
+    {
+      "category": "hydrological",
+      "coverage_status": "not_inventoried",
+      "known_gap": "Water table, palaeo-flow paths and aquifer properties unresolved",
+      "label": "Ancient channels, waterways and hydrogeological structures",
+      "natural_structure": true,
+      "required_survey_layer": "hydrogeological survey with datum-controlled heads and permeability",
+      "slot_id": "ancient_channels_hydrogeology",
+      "verified_object_count": 0
+    },
+    {
+      "category": "geological",
+      "coverage_status": "not_inventoried",
+      "known_gap": "No geological surface or subsurface model and no structural network attached",
+      "label": "Bedrock massifs, escarpments, fractures and faults",
+      "natural_structure": true,
+      "required_survey_layer": "geological map with stratigraphy, structure and datum",
+      "slot_id": "bedrock_massifs_fractures_faults",
+      "verified_object_count": 0
+    },
+    {
+      "category": "natural",
+      "coverage_status": "not_inventoried",
+      "known_gap": "No measured forcing fields or long-baseline environmental records",
+      "label": "Relief, wind, thermal gradients and atmospheric or ground processes",
+      "natural_structure": true,
+      "required_survey_layer": "co-located calibrated atmospheric, thermal and ground-process monitoring",
+      "slot_id": "natural_processes",
+      "verified_object_count": 0
+    },
+    {
+      "category": "nonobvious",
+      "coverage_status": "not_inventoried",
+      "known_gap": "Detection limits unstated; unknown unknowns are not countable",
+      "label": "Destroyed, buried, partially preserved and currently ambiguous objects",
+      "natural_structure": false,
+      "required_survey_layer": "systematic survey with explicit detection limits and negative evidence",
+      "slot_id": "destroyed_buried_ambiguous",
+      "verified_object_count": 0
+    },
+    {
+      "category": "interface",
+      "coverage_status": "not_inventoried",
+      "known_gap": "No measured contact, boundary or transfer interface attached",
+      "label": "Interfaces and boundaries between subsystems",
+      "natural_structure": true,
+      "required_survey_layer": "source-path-interface-receiver measurement with closed transfer budget",
+      "slot_id": "interfaces_boundaries",
+      "verified_object_count": 0
+    }
+  ],
+  "source_contract": {
+    "accepted_types": [
+      "published_survey",
+      "archaeological_report",
+      "geological_map",
+      "hydrogeological_survey",
+      "institutional_catalogue"
+    ],
+    "gate": {
+      "no_fabricated_substitute": true,
+      "no_source_no_record": true,
+      "pending_is_not_evidence": true,
+      "rejected_is_not_evidence": true,
+      "rule": "Only a source with verification_state = verified may support a real object, natural structure or relation record."
+    },
+    "required_fields": [
+      "source_id",
+      "source_type",
+      "bibliographic_ref",
+      "datum",
+      "retrieved_at",
+      "verification_state"
+    ]
+  }
+}
+</script>
+<script>
+/* No network, no timers, no controls. Display-only rendering of a validated snapshot. */
+const ATLAS = JSON.parse(document.getElementById('atlas-snapshot').textContent);
+(function draw(){
+  const cv = document.getElementById('map');
+  const ctx = cv.getContext('2d');
+  const W = cv.width = cv.offsetWidth || 900;
+  const H = cv.height = cv.offsetHeight || 500;
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='rgba(5,5,15,0.4)'; ctx.fillRect(0,0,W,H);
+  const cx=W/2, cy=H/2;
+  const R=Math.max(80, Math.min(W*0.44, H*0.46));
+  ctx.setLineDash([4,8]); ctx.strokeStyle='rgba(245,166,35,0.20)'; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.arc(cx,cy,R*0.55,0,2*Math.PI); ctx.stroke();
+  ctx.setLineDash([3,10]); ctx.strokeStyle='rgba(245,166,35,0.10)';
+  ctx.beginPath(); ctx.arc(cx,cy,R*1.08,0,2*Math.PI); ctx.stroke();
+  ctx.setLineDash([]); ctx.strokeStyle='rgba(245,166,35,0.28)'; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.arc(cx,cy,R,0,2*Math.PI); ctx.stroke();
+  const n = ATLAS.slots.length;
+  ATLAS.slots.forEach((slot,i)=>{
+    const a = -Math.PI/2 + (2*Math.PI*i)/n;
+    const x = cx + R*Math.cos(a), y = cy + R*Math.sin(a);
+    ctx.beginPath(); ctx.arc(x,y,5,0,2*Math.PI);
+    ctx.fillStyle = slot.natural_structure ? '#8855ff' : '#f5a623';
+    ctx.shadowColor = ctx.fillStyle; ctx.shadowBlur = 12; ctx.fill(); ctx.shadowBlur = 0;
+  });
+  ctx.textAlign='center'; ctx.textBaseline='middle';
+  ctx.font='bold '+Math.max(18,Math.min(36,Math.floor(W/26)))+'px Unbounded,Arial Black,sans-serif';
+  ctx.fillStyle='#ff3c54'; ctx.fillText('0 VERIFIED RELATIONS',cx,cy-8);
+  ctx.font=Math.max(10,Math.min(16,Math.floor(W/70)))+'px Martian Mono,Consolas,monospace';
+  ctx.fillStyle='#5a3800'; ctx.fillText('NODE POSITIONS = DISPLAY LAYOUT ONLY',cx,cy+22);
+})();
+</script>
+</body>
+</html>
