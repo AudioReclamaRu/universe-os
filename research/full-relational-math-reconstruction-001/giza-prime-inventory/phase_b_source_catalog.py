@@ -42,6 +42,56 @@ EXPECTED_COUNTS = {
 }
 EXPECTED_TOTAL = 12078
 
+# Portability contract.  The two defaults above are kept verbatim so a build
+# with no environment overrides stays byte-identical to the published Phase B
+# registries.  Other machines may mount the same exact sources elsewhere.
+ENV_RAW_ROOT = "GIZA_PRIME_RAW_ROOT"
+ENV_DERIVED_ROOT = "GIZA_PRIME_DERIVED_ROOT"
+ENV_REQUIRE_FULL_SOURCE = "GIZA_PRIME_REQUIRE_FULL_SOURCE"
+SOURCE_NOT_MOUNTED = "SKIPPED — SOURCE DATA NOT MOUNTED"
+
+
+def source_roots() -> Tuple[str, str]:
+    """Resolve the two nominated source roots from the environment.
+
+    No fallback search is performed.  If a variable is set it must name the
+    exact directory to scan; otherwise the owner-nominated default is used.
+    """
+    raw = os.environ.get(ENV_RAW_ROOT) or RAW_ROOT
+    derived = os.environ.get(ENV_DERIVED_ROOT) or DERIVED_ROOT
+    return raw, derived
+
+
+def sources_mounted() -> bool:
+    """True only when both roots and all seven derived sets are present."""
+    return source_status()["mounted"]
+
+
+def full_source_required() -> bool:
+    """Whether missing sources must remain an error, not an explicit skip."""
+    return os.environ.get(ENV_REQUIRE_FULL_SOURCE, "").strip().lower() in (
+        "1", "true", "yes", "on")
+
+
+def source_status() -> Dict[str, Any]:
+    """Report the exact reason why full-source integration can or cannot run."""
+    raw_root, derived_root = source_roots()
+    raw_mounted = os.path.isdir(raw_root)
+    derived_mounted = os.path.isdir(derived_root)
+    missing = [name for name in sorted(EXPECTED_COUNTS)
+               if not os.path.isfile(os.path.join(derived_root, name))]
+    return {
+        "raw_root": raw_root,
+        "derived_root": derived_root,
+        "raw_mounted": raw_mounted,
+        "derived_mounted": derived_mounted,
+        "missing_derived_files": missing,
+        "mounted": bool(raw_mounted and derived_mounted and not missing),
+        "full_source_required": full_source_required(),
+        "skip_status": SOURCE_NOT_MOUNTED,
+    }
+
+
 KML_GEOMETRY_TAGS = (
     "Point", "LineString", "LinearRing", "Polygon", "MultiGeometry",
 )
@@ -245,15 +295,16 @@ def inventory_file(root: str, name: str) -> Dict[str, Any]:
 
 
 def build_catalog() -> Dict[str, Any]:
-    _require(os.path.isdir(RAW_ROOT), "raw directory absent: %s" % RAW_ROOT)
-    _require(os.path.isdir(DERIVED_ROOT),
-             "derived directory absent: %s" % DERIVED_ROOT)
-    raw_files = sorted(name for name in os.listdir(RAW_ROOT)
-                       if os.path.isfile(os.path.join(RAW_ROOT, name)))
-    derived_files = sorted(name for name in os.listdir(DERIVED_ROOT)
-                           if os.path.isfile(os.path.join(DERIVED_ROOT, name)))
-    raw = [inventory_file(RAW_ROOT, name) for name in raw_files]
-    derived = [inventory_file(DERIVED_ROOT, name) for name in derived_files]
+    raw_root, derived_root = source_roots()
+    _require(os.path.isdir(raw_root), "raw directory absent: %s" % raw_root)
+    _require(os.path.isdir(derived_root),
+             "derived directory absent: %s" % derived_root)
+    raw_files = sorted(name for name in os.listdir(raw_root)
+                       if os.path.isfile(os.path.join(raw_root, name)))
+    derived_files = sorted(name for name in os.listdir(derived_root)
+                           if os.path.isfile(os.path.join(derived_root, name)))
+    raw = [inventory_file(raw_root, name) for name in raw_files]
+    derived = [inventory_file(derived_root, name) for name in derived_files]
 
     expected_status = {}
     for name, expected in sorted(EXPECTED_COUNTS.items()):
@@ -295,7 +346,7 @@ def build_catalog() -> Dict[str, Any]:
     return {
         "report_id": "PHASE_B_SOURCE_CATALOG",
         "schema_version": "phase_b_catalog_v1",
-        "roots": {"raw": RAW_ROOT, "derived": DERIVED_ROOT},
+        "roots": {"raw": raw_root, "derived": derived_root},
         "scan_policy": "exact owner-nominated directories only; no fallback search",
         "identifier_policy": {
             "raw_sha256": "SHA-256 over actual file bytes",

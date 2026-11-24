@@ -85,8 +85,19 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Run GIZA inventory framework unit tests
+      - name: Report source mount status
         working-directory: research/full-relational-math-reconstruction-001/giza-prime-inventory
+        env:
+          GIZA_PRIME_REQUIRE_FULL_SOURCE: "0"
+        run: python -c "import phase_b_source_catalog as pbc; print('SOURCE DATA MOUNTED' if pbc.sources_mounted() else pbc.SOURCE_NOT_MOUNTED); print(pbc.source_status())"
+
+      # Portable contour always runs.  The full-source contour is skipped with
+      # an explicit status unless the two nominated source trees are mounted.
+      # Set GIZA_PRIME_REQUIRE_FULL_SOURCE=1 to make absence a hard error.
+      - name: Run portable inventory tests and optional full-source integration
+        working-directory: research/full-relational-math-reconstruction-001/giza-prime-inventory
+        env:
+          GIZA_PRIME_REQUIRE_FULL_SOURCE: "0"
         run: python -m unittest discover -v -p "test_*.py"
 
   system-cockpit-tests:

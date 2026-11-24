@@ -22,6 +22,7 @@ import phase_b_observations as pbo
 
 COORD_TOLERANCE = 0.001  # source precision is 0.001 in local units
 FEATURE_KEY = "feature_id"
+CANONICAL_OBSERVATION_TOTAL = 12078
 
 
 class IdentityError(ValueError):
@@ -45,8 +46,14 @@ def _same_name(a: Dict[str, Any], b: Dict[str, Any]) -> bool:
     return bool(name_a) and name_a == name_b
 
 
-def build_identity(observations: List[Dict[str, Any]]) -> Dict[str, Any]:
-    """Generate candidates; confirm nothing automatically."""
+def build_identity(observations: List[Dict[str, Any]],
+                   expected_total: Optional[int] = None) -> Dict[str, Any]:
+    """Generate candidates; confirm nothing automatically.
+
+    ``expected_total`` defaults to the published canonical count so production
+    output is unchanged.  Portable callers may pass the size of their own
+    fixture set; the no-loss invariant stays enforced either way.
+    """
     by_coord: Dict[Tuple[float, float], List[Dict[str, Any]]] = {}
     by_name: Dict[str, List[Dict[str, Any]]] = {}
     by_feature: Dict[str, List[Dict[str, Any]]] = {}
@@ -155,8 +162,10 @@ def build_identity(observations: List[Dict[str, Any]]) -> Dict[str, Any]:
         "documented_reshoot_notes": len(reshoots),
         "original_observations_removed": 0,
     }
-    _require(totals["source_observations"] == 12078,
-             "identity layer lost observations")
+    _require(totals["source_observations"] == (
+        CANONICAL_OBSERVATION_TOTAL if expected_total is None
+        else expected_total),
+        "identity layer lost observations")
     return {
         "report_id": "PHASE_B_ENTITY_CANDIDATE_REGISTRY",
         "schema_version": "phase_b_identity_v1",

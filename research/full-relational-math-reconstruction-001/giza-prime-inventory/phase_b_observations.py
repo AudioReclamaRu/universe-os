@@ -123,15 +123,22 @@ _SOURCE_HASH_CACHE: Dict[str, str] = {}
 
 
 def _source_sha(source_file: str) -> str:
-    """Cache the raw SHA-256 once per source file, not once per observation."""
-    if source_file not in _SOURCE_HASH_CACHE:
-        _SOURCE_HASH_CACHE[source_file] = pbc.raw_sha256(
-            os.path.join(pbc.DERIVED_ROOT, source_file))
-    return _SOURCE_HASH_CACHE[source_file]
+    """Cache the raw SHA-256 once per (root, source file), not per observation.
+
+    The root is part of the key so a mounted alternative source tree cannot
+    inherit hashes computed from the owner-nominated default.
+    """
+    _, derived_root = pbc.source_roots()
+    key = (derived_root, source_file)
+    if key not in _SOURCE_HASH_CACHE:
+        _SOURCE_HASH_CACHE[key] = pbc.raw_sha256(
+            os.path.join(derived_root, source_file))
+    return _SOURCE_HASH_CACHE[key]
 
 
-def _base_envelope(source_file: str, campaign: Dict[str, Any],
-                   index: int, placemark: Dict[str, Any]) -> Dict[str, Any]:
+def _base_envelope(source_file: str, campaign: Dict[str, Any], index: int,
+                   placemark: Dict[str, Any],
+                   source_sha256: Optional[str] = None) -> Dict[str, Any]:
     description = placemark.get("description")
     _require(isinstance(description, str) and bool(description),
              "placemark %s has no description" % source_file)
@@ -198,7 +205,9 @@ def _base_envelope(source_file: str, campaign: Dict[str, Any],
         "source_provenance": {
             "network": campaign["network"],
             "source_file": source_file,
-            "source_sha256": _source_sha(source_file),
+            "source_sha256": (
+                _source_sha(source_file) if source_sha256 is None
+                else source_sha256),
             "provenance_states": {
                 "FILE_PRESENT": True, "SOURCE_CONTENT_PARSED": True,
                 "STRUCTURE_VALIDATED": True, "SOURCE_PROVENANCE_VERIFIED": False,
@@ -246,9 +255,17 @@ def _base_envelope(source_file: str, campaign: Dict[str, Any],
     return record
 
 
-def adapt(source_file: str, placemark: Dict[str, Any], index: int) -> Dict[str, Any]:
+def adapt(source_file: str, placemark: Dict[str, Any], index: int,
+          source_sha256: Optional[str] = None) -> Dict[str, Any]:
+    """Adapt one placemark without requiring a mounted source tree.
+
+    ``source_sha256`` is injectable so portable tests can exercise every
+    adapter with tiny fixtures.  Production calls leave it as None and get the
+    real raw hash from the resolved derived root.
+    """
     _require(source_file in CAMPAIGNS, "no adapter for %s" % source_file)
-    record = _base_envelope(source_file, CAMPAIGNS[source_file], index, placemark)
+    record = _base_envelope(source_file, CAMPAIGNS[source_file], index,
+                            placemark, source_sha256)
     if source_file == "GPMP-Control-Monuments.json":
         match = re.search(r"Description:\s*([A-Za-z]+)", record["original_description"])
         network = match.group(1) if match else None
@@ -288,12 +305,13 @@ def adapt(source_file: str, placemark: Dict[str, Any], index: int) -> Dict[str, 
 
 
 def build_observations() -> Dict[str, Any]:
-    roots = [pbc.DERIVED_ROOT]
+    _, derived_root = pbc.source_roots()
+    roots = [derived_root]
     observations: List[Dict[str, Any]] = []
     per_campaign: Dict[str, int] = {}
     warnings: Dict[str, int] = {}
     for source_file in sorted(CAMPAIGNS):
-        path = os.path.join(pbc.DERIVED_ROOT, source_file)
+        path = os.path.join(derived_root, source_file)
         _require(os.path.isfile(path), "expected derived file absent: %s" % path)
         with open(path, "r", encoding="utf-8") as handle:
             payload = json.load(handle)
