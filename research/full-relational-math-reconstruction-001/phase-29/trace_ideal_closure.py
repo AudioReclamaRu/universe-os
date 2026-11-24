@@ -719,6 +719,7 @@ def build_bounded_trace_relation_space(
         "processed_derived_relations": _paired(processed_count),
         "unresolved_derived_relations": _paired(unresolved_count),
         "rejected_derived_relations": _paired(rejected_count),
+        "seed_verification_work": seed_catalog.get("verification_work"),
         "independent_basis_count": _paired(len(independent_basis)),
         "exactly_dependent_count": _paired(
             len([
