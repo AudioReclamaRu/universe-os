@@ -1,0 +1,840 @@
+{
+  "computed": {
+    "energy_budget_at_peak": {
+      "conservation_closed": true,
+      "energy_residual_W": -5.684341886080801e-13,
+      "exported_power_W": 339.91131174727695,
+      "frequency_hz": 0.07092032714073312,
+      "input_power_W": 1133.0377058242561,
+      "material_dissipation_W": 793.1263940769798,
+      "relative_residual": 5.016904430330134e-16,
+      "stored_energy_J": 63023.684057653954,
+      "units": {
+        "power": "W",
+        "stored_energy": "J"
+      }
+    },
+    "frequency_response_peak": {
+      "attenuation_db_re_1_m_per_N": -183.27155422417763,
+      "frequency_hz": 0.07092032714073312,
+      "group_delay_s": 36.194590586288136,
+      "magnitude_m_per_N": 6.8615508911852e-10,
+      "phase_rad": 1.905195152524464
+    },
+    "natural_background_comparator": {
+      "evidence_class": "assumption_for_sensitivity",
+      "interpretation": "No inbound or outbound attribution is permitted until a measured co-located background exists.",
+      "modelled_export_power_W": 339.91131174727695,
+      "ratio": 0.33991131174727696,
+      "status": "not_evaluable_missing_data",
+      "synthetic_background_power_W": 1000.0
+    },
+    "natural_modes": [
+      {
+        "damping_ratio": 0.021228370146670155,
+        "eigenvalue_s_minus2": 0.17910946381006704,
+        "frequency_hz": 0.06735648238065223,
+        "index": 0,
+        "modal_damping_kg_per_s": 0.017968255487089115,
+        "mode_vector_mass_normalized": [
+          -8.549278885169086e-06,
+          1.0160258909406067e-05,
+          -4.17988294522279e-06,
+          -5.319942795620011e-07,
+          2.22272915000545e-07
+        ],
+        "omega_rad_per_s": 0.42321326043741475,
+        "quality_factor": 23.55338617828035
+      },
+      {
+        "damping_ratio": 0.02044070215074811,
+        "eigenvalue_s_minus2": 0.19554145867697056,
+        "frequency_hz": 0.07037842717107981,
+        "index": 1,
+        "modal_damping_kg_per_s": 0.018077785580451977,
+        "mode_vector_mass_normalized": [
+          2.1079666143827515e-06,
+          2.8089934634577203e-06,
+          -5.974435814953767e-08,
+          1.5130064272381351e-05,
+          -1.3491603355700834e-06
+        ],
+        "omega_rad_per_s": 0.44220069954373725,
+        "quality_factor": 24.460999251031133
+      },
+      {
+        "damping_ratio": 0.019699451881016693,
+        "eigenvalue_s_minus2": 0.21074916392971907,
+        "frequency_hz": 0.07306393559922743,
+        "index": 2,
+        "modal_damping_kg_per_s": 0.01808702206306752,
+        "mode_vector_mass_normalized": [
+          9.320058946859394e-06,
+          8.190937252083738e-06,
+          -5.289665286617677e-06,
+          -4.056067577108269e-06,
+          -8.719867059270927e-07
+        ],
+        "omega_rad_per_s": 0.4590742466417813,
+        "quality_factor": 25.381416854639657
+      },
+      {
+        "damping_ratio": 0.019821322770254397,
+        "eigenvalue_s_minus2": 0.242697555206141,
+        "frequency_hz": 0.07840663804900039,
+        "index": 3,
+        "modal_damping_kg_per_s": 0.01952968911813694,
+        "mode_vector_mass_normalized": [
+          5.936091576148765e-07,
+          4.447500478849226e-06,
+          1.8737782362273894e-05,
+          -1.37092668562943e-06,
+          -1.1707043568644882e-06
+        ],
+        "omega_rad_per_s": 0.49264343617482714,
+        "quality_factor": 25.2253598710548
+      },
+      {
+        "damping_ratio": 0.019485744479989034,
+        "eigenvalue_s_minus2": 0.5119023583771025,
+        "frequency_hz": 0.11387114742118853,
+        "index": 4,
+        "modal_damping_kg_per_s": 0.027883068400976777,
+        "mode_vector_mass_normalized": [
+          1.3845950158722928e-06,
+          1.416679582385991e-06,
+          1.8547135831482581e-06,
+          1.5706727961872939e-06,
+          9.7979309873915e-06
+        ],
+        "omega_rad_per_s": 0.7154735203884924,
+        "quality_factor": 25.659784285556913
+      }
+    ],
+    "outbound_bound": {
+      "any_unmodelled_channel_bound_W": 339.91131174727695,
+      "frequency_hz": 0.07092032714073312,
+      "modelled_export_upper_bound_W": 339.91131174727695,
+      "note": "Bound only; unmodelled paths remain not_evaluable_missing_data without measured source power.",
+      "outbound_communication_claim": false,
+      "ratio_to_synthetic_background": 0.33991131174727696,
+      "status": "bounded_negligible",
+      "synthetic_natural_background_W": 1000.0,
+      "total_input_upper_bound_W": 1133.0377058242561
+    },
+    "passivity": {
+      "all_energy_balances_closed": true,
+      "damping_nonnegative": true,
+      "frequencies_evaluated": 41,
+      "min_damping_eigenvalue_kg_per_s": 48989794.85566357,
+      "min_input_power_W": 0.30227435709937417,
+      "no_net_amplification": true,
+      "worst_absolute_residual_W": 5.684341886080801e-13
+    },
+    "prime_envelope": {
+      "computed_candidate_frequencies_hz": [
+        0.013471296476,
+        0.015865006087,
+        0.018258715698,
+        0.020652425309,
+        0.02304613492,
+        0.025439844531,
+        0.027833554142,
+        0.030227263753,
+        0.032620973364,
+        0.035014682975,
+        0.037408392586,
+        0.039802102197,
+        0.073314036752,
+        0.106825971306,
+        0.109219680917,
+        0.111613390528,
+        0.114007100139,
+        0.11640080975,
+        0.118794519361,
+        0.121188228972,
+        0.123581938583,
+        0.125975648194,
+        0.128369357805,
+        0.130763067416
+      ],
+      "evaluated_points": 81,
+      "frequency_grid_hz": [
+        0.013471296476130446,
+        0.20496806535813936
+      ],
+      "hardcoded_prime_frequency_hz": null,
+      "objective_definitions": {
+        "export_efficiency": "P_export/P_in; maximize",
+        "material_loss_per_force2_W_per_N2": "P_material/F0^2; minimize",
+        "min_triad_transfer_m_per_N": "min over Khufu/Khafre/Menkaure of |H_pyramid->bedrock|; maximize",
+        "triad_phase_coherence": "|sum(exp(i phase_k))|/3; maximize"
+      },
+      "pareto_frontier": [
+        {
+          "export_efficiency": 0.30000000000000004,
+          "frequency_hz": 0.013471296476130446,
+          "material_loss_per_force2_W_per_N2": 2.1159204996956194e-13,
+          "min_triad_transfer_m_per_N": 3.667130098706306e-11,
+          "triad_phase_coherence": 0.9999999211564182
+        },
+        {
+          "export_efficiency": 0.30000000000000004,
+          "frequency_hz": 0.015865006087155558,
+          "material_loss_per_force2_W_per_N2": 3.02441167880592e-13,
+          "min_triad_transfer_m_per_N": 3.7351717801087635e-11,
+          "triad_phase_coherence": 0.99999988307792
+        },
+        {
+          "export_efficiency": 0.30000000000000004,
+          "frequency_hz": 0.018258715698180668,
+          "material_loss_per_force2_W_per_N2": 4.1511884624050556e-13,
+          "min_triad_transfer_m_per_N": 3.816853634796886e-11,
+          "triad_phase_coherence": 0.9999998324285851
+        },
+        {
+          "export_efficiency": 0.3000000000000001,
+          "frequency_hz": 0.02065242530920578,
+          "material_loss_per_force2_W_per_N2": 5.535623830668299e-13,
+          "min_triad_transfer_m_per_N": 3.913485377256142e-11,
+          "triad_phase_coherence": 0.9999997651286773
+        },
+        {
+          "export_efficiency": 0.3000000000000001,
+          "frequency_hz": 0.023046134920230894,
+          "material_loss_per_force2_W_per_N2": 7.229218590503414e-13,
+          "min_triad_transfer_m_per_N": 4.02668978097313e-11,
+          "triad_phase_coherence": 0.9999996753995837
+        },
+        {
+          "export_efficiency": 0.2999999999999999,
+          "frequency_hz": 0.025439844531256004,
+          "material_loss_per_force2_W_per_N2": 9.29959070675904e-13,
+          "min_triad_transfer_m_per_N": 4.1584703982836275e-11,
+          "triad_phase_coherence": 0.9999995549760792
+        },
+        {
+          "export_efficiency": 0.2999999999999998,
+          "frequency_hz": 0.027833554142281114,
+          "material_loss_per_force2_W_per_N2": 1.183619686232816e-12,
+          "min_triad_transfer_m_per_N": 4.3113009094667014e-11,
+          "triad_phase_coherence": 0.9999993918829698
+        },
+        {
+          "export_efficiency": 0.29999999999999993,
+          "frequency_hz": 0.030227263753306227,
+          "material_loss_per_force2_W_per_N2": 1.4958670142237019e-12,
+          "min_triad_transfer_m_per_N": 4.488243751647141e-11,
+          "triad_phase_coherence": 0.9999991684981113
+        },
+        {
+          "export_efficiency": 0.3,
+          "frequency_hz": 0.03262097336433134,
+          "material_loss_per_force2_W_per_N2": 1.882920616617353e-12,
+          "min_triad_transfer_m_per_N": 4.6931089989939844e-11,
+          "triad_phase_coherence": 0.99999885841626
+        },
+        {
+          "export_efficiency": 0.3,
+          "frequency_hz": 0.03501468297535645,
+          "material_loss_per_force2_W_per_N2": 2.367138287869152e-12,
+          "min_triad_transfer_m_per_N": 4.930669420231808e-11,
+          "triad_phase_coherence": 0.9999984212402008
+        },
+        {
+          "export_efficiency": 0.30000000000000004,
+          "frequency_hz": 0.03740839258638156,
+          "material_loss_per_force2_W_per_N2": 2.9799511885693106e-12,
+          "min_triad_transfer_m_per_N": 5.2069551293550244e-11,
+          "triad_phase_coherence": 0.9999977936730522
+        },
+        {
+          "export_efficiency": 0.30000000000000004,
+          "frequency_hz": 0.03980210219740667,
+          "material_loss_per_force2_W_per_N2": 3.766581783392882e-12,
+          "min_triad_transfer_m_per_N": 5.529662690175942e-11,
+          "triad_phase_coherence": 0.9999968737636133
+        },
+        {
+          "export_efficiency": 0.30000000000000004,
+          "frequency_hz": 0.07331403675175824,
+          "material_loss_per_force2_W_per_N2": 1.733539905239249e-09,
+          "min_triad_transfer_m_per_N": 7.557903358361636e-10,
+          "triad_phase_coherence": 0.5117128183647778
+        },
+        {
+          "export_efficiency": 0.3,
+          "frequency_hz": 0.1068259713061098,
+          "material_loss_per_force2_W_per_N2": 9.729236131625188e-12,
+          "min_triad_transfer_m_per_N": 2.6408147793242055e-10,
+          "triad_phase_coherence": 0.9999790397917399
+        },
+        {
+          "export_efficiency": 0.3000000000000001,
+          "frequency_hz": 0.10921968091713491,
+          "material_loss_per_force2_W_per_N2": 1.1333738635745857e-11,
+          "min_triad_transfer_m_per_N": 3.4601184703797386e-10,
+          "triad_phase_coherence": 0.9999834445529553
+        },
+        {
+          "export_efficiency": 0.3,
+          "frequency_hz": 0.11161339052816002,
+          "material_loss_per_force2_W_per_N2": 1.82045139856988e-11,
+          "min_triad_transfer_m_per_N": 5.173325077528388e-10,
+          "triad_phase_coherence": 0.9999866744635851
+        },
+        {
+          "export_efficiency": 0.3000000000000001,
+          "frequency_hz": 0.11400710013918512,
+          "material_loss_per_force2_W_per_N2": 2.92810437980523e-11,
+          "min_triad_transfer_m_per_N": 6.746280589831289e-10,
+          "triad_phase_coherence": 0.9999890969652084
+        },
+        {
+          "export_efficiency": 0.29999999999999993,
+          "frequency_hz": 0.11640080975021025,
+          "material_loss_per_force2_W_per_N2": 1.494456385293927e-11,
+          "min_triad_transfer_m_per_N": 4.101699085522271e-10,
+          "triad_phase_coherence": 0.9999909500812763
+        },
+        {
+          "export_efficiency": 0.30000000000000004,
+          "frequency_hz": 0.11879451936123536,
+          "material_loss_per_force2_W_per_N2": 8.286861613148625e-12,
+          "min_triad_transfer_m_per_N": 2.3727353728781177e-10,
+          "triad_phase_coherence": 0.9999923924820687
+        },
+        {
+          "export_efficiency": 0.3000000000000001,
+          "frequency_hz": 0.12118822897226046,
+          "material_loss_per_force2_W_per_N2": 5.977251334526799e-12,
+          "min_triad_transfer_m_per_N": 1.5599292581772818e-10,
+          "triad_phase_coherence": 0.9999935326390329
+        },
+        {
+          "export_efficiency": 0.3,
+          "frequency_hz": 0.12358193858328557,
+          "material_loss_per_force2_W_per_N2": 4.87834412546978e-12,
+          "min_triad_transfer_m_per_N": 1.1171426609223753e-10,
+          "triad_phase_coherence": 0.9999944463814288
+        },
+        {
+          "export_efficiency": 0.3,
+          "frequency_hz": 0.1259756481943107,
+          "material_loss_per_force2_W_per_N2": 4.2196656952672355e-12,
+          "min_triad_transfer_m_per_N": 8.455099451082943e-11,
+          "triad_phase_coherence": 0.9999951877870141
+        },
+        {
+          "export_efficiency": 0.3,
+          "frequency_hz": 0.1283693578053358,
+          "material_loss_per_force2_W_per_N2": 3.762932354701189e-12,
+          "min_triad_transfer_m_per_N": 6.647232239358388e-11,
+          "triad_phase_coherence": 0.9999957961184477
+        },
+        {
+          "export_efficiency": 0.30000000000000004,
+          "frequency_hz": 0.1307630674163609,
+          "material_loss_per_force2_W_per_N2": 3.416126988336411e-12,
+          "min_triad_transfer_m_per_N": 5.3726392303634224e-11,
+          "triad_phase_coherence": 0.9999963003469591
+        }
+      ],
+      "reason": "All inputs are synthetic and unresolved parameters dominate; competing objectives do not collapse to a unique robust optimum.",
+      "robust_joint_optimum_identifiable": false
+    },
+    "reciprocity": {
+      "broken_assumption": false,
+      "frequency_hz": 0.07092032714073312,
+      "max_absolute_asymmetry_m_per_N": 6.783385382605595e-24,
+      "reciprocity_holds": true,
+      "relative_asymmetry": 2.5201032082436385e-16,
+      "symmetric_operators": true
+    },
+    "zero_coupling": {
+      "frequencies_evaluated": 11,
+      "independent_subsystems_reproduced": true,
+      "max_off_diagonal_damping_kg_per_s": 0.0,
+      "max_off_diagonal_stiffness_N_per_m": 0.0,
+      "max_response_change_m_per_N": 0.0
+    }
+  },
+  "dimensional_checks": {
+    "expected_frequency_exponents_kg_m_s": [
+      0,
+      0,
+      -1
+    ],
+    "frequency_exponents_kg_m_s": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "frequency_scaling_consistent": true,
+    "k_over_m_exponents_kg_m_s": [
+      0,
+      0,
+      -2
+    ],
+    "k_over_m_has_inverse_time_squared": true,
+    "matrix_shapes": {
+      "B": [
+        5,
+        1
+      ],
+      "C": [
+        5,
+        5
+      ],
+      "Cr": [
+        1,
+        5
+      ],
+      "K": [
+        5,
+        5
+      ],
+      "M": [
+        5,
+        5
+      ]
+    },
+    "nonnegative_diagonal_damping": true,
+    "omega_exponents_kg_m_s": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "positive_masses": true,
+    "unit_mismatches": {},
+    "units_consistent": true
+  },
+  "external_citations_attached": false,
+  "graph_summary": {
+    "edge_count": 6,
+    "node_count": 13
+  },
+  "no_hardcoded_prime_frequency": true,
+  "report_id": "GIZA_PRIME_DETERMINISTIC_EXAMPLE_REPORT",
+  "represented_only_not_computed": {
+    "acoustic_cavity_spectrum": "not_evaluable_missing_data no cavity geometry",
+    "earth_and_cosmic_outbound": "bounded_negligible / analogy_only / non-bridge",
+    "electromagnetic_radiation": "not_evaluable_missing_data no circuit or conductivity tensor",
+    "gas_thermal_draft": "not_evaluable_missing_data no temperature field",
+    "hydrology": "not_evaluable_missing_data water table unresolved",
+    "sphinx_original_form": "unknown no original geometry asserted"
+  },
+  "scenario": {
+    "active_layers": [
+      1,
+      2,
+      3,
+      4,
+      7
+    ],
+    "coupling_families": [
+      "elastic"
+    ],
+    "coupling_scale": 1.0,
+    "description": "Declared coherent layout exercising the equations; not a historical completion claim.",
+    "driver_node": "khufu",
+    "enabled_hypotheses": [],
+    "enabled_modules": [
+      "L1_HOMOGENIZED_MATERIAL",
+      "L2_LUMPED_INTERFACES",
+      "L3_REDUCED_ORDER_MECHANICS",
+      "L7_SUBSTRATE_ENVIRONMENT",
+      "L4_IDEALIZED_ACOUSTIC_PLACEHOLDER"
+    ],
+    "evidence_basis": [
+      "idealized_design",
+      "assumption_for_sensitivity",
+      "unknown"
+    ],
+    "falsifiers": [
+      "Synthetic matrices fail a passivity, energy-balance or dimensional control."
+    ],
+    "geometry_state": "idealized",
+    "label": "Synthetic idealized reference complex",
+    "natural_background_comparator_required": false,
+    "notes": "Synthetic reference fixture; no external citation or historical claim. Layer 4 is represented, not computed: no cavity volume is specified.",
+    "outbound_communication_claim": false,
+    "parameter_overrides": {},
+    "receiver_node": "bedrock",
+    "scenario_id": "S2_IDEALIZED_REFERENCE_COMPLEX",
+    "schema_version": "1.0",
+    "synthetic": true
+  },
+  "scenario_comparison": {
+    "null_scenario_id": "S3_PASSIVE_NULL",
+    "rows": [
+      {
+        "coupling_scale": 1.0,
+        "enabled_hypotheses": [],
+        "exported_power_W_at_peak": 339.91131174727695,
+        "first_mode_hz": 0.06735648238065223,
+        "outbound_communication_claim": false,
+        "peak_phase_rad": 1.905195152524464,
+        "peak_response_hz": 0.07092032714073312,
+        "peak_response_m_per_N": 6.8615508911852e-10,
+        "scenario_id": "S0_CURRENT_OBSERVED"
+      },
+      {
+        "coupling_scale": 1.0,
+        "enabled_hypotheses": [],
+        "exported_power_W_at_peak": 339.91131174727695,
+        "first_mode_hz": 0.06735648238065223,
+        "outbound_communication_claim": false,
+        "peak_phase_rad": 1.905195152524464,
+        "peak_response_hz": 0.07092032714073312,
+        "peak_response_m_per_N": 6.8615508911852e-10,
+        "scenario_id": "S1_PARENT_GEOLOGY_RECONSTRUCTION"
+      },
+      {
+        "coupling_scale": 1.0,
+        "enabled_hypotheses": [],
+        "exported_power_W_at_peak": 339.91131174727695,
+        "first_mode_hz": 0.06735648238065223,
+        "outbound_communication_claim": false,
+        "peak_phase_rad": 1.905195152524464,
+        "peak_response_hz": 0.07092032714073312,
+        "peak_response_m_per_N": 6.8615508911852e-10,
+        "scenario_id": "S2_IDEALIZED_REFERENCE_COMPLEX"
+      },
+      {
+        "coupling_scale": 0.0,
+        "enabled_hypotheses": [],
+        "exported_power_W_at_peak": 0.09704482229965757,
+        "first_mode_hz": 0.0711762543417177,
+        "outbound_communication_claim": false,
+        "peak_phase_rad": 0.0,
+        "peak_response_hz": 0.01423525086834354,
+        "peak_response_m_per_N": 0.0,
+        "scenario_id": "S3_PASSIVE_NULL"
+      },
+      {
+        "coupling_scale": 1.0,
+        "enabled_hypotheses": [
+          "H_ACOUSTIC_CAVITY"
+        ],
+        "exported_power_W_at_peak": 339.813910962792,
+        "first_mode_hz": 0.06735648238065223,
+        "outbound_communication_claim": false,
+        "peak_phase_rad": 1.9057844082498476,
+        "peak_response_hz": 0.07092032714073312,
+        "peak_response_m_per_N": 6.856127795722579e-10,
+        "scenario_id": "S4_ACOUSTIC"
+      },
+      {
+        "coupling_scale": 1.0,
+        "enabled_hypotheses": [
+          "H_ELASTIC_SUBSTRATE"
+        ],
+        "exported_power_W_at_peak": 304.1325522643742,
+        "first_mode_hz": 0.06698619332346438,
+        "outbound_communication_claim": false,
+        "peak_phase_rad": 2.5691108451306732,
+        "peak_response_hz": 0.07088197079891038,
+        "peak_response_m_per_N": 9.632776205276272e-10,
+        "scenario_id": "S4_ELASTIC"
+      },
+      {
+        "coupling_scale": 1.0,
+        "enabled_hypotheses": [
+          "H_EM_TRANSDUCER"
+        ],
+        "exported_power_W_at_peak": 339.92745258345724,
+        "first_mode_hz": 0.06735648238065223,
+        "outbound_communication_claim": false,
+        "peak_phase_rad": 1.904705589843256,
+        "peak_response_hz": 0.07092032714073312,
+        "peak_response_m_per_N": 6.859358514253679e-10,
+        "scenario_id": "S4_ELECTROMAGNETIC"
+      },
+      {
+        "coupling_scale": 1.0,
+        "enabled_hypotheses": [
+          "H_GAS_THERMAL_DRAFT"
+        ],
+        "exported_power_W_at_peak": 339.7114252650521,
+        "first_mode_hz": 0.06735648238065223,
+        "outbound_communication_claim": false,
+        "peak_phase_rad": 1.9047624583516367,
+        "peak_response_hz": 0.07092032714073312,
+        "peak_response_m_per_N": 6.85291577768377e-10,
+        "scenario_id": "S4_GAS_THERMAL"
+      },
+      {
+        "coupling_scale": 1.0,
+        "enabled_hypotheses": [
+          "H_HYDRAULIC_PATH"
+        ],
+        "exported_power_W_at_peak": 12.50730740621281,
+        "first_mode_hz": 0.06735186677023776,
+        "outbound_communication_claim": false,
+        "peak_phase_rad": -1.588347188310274,
+        "peak_response_hz": 0.11405663836239996,
+        "peak_response_m_per_N": 6.727464536809552e-10,
+        "scenario_id": "S4_HYDROLOGIC"
+      },
+      {
+        "coupling_scale": 1.0,
+        "enabled_hypotheses": [
+          "H_MIXED_CONTROLLED"
+        ],
+        "exported_power_W_at_peak": 339.86095236534254,
+        "first_mode_hz": 0.06735648238065223,
+        "outbound_communication_claim": false,
+        "peak_phase_rad": 1.905596332989431,
+        "peak_response_hz": 0.07092032714073312,
+        "peak_response_m_per_N": 6.858726099220716e-10,
+        "scenario_id": "S4_MIXED"
+      },
+      {
+        "coupling_scale": 1.0,
+        "enabled_hypotheses": [],
+        "exported_power_W_at_peak": 339.91131174727695,
+        "first_mode_hz": 0.06735648238065223,
+        "outbound_communication_claim": false,
+        "peak_phase_rad": 1.905195152524464,
+        "peak_response_hz": 0.07092032714073312,
+        "peak_response_m_per_N": 6.8615508911852e-10,
+        "scenario_id": "S5_ENVIRONMENTAL_DRIVERS"
+      }
+    ]
+  },
+  "schema_version": "1.0",
+  "scientific_status": "idealized_reference_model_not_historical_claim",
+  "sensitivity": {
+    "dominant_unknown": "damping_ratio_zeta",
+    "dominant_unknown_normalized_peak_response_range": 1.084602638436781,
+    "interpretation": "Dominance is with respect to this synthetic fixture only; it is not an archaeological result.",
+    "sweeps": {
+      "contact_khufu_bedrock_N_per_m": {
+        "normalized_output_ranges": {
+          "exported_power_W_at_peak": 0.36133142429399817,
+          "first_mode_hz": 0.0033107394790122856,
+          "peak_response_m_per_N": 0.5349075049891167
+        },
+        "parameter_name": "contact_khufu_bedrock_N_per_m",
+        "parameter_unit": "N/m",
+        "random_sampling_used": false,
+        "records": [
+          {
+            "exported_power_W_at_peak": 822.767265352788,
+            "factor": 0.5,
+            "first_mode_hz": 0.06735449665600463,
+            "parameter_value": 125000000.0,
+            "peak_response_hz": 0.07331403675175824,
+            "peak_response_m_per_N": 7.162422999675318e-10
+          },
+          {
+            "exported_power_W_at_peak": 798.350954225906,
+            "factor": 0.75,
+            "first_mode_hz": 0.0673772747138953,
+            "parameter_value": 187500000.0,
+            "peak_response_hz": 0.07331403675175824,
+            "peak_response_m_per_N": 9.204549911878396e-10
+          },
+          {
+            "exported_power_W_at_peak": 742.9456736739638,
+            "factor": 1.0,
+            "first_mode_hz": 0.06735648238065223,
+            "parameter_value": 250000000.0,
+            "peak_response_hz": 0.07331403675175824,
+            "peak_response_m_per_N": 1.0970447921908032e-09
+          },
+          {
+            "exported_power_W_at_peak": 657.6689157063286,
+            "factor": 1.25,
+            "first_mode_hz": 0.06728523988989588,
+            "parameter_value": 312500000.0,
+            "peak_response_hz": 0.07331403675175824,
+            "peak_response_m_per_N": 1.227546514382668e-09
+          },
+          {
+            "exported_power_W_at_peak": 554.3176469111106,
+            "factor": 1.5,
+            "first_mode_hz": 0.06715427494851028,
+            "parameter_value": 375000000.0,
+            "peak_response_hz": 0.07331403675175824,
+            "peak_response_m_per_N": 1.3030597926196183e-09
+          }
+        ],
+        "sampling": "deterministic_one_at_a_time"
+      },
+      "damping_ratio_zeta": {
+        "normalized_output_ranges": {
+          "exported_power_W_at_peak": 1.044516592812745,
+          "first_mode_hz": 0.0,
+          "peak_response_m_per_N": 1.084602638436781
+        },
+        "parameter_name": "damping_ratio_zeta",
+        "parameter_unit": "dimensionless",
+        "random_sampling_used": false,
+        "records": [
+          {
+            "exported_power_W_at_peak": 1309.393302161795,
+            "factor": 0.5,
+            "first_mode_hz": 0.06735648238065223,
+            "parameter_value": 0.01,
+            "peak_response_hz": 0.07331403675175824,
+            "peak_response_m_per_N": 1.977937607955861e-09
+          },
+          {
+            "exported_power_W_at_peak": 945.7326532912641,
+            "factor": 0.75,
+            "first_mode_hz": 0.06735648238065223,
+            "parameter_value": 0.015,
+            "peak_response_hz": 0.07331403675175824,
+            "peak_response_m_per_N": 1.399347786883437e-09
+          },
+          {
+            "exported_power_W_at_peak": 742.9456736739638,
+            "factor": 1.0,
+            "first_mode_hz": 0.06735648238065223,
+            "parameter_value": 0.02,
+            "peak_response_hz": 0.07331403675175824,
+            "peak_response_m_per_N": 1.0970447921908032e-09
+          },
+          {
+            "exported_power_W_at_peak": 617.5255017464663,
+            "factor": 1.25,
+            "first_mode_hz": 0.06735648238065223,
+            "parameter_value": 0.025,
+            "peak_response_hz": 0.07331403675175824,
+            "peak_response_m_per_N": 9.12748088028456e-10
+          },
+          {
+            "exported_power_W_at_peak": 533.3742184508968,
+            "factor": 1.5,
+            "first_mode_hz": 0.06735648238065223,
+            "parameter_value": 0.03,
+            "peak_response_hz": 0.07331403675175824,
+            "peak_response_m_per_N": 7.88079931862386e-10
+          }
+        ],
+        "sampling": "deterministic_one_at_a_time"
+      },
+      "khufu_vertical_stiffness_N_per_m": {
+        "normalized_output_ranges": {
+          "exported_power_W_at_peak": 1.2294930063808054,
+          "first_mode_hz": 0.3026681179313354,
+          "peak_response_m_per_N": 0.93396210198861
+        },
+        "parameter_name": "khufu_vertical_stiffness_N_per_m",
+        "parameter_unit": "N/m",
+        "random_sampling_used": false,
+        "records": [
+          {
+            "exported_power_W_at_peak": 1656.3921835769784,
+            "factor": 0.5,
+            "first_mode_hz": 0.04899568524283262,
+            "parameter_value": 600000000.0,
+            "peak_response_hz": 0.04937694064150712,
+            "peak_response_m_per_N": 2.1216430522809835e-09
+          },
+          {
+            "exported_power_W_at_peak": 841.5959511206905,
+            "factor": 0.75,
+            "first_mode_hz": 0.05999894047989584,
+            "parameter_value": 900000000.0,
+            "peak_response_hz": 0.058951779085607565,
+            "peak_response_m_per_N": 1.1637686671899708e-09
+          },
+          {
+            "exported_power_W_at_peak": 742.9456736739638,
+            "factor": 1.0,
+            "first_mode_hz": 0.06735648238065223,
+            "parameter_value": 1200000000.0,
+            "peak_response_hz": 0.07331403675175824,
+            "peak_response_m_per_N": 1.0970447921908032e-09
+          },
+          {
+            "exported_power_W_at_peak": 868.4509156938435,
+            "factor": 1.25,
+            "first_mode_hz": 0.0690833897807114,
+            "parameter_value": 1500000000.0,
+            "peak_response_hz": 0.08049516558483358,
+            "peak_response_m_per_N": 1.5177269991353195e-09
+          },
+          {
+            "exported_power_W_at_peak": 849.5285083439312,
+            "factor": 1.5,
+            "first_mode_hz": 0.06938234499545978,
+            "parameter_value": 1800000000.0,
+            "peak_response_hz": 0.0876762944179089,
+            "peak_response_m_per_N": 1.5236719175741215e-09
+          }
+        ],
+        "sampling": "deterministic_one_at_a_time"
+      },
+      "sphinx_parent_mass_kg": {
+        "normalized_output_ranges": {
+          "exported_power_W_at_peak": 0.04940524233084888,
+          "first_mode_hz": 0.14353985708456196,
+          "peak_response_m_per_N": 0.3429192423378525
+        },
+        "parameter_name": "sphinx_parent_mass_kg",
+        "parameter_unit": "kg",
+        "random_sampling_used": false,
+        "records": [
+          {
+            "exported_power_W_at_peak": 724.8757461140538,
+            "factor": 0.5,
+            "first_mode_hz": 0.06735955951382885,
+            "parameter_value": 2000000000.0,
+            "peak_response_hz": 0.07331403675175824,
+            "peak_response_m_per_N": 1.421684663108132e-09
+          },
+          {
+            "exported_power_W_at_peak": 707.8838870941328,
+            "factor": 0.75,
+            "first_mode_hz": 0.06735913212615467,
+            "parameter_value": 3000000000.0,
+            "peak_response_hz": 0.07331403675175824,
+            "peak_response_m_per_N": 1.4732425611395602e-09
+          },
+          {
+            "exported_power_W_at_peak": 742.9456736739638,
+            "factor": 1.0,
+            "first_mode_hz": 0.06735648238065223,
+            "parameter_value": 4000000000.0,
+            "peak_response_hz": 0.07331403675175824,
+            "peak_response_m_per_N": 1.0970447921908032e-09
+          },
+          {
+            "exported_power_W_at_peak": 744.5892981406507,
+            "factor": 1.25,
+            "first_mode_hz": 0.06314358174861204,
+            "parameter_value": 5000000000.0,
+            "peak_response_hz": 0.07331403675175824,
+            "peak_response_m_per_N": 1.306834072610282e-09
+          },
+          {
+            "exported_power_W_at_peak": 741.0075247146383,
+            "factor": 1.5,
+            "first_mode_hz": 0.05769121965919122,
+            "parameter_value": 6000000000.0,
+            "peak_response_hz": 0.07331403675175824,
+            "peak_response_m_per_N": 1.3374931955458633e-09
+          }
+        ],
+        "sampling": "deterministic_one_at_a_time"
+      }
+    }
+  },
+  "source_id": "synthetic_reference_fixture",
+  "unresolved_parameters": [
+    "sphinx_original_parent_geometry",
+    "groundwater_table_depth_m",
+    "contact_friction_coefficient",
+    "cavity_inventory"
+  ],
+  "validation": {
+    "bridge_catalog": true,
+    "parameter_registry": true,
+    "scenario": true,
+    "source_register": true
+  }
+}
