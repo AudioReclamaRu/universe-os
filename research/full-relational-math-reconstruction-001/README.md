@@ -513,3 +513,14 @@ The dedicated GitHub Actions push workflow completed successfully in [run 452981
 **161 tests passed across all 16 affine-IFS phase packages.** This validates these sixteen packages on the clean checkout at the cited commit only; it does not claim that the complete repository or every earlier research phase passed CI.
 
 Phase 31's 12 tests specifically verify canonical RREF basis order-independence, exact inclusion maps, predecessor intersection coordinates, quotient-complement dimensions, bidirectional adapted-basis matrices and exact inverse products, unresolved-bound propagation and input validation. All arithmetic in the transition engine is rational and exact.
+
+
+## Phase 32 — exact bifiltration operators and mixed predecessor overlap
+
+Phase 32 consumes the completed Phase 30 filtration and Phase 31 canonical bases/inclusion matrices. For each interior unit square it names \(C=R_{L-1,D-1}\), \(A=R_{L-1,D}\), \(B=R_{L,D-1}\) and \(R=R_{L,D}\), computes \(A\cap B\) exactly over \(\mathbb Q\), and constructs a deterministic complement of \(C\) inside \(A\cap B\). The local mixed-overlap correction is \(\omega_{L,D}=\dim(A\cap B)-\dim C\).
+
+The implementation verifies both composed inclusion paths \(C\to B\to R\) and \(C\to A\to R\) against the direct \(C\to R\) coordinates, preserving Phase 31's row-source/column-target matrix orientation. It checks \(\dim(A\cap B)=\dim C+\omega\), \(\dim R=\dim A+\dim B-\dim C-\omega+q\), and \(\Delta_L\Delta_D r=q-\omega\). Boundary cells at \(L=1\) or \(D=0\) are explicit and no zero subspace is substituted for a missing measured cell.
+
+The small physical grid \((L=1,2)\), \((D=0,1)\), dimension 2, generator count 2, has one interior square with dimensions \(C=4\), \(A=12\), \(B=41\), \(R=120\), \(A\cap B=7\), \(q=74\), \(\omega=3\), and rank difference \(71=q-\omega\). Synthetic controls separately force nonzero and zero mixed overlap and exact non-integer rational coordinates. These are finite exact statements only; they do not prove global distributivity, stabilization, a universal recurrence, an infinite Hilbert series, or an infinite T-ideal presentation.
+
+See [Phase 32 report](phase-32/EXACT_BIFILTRATION_OPERATORS_AND_MIXED_OVERLAP.md), the [bifiltration operator engine](phase-32/bifiltration_operators.py) and the [13 Phase 32 tests](phase-32/test_bifiltration_operators.py). The dedicated CI matrix now includes Phase 32.
