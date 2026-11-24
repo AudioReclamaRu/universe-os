@@ -486,4 +486,4 @@ For each cell, the canonical predecessor-union basis is concatenated with Phase 
 
 These are exact finite-dimensional coordinate statements only. No universal recurrence, infinite stabilization, infinite Hilbert series, or minimal generating set of the infinite T-ideal is inferred.
 
-See [Phase 31 report](phase-31/EXACT_TRACE_RELATION_BASIS_TRANSITIONS.md), the [basis-transition engine](phase-31/basis_transitions.py) and the [11 Phase 31 tests](phase-31/test_basis_transitions.py).
+See [Phase 31 report](phase-31/EXACT_TRACE_RELATION_BASIS_TRANSITIONS.md), the [basis-transition engine](phase-31/basis_transitions.py) and the [12 Phase 31 tests](phase-31/test_basis_transitions.py).

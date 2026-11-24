@@ -346,6 +346,8 @@ def analyze_exact_basis_transitions(filtration_result):
     raw_cells = filtration_result.get("cells")
     if not isinstance(raw_cells, list):
         raise ValueError("completed filtration must contain a cells list")
+    if not raw_cells:
+        raise ValueError("completed filtration must contain at least one cell")
 
     indexed = {}
     for cell in raw_cells:

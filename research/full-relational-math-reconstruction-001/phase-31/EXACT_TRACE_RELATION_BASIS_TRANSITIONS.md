@@ -71,4 +71,4 @@ Thus every slice element can be represented in either coordinate system without 
 
 ## Tests
 
-Eleven standard-library tests cover canonical basis ranks, order-independent RREF, injective inclusion maps, predecessor intersections, quotient dimensions, exact inverse transition matrices, boundary cells, unresolved bounds, deterministic output and input validation.
+Twelve standard-library tests cover canonical basis ranks, order-independent RREF, injective inclusion maps, predecessor intersections, quotient dimensions, exact inverse transition matrices, boundary cells, unresolved bounds, deterministic output and input validation.
