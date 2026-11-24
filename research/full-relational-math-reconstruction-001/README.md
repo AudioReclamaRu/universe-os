@@ -452,3 +452,27 @@ For every grid cell it computes the exact Q-dimension, the predecessor sum R[L-1
 Every basis vector inherits Phase 29's universal generic-matrix verification. Homogeneous rank profiles by total trace-word degree provide a finite Hilbert-like table. Final-step increments are explicitly descriptive; no infinite stabilization, Hilbert-series, or T-ideal minimal-generator claim is made.
 
 See [Phase 30 report](phase-30/EXACT_TRACE_RELATION_FILTRATION_AND_MINIMAL_BASES.md), the [filtration engine](phase-30/relation_filtration.py) and the [13 Phase 30 tests](phase-30/test_relation_filtration.py).
+
+### Corrected validation status — phases 16–30
+
+The dedicated GitHub Actions pull-request workflow completed successfully on the clean checkout in [run 45294607007](https://github.com/AudioReclamaRu/universe-os/actions/runs/45294607007), testing branch head `0fce6e34088cf16c9f3ea2c008b712890907dd0f`. All **15 of 15 jobs passed**.
+
+- Phase 16 — 17 tests
+- Phase 17 — 9 tests
+- Phase 18 — 6 tests
+- Phase 19 — 10 tests
+- Phase 20 — 6 tests
+- Phase 21 — 7 tests
+- Phase 22 — 9 tests
+- Phase 23 — 6 tests
+- Phase 24 — 8 tests
+- Phase 25 — 6 tests
+- Phase 26 — 7 tests
+- Phase 27 — 16 tests
+- Phase 28 — 15 tests
+- Phase 29 — 14 tests
+- Phase 30 — 13 tests
+
+**149 tests passed across all 15 affine-IFS phase packages.** This validates these fifteen packages on a clean PR checkout only; it does not claim that the complete repository or every earlier research phase passed CI.
+
+Phase 30's exact two-parameter filtration is a finite vector-space analysis. It provides minimum-cardinality Q-bases and quotient complements for the declared bounded slices; it does not prove minimal generators of the infinite T-ideal or stabilization outside the searched grid.
