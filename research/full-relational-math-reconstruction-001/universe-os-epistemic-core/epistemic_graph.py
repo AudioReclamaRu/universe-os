@@ -38,6 +38,10 @@ class KnowledgeGraph:
         self._nodes: Dict[str, List[Dict[str, Any]]] = {}
         self._edges: List[Dict[str, Any]] = []
         self._events: List[Dict[str, Any]] = []
+        # Optional link to the ontology passport.  When set, class registration
+        # becomes a graph event and can therefore be audited by the same
+        # validator as every other mutation (enforcement audit, 2026-11-24).
+        self.ontology: Optional[Any] = None
 
     # -- writing -----------------------------------------------------------
 
@@ -144,6 +148,7 @@ class KnowledgeGraph:
         *,
         actor: str = "unspecified",
         approval_gate: Optional[str] = None,
+        synthetic: bool = False,
     ) -> Dict[str, Any]:
         require(bool(event_type), "event_type required")
         event = {
@@ -152,6 +157,9 @@ class KnowledgeGraph:
             "payload": frozen(payload),
             "actor": actor,
             "approval_gate": approval_gate,
+            # Events must carry the synthetic marker too: without it a
+            # synthetic control could masquerade as an evaluated principle.
+            "synthetic": bool(synthetic),
             "sequence": len(self._events),
         }
         self._events.append(event)
@@ -348,8 +356,11 @@ class PassportRegistry:
 class OntologyPassport:
     """Versioned class definitions; rejects wrong first-class entity typing."""
 
-    def __init__(self) -> None:
+    def __init__(self, graph: Optional[KnowledgeGraph] = None) -> None:
         self._classes: Dict[str, List[Dict[str, Any]]] = {}
+        self._graph = graph
+        if graph is not None:
+            graph.ontology = self
 
     def register(
         self,
@@ -361,6 +372,9 @@ class OntologyPassport:
         allowed_states: Sequence[str] = (),
         author: str = "unspecified",
         migration_from: Optional[int] = None,
+        graph: Optional[KnowledgeGraph] = None,
+        approval_event: Optional[str] = None,
+        extension_source: Optional[str] = None,
     ) -> Dict[str, Any]:
         require(bool(class_id), "class_id required")
         require(bool(membership_criteria), "membership criteria required")
@@ -381,7 +395,20 @@ class OntologyPassport:
             "migration_from": migration_from,
         }
         self._classes.setdefault(class_id, []).append(frozen(definition))
-        return frozen(definition)
+        result = frozen(definition)
+        target = graph
+        if target is None and hasattr(self, "_graph"):
+            target = self._graph  # type: ignore[attr-defined]
+        if target is not None:
+            target.record_event(
+                "ontology_class_registered",
+                {"class_id": class_id, "version": version,
+                 "migration_from": migration_from,
+                 "approval_event": approval_event,
+                 "extension_source": extension_source},
+                actor=author,
+            )
+        return result
 
     def current(self, class_id: str) -> Optional[Dict[str, Any]]:
         versions = self._classes.get(class_id)
@@ -404,6 +431,7 @@ class OntologyPassport:
             allowed_states=kwargs.get("allowed_states", current["allowed_states"]),
             author=kwargs.get("author", "unspecified"),
             migration_from=current["version"],
+            graph=graph,
         )
         affected = [
             n["node_id"] for n in graph.nodes()

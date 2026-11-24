@@ -23,6 +23,8 @@ Core commitments:
 
 from __future__ import annotations
 
+import re
+
 from typing import Any, Dict, List, Optional, Sequence, Tuple
 
 from epistemic_types import (
@@ -301,8 +303,18 @@ PRINCIPLE_CHECKS = tuple(item["check"] for item in PRINCIPLES)
 # Recorders: produce the structured evidence that the checks consume
 # ---------------------------------------------------------------------------
 
-def _record(graph: Any, event_type: str, payload: Dict[str, Any], actor: str) -> Dict[str, Any]:
-    return graph.record_event(event_type, frozen(payload), actor=actor)
+def _record(
+    graph: Any, event_type: str, payload: Dict[str, Any], actor: str,
+    *, synthetic: Optional[bool] = None,
+) -> Dict[str, Any]:
+    """Write an event with an explicit synthetic marker.
+
+    When a caller does not state the marker it is inferred conservatively from
+    the graph objects the event references.  A synthetic control can therefore
+    never be silently promoted to an evaluated principle.
+    """
+    marker = _infer_synthetic(graph, {"payload": payload}) if synthetic is None else bool(synthetic)
+    return graph.record_event(event_type, frozen(payload), actor=actor, synthetic=marker)
 
 
 def record_existence_grounding(
@@ -355,9 +367,23 @@ def record_representation(
     }, actor)
 
 
+def record_transformation_freeze(
+    graph: Any, freeze_token: str, *, transforms: Sequence[str],
+    actor: str = "epistemic_core",
+) -> Dict[str, Any]:
+    require(bool(freeze_token), "freeze token required")
+    require(bool(transforms), "frozen transformation set required")
+    unknown = set(transforms) - set(TRANSFORM_CLASSES)
+    require(not unknown, f"unknown transformation class {sorted(unknown)}")
+    return _record(graph, "transformation_frozen", {
+        "freeze_token": freeze_token, "transforms": list(transforms),
+    }, actor)
+
+
 def record_invariance_check(
     graph: Any, subject_id: str, *, transform_classes: Sequence[str],
-    frozen_sequence: int, outcome: str, actor: str = "epistemic_core",
+    frozen_sequence: int, outcome: str, freeze_token: str,
+    actor: str = "epistemic_core",
 ) -> Dict[str, Any]:
     require(outcome in TRANSFORM_OUTCOMES, "unknown invariance outcome")
     require(frozen_sequence <= len(graph.events()),
@@ -367,16 +393,49 @@ def record_invariance_check(
     return _record(graph, "invariance_check", {
         "subject_id": subject_id, "transform_classes": list(transform_classes),
         "frozen_sequence": frozen_sequence, "outcome": outcome,
+        "freeze_token": freeze_token,
     }, actor)
 
 
+def record_inference_isolation(
+    graph: Any, conflict_id: str, *, engine: str,
+    isolated: bool = True, actor: str = "epistemic_core",
+) -> Dict[str, Any]:
+    """Register the isolation contract that PR-11 checks on every propagation."""
+    require(bool(engine), "isolation engine must be identified")
+    return _record(graph, "inference_isolation", {
+        "conflict_id": conflict_id, "engine": engine, "isolated": bool(isolated),
+    }, actor)
+
+
+def record_ontology_approval(
+    graph: Any, approval_id: str, *, extension_id: str,
+    extension_version: int, approver: str, authorization: str,
+    subject_id: str, insufficiency_event: str,
+    checks: Sequence[str], decision: str = "approved",
+    actor: str = "epistemic_core",
+) -> Dict[str, Any]:
+    require(bool(approver) and approver not in ("unspecified", "epistemic_core"),
+            "approval needs an authorized decision subject")
+    require(set(EXTENSION_CHECKS) <= set(checks), "all extension checks required")
+    return _record(graph, "ontology_extension_approved", {
+        "approval_id": approval_id, "extension_id": extension_id,
+        "extension_version": extension_version, "approver": approver,
+        "authorization": authorization, "subject_id": subject_id,
+        "insufficiency_event": insufficiency_event,
+        "checks": list(checks), "decision": decision,
+    }, actor=approver, synthetic=False)
+
+
 def record_system_state(
-    graph: Any, kind: str, *, description: str, actor: str = "epistemic_core",
+    graph: Any, kind: str, *, description: str, artifact_ref: str,
+    actor: str = "epistemic_core",
 ) -> Dict[str, Any]:
     require(kind in SELF_APPLICATION_KINDS, f"unknown self-application kind {kind!r}")
+    require(bool(artifact_ref), "system state must bind to a code/build/run artifact")
     return _record(graph, "system_self_state", {
         "kind": kind, "description": description,
-        "not_interchangeable": True,
+        "artifact_ref": artifact_ref, "not_interchangeable": True,
     }, actor)
 
 
@@ -403,11 +462,13 @@ def record_trace_filters(
 
 
 def record_classification_change(
-    graph: Any, entity_id: str, *, claim_id: str, old_class: str, new_class: str,
-    actor: str = "epistemic_core",
+    graph: Any, entity_id: str, *, claim_id: str, claim_revision_event: str,
+    old_class: str, new_class: str, actor: str = "epistemic_core",
 ) -> Dict[str, Any]:
+    require(bool(claim_revision_event), "classification needs a linked claim revision")
     return _record(graph, "classification_changed", {
         "entity_id": entity_id, "claim_id": claim_id,
+        "claim_revision_event": claim_revision_event,
         "old_class": old_class, "new_class": new_class,
         "physical_identity_unchanged": True,
     }, actor)
@@ -482,8 +543,515 @@ def declare_ontology_insufficient(
         if status == "accepted":
             require(bool(proposed_extension.get("approval_event")),
                     "extension cannot self-accept")
+            require(bool(proposed_extension.get("extension_id")),
+                    "accepted extension needs a stable extension_id")
+            require(bool(proposed_extension.get("extension_version")),
+                    "accepted extension needs a version")
         payload["proposed_extension"] = frozen(proposed_extension)
     return _record(graph, "ontology_insufficient", payload, actor)
+
+
+# ---------------------------------------------------------------------------
+# Enforcement audit (2026-11-24)
+#
+# A recorder helper is a convenience, never the sole enforcement point.  Every
+# event is validated against the single registry below, including events that
+# bypassed a recorder and were injected straight into the graph.  No new node
+# classes and no new physical claims are introduced by this layer.
+# ---------------------------------------------------------------------------
+
+EVALUATION_NOT_EXERCISED = "not_exercised"
+EVALUATION_SYNTHETIC_CONTROL = "synthetic_control_passed"
+EVALUATION_STRUCTURAL = "structural_evaluation_passed"
+EVALUATION_EMPIRICAL_NOT_EVALUABLE = "empirical_application_not_evaluable"
+EVALUATION_STATES: Sequence[str] = (
+    EVALUATION_NOT_EXERCISED,
+    EVALUATION_SYNTHETIC_CONTROL,
+    EVALUATION_STRUCTURAL,
+    EVALUATION_EMPIRICAL_NOT_EVALUABLE,
+)
+
+PRINCIPLE_ID_BY_CHECK = {item["check"]: item["id"] for item in PRINCIPLES}
+
+REFERENCE_KEYS: Sequence[str] = (
+    "claim_id", "entity_id", "subject_id", "observation_id", "representation_id",
+    "conflict_id", "target", "from_concept", "to_concept", "experiment_id",
+    "intervention_id", "approval_id", "extension_id", "authorization",
+    "insufficiency_event", "freeze_token", "artifact_ref", "claim_revision_event",
+)
+
+
+def _nonempty(value: Any) -> bool:
+    if isinstance(value, str):
+        return bool(value.strip())
+    if isinstance(value, (list, tuple, dict, set)):
+        return bool(value)
+    return value is not None
+
+
+def _reference_ids(payload: Dict[str, Any]) -> List[str]:
+    ids: List[str] = []
+    for key in REFERENCE_KEYS:
+        value = payload.get(key)
+        if isinstance(value, str) and value:
+            ids.append(value)
+    for key in ("sources", "raw_data_refs"):
+        for value in payload.get(key) or ():
+            if isinstance(value, str) and value:
+                ids.append(value)
+    extension = payload.get("proposed_extension")
+    if isinstance(extension, dict) and isinstance(extension.get("approval_event"), str):
+        ids.append(extension["approval_event"])
+    return ids
+
+
+def _referenced_nodes(graph: Any, event: Dict[str, Any]) -> List[Dict[str, Any]]:
+    nodes: List[Dict[str, Any]] = []
+    for node_id in _reference_ids(event["payload"]):
+        node = graph.current(node_id)
+        if node is not None:
+            nodes.append(node)
+    return nodes
+
+
+def _event_state(graph: Any, event: Dict[str, Any]) -> str:
+    """Classify one event as synthetic control, structural or not evaluable."""
+    if event.get("synthetic") is True:
+        return EVALUATION_SYNTHETIC_CONTROL
+    nodes = _referenced_nodes(graph, event)
+    if nodes and all(bool(node["synthetic"]) for node in nodes):
+        return EVALUATION_SYNTHETIC_CONTROL
+    if any(not bool(node["synthetic"]) for node in nodes):
+        return EVALUATION_STRUCTURAL
+    return EVALUATION_EMPIRICAL_NOT_EVALUABLE
+
+
+def _infer_synthetic(graph: Any, event: Dict[str, Any]) -> bool:
+    """Conservative marker used when a recorder does not state syntheticness."""
+    return _event_state(graph, event) in (
+        EVALUATION_SYNTHETIC_CONTROL, EVALUATION_EMPIRICAL_NOT_EVALUABLE,
+    )
+
+
+# -- event contract validators ---------------------------------------------
+
+def _contract_existence_grounding(event: Dict[str, Any], graph: Any) -> List[str]:
+    payload = event["payload"]
+    bad: List[str] = []
+    claim = graph.current(payload.get("claim_id"))
+    if claim is None or claim["node_type"] not in ("Claim", "Hypothesis"):
+        bad.append(
+            f"{event['event_id']}: claim {payload.get('claim_id')!r} does not resolve "
+            "to a Claim/Hypothesis"
+        )
+    if payload.get("asserts_existence"):
+        if payload.get("grounding") != "evidence":
+            bad.append(
+                f"{event['event_id']}: existence asserted from "
+                f"{payload.get('grounding')!r}, not from evidence"
+            )
+        sources = payload.get("sources") or []
+        if not sources:
+            bad.append(f"{event['event_id']}: no evidence sources")
+        for source_id in sources:
+            node = graph.current(source_id)
+            if node is None or node["node_type"] not in ("Source", "Dataset"):
+                bad.append(
+                    f"{event['event_id']}: source {source_id!r} is not a Source/Dataset node"
+                )
+                continue
+            provenance = [
+                edge for edge in graph.edges()
+                if edge["to_id"] == source_id
+                and edge["edge_type"] in ("derived_from", "cites")
+            ]
+            if not provenance:
+                bad.append(
+                    f"{event['event_id']}: source {source_id!r} has no traceable path "
+                    "to a primary observation"
+                )
+    return bad
+
+
+def _contract_perspective(event: Dict[str, Any], graph: Any) -> List[str]:
+    payload = event["payload"]
+    bad: List[str] = []
+    perspectives = payload.get("perspectives") or []
+    if len(perspectives) < 2:
+        bad.append(f"{event['event_id']}: fewer than two admissible perspectives")
+    for item in perspectives:
+        if not isinstance(item, dict) or not _nonempty(item.get("conditions")):
+            bad.append(f"{event['event_id']}: perspective without recorded conditions")
+    if _nonempty(payload.get("preferred")):
+        reason = payload.get("preference_reason")
+        if not _nonempty(reason):
+            bad.append(f"{event['event_id']}: preferred perspective without a reason")
+        else:
+            condition_keys: set = set()
+            for item in perspectives:
+                if isinstance(item, dict) and isinstance(item.get("conditions"), dict):
+                    condition_keys.update(item["conditions"].keys())
+            tokens = set(re.findall(r"[A-Za-z_][A-Za-z0-9_]*", reason))
+            if not (tokens & condition_keys):
+                bad.append(
+                    f"{event['event_id']}: preference reason not grounded in recorded conditions"
+                )
+    return bad
+
+
+def _contract_observation(event: Dict[str, Any], graph: Any) -> List[str]:
+    payload = event["payload"]
+    bad: List[str] = []
+    if not _nonempty(payload.get("conditions")):
+        bad.append(f"{event['event_id']}: no observation conditions")
+    if payload.get("impact") not in ("none", "physical", "informational", "unknown"):
+        bad.append(f"{event['event_id']}: invalid observation impact")
+    if payload.get("impact") != "none" and not set(("before", "during", "after")) <= set(
+            payload.get("system_states") or ()):
+        bad.append(
+            f"{event['event_id']}: non-neutral observation lacks before/during/after"
+        )
+    return bad
+
+
+def _contract_representation(event: Dict[str, Any], graph: Any) -> List[str]:
+    payload = event["payload"]
+    bad: List[str] = []
+    if payload.get("relation") != "representation_non_identity":
+        bad.append(f"{event['event_id']}: representation non-identity not declared")
+    node = graph.current(payload.get("representation_id"))
+    if node is not None and node["node_type"] in ("Entity", "EntityState"):
+        bad.append(f"{event['event_id']}: representation typed as a physical entity")
+    return bad
+
+
+def _contract_transformation_freeze(event: Dict[str, Any], graph: Any) -> List[str]:
+    payload = event["payload"]
+    bad: List[str] = []
+    if not _nonempty(payload.get("freeze_token")):
+        bad.append(f"{event['event_id']}: freeze token missing")
+    if not _nonempty(payload.get("transforms")):
+        bad.append(f"{event['event_id']}: frozen transformation set is empty")
+    return bad
+
+
+def _contract_invariance(event: Dict[str, Any], graph: Any) -> List[str]:
+    payload = event["payload"]
+    bad: List[str] = []
+    if payload.get("outcome") not in TRANSFORM_OUTCOMES:
+        bad.append(f"{event['event_id']}: invalid invariance outcome")
+    sequence = payload.get("frozen_sequence")
+    if not isinstance(sequence, int) or sequence > event["sequence"]:
+        bad.append(f"{event['event_id']}: transformation set not frozen before test")
+    token = payload.get("freeze_token")
+    if not _nonempty(token):
+        bad.append(f"{event['event_id']}: no recorded frozen transformation set")
+    else:
+        freezes = [
+            prior for prior in graph.events()
+            if prior["event_type"] == "transformation_frozen"
+            and prior["payload"].get("freeze_token") == token
+            and prior["sequence"] <= event["sequence"]
+        ]
+        if not freezes:
+            bad.append(f"{event['event_id']}: freeze token {token!r} not on record")
+    return bad
+
+
+def _contract_absence_inference(event: Dict[str, Any], graph: Any) -> List[str]:
+    return [f"{event['event_id']}: {event['event_type']} converts unknown into false"]
+
+
+def _contract_self_state(event: Dict[str, Any], graph: Any) -> List[str]:
+    payload = event["payload"]
+    bad: List[str] = []
+    if payload.get("kind") not in SELF_APPLICATION_KINDS:
+        bad.append(f"{event['event_id']}: unknown self-application kind")
+    if not _nonempty(payload.get("description")):
+        bad.append(f"{event['event_id']}: system state has no description")
+    if not _nonempty(payload.get("artifact_ref")):
+        bad.append(f"{event['event_id']}: system state not bound to a code/build/run artifact")
+    return bad
+
+
+def _contract_green_test(event: Dict[str, Any], graph: Any) -> List[str]:
+    if event["payload"].get("physical_confirmation") is True:
+        return [f"{event['event_id']}: green test claims physical confirmation"]
+    return []
+
+
+def _contract_trace(event: Dict[str, Any], graph: Any) -> List[str]:
+    payload = event["payload"]
+    bad: List[str] = []
+    stages = set(payload.get("stages") or ())
+    missing = [stage for stage in TRACE_REQUIRED_STAGES if stage not in stages]
+    if missing:
+        bad.append(f"{event['event_id']}: missing trace stages {missing}")
+    if payload.get("absence_inferred_from_no_trace") is True:
+        bad.append(f"{event['event_id']}: no trace converted into no phenomenon")
+    return bad
+
+
+def _contract_classification(event: Dict[str, Any], graph: Any) -> List[str]:
+    payload = event["payload"]
+    bad: List[str] = []
+    entity = graph.current(payload.get("entity_id"))
+    if entity is None or entity["node_type"] not in ("Entity", "EntityState"):
+        bad.append(f"{event['event_id']}: entity {payload.get('entity_id')!r} does not resolve")
+    claim = graph.current(payload.get("claim_id"))
+    if claim is None or claim["node_type"] not in ("Claim", "Hypothesis"):
+        bad.append(f"{event['event_id']}: claim {payload.get('claim_id')!r} does not resolve")
+    if payload.get("physical_identity_unchanged") is not True:
+        bad.append(f"{event['event_id']}: physical identity changed with classification")
+    revision_id = payload.get("claim_revision_event")
+    revision = next(
+        (item for item in graph.events() if item["event_id"] == revision_id), None
+    )
+    if revision is None or revision["event_type"] != "claim_revised":
+        bad.append(f"{event['event_id']}: no linked claim revision event")
+    elif revision["payload"].get("claim_id") != payload.get("claim_id"):
+        bad.append(f"{event['event_id']}: linked revision belongs to another claim")
+    return bad
+
+
+def _contract_concept_evolution(event: Dict[str, Any], graph: Any) -> List[str]:
+    payload = event["payload"]
+    bad: List[str] = []
+    if payload.get("relation") not in CONCEPT_EVOLUTION_RELATIONS:
+        bad.append(f"{event['event_id']}: invalid concept evolution relation")
+    if "reality_changed" not in payload:
+        bad.append(f"{event['event_id']}: reality_changed not declared")
+    return bad
+
+
+def _contract_inference_isolation(event: Dict[str, Any], graph: Any) -> List[str]:
+    """Check the *registered* isolation contract (PR-11).
+
+    Honesty limit: the actual paraconsistent logical inference engine is
+    ``not_implemented``.  This validator proves that a propagation outside the
+    disputed set is rejected and that an isolation contract is on record; it
+    does not prove the behaviour of a real inference engine.
+    """
+    payload = event["payload"]
+    bad: List[str] = []
+    conflict = graph.current(payload.get("conflict_id"))
+    if conflict is None or conflict["node_type"] != "Conflict":
+        bad.append(f"{event['event_id']}: conflict does not resolve")
+    if not _nonempty(payload.get("engine")):
+        bad.append(f"{event['event_id']}: isolation engine not identified")
+    if payload.get("isolated") is not True:
+        bad.append(f"{event['event_id']}: conflict isolation not asserted")
+    return bad
+
+
+def _contract_conflict_propagation(event: Dict[str, Any], graph: Any) -> List[str]:
+    payload = event["payload"]
+    record = graph.current(payload.get("conflict_id"))
+    disputed = (record or {}).get("payload", {}).get("disputed_claims", [])
+    if payload.get("target") not in disputed:
+        return [f"{event['event_id']}: propagation to non-disputed claim"]
+    isolation = [
+        item for item in graph.events()
+        if item["event_type"] == "inference_isolation"
+        and item["payload"].get("conflict_id") == payload.get("conflict_id")
+    ]
+    if not isolation:
+        return [f"{event['event_id']}: no isolation contract for the conflict"]
+    return []
+
+
+def _contract_bitemporal(event: Dict[str, Any], graph: Any) -> List[str]:
+    payload = event["payload"]
+    bad: List[str] = []
+    valid = payload.get("valid_time")
+    transaction = payload.get("transaction_time")
+    if not _nonempty(valid) or not _nonempty(transaction):
+        bad.append(f"{event['event_id']}: incomplete bitemporal record")
+    elif valid == transaction:
+        bad.append(f"{event['event_id']}: knowledge date recorded as event date")
+    if payload.get("axes_are_distinct") is not True:
+        bad.append(f"{event['event_id']}: time axes collapsed")
+    return bad
+
+
+def _contract_computation(event: Dict[str, Any], graph: Any) -> List[str]:
+    payload = event["payload"]
+    bad: List[str] = []
+    missing = [name for name in COMPUTATIONAL_REQUIRED_FIELDS if name not in payload]
+    if missing:
+        bad.append(f"{event['event_id']}: missing {missing}")
+    for name in ("code_version", "environment", "algorithm_version"):
+        if not _nonempty(payload.get(name)):
+            bad.append(f"{event['event_id']}: empty {name}")
+    for name in ("dependencies", "input_checksums", "parameters", "solver_settings",
+                 "convergence", "discretization_error", "outputs"):
+        if name in payload and not isinstance(payload[name], dict):
+            bad.append(f"{event['event_id']}: {name} is not a mapping")
+    if payload.get("distinction") not in COMPUTATION_DISTINCTIONS:
+        bad.append(f"{event['event_id']}: computation/reality distinction missing")
+    if payload.get("replayable") is not True:
+        bad.append(f"{event['event_id']}: computational experiment is not replayable")
+    return bad
+
+
+def _contract_intervention(event: Dict[str, Any], graph: Any) -> List[str]:
+    payload = event["payload"]
+    value = payload.get("option_value")
+    if not isinstance(value, dict):
+        return [f"{event['event_id']}: option value is a single number"]
+    empty = [name for name in OPTION_VALUE_FIELDS if not _nonempty(value.get(name))]
+    if empty:
+        return [f"{event['event_id']}: empty option value fields {empty}"]
+    return []
+
+
+def _contract_extension_approval(event: Dict[str, Any], graph: Any) -> List[str]:
+    payload = event["payload"]
+    bad: List[str] = []
+    for field in ("approval_id", "extension_id", "approver", "authorization", "subject_id"):
+        if not _nonempty(payload.get(field)):
+            bad.append(f"{event['event_id']}: approval missing {field}")
+    if payload.get("approver") in ("unspecified", "epistemic_core"):
+        bad.append(f"{event['event_id']}: approver is not an authorized decision subject")
+    missing = [name for name in EXTENSION_CHECKS if name not in (payload.get("checks") or ())]
+    if missing:
+        bad.append(f"{event['event_id']}: extension checks incomplete {missing}")
+    if payload.get("decision") != "approved":
+        bad.append(f"{event['event_id']}: extension decision not approved")
+    decision = graph.current(payload.get("authorization"))
+    if decision is None or decision["node_type"] != "Decision":
+        bad.append(f"{event['event_id']}: authorization does not resolve to a Decision")
+    elif decision["payload"].get("approved_by") != payload.get("approver"):
+        bad.append(f"{event['event_id']}: authorization names another approver")
+    insufficiency = next(
+        (item for item in graph.events()
+         if item["event_id"] == payload.get("insufficiency_event")), None
+    )
+    if insufficiency is None or insufficiency["event_type"] != "ontology_insufficient":
+        bad.append(f"{event['event_id']}: approval is not linked to an insufficiency event")
+    return bad
+
+
+def _contract_insufficiency(event: Dict[str, Any], graph: Any) -> List[str]:
+    payload = event["payload"]
+    bad: List[str] = []
+    if payload.get("status") != ONTOLOGY_INSUFFICIENT:
+        bad.append(f"{event['event_id']}: insufficient state not declared")
+    if payload.get("reason") not in INSUFFICIENCY_REASONS:
+        bad.append(f"{event['event_id']}: unknown insufficiency reason")
+    if not _nonempty(payload.get("raw_data_refs")):
+        bad.append(f"{event['event_id']}: raw data not preserved")
+    if payload.get("forced_classification") is True:
+        bad.append(f"{event['event_id']}: phenomenon forcibly classified")
+    extension = payload.get("proposed_extension")
+    if isinstance(extension, dict):
+        if extension.get("status") not in PROPOSED_EXTENSION_STATUSES:
+            bad.append(f"{event['event_id']}: unknown extension status")
+        missing = [name for name in EXTENSION_CHECKS if name not in (extension.get("checks") or ())]
+        if missing:
+            bad.append(f"{event['event_id']}: extension checks incomplete {missing}")
+        if extension.get("status") == "accepted":
+            approval_id = extension.get("approval_event")
+            approval = next(
+                (item for item in graph.events() if item["event_id"] == approval_id), None
+            )
+            if approval is None or approval["event_type"] != "ontology_extension_approved":
+                bad.append(f"{event['event_id']}: approval does not resolve to a real event")
+            else:
+                values = approval["payload"]
+                if values.get("extension_id") != extension.get("extension_id"):
+                    bad.append(f"{event['event_id']}: approval refers to another extension")
+                if values.get("extension_version") != extension.get("extension_version"):
+                    bad.append(f"{event['event_id']}: approval refers to another version")
+                if values.get("insufficiency_event") != event["event_id"]:
+                    bad.append(f"{event['event_id']}: approval belongs to another insufficiency")
+                bad.extend(_contract_extension_approval(approval, graph))
+    return bad
+
+
+def _contract_ontology_registration(event: Dict[str, Any], graph: Any) -> List[str]:
+    """A graph-linked extension must carry a real approval, not a bare claim."""
+    payload = event["payload"]
+    if payload.get("extension_source") != "insufficiency":
+        return []  # base ontology registration, not a proposed extension
+    bad: List[str] = []
+    approval_id = payload.get("approval_event")
+    approval = next(
+        (item for item in graph.events() if item["event_id"] == approval_id), None
+    )
+    if approval is None or approval["event_type"] != "ontology_extension_approved":
+        bad.append(f"{event['event_id']}: extension registration has no real approval")
+    elif approval["payload"].get("extension_id") != payload.get("class_id"):
+        bad.append(f"{event['event_id']}: approval names another extension")
+    return bad
+
+
+EVENT_CONTRACT_VALIDATORS = {
+    "ontology_class_registered": _contract_ontology_registration,
+    "existence_grounding": _contract_existence_grounding,
+    "perspective_compared": _contract_perspective,
+    "observation_context": _contract_observation,
+    "representation_declared": _contract_representation,
+    "transformation_frozen": _contract_transformation_freeze,
+    "invariance_check": _contract_invariance,
+    "absence_inferred": _contract_absence_inference,
+    "unknown_became_false": _contract_absence_inference,
+    "system_self_state": _contract_self_state,
+    "green_test": _contract_green_test,
+    "trace_filters": _contract_trace,
+    "classification_changed": _contract_classification,
+    "concept_evolution": _contract_concept_evolution,
+    "conflict_propagation": _contract_conflict_propagation,
+    "inference_isolation": _contract_inference_isolation,
+    "bitemporal_recorded": _contract_bitemporal,
+    "computational_experiment": _contract_computation,
+    "intervention_evaluated": _contract_intervention,
+    "ontology_insufficient": _contract_insufficiency,
+    "ontology_extension_approved": _contract_extension_approval,
+}
+
+EVENT_TO_PRINCIPLE_CHECK = {
+    "ontology_class_registered": "pr15",
+    "existence_grounding": "pr01",
+    "perspective_compared": "pr02",
+    "observation_context": "pr03",
+    "representation_declared": "pr04",
+    "transformation_frozen": "pr05",
+    "invariance_check": "pr05",
+    "absence_inferred": "pr06",
+    "unknown_became_false": "pr06",
+    "system_self_state": "pr07",
+    "green_test": "pr07",
+    "trace_filters": "pr08",
+    "classification_changed": "pr09",
+    "concept_evolution": "pr10",
+    "conflict_propagation": "pr11",
+    "inference_isolation": "pr11",
+    "bitemporal_recorded": "pr12",
+    "computational_experiment": "pr13",
+    "intervention_evaluated": "pr14",
+    "ontology_insufficient": "pr15",
+    "ontology_extension_approved": "pr15",
+}
+
+PRINCIPLE_EVENT_TYPES = {
+    "pr01": ("existence_grounding",),
+    "pr02": ("perspective_compared",),
+    "pr03": ("observation_context",),
+    "pr04": ("representation_declared",),
+    "pr05": ("transformation_frozen", "invariance_check"),
+    "pr06": ("absence_inferred", "unknown_became_false"),
+    "pr07": ("system_self_state", "green_test"),
+    "pr08": ("trace_filters",),
+    "pr09": ("classification_changed",),
+    "pr10": ("concept_evolution",),
+    "pr11": ("conflict_propagation", "inference_isolation"),
+    "pr12": ("bitemporal_recorded",),
+    "pr13": ("computational_experiment",),
+    "pr14": ("intervention_evaluated",),
+    "pr15": ("ontology_insufficient", "ontology_extension_approved",
+             "ontology_class_registered"),
+}
 
 
 # ---------------------------------------------------------------------------
@@ -500,8 +1068,11 @@ def _ev(index: int, principle: Dict[str, str], status: str, details: Sequence[st
         "status": status,
         "passed": status in ("evaluated", "vacuous"),
         "details": list(details),
+        # Four distinct states replace the old binary evaluated/vacuous claim.
+        "evaluation_status": EVALUATION_NOT_EXERCISED,
         # A structural pass is never physical confirmation.
         "evidentiary_status": "not_evaluable",
+        "empirical_status": EVALUATION_EMPIRICAL_NOT_EVALUABLE,
         "rule_version": EPISTEMIC_PRINCIPLES_VERSION,
     }
 
@@ -651,6 +1222,8 @@ def check_principles(graph: Any) -> List[Dict[str, Any]]:
            if c["payload"].get("status") in ("open", "under_review")
            and c["payload"].get("explodes_graph") is True]
     for event in events:
+        if event["event_type"] in ("conflict_explosion", "explodes_graph"):
+            bad.append(f"{event['event_id']}: conflict explosion event is forbidden")
         if event["event_type"] != "conflict_propagation":
             continue
         conflict_id = event["payload"].get("conflict_id")
@@ -670,6 +1243,12 @@ def check_principles(graph: Any) -> List[Dict[str, Any]]:
             bad.append(f"{event['event_id']}: incomplete bitemporal record")
         if payload.get("axes_are_distinct") is not True:
             bad.append(f"{event['event_id']}: time axes collapsed")
+    for claim in [n for n in graph.nodes() if n["node_type"] in ("Claim", "Hypothesis")]:
+        payload = claim["payload"]
+        if "valid_time" in payload and "transaction_time" not in payload:
+            bad.append(f"{claim['node_id']}: valid_time without transaction_time")
+        elif "valid_time" in payload and payload.get("valid_time") == payload.get("transaction_time"):
+            bad.append(f"{claim['node_id']}: knowledge date recorded as event date")
     add("pr12", "evaluated" if bitemporal else "vacuous", bad)
 
     # PR-13 -----------------------------------------------------------------
@@ -714,11 +1293,53 @@ def check_principles(graph: Any) -> List[Dict[str, Any]]:
             bad.append(f"{event['event_id']}: extension self-accepted")
     add("pr15", "evaluated" if insufficiencies else "vacuous", bad)
 
+    # Enforcement audit: the contract registry is authoritative for EVERY
+    # event, including events injected directly through record_event().  A
+    # violation found here overrides the recorder-level verdict above.
+    by_id = {item["id"]: item for item in results}
+    for event in events:
+        validator = EVENT_CONTRACT_VALIDATORS.get(event["event_type"])
+        check_name = EVENT_TO_PRINCIPLE_CHECK.get(event["event_type"])
+        if validator is None or check_name is None:
+            continue
+        messages = validator(event, graph)
+        if not messages:
+            continue
+        target = by_id[PRINCIPLE_ID_BY_CHECK[check_name]]
+        target["details"].extend(messages)
+        target["passed"] = False
+        target["status"] = "failed"
+
+    # Replace the old binary evaluated/vacuous claim with four honest states.
+    for principle in PRINCIPLES:
+        target = by_id[principle["id"]]
+        related = [
+            event for event in events
+            if event["event_type"] in PRINCIPLE_EVENT_TYPES[principle["check"]]
+        ]
+        if not related:
+            state = EVALUATION_NOT_EXERCISED
+        else:
+            states = {_event_state(graph, event) for event in related}
+            if EVALUATION_STRUCTURAL in states:
+                state = EVALUATION_STRUCTURAL
+            elif states == {EVALUATION_SYNTHETIC_CONTROL}:
+                state = EVALUATION_SYNTHETIC_CONTROL
+            else:
+                state = EVALUATION_EMPIRICAL_NOT_EVALUABLE
+        target["evaluation_status"] = state
+
     return results
 
 
 def assert_principles(graph: Any, *, require_evaluated: bool = False) -> bool:
-    """Assert no violation.  require_evaluated prevents vacuous greenwashing."""
+    """Assert no violation.  require_evaluated prevents vacuous greenwashing.
+
+    ``require_evaluated`` now means: every principle was exercised through a
+    non-synthetic graph artefact (``structural_evaluation_passed``).  It never
+    asserts an empirical application; empirical confirmation remains permanently
+    ``not_evaluable`` in the honest-zero state.
+    """
     results = check_principles(graph)
     violations = [item for item in results if not item["passed"]]
     if violations:
@@ -727,10 +1348,13 @@ def assert_principles(graph: Any, *, require_evaluated: bool = False) -> bool:
         )
         raise EpistemicContractError(f"principles violated: {detail}")
     if require_evaluated:
-        vacuous = [item["id"] for item in results if item["status"] == "vacuous"]
-        if vacuous:
+        unevaluated = [
+            item["id"] for item in results
+            if item["evaluation_status"] != EVALUATION_STRUCTURAL
+        ]
+        if unevaluated:
             raise EpistemicContractError(
-                f"principles not evaluated on real cases: {', '.join(vacuous)}"
+                f"principles not evaluated on real cases: {', '.join(unevaluated)}"
             )
     return True
 
@@ -756,6 +1380,15 @@ def principles_manifest() -> Dict[str, Any]:
         "ontology_insufficient_state": ONTOLOGY_INSUFFICIENT,
         "principles": list(PRINCIPLES),
         "machine_checkable_consequence_count": len(PRINCIPLES),
+        "evaluation_states": list(EVALUATION_STATES),
+        "event_contract_count": len(EVENT_CONTRACT_VALIDATORS),
+        "enforcement_policy":
+            "every event is validated against one registry, including direct injection",
+        "inference_engine_status": "not_implemented",
+        "not_implemented": [
+            "actual paraconsistent logical inference engine "
+            "(PR-11 checks the registered isolation contract only)",
+        ],
         "evidentiary_status": "not_evaluable",
         "cross_cases": {
             "A_RICHAT": "not_evaluable_no_primary_sources",
@@ -790,6 +1423,13 @@ def assert_principle_manifest_honesty() -> bool:
             "real cross-cases must not be presented as evaluated")
     require(manifest["evidentiary_status"] == "not_evaluable",
             "structural checks must not claim evidentiary force")
+    require(len(manifest["evaluation_states"]) == 4,
+            "four distinct evaluation states are required")
+    require(manifest["event_contract_count"] >= 15,
+            "event contract registry must cover the principle events")
+    require(manifest["inference_engine_status"] == "not_implemented",
+            "the actual paraconsistent inference engine is not implemented; "
+            "PR-11 only checks the registered isolation contract")
     require(all(manifest["guards"].values()), "a principle guard is disabled")
     return True
 

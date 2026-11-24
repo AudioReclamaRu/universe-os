@@ -79,6 +79,26 @@ class MetaArchitectureTests(unittest.TestCase):
         with self.assertRaises(EpistemicContractError):
             ep.assert_principles(graph, require_evaluated=True)
 
+    def test_paraconsistent_inference_engine_remains_not_implemented(self):
+        manifest = ep.principles_manifest()
+        self.assertEqual(manifest["inference_engine_status"], "not_implemented")
+        self.assertTrue(any("paraconsistent" in item for item in manifest["not_implemented"]))
+        self.assertTrue(ep.assert_principle_manifest_honesty())
+
+    def test_four_evaluation_states_stay_distinct(self):
+        graph = primary_graph()
+        first = ep.check_principles(graph)[0]
+        self.assertEqual(first["evaluation_status"], "not_exercised")
+        ep.record_existence_grounding(
+            graph, "C1", grounding="evidence", sources=["S1"], asserts_existence=True)
+        pr01 = next(r for r in ep.check_principles(graph) if r["id"] == "PR-01")
+        self.assertEqual(pr01["evaluation_status"], "synthetic_control_passed")
+        self.assertEqual(pr01["evidentiary_status"], "not_evaluable")
+        self.assertEqual(pr01["empirical_status"], "empirical_application_not_evaluable")
+        self.assertEqual(len(ep.principles_manifest()["evaluation_states"]), 4)
+        with self.assertRaises(EpistemicContractError):
+            ep.assert_principles(graph, require_evaluated=True)
+
 
 class PrincipleConsequenceTests(unittest.TestCase):
     def setUp(self):
@@ -93,6 +113,14 @@ class PrincipleConsequenceTests(unittest.TestCase):
         failed = by_id(self.graph, "PR-01")
         self.assertFalse(failed["passed"])
         self.assertTrue(any("graph_record" in d or "C2" in d for d in failed["details"]))
+        # Direct injection bypassing the recorder must still be caught.
+        self.graph.record_event("existence_grounding", {
+            "claim_id": "C1", "grounding": "evidence",
+            "sources": ["DOES_NOT_EXIST"], "asserts_existence": True,
+        })
+        injected = by_id(self.graph, "PR-01")
+        self.assertFalse(injected["passed"])
+        self.assertTrue(any("DOES_NOT_EXIST" in d for d in injected["details"]))
 
     def test_pr02_no_unearned_perspective_privilege(self):
         ep.record_perspective_comparison(self.graph, "E1", perspectives=[
@@ -118,6 +146,12 @@ class PrincipleConsequenceTests(unittest.TestCase):
             self.graph, "OBS1", conditions={"instrument": "synth"},
             impact="physical", system_states=["before", "during", "after"])
         self.assertTrue(by_id(self.graph, "PR-03")["passed"])
+        # A raw event with an incomplete state triple must be rejected too.
+        self.graph.record_event("observation_context", {
+            "observation_id": "OBS2", "conditions": {"instrument": "synth"},
+            "impact": "physical", "system_states": ["before"],
+        })
+        self.assertFalse(by_id(self.graph, "PR-03")["passed"])
 
     def test_pr04_representation_is_not_the_entity(self):
         self.graph.add_node("REP_1", "Model", {"label": "digital twin"}, synthetic=True)
@@ -128,14 +162,22 @@ class PrincipleConsequenceTests(unittest.TestCase):
         self.assertFalse(by_id(self.graph, "PR-04")["passed"])
 
     def test_pr05_transformation_set_frozen_before_test(self):
+        ep.record_transformation_freeze(
+            self.graph, "FREEZE_1", transforms=["invariant", "covariant"])
         ep.record_invariance_check(
             self.graph, "C1", transform_classes=["invariant", "covariant"],
-            frozen_sequence=0, outcome="invariance_detected")
+            frozen_sequence=1, outcome="invariance_detected", freeze_token="FREEZE_1")
         self.assertTrue(by_id(self.graph, "PR-05")["passed"])
         with self.assertRaises(EpistemicContractError):
             ep.record_invariance_check(
                 self.graph, "C1", transform_classes=["nonsense"],
-                frozen_sequence=0, outcome="invariance_detected")
+                frozen_sequence=0, outcome="invariance_detected", freeze_token="FREEZE_1")
+        # A sequence number alone is not a frozen set: the token must exist.
+        self.graph.record_event("invariance_check", {
+            "subject_id": "C1", "frozen_sequence": 0,
+            "outcome": "invariance_detected", "freeze_token": "NEVER_RECORDED",
+        })
+        self.assertFalse(by_id(self.graph, "PR-05")["passed"])
 
     def test_pr06_unknown_never_becomes_false(self):
         self.graph.record_event("absence_inferred", {"subject": "S1"})
@@ -145,8 +187,14 @@ class PrincipleConsequenceTests(unittest.TestCase):
 
     def test_pr07_green_test_is_not_physical_confirmation(self):
         for kind in ep.SELF_APPLICATION_KINDS:
-            ep.record_system_state(self.graph, kind, description="synthetic")
+            ep.record_system_state(
+                self.graph, kind, description="synthetic",
+                artifact_ref=f"ce5c38b::{kind}")
         self.assertTrue(by_id(self.graph, "PR-07")["passed"])
+        self.graph.record_event("system_self_state", {
+            "kind": "system_limitation", "description": "unbound state",
+        })
+        self.assertFalse(by_id(self.graph, "PR-07")["passed"])
         ep.record_green_test(self.graph, "T1", physical_confirmation=True)
         self.assertFalse(by_id(self.graph, "PR-07")["passed"])
 
@@ -159,12 +207,21 @@ class PrincipleConsequenceTests(unittest.TestCase):
         self.assertFalse(by_id(self.graph, "PR-08")["passed"])
 
     def test_pr09_classification_change_keeps_identity(self):
+        self.graph.add_node(
+            "ENT1", "Entity", {"label": "synthetic physical object"}, synthetic=True)
         ec.supersede_claim(self.graph, "C1", statement="reclassified synthetic claim")
+        revision_id = self.graph.events("claim_revised")[-1]["event_id"]
         ep.record_classification_change(
-            self.graph, "E1", claim_id="C1", old_class="X", new_class="Y")
+            self.graph, "ENT1", claim_id="C1", claim_revision_event=revision_id,
+            old_class="X", new_class="Y")
         self.assertTrue(by_id(self.graph, "PR-09")["passed"])
-        ep.record_classification_change(
-            self.graph, "E1", claim_id="UNREVISED", old_class="Y", new_class="Z")
+        # Classification without a revision belonging to this claim is rejected,
+        # including when injected directly into the graph.
+        self.graph.record_event("classification_changed", {
+            "entity_id": "ENT1", "claim_id": "C1",
+            "claim_revision_event": "V000001", "new_class": "Z",
+            "physical_identity_unchanged": True,
+        })
         self.assertFalse(by_id(self.graph, "PR-09")["passed"])
 
     def test_pr10_concept_evolution_is_not_reality_evolution(self):
@@ -185,9 +242,18 @@ class PrincipleConsequenceTests(unittest.TestCase):
             self.graph, "K1", ["C1", "C2"], divergence_type="interpretation",
             comparability={}, synthetic=True,
         )
+        ep.record_inference_isolation(
+            self.graph, "K1", engine="synthetic_paraconsistent_engine_v1")
         self.assertTrue(by_id(self.graph, "PR-11")["passed"])
         self.graph.record_event("conflict_propagation",
                                 {"conflict_id": "K1", "target": "INDEPENDENT_CLAIM"})
+        self.assertFalse(by_id(self.graph, "PR-11")["passed"])
+        self.graph.record_event("conflict_propagation",
+                                {"conflict_id": "K1", "target": "C1"})
+        # A registered propagation still needs the isolation contract.
+        self.graph.record_event("inference_isolation", {
+            "conflict_id": "K1", "engine": "", "isolated": True,
+        })
         self.assertFalse(by_id(self.graph, "PR-11")["passed"])
 
     def test_pr12_valid_time_and_transaction_time_are_distinct(self):
@@ -214,6 +280,18 @@ class PrincipleConsequenceTests(unittest.TestCase):
         with self.assertRaises(EpistemicContractError):
             ep.record_computational_experiment(
                 self.graph, "EXP2", distinction="real_object", code_version="1")
+        # Every key can be present while replayability is explicitly false.
+        payload = {
+            "experiment_id": "EXP_BAD", "distinction": "synthetic",
+            "code_version": "1", "environment": "python", "dependencies": {},
+            "input_checksums": {}, "parameters": {}, "algorithm_version": "v1",
+            "solver_settings": {}, "convergence": {}, "discretization_error": {},
+            "outputs": {}, "replayable": False,
+        }
+        self.graph.record_event("computational_experiment", payload)
+        failed = by_id(self.graph, "PR-13")
+        self.assertFalse(failed["passed"])
+        self.assertTrue(any("replayable" in d for d in failed["details"]))
 
     def test_pr14_future_option_value_is_not_one_number(self):
         ep.record_intervention(self.graph, "I1", option_value={
@@ -225,6 +303,14 @@ class PrincipleConsequenceTests(unittest.TestCase):
         self.assertTrue(by_id(self.graph, "PR-14")["passed"])
         with self.assertRaises(EpistemicContractError):
             ep.record_intervention(self.graph, "I2", option_value=0.7)
+        # Keys present with empty content are still not a structural option value.
+        self.graph.record_event("intervention_evaluated", {
+            "intervention_id": "I_BAD",
+            "option_value": {field: "" for field in ep.OPTION_VALUE_FIELDS},
+        })
+        failed = by_id(self.graph, "PR-14")
+        self.assertFalse(failed["passed"])
+        self.assertTrue(any("empty" in d for d in failed["details"]))
 
     def test_pr15_system_can_declare_ontology_insufficient(self):
         ep.declare_ontology_insufficient(
@@ -241,6 +327,41 @@ class PrincipleConsequenceTests(unittest.TestCase):
         failed = by_id(self.graph, "PR-15")
         self.assertFalse(failed["passed"])
         self.assertTrue(any("forced" in d or "raw data" in d for d in failed["details"]))
+
+        # A genuine approval is a real, authorised, linked event with all four checks.
+        self.graph.add_node("DEC1", "Decision", {
+            "approved_by": "owner", "scope": "NEW_CLASS",
+        }, synthetic=True)
+        offset = len(self.graph.events())
+        insufficiency_id = f"V{offset + 1:06d}"
+        approval_id = f"V{offset + 2:06d}"
+        ep.declare_ontology_insufficient(
+            self.graph, "PHENOMENON_3", reason="relation_not_describable",
+            raw_data_refs=["S1"], proposed_extension={
+                "extension_id": "NEW_CLASS", "extension_version": 1,
+                "checks": list(ep.EXTENSION_CHECKS), "status": "accepted",
+                "approval_event": approval_id,
+            },
+        )
+        approval = ep.record_ontology_approval(
+            self.graph, "AP1", extension_id="NEW_CLASS", extension_version=1,
+            approver="owner", authorization="DEC1", subject_id="PHENOMENON_3",
+            insufficiency_event=insufficiency_id, checks=list(ep.EXTENSION_CHECKS),
+        )
+        self.assertEqual(approval["event_id"], approval_id)
+
+        # A fabricated approval string, even with a full check list, is rejected.
+        ep.declare_ontology_insufficient(
+            self.graph, "PHENOMENON_4", reason="missing_required_dimension",
+            raw_data_refs=["S1"], proposed_extension={
+                "extension_id": "FAKE_CLASS", "extension_version": 1,
+                "checks": list(ep.EXTENSION_CHECKS), "status": "accepted",
+                "approval_event": "V999999",
+            },
+        )
+        forged = by_id(self.graph, "PR-15")
+        self.assertFalse(forged["passed"])
+        self.assertTrue(any("approval" in d for d in forged["details"]))
 
     def test_assert_principles_reports_violations(self):
         ep.record_green_test(self.graph, "T1", physical_confirmation=True)
