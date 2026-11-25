@@ -1,12 +1,20 @@
 import copy
 import hashlib
+import io
+import json
 import sys
+from contextlib import redirect_stderr
 import tempfile
 import unittest
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "tools" / "giza_spatial"))
-from validate_vibration_manifest import validate_manifest_payload
+from validate_vibration_manifest import (
+    DEFAULT_SCHEMA_PATH,
+    main,
+    validate_json_schema_payload,
+    validate_manifest_payload,
+)
 
 
 def make_manifest(raw_hash: str) -> dict:
@@ -176,6 +184,43 @@ class VibrationManifestTests(unittest.TestCase):
             (raw_dir / "station01.mseed").write_bytes(raw_bytes)
             errors, _ = validate_manifest_payload(payload, root=root, verify_files=True)
         self.assertTrue(any("size_bytes mismatch" in error for error in errors))
+
+
+    def test_draft_2020_12_schema_accepts_empty_template(self):
+        template_path = (
+            Path(__file__).resolve().parents[2]
+            / "examples"
+            / "giza_spatial"
+            / "ambient_vibration_manifest.template.json"
+        )
+        payload = json.loads(template_path.read_text(encoding="utf-8"))
+        self.assertEqual(validate_json_schema_payload(payload, DEFAULT_SCHEMA_PATH), [])
+
+    def test_draft_2020_12_schema_accepts_synthetic_three_component_manifest(self):
+        payload = make_manifest("a" * 64)
+        self.assertEqual(validate_json_schema_payload(payload, DEFAULT_SCHEMA_PATH), [])
+
+    def test_schema_format_checker_rejects_invalid_datetime(self):
+        payload = make_manifest("a" * 64)
+        payload["datasets"][0]["acquisition"]["start_time"] = "2026-02-30T00:00:00Z"
+        errors = validate_json_schema_payload(payload, DEFAULT_SCHEMA_PATH)
+        self.assertTrue(any("start_time" in error for error in errors))
+
+    def test_cli_enforces_schema_unknown_property_rule(self):
+        payload = {
+            "schema_version": "1.0",
+            "project": {"id": "CLI-TEST", "title": "Schema CLI test"},
+            "datasets": [],
+            "unexpected": "not allowed by the schema"
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            manifest_path = Path(tmp) / "manifest.json"
+            manifest_path.write_text(json.dumps(payload), encoding="utf-8")
+            stderr = io.StringIO()
+            with redirect_stderr(stderr):
+                exit_code = main(["--manifest", str(manifest_path)])
+        self.assertEqual(exit_code, 2)
+        self.assertIn("JSON Schema $", stderr.getvalue())
 
 
 if __name__ == "__main__":
