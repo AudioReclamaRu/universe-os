@@ -1,0 +1,415 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/AudioReclamaRu/universe-os/blob/research/universe-3-semantic-atlas-001/schemas/giza_cli_benchmark_report.schema.json",
+  "title": "GIZA PRIME CLI benchmark report",
+  "description": "Machine-readable report for the synthetic GIZA vibration-manifest CLI benchmark.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "benchmark_format",
+    "started_at_utc",
+    "benchmark_wall_seconds",
+    "runtime",
+    "memory_measurement",
+    "artifacts",
+    "configuration",
+    "integrity",
+    "summary",
+    "measurements",
+    "limitations"
+  ],
+  "properties": {
+    "benchmark_format": {
+      "const": "giza-prime-cli-benchmark-1.0"
+    },
+    "started_at_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "benchmark_wall_seconds": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "runtime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "os",
+        "platform",
+        "python",
+        "numpy",
+        "jsonschema",
+        "psutil",
+        "revision"
+      ],
+      "properties": {
+        "os": {
+          "type": "string",
+          "minLength": 1
+        },
+        "platform": {
+          "type": "string",
+          "minLength": 1
+        },
+        "python": {
+          "type": "string",
+          "minLength": 1
+        },
+        "numpy": {
+          "type": "string",
+          "minLength": 1
+        },
+        "jsonschema": {
+          "type": "string",
+          "minLength": 1
+        },
+        "psutil": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "memory_measurement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "metric",
+        "source",
+        "sampling_interval_ms",
+        "peak_definition",
+        "shared_memory_note"
+      ],
+      "properties": {
+        "metric": {
+          "const": "RSS bytes"
+        },
+        "source": {
+          "const": "psutil.Process.memory_info().rss"
+        },
+        "sampling_interval_ms": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "peak_definition": {
+          "type": "string",
+          "minLength": 1
+        },
+        "shared_memory_note": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "validator_sha256",
+        "schema_sha256",
+        "report_schema_sha256",
+        "requirements_file"
+      ],
+      "properties": {
+        "validator_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "schema_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "report_schema_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "requirements_file": {
+          "const": "requirements-giza-signal.txt"
+        }
+      }
+    },
+    "configuration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "datasets",
+        "manifest_bytes",
+        "manifest_sha256",
+        "file_size_bytes_per_dataset",
+        "raw_files_count",
+        "raw_total_bytes",
+        "raw_sha256_unique",
+        "verify_files",
+        "concurrency",
+        "warmup_batches",
+        "measured_batches",
+        "timeout_seconds_per_process",
+        "memory_sample_interval_ms",
+        "hash_seed_cycle"
+      ],
+      "properties": {
+        "datasets": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "manifest_bytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "manifest_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "file_size_bytes_per_dataset": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1073741824
+        },
+        "raw_files_count": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "raw_total_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1073741824
+        },
+        "raw_sha256_unique": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/sha256"
+          }
+        },
+        "verify_files": {
+          "type": "boolean"
+        },
+        "concurrency": {
+          "type": "integer",
+          "enum": [
+            1,
+            2,
+            4,
+            8
+          ]
+        },
+        "warmup_batches": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10
+        },
+        "measured_batches": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        },
+        "timeout_seconds_per_process": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3600
+        },
+        "memory_sample_interval_ms": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "hash_seed_cycle": {
+          "type": "array",
+          "minItems": 8,
+          "maxItems": 8,
+          "items": {
+            "type": "string",
+            "pattern": "^[0-9]+$"
+          }
+        }
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "manifest_unchanged",
+        "raw_inputs_unchanged",
+        "cli_outputs_identical_across_processes_and_iterations"
+      ],
+      "properties": {
+        "manifest_unchanged": {
+          "const": true
+        },
+        "raw_inputs_unchanged": {
+          "const": true
+        },
+        "cli_outputs_identical_across_processes_and_iterations": {
+          "const": true
+        }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "process_runs",
+        "process_elapsed_seconds_min",
+        "process_elapsed_seconds_median",
+        "process_elapsed_seconds_max",
+        "batch_wall_seconds_min",
+        "batch_wall_seconds_median",
+        "batch_wall_seconds_max",
+        "max_per_process_rss_sampled_bytes",
+        "rss_samples_total",
+        "validated_stdout_sha256",
+        "validated_stderr_sha256"
+      ],
+      "properties": {
+        "process_runs": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "process_elapsed_seconds_min": {
+          "type": "number",
+          "minimum": 0
+        },
+        "process_elapsed_seconds_median": {
+          "type": "number",
+          "minimum": 0
+        },
+        "process_elapsed_seconds_max": {
+          "type": "number",
+          "minimum": 0
+        },
+        "batch_wall_seconds_min": {
+          "type": "number",
+          "minimum": 0
+        },
+        "batch_wall_seconds_median": {
+          "type": "number",
+          "minimum": 0
+        },
+        "batch_wall_seconds_max": {
+          "type": "number",
+          "minimum": 0
+        },
+        "max_per_process_rss_sampled_bytes": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "rss_samples_total": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "validated_stdout_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "validated_stderr_sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "measurements": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 100,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "iteration",
+          "batch_wall_seconds",
+          "outputs_identical",
+          "processes"
+        ],
+        "properties": {
+          "iteration": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "batch_wall_seconds": {
+            "type": "number",
+            "minimum": 0
+          },
+          "outputs_identical": {
+            "const": true
+          },
+          "processes": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 8,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "hash_seed",
+                "elapsed_seconds",
+                "return_code",
+                "stdout_sha256",
+                "stderr_sha256",
+                "rss_peak_sampled_bytes",
+                "rss_first_sample_bytes",
+                "rss_sample_count"
+              ],
+              "properties": {
+                "hash_seed": {
+                  "type": "string",
+                  "pattern": "^[0-9]+$"
+                },
+                "elapsed_seconds": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "return_code": {
+                  "const": 0
+                },
+                "stdout_sha256": {
+                  "$ref": "#/$defs/sha256"
+                },
+                "stderr_sha256": {
+                  "$ref": "#/$defs/sha256"
+                },
+                "rss_peak_sampled_bytes": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "minimum": 0
+                },
+                "rss_first_sample_bytes": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "minimum": 0
+                },
+                "rss_sample_count": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "minItems": 5,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}
