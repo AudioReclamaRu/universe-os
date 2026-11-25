@@ -242,6 +242,8 @@ def _validate_results(
 
 
 def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
+    benchmark_started_at = datetime.now(timezone.utc).isoformat()
+    benchmark_started = time.perf_counter()
     if args.datasets < 1 or args.datasets > 10_000:
         raise ValueError("--datasets must be between 1 and 10000")
     if args.file_size_bytes < 0 or args.file_size_bytes > 1024 * 1024 * 1024:
@@ -326,7 +328,8 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
         total_raw_bytes = sum(sizes)
         report = {
             "benchmark_format": "giza-prime-cli-benchmark-1.0",
-            "started_at_utc": datetime.now(timezone.utc).isoformat(),
+            "started_at_utc": benchmark_started_at,
+            "benchmark_wall_seconds": time.perf_counter() - benchmark_started,
             "runtime": {
                 "os": platform.system(),
                 "platform": platform.platform(),
