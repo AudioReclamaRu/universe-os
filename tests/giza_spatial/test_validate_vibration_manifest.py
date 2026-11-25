@@ -421,6 +421,49 @@ class VibrationManifestTests(unittest.TestCase):
         self.assertEqual(errors, [])
         self.assertEqual(len(warnings), 4)
 
+    def test_strict_json_rejects_float_overflow_and_underflow(self):
+        numbers = {
+            "overflow": ("1e999", "exceeds supported finite range"),
+            "underflow": ("1e-999", "underflows supported numeric precision"),
+        }
+        for name, (number, expected_message) in numbers.items():
+            with self.subTest(name=name), tempfile.TemporaryDirectory() as tmp:
+                manifest_path = Path(tmp) / "manifest.json"
+                raw = (
+                    '{"schema_version":"1.0","project":{"id":"STRICT","title":"Strict"},'
+                    '"datasets":[],"extra":' + number + '}'
+                )
+                manifest_path.write_text(raw, encoding="utf-8")
+                stderr = io.StringIO()
+                with redirect_stderr(stderr):
+                    exit_code = main(["--manifest", str(manifest_path)])
+                self.assertEqual(exit_code, 2)
+                self.assertIn(expected_message, stderr.getvalue())
+
+    def test_cli_rejects_oversized_integer_coordinate_without_crashing(self):
+        payload = make_manifest("a" * 64)
+        payload["datasets"][0]["station"]["location"]["x"] = 10 ** 1000
+        with tempfile.TemporaryDirectory() as tmp:
+            manifest_path = Path(tmp) / "manifest.json"
+            manifest_path.write_text(json.dumps(payload), encoding="utf-8")
+            stderr = io.StringIO()
+            with redirect_stderr(stderr):
+                exit_code = main(["--manifest", str(manifest_path)])
+        self.assertEqual(exit_code, 2)
+        self.assertIn("station.location.x must be finite", stderr.getvalue())
+
+    def test_cli_reports_oversized_sample_count_without_overflow(self):
+        payload = make_manifest("a" * 64)
+        payload["datasets"][0]["acquisition"]["sample_count"] = 10 ** 1000
+        with tempfile.TemporaryDirectory() as tmp:
+            manifest_path = Path(tmp) / "manifest.json"
+            manifest_path.write_text(json.dumps(payload), encoding="utf-8")
+            stderr = io.StringIO()
+            with redirect_stderr(stderr):
+                exit_code = main(["--manifest", str(manifest_path)])
+        self.assertEqual(exit_code, 2)
+        self.assertIn("sample_count exceeds the supported duration calculation range", stderr.getvalue())
+
     def test_cli_rejects_nonstandard_numeric_constants(self):
         for constant in ("NaN", "Infinity", "-Infinity"):
             with self.subTest(constant=constant), tempfile.TemporaryDirectory() as tmp:
