@@ -176,7 +176,8 @@ def validate_manifest_payload(
         nominal_duration = acquisition.get("nominal_duration_s")
         if nominal_duration is not None and (not _is_number(nominal_duration) or float(nominal_duration) <= 0):
             errors.append(f"{prefix}: nominal_duration_s must be positive when supplied")
-        if start is not None and end is not None and _is_number(sample_rate) and isinstance(sample_count, int) and sample_count > 0:
+        if (start is not None and end is not None and _is_number(sample_rate)
+                and float(sample_rate) > 0 and isinstance(sample_count, int) and sample_count > 0):
             elapsed = (end - start).total_seconds()
             expected = sample_count / float(sample_rate)
             tolerance = max(2.0 / float(sample_rate), 0.005 * expected)
