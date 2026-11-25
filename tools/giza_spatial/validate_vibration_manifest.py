@@ -53,6 +53,28 @@ ALLOWED_QUALITY_VALUES = {
 DATASET_ID_RE = re.compile(r"^[A-Z0-9][A-Z0-9._:-]*$")
 
 
+def _reject_nonstandard_json_constant(token: str) -> None:
+    raise ValueError(f"non-standard JSON numeric constant is not allowed: {token}")
+
+
+def _reject_duplicate_json_keys(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    result: dict[str, Any] = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError(f"duplicate JSON object key is not allowed: {key!r}")
+        result[key] = value
+    return result
+
+
+def _strict_json_loads(raw: str) -> Any:
+    """Parse standard JSON while rejecting duplicate keys and NaN/Infinity."""
+    return json.loads(
+        raw,
+        object_pairs_hook=_reject_duplicate_json_keys,
+        parse_constant=_reject_nonstandard_json_constant,
+    )
+
+
 def _is_number(value: Any) -> bool:
     return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(float(value))
 
@@ -353,7 +375,7 @@ def validate_manifest_payload(
 
 def validate_json_schema_payload(payload: Any, schema_path: Path) -> list[str]:
     """Validate a manifest against its Draft 2020-12 JSON Schema."""
-    schema_payload = json.loads(schema_path.read_text(encoding="utf-8"))
+    schema_payload = _strict_json_loads(schema_path.read_text(encoding="utf-8"))
     Draft202012Validator.check_schema(schema_payload)
     validator = Draft202012Validator(
         schema_payload,
@@ -394,14 +416,14 @@ def main(argv: list[str] | None = None) -> int:
         return 2
 
     try:
-        payload = json.loads(args.manifest.read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError) as exc:
+        payload = _strict_json_loads(args.manifest.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as exc:
         print(f"ERROR: cannot read manifest: {exc}", file=sys.stderr)
         return 2
 
     try:
         schema_errors = validate_json_schema_payload(payload, args.schema)
-    except (OSError, json.JSONDecodeError, SchemaError) as exc:
+    except (OSError, ValueError, SchemaError) as exc:
         print(f"ERROR: JSON Schema validation could not run: {exc}", file=sys.stderr)
         return 2
 
