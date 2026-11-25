@@ -132,6 +132,12 @@ class VibrationManifestTests(unittest.TestCase):
         errors, _ = validate_manifest_payload(payload)
         self.assertTrue(any("sample_rate_hz must be" in error for error in errors))
 
+    def test_rejects_negative_sample_rate_without_crashing(self):
+        payload = make_manifest("a" * 64)
+        payload["datasets"][0]["acquisition"]["sample_rate_hz"] = -20
+        errors, _ = validate_manifest_payload(payload)
+        self.assertTrue(any("sample_rate_hz must be" in error for error in errors))
+
 
     def test_rejects_unsupported_file_format(self):
         payload = make_manifest("a" * 64)
