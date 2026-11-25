@@ -476,6 +476,22 @@ class VibrationManifestTests(unittest.TestCase):
                     stderr.getvalue(),
                 )
 
+    def test_schema_reference_in_const_is_treated_as_literal_data(self):
+        schema = {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "type": "object",
+            "properties": {
+                "payload": {
+                    "const": {"$ref": "https://example.invalid/this-is-data-not-a-schema-ref"}
+                }
+            },
+        }
+        payload = {"payload": {"$ref": "https://example.invalid/this-is-data-not-a-schema-ref"}}
+        with tempfile.TemporaryDirectory() as tmp:
+            schema_path = Path(tmp) / "schema.json"
+            schema_path.write_text(json.dumps(schema), encoding="utf-8")
+            self.assertEqual(validate_json_schema_payload(payload, schema_path), [])
+
     def test_cli_rejects_schema_that_is_invalid_under_draft_2020_12(self):
         payload = make_manifest("a" * 64)
         invalid_schema = {
