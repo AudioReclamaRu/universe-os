@@ -103,25 +103,39 @@ $.$defs.first_definition.$ref
 
 ## 4. Результат GitHub Actions
 
-Последний расширенный запуск:
+### 4.1. Расширенная матрица на Ubuntu и Windows
 
-- Workflow run: 45667701102
-- Commit: 1d10a48b3e69aa300cc9d55da53c7c0ccc7eb22b
-- Job ID: 139394232250
+Последний завершённый запуск:
+
+- Workflow run: 45668502854
+- Commit: b1d7c7fc109f6386093e1ae4b708f8b80d40f338
+- URL: https://github.com/AudioReclamaRu/universe-os/actions/runs/45668502854
 - Python: 3.11
-- Runner: GitHub-hosted Ubuntu
-- Status: completed / success
-- Итог журнала: Ran 69 tests in 21.053s; OK
-- URL: https://github.com/AudioReclamaRu/universe-os/actions/runs/45667701102
+- Runner: GitHub-hosted Ubuntu и Windows
+- Общий статус запуска: completed / success
 
-Все пять межпроцессных тестов завершились успешно:
+| Среда | Job ID | Итог |
+|---|---:|---|
+| Ubuntu latest | 139397066044 | 73 tests in 43.882s; OK |
+| Windows latest | 139397065408 | 73 tests in 58.880s; OK |
+
+Оба задания завершились успешно. В Windows-среде тест символической ссылки также выполнился, а не был пропущен.
+
+### 4.2. Межпроцессные сценарии
+
+Все сценарии выполняются в отдельных процессах Python с PYTHONHASHSEED 1, 73 и 987654321:
 - test_schema_failure_order_has_byte_stable_cli_diagnostics;
 - test_semantic_errors_and_warnings_are_byte_stable;
 - test_strict_json_rejections_are_byte_stable_across_hash_seeds;
 - test_valid_unchanged_passport_has_byte_stable_output;
-- test_verify_files_success_is_byte_stable_and_inputs_remain_unchanged.
+- test_verify_files_success_is_byte_stable_and_inputs_remain_unchanged;
+- test_verify_files_missing_file_and_hash_mismatch_are_byte_stable;
+- test_verify_files_path_escape_is_byte_stable;
+- test_verify_files_symlink_escape_is_byte_stable;
+- test_verify_files_multiple_errors_are_byte_stable.
 
-В полный набор также входят координатные преобразования, трёхкомпонентный спектральный инструмент, приём манифеста, строгий JSON, JSON Schema, семантическая и файловая проверки.
+В суммарный набор входят также координатные преобразования, трёхкомпонентный спектральный инструмент, приём манифеста, строгий JSON, JSON Schema, семантические и файловые проверки.
+
 
 ## 5. Что доказано
 
@@ -148,14 +162,12 @@ $.$defs.first_definition.$ref
 
 ## 7. Следующая техническая граница
 
-Следующий слой — проверить те же контракты в дополнительных средах выполнения, в первую очередь на Windows, а также расширить файловые отрицательные сценарии:
-1. отсутствующий исходный файл;
-2. несовпадение SHA-256;
-3. выход относительного пути за корень;
-4. символическая ссылка за пределы корня;
-5. несколько файловых ошибок в одном манифесте.
+На Python 3.11 обе платформы — Ubuntu и Windows — прошли полный набор из 73 тестов. Следующий технический шаг — расширить ту же матрицу на Python 3.12 и 3.13, не меняя закреплённые версии библиотек. Это позволит увидеть, зависит ли результат от версии интерпретатора.
 
-После этого следует сверить поведение на заявленных версиях Python и операционных системах.
+После проверки версий Python следует отдельно рассмотреть:
+- другие реально поддерживаемые операционные системы и файловые системы;
+- предельные размеры файлов и объёмы входных манифестов;
+- воспроизводимость при параллельной обработке нескольких независимых паспортов.
 
 Эмпирическая граница остаётся отдельной: первичные временные ряды, полевые метаданные, калибровки и документированная геодезическая привязка пока не получены. Никакой синтетический CI-тест не заменяет эти материалы.
 
