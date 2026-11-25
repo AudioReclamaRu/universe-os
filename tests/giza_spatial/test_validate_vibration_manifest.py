@@ -303,6 +303,41 @@ class VibrationManifestTests(unittest.TestCase):
         errors = validate_json_schema_payload(payload, DEFAULT_SCHEMA_PATH)
         self.assertTrue(any("source.source_uris" in error for error in errors))
 
+    def test_cli_rejects_missing_required_nested_properties(self):
+        mutations = {
+            "dataset.title": lambda dataset: dataset.pop("title"),
+            "instrument.manufacturer": lambda dataset: dataset["instrument"].pop("manufacturer"),
+            "station.location.coordinate_system": lambda dataset: dataset["station"]["location"].pop("coordinate_system"),
+            "acquisition.sample_count": lambda dataset: dataset["acquisition"].pop("sample_count"),
+            "channels[0].unit": lambda dataset: dataset["channels"][0].pop("unit"),
+            "files[0].sha256": lambda dataset: dataset["files"][0].pop("sha256"),
+            "quality.coordinate_status": lambda dataset: dataset["quality"].pop("coordinate_status"),
+        }
+        for field, mutate in mutations.items():
+            with self.subTest(field=field), tempfile.TemporaryDirectory() as tmp:
+                payload = make_manifest("a" * 64)
+                mutate(payload["datasets"][0])
+                manifest_path = Path(tmp) / "manifest.json"
+                manifest_path.write_text(json.dumps(payload), encoding="utf-8")
+                stderr = io.StringIO()
+                with redirect_stderr(stderr):
+                    exit_code = main(["--manifest", str(manifest_path)])
+                self.assertEqual(exit_code, 2)
+                self.assertIn("JSON Schema", stderr.getvalue())
+
+    def test_cli_rejects_unknown_nested_channel_property(self):
+        payload = make_manifest("a" * 64)
+        payload["datasets"][0]["channels"][0]["unregistered_gain"] = 42
+        with tempfile.TemporaryDirectory() as tmp:
+            manifest_path = Path(tmp) / "manifest.json"
+            manifest_path.write_text(json.dumps(payload), encoding="utf-8")
+            stderr = io.StringIO()
+            with redirect_stderr(stderr):
+                exit_code = main(["--manifest", str(manifest_path)])
+        self.assertEqual(exit_code, 2)
+        self.assertIn("JSON Schema", stderr.getvalue())
+        self.assertIn("unregistered_gain", stderr.getvalue())
+
     def test_cli_enforces_schema_unknown_property_rule(self):
         payload = {
             "schema_version": "1.0",
