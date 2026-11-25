@@ -3,7 +3,7 @@ import hashlib
 import io
 import json
 import sys
-from contextlib import redirect_stderr
+from contextlib import redirect_stderr, redirect_stdout
 import tempfile
 import unittest
 from pathlib import Path
