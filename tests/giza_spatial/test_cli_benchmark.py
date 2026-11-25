@@ -42,9 +42,17 @@ class CliBenchmarkTests(unittest.TestCase):
         self.assertTrue(report["started_at_utc"].endswith("+00:00"))
         self.assertTrue(report["integrity"]["manifest_unchanged"])
         self.assertTrue(report["integrity"]["raw_inputs_unchanged"])
+        self.assertGreater(report["measurements"][0]["processes"][0]["rss_peak_sampled_bytes"], 0)
         self.assertTrue(report["integrity"]["cli_outputs_identical_across_processes_and_iterations"])
+        self.assertEqual(report["runtime"]["psutil"], "7.2.2")
+        self.assertEqual(report["memory_measurement"]["source"], "psutil.Process.memory_info().rss")
+        self.assertEqual(report["memory_measurement"]["sampling_interval_ms"], 10)
+        self.assertGreater(report["summary"]["max_rss_sampled_bytes_across_processes"], 0)
         self.assertEqual(len(report["measurements"]), 1)
         self.assertEqual(len(report["measurements"][0]["processes"]), 2)
+        for process in report["measurements"][0]["processes"]:
+            self.assertGreater(process["rss_peak_sampled_bytes"], 0)
+            self.assertGreater(process["rss_sample_count"], 0)
         self.assertTrue(report["measurements"][0]["outputs_identical"])
 
     def test_file_verification_benchmark_records_bytes_and_digest(self):
