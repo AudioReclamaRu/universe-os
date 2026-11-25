@@ -186,8 +186,7 @@ def validate_manifest_payload(
                     f"sample_count/sample_rate ({expected:.6g}s); confirm whether end_time "
                     "marks the final sample or the end boundary"
                 )
-        if acquisition.get("time_standard") == "unknown":
-            warnings.append(f"{prefix}: time standard is unknown")
+
 
         channels = dataset.get("channels")
         if not isinstance(channels, list) or not channels:
