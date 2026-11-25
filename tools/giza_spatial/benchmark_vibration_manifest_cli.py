@@ -355,6 +355,7 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
                 args.concurrency,
                 iteration + args.warmup,
                 args.timeout_seconds,
+                args.memory_sample_interval_ms,
             )
             validated = _validate_results(results, args.datasets)
             if baseline is None:
@@ -370,6 +371,12 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
             changed = [path.name for path in tracked_paths if hashes_after[path] != hashes_before[path]]
             raise RuntimeError(f"benchmark inputs changed during execution: {changed}")
 
+        rss_peaks = [
+            item["rss_peak_sampled_bytes"]
+            for batch in measurements
+            for item in batch["processes"]
+            if item["rss_peak_sampled_bytes"] is not None
+        ]
         total_raw_bytes = sum(sizes)
         report = {
             "benchmark_format": "giza-prime-cli-benchmark-1.0",
@@ -408,6 +415,7 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
                 "warmup_batches": args.warmup,
                 "measured_batches": args.repeat,
                 "timeout_seconds_per_process": args.timeout_seconds,
+                "memory_sample_interval_ms": args.memory_sample_interval_ms,
                 "hash_seed_cycle": list(HASH_SEEDS),
             },
             "integrity": {
@@ -423,12 +431,7 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
                 "batch_wall_seconds_min": min(batch_times),
                 "batch_wall_seconds_median": statistics.median(batch_times),
                 "batch_wall_seconds_max": max(batch_times),
-                "max_rss_sampled_bytes_across_processes": max(
-                    item["rss_peak_sampled_bytes"]
-                    for batch in measurements
-                    for item in batch["processes"]
-                    if item["rss_peak_sampled_bytes"] is not None
-                ),
+"max_rss_sampled_bytes_across_processes": max(rss_peaks) if rss_peaks else None,
                 "rss_samples_total": sum(
                     item["rss_sample_count"]
                     for batch in measurements
