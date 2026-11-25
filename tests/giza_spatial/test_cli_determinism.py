@@ -213,6 +213,121 @@ class CliDeterminismTests(unittest.TestCase):
         self.assertIn(b"VALID: 1 dataset(s)", stdout)
         self.assertEqual(stderr, b"")
 
+    def test_verify_files_missing_file_and_hash_mismatch_are_byte_stable(self):
+        cases = ("missing", "hash_mismatch")
+        for case in cases:
+            with self.subTest(case=case), tempfile.TemporaryDirectory() as temporary_directory:
+                root = Path(temporary_directory)
+                raw_directory = root / "raw"
+                raw_directory.mkdir()
+                raw_bytes = b"synthetic raw input for a negative file check"
+                payload = make_manifest(hashlib.sha256(raw_bytes).hexdigest())
+                protected_paths: tuple[Path, ...] = ()
+
+                if case == "hash_mismatch":
+                    raw_path = raw_directory / "station01.mseed"
+                    raw_path.write_bytes(b"different synthetic contents")
+                    protected_paths = (raw_path,)
+
+                manifest_path = root / "manifest.json"
+                write_json(manifest_path, payload)
+                returncode, stdout, stderr = run_cli_across_hash_seeds(
+                    manifest_path,
+                    verify_files=True,
+                    protected_paths=protected_paths,
+                )
+
+            self.assertEqual(returncode, 2)
+            self.assertEqual(stdout, b"")
+            if case == "missing":
+                self.assertIn(b"file does not exist: raw/station01.mseed", stderr)
+            else:
+                self.assertIn(b"SHA-256 mismatch for raw/station01.mseed", stderr)
+
+    def test_verify_files_path_escape_is_byte_stable(self):
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            base = Path(temporary_directory)
+            root = base / "data"
+            (root / "raw").mkdir(parents=True)
+            outside_path = base / "outside.mseed"
+            outside_path.write_bytes(b"synthetic data outside the declared root")
+
+            payload = make_manifest(hashlib.sha256(outside_path.read_bytes()).hexdigest())
+            payload["datasets"][0]["files"][0]["path"] = "../outside.mseed"
+            manifest_path = root / "manifest.json"
+            write_json(manifest_path, payload)
+
+            returncode, stdout, stderr = run_cli_across_hash_seeds(
+                manifest_path,
+                verify_files=True,
+                protected_paths=(outside_path,),
+            )
+
+        self.assertEqual(returncode, 2)
+        self.assertEqual(stdout, b"")
+        self.assertIn(b"path escapes the declared data root", stderr)
+
+    def test_verify_files_symlink_escape_is_byte_stable(self):
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            base = Path(temporary_directory)
+            root = base / "data"
+            raw_directory = root / "raw"
+            raw_directory.mkdir(parents=True)
+            outside_path = base / "outside.mseed"
+            raw_bytes = b"synthetic data reached only through an escaping symlink"
+            outside_path.write_bytes(raw_bytes)
+            link_path = raw_directory / "escape.mseed"
+            try:
+                link_path.symlink_to(outside_path)
+            except (OSError, NotImplementedError) as exc:
+                self.skipTest(f"symlink creation is unavailable: {exc}")
+
+            payload = make_manifest(hashlib.sha256(raw_bytes).hexdigest())
+            payload["datasets"][0]["files"][0]["path"] = "raw/escape.mseed"
+            manifest_path = root / "manifest.json"
+            write_json(manifest_path, payload)
+
+            returncode, stdout, stderr = run_cli_across_hash_seeds(
+                manifest_path,
+                verify_files=True,
+                protected_paths=(outside_path,),
+            )
+
+        self.assertEqual(returncode, 2)
+        self.assertEqual(stdout, b"")
+        self.assertIn(b"path escapes the declared data root", stderr)
+
+    def test_verify_files_multiple_errors_are_byte_stable(self):
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            raw_directory = root / "raw"
+            raw_directory.mkdir()
+            actual_path = raw_directory / "wronghash.mseed"
+            actual_path.write_bytes(b"actual bytes differ from declared digest")
+
+            payload = make_manifest("a" * 64)
+            first_file = payload["datasets"][0]["files"][0]
+            first_file["path"] = "raw/missing.mseed"
+            second_file = copy.deepcopy(first_file)
+            second_file["file_id"] = "DERIVED-002"
+            second_file["role"] = "derived"
+            second_file["path"] = "raw/wronghash.mseed"
+            second_file["sha256"] = "0" * 64
+            payload["datasets"][0]["files"].append(second_file)
+
+            manifest_path = root / "manifest.json"
+            write_json(manifest_path, payload)
+            returncode, stdout, stderr = run_cli_across_hash_seeds(
+                manifest_path,
+                verify_files=True,
+                protected_paths=(actual_path,),
+            )
+
+        self.assertEqual(returncode, 2)
+        self.assertEqual(stdout, b"")
+        self.assertIn(b"file does not exist: raw/missing.mseed", stderr)
+        self.assertIn(b"SHA-256 mismatch for raw/wronghash.mseed", stderr)
+
 
 if __name__ == "__main__":
     unittest.main()
