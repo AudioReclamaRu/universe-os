@@ -91,7 +91,7 @@ def _strict_json_loads(raw: str) -> Any:
     )
 
 
-_SINGLE_SCHEMA_KEYWORDS = {
+_SINGLE_SCHEMA_KEYWORDS = (
     "additionalItems",
     "additionalProperties",
     "unevaluatedItems",
@@ -104,15 +104,15 @@ _SINGLE_SCHEMA_KEYWORDS = {
     "then",
     "else",
     "contentSchema",
-}
-_SCHEMA_ARRAY_KEYWORDS = {"allOf", "anyOf", "oneOf", "prefixItems"}
-_SCHEMA_MAP_KEYWORDS = {
+)
+_SCHEMA_ARRAY_KEYWORDS = ("allOf", "anyOf", "oneOf", "prefixItems")
+_SCHEMA_MAP_KEYWORDS = (
     "$defs",
     "definitions",
     "properties",
     "patternProperties",
     "dependentSchemas",
-}
+)
 
 
 def _iter_schema_references(schema: Any, path: str = "$"):
