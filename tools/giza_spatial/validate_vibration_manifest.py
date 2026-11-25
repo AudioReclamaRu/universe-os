@@ -15,7 +15,7 @@ import math
 import re
 import sys
 from datetime import datetime
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 from typing import Any
 from urllib.parse import unquote, urlsplit
 
@@ -173,6 +173,14 @@ def _is_allowed_string(value: Any, allowed: set[str]) -> bool:
     return isinstance(value, str) and value in allowed
 
 
+def _is_integer(value: Any) -> bool:
+    if isinstance(value, bool):
+        return False
+    if isinstance(value, int):
+        return True
+    return isinstance(value, float) and math.isfinite(value) and value.is_integer()
+
+
 def _parse_aware_datetime(value: Any, label: str, errors: list[str]) -> datetime | None:
     if not isinstance(value, str) or not value.strip():
         errors.append(f"{label}: missing ISO-8601 datetime")
@@ -194,7 +202,8 @@ def _safe_relative_path(raw_path: Any, root: Path, label: str, errors: list[str]
         errors.append(f"{label}: path is empty")
         return None
     candidate = Path(raw_path)
-    if candidate.is_absolute():
+    windows_candidate = PureWindowsPath(raw_path)
+    if candidate.is_absolute() or windows_candidate.is_absolute() or windows_candidate.drive:
         errors.append(f"{label}: absolute paths are not allowed: {raw_path}")
         return None
     try:
@@ -299,7 +308,7 @@ def validate_manifest_payload(
         if not _is_number(sample_rate) or float(sample_rate) <= 0:
             errors.append(f"{prefix}: sample_rate_hz must be a finite positive number")
         sample_count = acquisition.get("sample_count")
-        if not isinstance(sample_count, int) or isinstance(sample_count, bool) or sample_count < 1:
+        if not _is_integer(sample_count) or sample_count < 1:
             errors.append(f"{prefix}: sample_count must be a positive integer")
         if not _is_allowed_string(acquisition.get("time_standard"), ALLOWED_TIME_STANDARDS):
             errors.append(f"{prefix}: unsupported time_standard {acquisition.get('time_standard')!r}")
@@ -309,9 +318,9 @@ def validate_manifest_payload(
         if nominal_duration is not None and (not _is_number(nominal_duration) or float(nominal_duration) <= 0):
             errors.append(f"{prefix}: nominal_duration_s must be positive when supplied")
         if (start is not None and end is not None and _is_number(sample_rate)
-                and float(sample_rate) > 0 and isinstance(sample_count, int) and sample_count > 0):
+                and float(sample_rate) > 0 and _is_integer(sample_count) and sample_count > 0):
             elapsed = (end - start).total_seconds()
-            expected = sample_count / float(sample_rate)
+            expected = int(sample_count) / float(sample_rate)
             tolerance = max(2.0 / float(sample_rate), 0.005 * expected)
             if abs(elapsed - expected) > tolerance:
                 warnings.append(
@@ -378,6 +387,7 @@ def validate_manifest_payload(
         file_ids: set[str] = set()
         roles: set[str] = set()
         file_paths: set[str] = set()
+        resolved_paths: set[Path] = set()
         derived_refs: list[tuple[str, list[str]]] = []
         for file_index, file_record in enumerate(files):
             file_prefix = f"{prefix}.files[{file_index}]"
@@ -417,20 +427,26 @@ def validate_manifest_payload(
                 errors.append(f"{file_prefix}: sha256 must contain exactly 64 hexadecimal characters")
 
             resolved = _safe_relative_path(raw_path, root_path, file_prefix, errors)
+            if resolved is not None:
+                if resolved in resolved_paths:
+                    errors.append(
+                        f"{file_prefix}: multiple file records resolve to the same path: {raw_path!r}"
+                    )
+                else:
+                    resolved_paths.add(resolved)
             if verify_files and resolved is not None:
                 if not resolved.is_file():
                     errors.append(f"{file_prefix}: file does not exist: {raw_path}")
                 else:
                     declared_size = file_record.get("size_bytes")
                     if declared_size is not None and (
-                        not isinstance(declared_size, int) or isinstance(declared_size, bool)
-                        or declared_size < 0
+                        not _is_integer(declared_size) or declared_size < 0
                     ):
                         errors.append(f"{file_prefix}: size_bytes must be a non-negative integer")
-                    elif isinstance(declared_size, int) and resolved.stat().st_size != declared_size:
+                    elif _is_integer(declared_size) and resolved.stat().st_size != int(declared_size):
                         errors.append(
                             f"{file_prefix}: size_bytes mismatch for {raw_path}; "
-                            f"manifest={declared_size}, actual={resolved.stat().st_size}"
+                            f"manifest={int(declared_size)}, actual={resolved.stat().st_size}"
                         )
                     if isinstance(expected_hash, str) and SHA256_RE.fullmatch(expected_hash):
                         actual = _sha256(resolved)
