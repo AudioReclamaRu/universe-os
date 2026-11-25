@@ -17,6 +17,7 @@ import sys
 from datetime import datetime
 from pathlib import Path
 from typing import Any
+from urllib.parse import unquote, urlsplit
 
 from jsonschema import Draft202012Validator, FormatChecker
 from jsonschema.exceptions import SchemaError
@@ -73,6 +74,55 @@ def _strict_json_loads(raw: str) -> Any:
         object_pairs_hook=_reject_duplicate_json_keys,
         parse_constant=_reject_nonstandard_json_constant,
     )
+
+
+def _iter_schema_references(value: Any, path: str = "$"):
+    if isinstance(value, dict):
+        for key, child in value.items():
+            child_path = f"{path}.{key}"
+            if key in {"$ref", "$dynamicRef", "$recursiveRef"}:
+                yield child_path, child
+            if isinstance(child, (dict, list)):
+                yield from _iter_schema_references(child, child_path)
+    elif isinstance(value, list):
+        for index, child in enumerate(value):
+            if isinstance(child, (dict, list)):
+                yield from _iter_schema_references(child, f"{path}[{index}]")
+
+
+def _validate_local_schema_references(schema: Any) -> None:
+    """Allow only resolvable local JSON Pointer references; never retrieve remote schemas."""
+    for location, reference in _iter_schema_references(schema):
+        if not isinstance(reference, str):
+            raise ValueError(f"{location}: schema reference must be a string")
+        parsed = urlsplit(reference)
+        if parsed.scheme or parsed.netloc or parsed.path or parsed.query:
+            raise ValueError(
+                f"{location}: external schema references are not allowed: {reference!r}"
+            )
+        fragment = unquote(parsed.fragment)
+        if not fragment:
+            continue
+        if not fragment.startswith("/"):
+            raise ValueError(
+                f"{location}: only local JSON Pointer references are supported: {reference!r}"
+            )
+
+        target = schema
+        for encoded_token in fragment[1:].split("/"):
+            if re.search(r"~(?![01])", encoded_token):
+                raise ValueError(
+                    f"{location}: invalid JSON Pointer escape in {reference!r}"
+                )
+            token = encoded_token.replace("~1", "/").replace("~0", "~")
+            if isinstance(target, dict) and token in target:
+                target = target[token]
+            elif isinstance(target, list) and token.isdigit() and int(token) < len(target):
+                target = target[int(token)]
+            else:
+                raise ValueError(
+                    f"{location}: unresolved local JSON Pointer reference: {reference!r}"
+                )
 
 
 def _is_number(value: Any) -> bool:
@@ -377,6 +427,7 @@ def validate_json_schema_payload(payload: Any, schema_path: Path) -> list[str]:
     """Validate a manifest against its Draft 2020-12 JSON Schema."""
     schema_payload = _strict_json_loads(schema_path.read_text(encoding="utf-8"))
     Draft202012Validator.check_schema(schema_payload)
+    _validate_local_schema_references(schema_payload)
     validator = Draft202012Validator(
         schema_payload,
         format_checker=FormatChecker(),
