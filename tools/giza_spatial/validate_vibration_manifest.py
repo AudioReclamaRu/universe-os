@@ -86,7 +86,8 @@ def _strict_json_loads(raw: str) -> Any:
     return json.loads(
         raw,
         object_pairs_hook=_reject_duplicate_json_keys,
-        parse_constant=_reject_nonstandard_json_constant,\n        parse_float=_strict_json_float,
+        parse_constant=_reject_nonstandard_json_constant,
+        parse_float=_strict_json_float,
     )
 
 
