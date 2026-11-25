@@ -206,6 +206,24 @@ class VibrationManifestTests(unittest.TestCase):
         errors = validate_json_schema_payload(payload, DEFAULT_SCHEMA_PATH)
         self.assertTrue(any("start_time" in error for error in errors))
 
+    def test_schema_requires_all_quality_status_fields(self):
+        payload = make_manifest("a" * 64)
+        payload["datasets"][0]["quality"].pop("coordinate_status")
+        errors = validate_json_schema_payload(payload, DEFAULT_SCHEMA_PATH)
+        self.assertTrue(any("quality" in error for error in errors))
+
+    def test_schema_requires_nonempty_instrument_model(self):
+        payload = make_manifest("a" * 64)
+        payload["datasets"][0]["instrument"]["model"] = ""
+        errors = validate_json_schema_payload(payload, DEFAULT_SCHEMA_PATH)
+        self.assertTrue(any("instrument.model" in error for error in errors))
+
+    def test_schema_format_checker_rejects_non_uri_source(self):
+        payload = make_manifest("a" * 64)
+        payload["datasets"][0]["source"]["source_uris"] = ["not a uri"]
+        errors = validate_json_schema_payload(payload, DEFAULT_SCHEMA_PATH)
+        self.assertTrue(any("source.source_uris" in error for error in errors))
+
     def test_cli_enforces_schema_unknown_property_rule(self):
         payload = {
             "schema_version": "1.0",
