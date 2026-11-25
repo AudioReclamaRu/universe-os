@@ -125,7 +125,7 @@ class CliDeterminismTests(unittest.TestCase):
         self.assertEqual(returncode, 2)
         self.assertEqual(stdout, b"")
         self.assertIn(b"JSON Schema validation could not run", stderr)
-        self.assertIn(b"#.$defs.first_definition.$ref", stderr)
+        self.assertIn(b"$.$defs.first_definition.$ref", stderr)
         self.assertIn(b"external schema references are not allowed", stderr)
 
 
