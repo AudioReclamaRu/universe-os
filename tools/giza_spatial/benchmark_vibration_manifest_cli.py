@@ -388,6 +388,7 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
                 "python": platform.python_version(),
                 "numpy": _version("numpy"),
                 "jsonschema": _version("jsonschema"),
+                "psutil": _version("psutil"),
                 "revision": os.environ.get("GITHUB_SHA"),
             },
             "memory_measurement": {
