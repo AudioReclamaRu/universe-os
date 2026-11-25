@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0",
+  "project": {
+    "id": "GIZA-PRIME-SPATIAL-REGISTER",
+    "title": "GIZA PRIME spatial evidence register",
+    "branch": "research/universe-3-semantic-atlas-001",
+    "description": "Empty intake template. No measurements or hypotheses are inserted by default."
+  },
+  "records": [],
+  "relations": []
+}
