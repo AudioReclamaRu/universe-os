@@ -38,6 +38,8 @@ class CliBenchmarkTests(unittest.TestCase):
         self.assertEqual(report["configuration"]["datasets"], 2)
         self.assertEqual(report["configuration"]["concurrency"], 2)
         self.assertEqual(report["summary"]["process_runs"], 2)
+        self.assertGreater(report["benchmark_wall_seconds"], 0)
+        self.assertTrue(report["started_at_utc"].endswith("+00:00"))
         self.assertTrue(report["integrity"]["manifest_unchanged"])
         self.assertTrue(report["integrity"]["raw_inputs_unchanged"])
         self.assertTrue(report["integrity"]["cli_outputs_identical_across_processes_and_iterations"])
