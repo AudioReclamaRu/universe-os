@@ -474,8 +474,8 @@ class VibrationManifestTests(unittest.TestCase):
         self.assertEqual(results[0], results[1])
         self.assertEqual(results[1], results[2])
         self.assertEqual(results[0][0], 2)
-        self.assertIn("quality.calibration_status is 'unknown'", results[0][1])
-        self.assertIn("quality.orientation_status is 'partial'", results[0][1])
+        self.assertIn("quality.calibration_status is unknown", results[0][1])
+        self.assertIn("quality.orientation_status is partial", results[0][1])
         self.assertIn("JSON Schema", results[0][2])
 
     def test_cli_reports_oversized_sample_count_without_overflow(self):
