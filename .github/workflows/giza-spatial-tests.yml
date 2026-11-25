@@ -4,17 +4,31 @@ on:
   push:
     branches:
       - research/universe-3-semantic-atlas-001
+    paths:
+      - ".github/workflows/giza-spatial-tests.yml"
+      - "tools/giza_spatial/**"
+      - "tests/giza_spatial/**"
+      - "schemas/giza_spatial_evidence.schema.json"
+      - "schemas/giza_ambient_vibration_manifest.schema.json"
+      - "examples/giza_spatial/**"
   pull_request:
     branches:
       - research/universe-3-semantic-atlas-001
+    paths:
+      - ".github/workflows/giza-spatial-tests.yml"
+      - "tools/giza_spatial/**"
+      - "tests/giza_spatial/**"
+      - "schemas/giza_spatial_evidence.schema.json"
+      - "schemas/giza_ambient_vibration_manifest.schema.json"
+      - "examples/giza_spatial/**"
   workflow_dispatch:
 
 permissions:
   contents: read
 
 jobs:
-  coordinate-transform-tests:
-    name: Coordinate transform unit tests
+  coordinate-transform-and-vibration-intake-tests:
+    name: Coordinate transform and vibration intake tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -25,5 +39,5 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Run unit tests
+      - name: Run GIZA spatial tools tests
         run: python -m unittest discover -s tests/giza_spatial -v
