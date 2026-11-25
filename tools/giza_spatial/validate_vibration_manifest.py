@@ -18,6 +18,14 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
+from jsonschema import Draft202012Validator, FormatChecker
+from jsonschema.exceptions import SchemaError
+
+DEFAULT_SCHEMA_PATH = (
+    Path(__file__).resolve().parents[2]
+    / "schemas"
+    / "giza_ambient_vibration_manifest.schema.json"
+)
 SHA256_RE = re.compile(r"^[0-9a-fA-F]{64}$")
 REQUIRED_COMPONENTS = {"vertical", "north", "east"}
 ALLOWED_SOURCE_ORIGINS = {
@@ -337,9 +345,37 @@ def validate_manifest_payload(
     return errors, warnings
 
 
+def validate_json_schema_payload(payload: Any, schema_path: Path) -> list[str]:
+    """Validate a manifest against its Draft 2020-12 JSON Schema."""
+    schema_payload = json.loads(schema_path.read_text(encoding="utf-8"))
+    Draft202012Validator.check_schema(schema_payload)
+    validator = Draft202012Validator(
+        schema_payload,
+        format_checker=FormatChecker(),
+    )
+    validation_errors = sorted(
+        validator.iter_errors(payload),
+        key=lambda error: tuple(str(part) for part in error.absolute_path),
+    )
+
+    messages: list[str] = []
+    for error in validation_errors:
+        location = "$"
+        for part in error.absolute_path:
+            location += f"[{part}]" if isinstance(part, int) else f".{part}"
+        messages.append(f"JSON Schema {location}: {error.message}")
+    return messages
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--manifest", type=Path, required=True, help="Ambient vibration manifest JSON")
+    parser.add_argument(
+        "--schema",
+        type=Path,
+        default=DEFAULT_SCHEMA_PATH,
+        help="Draft 2020-12 JSON Schema; defaults to the repository schema",
+    )
     parser.add_argument("--root", type=Path, default=None, help="Data root for relative file paths; defaults to manifest directory")
     parser.add_argument("--verify-files", action="store_true", help="Check file existence and SHA-256 against actual bytes")
     return parser
@@ -357,6 +393,12 @@ def main(argv: list[str] | None = None) -> int:
         print(f"ERROR: cannot read manifest: {exc}", file=sys.stderr)
         return 2
 
+    try:
+        schema_errors = validate_json_schema_payload(payload, args.schema)
+    except (OSError, json.JSONDecodeError, SchemaError) as exc:
+        print(f"ERROR: JSON Schema validation could not run: {exc}", file=sys.stderr)
+        return 2
+
     root = args.root or args.manifest.parent
     try:
         errors, warnings = validate_manifest_payload(payload, root=root, verify_files=args.verify_files)
@@ -366,11 +408,14 @@ def main(argv: list[str] | None = None) -> int:
 
     for warning in warnings:
         print(f"WARNING: {warning}")
+    for error in schema_errors:
+        print(f"ERROR: {error}", file=sys.stderr)
     for error in errors:
         print(f"ERROR: {error}", file=sys.stderr)
 
-    if errors:
-        print(f"FAILED: {len(errors)} error(s), {len(warnings)} warning(s)", file=sys.stderr)
+    total_errors = len(schema_errors) + len(errors)
+    if total_errors:
+        print(f"FAILED: {total_errors} error(s), {len(warnings)} warning(s)", file=sys.stderr)
         return 2
 
     print(f"VALID: {len(payload.get('datasets', []))} dataset(s), {len(warnings)} warning(s)")
