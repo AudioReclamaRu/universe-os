@@ -91,7 +91,8 @@
 - [Пустой манифест фоновых колебаний](../../examples/giza_spatial/ambient_vibration_manifest.template.json)
 - [Валидатор манифеста фоновых колебаний](../../tools/giza_spatial/validate_vibration_manifest.py)
 - [Тесты валидатора фоновых колебаний](../../tests/giza_spatial/test_validate_vibration_manifest.py)
-- [Межпроцессные тесты побайтной воспроизводимости CLI](../../tests/giza_spatial/test_cli_determinism.py)
+- [Межпроцессные тесты побайтной воспроизводимости, файловой безопасности и нагрузки CLI](../../tests/giza_spatial/test_cli_determinism.py)
+- [Документ 66: нагрузочная и параллельная устойчивость приёмника](66_CLI_LOAD_AND_PARALLEL_PROCESS_STABILITY_RU.md)
 
 - [JSON Schema пространственного реестра](../../schemas/giza_spatial_evidence.schema.json)
 - [Пустой шаблон реестра](../../examples/giza_spatial/evidence_manifest.template.json)
@@ -104,6 +105,7 @@
 - [Результат GitHub Actions — 73 теста на Ubuntu и Windows, Python 3.11, SUCCESS](https://github.com/AudioReclamaRu/universe-os/actions/runs/45668502854)
 - [Результат GitHub Actions — 73 теста в каждой из шести конфигураций ОС × Python 3.11–3.13 на NumPy 2.2.5, SUCCESS](https://github.com/AudioReclamaRu/universe-os/actions/runs/45669026275)
 - [Результат GitHub Actions — 73 теста в каждой из восьми конфигураций ОС × Python 3.11–3.14 на NumPy 2.4.6, SUCCESS](https://github.com/AudioReclamaRu/universe-os/actions/runs/45669665697)
+- [Результат GitHub Actions — 76 тестов в каждой из восьми конфигураций, включая нагрузочные и параллельные сценарии, SUCCESS](https://github.com/AudioReclamaRu/universe-os/actions/runs/45670546773)
 - [Результат GitHub Actions — 76 тестов в каждой из восьми конфигураций, включая нагрузочные и параллельные сценарии, SUCCESS](https://github.com/AudioReclamaRu/universe-os/actions/runs/45670546773)
 
 Пять синтетических тестов координатного инструмента прошли на GitHub-hosted Ubuntu runner с Python 3.11. Это подтверждает работу реализации на синтетических примерах, но не является геодезической проверкой координат Гизы.
@@ -162,6 +164,6 @@
 | 63 | [Семантика целых чисел и каноническая идентичность путей](63_INTEGER_SEMANTICS_AND_CANONICAL_PATH_IDENTITY_RU.md) | Согласование integer между JSON Schema и Python; алиасы файловых путей; Windows drive/UNC пути; 4 новых теста | Реализовано; CI success |
 | 64 | [Конечность чисел JSON и воспроизводимый порядок проверки Schema](64_finite_json_numbers_and_deterministic_schema_order_RU.md) | Отказ от float overflow/underflow, штатная обработка больших целых чисел и фиксированный порядок первого schema reference error | Реализовано; CI success |
 | 65 | [Побайтная воспроизводимость CLI на неизменном паспорте](65_CROSS_PROCESS_CLI_OUTPUT_DETERMINISM_RU.md) | Девять групп межпроцессных проверок: успешный вход, Schema и JSON-отказы, семантические предупреждения/ошибки, положительные и отрицательные файловые проверки; сравнение кодов завершения/stdout/stderr и SHA-256 входов в трёх процессах с разными PYTHONHASHSEED | CI success; включён в полный набор из 76 тестов на восьми конфигурациях |
-| 66 | [Нагрузочная и параллельная устойчивость приёмника GIZA PRIME](66_CLI_LOAD_AND_PARALLEL_PROCESS_STABILITY_RU.md) | 256 записей в манифесте, исходный файл 4 МиБ, шесть параллельных CLI-процессов; контроль SHA-256 и побайтной стабильности | CI success: 76 тестов в каждой из восьми конфигураций Ubuntu/Windows × Python 3.11/3.12/3.13/3.14 на NumPy 2.4.6 |
+| 66 | [Нагрузочная и параллельная устойчивость приёмника GIZA PRIME](66_CLI_LOAD_AND_PARALLEL_PROCESS_STABILITY_RU.md) | 256 записей в манифесте, исходный файл 4 МиБ, шесть параллельных CLI-процессов; контроль SHA-256, неизменности входов и побайтной стабильности | CI success: 76 тестов в каждой из восьми конфигураций Ubuntu/Windows × Python 3.11/3.12/3.13/3.14 на NumPy 2.4.6 |
 
 **БЫТЬ И Ё.**
