@@ -457,6 +457,46 @@ class VibrationManifestTests(unittest.TestCase):
                 self.assertEqual(exit_code, 2)
                 self.assertIn("duplicate JSON object key", stderr.getvalue())
 
+    def test_integral_float_sample_count_matches_json_schema_integer(self):
+        payload = make_manifest("a" * 64)
+        payload["datasets"][0]["acquisition"]["sample_count"] = 6000.0
+        self.assertEqual(validate_json_schema_payload(payload, DEFAULT_SCHEMA_PATH), [])
+        errors, warnings = validate_manifest_payload(payload)
+        self.assertFalse(any("sample_count must be" in error for error in errors))
+        self.assertFalse(any("timestamp duration" in warning for warning in warnings))
+
+    def test_integral_float_size_bytes_matches_json_schema_integer(self):
+        raw_bytes = b"integral float size metadata"
+        digest = hashlib.sha256(raw_bytes).hexdigest()
+        payload = make_manifest(digest)
+        payload["datasets"][0]["files"][0]["size_bytes"] = float(len(raw_bytes))
+        self.assertEqual(validate_json_schema_payload(payload, DEFAULT_SCHEMA_PATH), [])
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            raw_dir = root / "raw"
+            raw_dir.mkdir()
+            (raw_dir / "station01.mseed").write_bytes(raw_bytes)
+            errors, _ = validate_manifest_payload(payload, root=root, verify_files=True)
+        self.assertEqual(errors, [])
+
+    def test_rejects_distinct_paths_that_resolve_to_same_file(self):
+        payload = make_manifest("a" * 64)
+        duplicate = copy.deepcopy(payload["datasets"][0]["files"][0])
+        duplicate["file_id"] = "DERIVED-ALIAS"
+        duplicate["role"] = "derived"
+        duplicate["path"] = "raw/./station01.mseed"
+        payload["datasets"][0]["files"].append(duplicate)
+        errors, _ = validate_manifest_payload(payload)
+        self.assertTrue(any("multiple file records resolve to the same path" in error for error in errors))
+
+    def test_rejects_windows_absolute_paths_on_posix(self):
+        for raw_path in (r"C:\data\station.mseed", r"\\server\share\station.mseed"):
+            with self.subTest(path=raw_path):
+                payload = make_manifest("a" * 64)
+                payload["datasets"][0]["files"][0]["path"] = raw_path
+                errors, _ = validate_manifest_payload(payload)
+                self.assertTrue(any("absolute paths are not allowed" in error for error in errors))
+
     def test_cli_rejects_invalid_top_level_manifest_shapes(self):
         cases = {
             "root_array": "[]",
