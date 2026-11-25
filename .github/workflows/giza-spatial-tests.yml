@@ -19,6 +19,7 @@ on:
       - ".github/workflows/giza-spatial-tests.yml"
       - "tools/giza_spatial/**"
       - "tests/giza_spatial/**"
+      - "requirements-giza-signal.txt"
       - "schemas/giza_spatial_evidence.schema.json"
       - "schemas/giza_ambient_vibration_manifest.schema.json"
       - "examples/giza_spatial/**"
