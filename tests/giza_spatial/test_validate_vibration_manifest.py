@@ -223,5 +223,23 @@ class VibrationManifestTests(unittest.TestCase):
         self.assertIn("JSON Schema $", stderr.getvalue())
 
 
+    def test_semantic_validator_handles_unhashable_enum_values(self):
+        payload = make_manifest("a" * 64)
+        dataset = payload["datasets"][0]
+        dataset["source"]["origin"] = ["user_supplied"]
+        dataset["instrument"]["sensor_type"] = ["seismometer"]
+        dataset["acquisition"]["time_standard"] = ["UTC"]
+        dataset["channels"][0]["component"] = ["vertical"]
+        dataset["channels"][0]["unit"] = ["m/s"]
+        dataset["files"][0]["role"] = ["raw"]
+        dataset["files"][0]["file_format"] = ["mseed"]
+        dataset["quality"]["status"] = ["received_unchecked"]
+
+        errors, _ = validate_manifest_payload(payload)
+        self.assertGreaterEqual(len(errors), 8)
+        self.assertTrue(any("unsupported component" in error for error in errors))
+        self.assertTrue(any("unsupported quality.status" in error for error in errors))
+
+
 if __name__ == "__main__":
     unittest.main()
