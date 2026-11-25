@@ -20,6 +20,21 @@ from typing import Any
 
 SHA256_RE = re.compile(r"^[0-9a-fA-F]{64}$")
 REQUIRED_COMPONENTS = {"vertical", "north", "east"}
+ALLOWED_SOURCE_ORIGINS = {
+    "primary_fieldwork", "primary_archive", "official_publication",
+    "secondary_publication", "user_supplied", "derived", "unknown"
+}
+ALLOWED_SENSOR_TYPES = {
+    "seismometer", "geophone", "accelerometer", "velocity_sensor", "other", "unknown"
+}
+ALLOWED_COMPONENTS = {"vertical", "north", "east", "other", "unknown"}
+ALLOWED_UNITS = {"counts", "m/s", "m/s2", "m", "unknown"}
+ALLOWED_FILE_ROLES = {
+    "raw", "calibrated", "oriented", "segmented", "processed",
+    "derived", "metadata", "report", "field_photo"
+}
+ALLOWED_FILE_FORMATS = {"mseed", "sac", "csv", "ascii", "wav", "seg2", "other"}
+DATASET_ID_RE = re.compile(r"^[A-Z0-9][A-Z0-9._:-]*$")
 
 
 def _is_number(value: Any) -> bool:
@@ -106,6 +121,8 @@ def validate_manifest_payload(
         dataset_id = dataset.get("dataset_id")
         if not isinstance(dataset_id, str) or not dataset_id.strip():
             errors.append(f"{prefix}: dataset_id is required")
+        elif not DATASET_ID_RE.fullmatch(dataset_id):
+            errors.append(f"{prefix}: dataset_id contains unsupported characters")
         elif dataset_id in dataset_ids:
             errors.append(f"{prefix}: duplicate dataset_id {dataset_id!r}")
         else:
@@ -114,6 +131,8 @@ def validate_manifest_payload(
         source = dataset.get("source")
         if not isinstance(source, dict) or not source.get("origin") or not source.get("title"):
             errors.append(f"{prefix}: source.origin and source.title are required")
+        elif source.get("origin") not in ALLOWED_SOURCE_ORIGINS:
+            errors.append(f"{prefix}: unsupported source.origin {source.get('origin')!r}")
 
         station = dataset.get("station")
         if not isinstance(station, dict) or not station.get("station_id"):
@@ -132,6 +151,8 @@ def validate_manifest_payload(
         instrument = dataset.get("instrument")
         if not isinstance(instrument, dict) or not instrument.get("sensor_type") or not instrument.get("model"):
             errors.append(f"{prefix}: instrument.sensor_type and instrument.model are required")
+        elif instrument.get("sensor_type") not in ALLOWED_SENSOR_TYPES:
+            errors.append(f"{prefix}: unsupported instrument.sensor_type {instrument.get('sensor_type')!r}")
 
         acquisition = dataset.get("acquisition")
         if not isinstance(acquisition, dict):
@@ -148,6 +169,23 @@ def validate_manifest_payload(
         sample_count = acquisition.get("sample_count")
         if not isinstance(sample_count, int) or isinstance(sample_count, bool) or sample_count < 1:
             errors.append(f"{prefix}: sample_count must be a positive integer")
+        if acquisition.get("time_standard") not in {"UTC", "GPS", "local_with_offset", "unknown"}:
+            errors.append(f"{prefix}: unsupported time_standard {acquisition.get('time_standard')!r}")
+        if acquisition.get("time_standard") == "unknown":
+            warnings.append(f"{prefix}: time standard is unknown")
+        nominal_duration = acquisition.get("nominal_duration_s")
+        if nominal_duration is not None and (not _is_number(nominal_duration) or float(nominal_duration) <= 0):
+            errors.append(f"{prefix}: nominal_duration_s must be positive when supplied")
+        if start is not None and end is not None and _is_number(sample_rate) and isinstance(sample_count, int) and sample_count > 0:
+            elapsed = (end - start).total_seconds()
+            expected = sample_count / float(sample_rate)
+            tolerance = max(2.0 / float(sample_rate), 0.005 * expected)
+            if abs(elapsed - expected) > tolerance:
+                warnings.append(
+                    f"{prefix}: timestamp duration ({elapsed:.6g}s) differs from "
+                    f"sample_count/sample_rate ({expected:.6g}s); confirm whether end_time "
+                    "marks the final sample or the end boundary"
+                )
         if acquisition.get("time_standard") == "unknown":
             warnings.append(f"{prefix}: time standard is unknown")
 
@@ -170,10 +208,21 @@ def validate_manifest_payload(
             else:
                 channel_ids.add(channel_id)
             component = channel.get("component")
-            if isinstance(component, str):
+            if component not in ALLOWED_COMPONENTS:
+                errors.append(f"{channel_prefix}: unsupported component {component!r}")
+            elif isinstance(component, str):
                 if component in components and component in REQUIRED_COMPONENTS:
                     errors.append(f"{channel_prefix}: duplicate component {component!r}")
                 components.add(component)
+            unit = channel.get("unit")
+            if unit not in ALLOWED_UNITS:
+                errors.append(f"{channel_prefix}: unsupported unit {unit!r}")
+            azimuth = channel.get("azimuth_deg")
+            if azimuth is not None and (not _is_number(azimuth) or not 0 <= float(azimuth) <= 360):
+                errors.append(f"{channel_prefix}: azimuth_deg must be between 0 and 360")
+            dip = channel.get("dip_deg")
+            if dip is not None and (not _is_number(dip) or not -90 <= float(dip) <= 90):
+                errors.append(f"{channel_prefix}: dip_deg must be between -90 and 90")
             if channel.get("unit") == "counts" and not _is_number(channel.get("sensitivity")):
                 warnings.append(
                     f"{channel_prefix}: counts channel has no documented positive sensitivity; "
@@ -197,6 +246,7 @@ def validate_manifest_payload(
         file_ids: set[str] = set()
         roles: set[str] = set()
         file_paths: set[str] = set()
+        derived_refs: list[tuple[str, list[str]]] = []
         for file_index, file_record in enumerate(files):
             file_prefix = f"{prefix}.files[{file_index}]"
             if not isinstance(file_record, dict):
@@ -212,8 +262,18 @@ def validate_manifest_payload(
                 file_ids.add(file_id)
 
             role = file_record.get("role")
-            if isinstance(role, str):
+            if role not in ALLOWED_FILE_ROLES:
+                errors.append(f"{file_prefix}: unsupported file role {role!r}")
+            elif isinstance(role, str):
                 roles.add(role)
+            file_format = file_record.get("file_format")
+            if file_format not in ALLOWED_FILE_FORMATS:
+                errors.append(f"{file_prefix}: unsupported file_format {file_format!r}")
+            derived = file_record.get("derived_from_file_ids", [])
+            if not isinstance(derived, list) or any(not isinstance(x, str) for x in derived):
+                errors.append(f"{file_prefix}: derived_from_file_ids must be an array of strings")
+            else:
+                derived_refs.append((file_prefix, derived))
             raw_path = file_record.get("path")
             if isinstance(raw_path, str):
                 if raw_path in file_paths:
@@ -228,13 +288,30 @@ def validate_manifest_payload(
             if verify_files and resolved is not None:
                 if not resolved.is_file():
                     errors.append(f"{file_prefix}: file does not exist: {raw_path}")
-                elif isinstance(expected_hash, str) and SHA256_RE.fullmatch(expected_hash):
-                    actual = _sha256(resolved)
-                    if actual.lower() != expected_hash.lower():
+                else:
+                    declared_size = file_record.get("size_bytes")
+                    if declared_size is not None and (
+                        not isinstance(declared_size, int) or isinstance(declared_size, bool)
+                        or declared_size < 0
+                    ):
+                        errors.append(f"{file_prefix}: size_bytes must be a non-negative integer")
+                    elif isinstance(declared_size, int) and resolved.stat().st_size != declared_size:
                         errors.append(
-                            f"{file_prefix}: SHA-256 mismatch for {raw_path}; expected "
-                            f"{expected_hash.lower()}, got {actual}"
+                            f"{file_prefix}: size_bytes mismatch for {raw_path}; "
+                            f"manifest={declared_size}, actual={resolved.stat().st_size}"
                         )
+                    if isinstance(expected_hash, str) and SHA256_RE.fullmatch(expected_hash):
+                        actual = _sha256(resolved)
+                        if actual.lower() != expected_hash.lower():
+                            errors.append(
+                                f"{file_prefix}: SHA-256 mismatch for {raw_path}; expected "
+                                f"{expected_hash.lower()}, got {actual}"
+                            )
+
+        for file_prefix, refs in derived_refs:
+            for ref in refs:
+                if ref not in file_ids:
+                    errors.append(f"{file_prefix}: derived_from_file_id {ref!r} does not exist in this dataset")
 
         if "raw" not in roles:
             errors.append(f"{prefix}: at least one raw file record is required")
@@ -243,6 +320,16 @@ def validate_manifest_payload(
         if not isinstance(quality, dict):
             errors.append(f"{prefix}: quality object is required")
         else:
+            allowed_quality = {
+                "status": {"received_unchecked", "metadata_checked", "integrity_checked", "processed", "validated", "quarantined"},
+                "calibration_status": {"documented", "partial", "unknown", "not_applicable"},
+                "orientation_status": {"documented", "partial", "unknown", "not_applicable"},
+                "timing_status": {"documented", "partial", "unknown"},
+                "coordinate_status": {"documented", "partial", "unknown"}
+            }
+            for field, allowed in allowed_quality.items():
+                if quality.get(field) not in allowed:
+                    errors.append(f"{prefix}: unsupported quality.{field} value {quality.get(field)!r}")
             for field in ("calibration_status", "orientation_status", "timing_status", "coordinate_status"):
                 if quality.get(field) in {"unknown", "partial"}:
                     warnings.append(f"{prefix}: quality.{field} is {quality.get(field)}")
