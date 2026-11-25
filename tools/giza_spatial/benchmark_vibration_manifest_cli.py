@@ -252,6 +252,9 @@ def _run_batch(
                 "return_code": result["return_code"],
                 "stdout_sha256": result["stdout_sha256"],
                 "stderr_sha256": result["stderr_sha256"],
+                "rss_peak_sampled_bytes": result["rss_peak_sampled_bytes"],
+                "rss_first_sample_bytes": result["rss_first_sample_bytes"],
+                "rss_sample_count": result["rss_sample_count"],
             }
             for result in results
         ],
@@ -432,7 +435,7 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
                 "batch_wall_seconds_min": min(batch_times),
                 "batch_wall_seconds_median": statistics.median(batch_times),
                 "batch_wall_seconds_max": max(batch_times),
-                "max_rss_sampled_bytes_across_processes": max(rss_peaks) if rss_peaks else None,
+                "max_per_process_rss_sampled_bytes": max(rss_peaks) if rss_peaks else None,
                 "rss_samples_total": sum(
                     item["rss_sample_count"]
                     for batch in measurements
