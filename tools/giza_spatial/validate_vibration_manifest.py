@@ -49,6 +49,10 @@ def _is_number(value: Any) -> bool:
     return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(float(value))
 
 
+def _is_allowed_string(value: Any, allowed: set[str]) -> bool:
+    return isinstance(value, str) and value in allowed
+
+
 def _parse_aware_datetime(value: Any, label: str, errors: list[str]) -> datetime | None:
     if not isinstance(value, str) or not value.strip():
         errors.append(f"{label}: missing ISO-8601 datetime")
@@ -139,7 +143,7 @@ def validate_manifest_payload(
         source = dataset.get("source")
         if not isinstance(source, dict) or not source.get("origin") or not source.get("title"):
             errors.append(f"{prefix}: source.origin and source.title are required")
-        elif source.get("origin") not in ALLOWED_SOURCE_ORIGINS:
+        elif not _is_allowed_string(source.get("origin"), ALLOWED_SOURCE_ORIGINS):
             errors.append(f"{prefix}: unsupported source.origin {source.get('origin')!r}")
 
         station = dataset.get("station")
@@ -159,7 +163,7 @@ def validate_manifest_payload(
         instrument = dataset.get("instrument")
         if not isinstance(instrument, dict) or not instrument.get("sensor_type") or not instrument.get("model"):
             errors.append(f"{prefix}: instrument.sensor_type and instrument.model are required")
-        elif instrument.get("sensor_type") not in ALLOWED_SENSOR_TYPES:
+        elif not _is_allowed_string(instrument.get("sensor_type"), ALLOWED_SENSOR_TYPES):
             errors.append(f"{prefix}: unsupported instrument.sensor_type {instrument.get('sensor_type')!r}")
 
         acquisition = dataset.get("acquisition")
@@ -177,7 +181,7 @@ def validate_manifest_payload(
         sample_count = acquisition.get("sample_count")
         if not isinstance(sample_count, int) or isinstance(sample_count, bool) or sample_count < 1:
             errors.append(f"{prefix}: sample_count must be a positive integer")
-        if acquisition.get("time_standard") not in {"UTC", "GPS", "local_with_offset", "unknown"}:
+        if not _is_allowed_string(acquisition.get("time_standard"), {"UTC", "GPS", "local_with_offset", "unknown"}):
             errors.append(f"{prefix}: unsupported time_standard {acquisition.get('time_standard')!r}")
         if acquisition.get("time_standard") == "unknown":
             warnings.append(f"{prefix}: time standard is unknown")
@@ -216,14 +220,14 @@ def validate_manifest_payload(
             else:
                 channel_ids.add(channel_id)
             component = channel.get("component")
-            if component not in ALLOWED_COMPONENTS:
+            if not _is_allowed_string(component, ALLOWED_COMPONENTS):
                 errors.append(f"{channel_prefix}: unsupported component {component!r}")
             elif isinstance(component, str):
                 if component in components and component in REQUIRED_COMPONENTS:
                     errors.append(f"{channel_prefix}: duplicate component {component!r}")
                 components.add(component)
             unit = channel.get("unit")
-            if unit not in ALLOWED_UNITS:
+            if not _is_allowed_string(unit, ALLOWED_UNITS):
                 errors.append(f"{channel_prefix}: unsupported unit {unit!r}")
             azimuth = channel.get("azimuth_deg")
             if azimuth is not None and (not _is_number(azimuth) or not 0 <= float(azimuth) <= 360):
@@ -270,12 +274,12 @@ def validate_manifest_payload(
                 file_ids.add(file_id)
 
             role = file_record.get("role")
-            if role not in ALLOWED_FILE_ROLES:
+            if not _is_allowed_string(role, ALLOWED_FILE_ROLES):
                 errors.append(f"{file_prefix}: unsupported file role {role!r}")
             elif isinstance(role, str):
                 roles.add(role)
             file_format = file_record.get("file_format")
-            if file_format not in ALLOWED_FILE_FORMATS:
+            if not _is_allowed_string(file_format, ALLOWED_FILE_FORMATS):
                 errors.append(f"{file_prefix}: unsupported file_format {file_format!r}")
             derived = file_record.get("derived_from_file_ids", [])
             if not isinstance(derived, list) or any(not isinstance(x, str) for x in derived):
@@ -336,10 +340,10 @@ def validate_manifest_payload(
                 "coordinate_status": {"documented", "partial", "unknown"}
             }
             for field, allowed in allowed_quality.items():
-                if quality.get(field) not in allowed:
+                if not _is_allowed_string(quality.get(field), allowed):
                     errors.append(f"{prefix}: unsupported quality.{field} value {quality.get(field)!r}")
             for field in ("calibration_status", "orientation_status", "timing_status", "coordinate_status"):
-                if quality.get(field) in {"unknown", "partial"}:
+                if isinstance(quality.get(field), str) and quality.get(field) in {"unknown", "partial"}:
                     warnings.append(f"{prefix}: quality.{field} is {quality.get(field)}")
 
     return errors, warnings
