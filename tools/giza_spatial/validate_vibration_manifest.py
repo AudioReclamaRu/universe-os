@@ -15,6 +15,7 @@ import math
 import re
 import sys
 from datetime import datetime
+from decimal import Decimal, InvalidOperation
 from pathlib import Path, PureWindowsPath
 from typing import Any
 from urllib.parse import unquote, urlsplit
@@ -67,12 +68,25 @@ def _reject_duplicate_json_keys(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
     return result
 
 
+def _strict_json_float(token: str) -> float:
+    try:
+        value = float(token)
+        exact = Decimal(token)
+    except (ValueError, InvalidOperation, OverflowError) as exc:
+        raise ValueError(f"invalid JSON number: {token}") from exc
+    if not math.isfinite(value):
+        raise ValueError(f"JSON number exceeds supported finite range: {token}")
+    if value == 0.0 and not exact.is_zero():
+        raise ValueError(f"JSON number underflows supported numeric precision: {token}")
+    return value
+
+
 def _strict_json_loads(raw: str) -> Any:
     """Parse standard JSON while rejecting duplicate keys and NaN/Infinity."""
     return json.loads(
         raw,
         object_pairs_hook=_reject_duplicate_json_keys,
-        parse_constant=_reject_nonstandard_json_constant,
+        parse_constant=_reject_nonstandard_json_constant,\n        parse_float=_strict_json_float,
     )
 
 
@@ -166,7 +180,12 @@ def _validate_local_schema_references(schema: Any) -> None:
 
 
 def _is_number(value: Any) -> bool:
-    return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(float(value))
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        return False
+    try:
+        return math.isfinite(float(value))
+    except (OverflowError, ValueError):
+        return False
 
 
 def _is_allowed_string(value: Any, allowed: set[str]) -> bool:
@@ -320,14 +339,18 @@ def validate_manifest_payload(
         if (start is not None and end is not None and _is_number(sample_rate)
                 and float(sample_rate) > 0 and _is_integer(sample_count) and sample_count > 0):
             elapsed = (end - start).total_seconds()
-            expected = int(sample_count) / float(sample_rate)
-            tolerance = max(2.0 / float(sample_rate), 0.005 * expected)
-            if abs(elapsed - expected) > tolerance:
-                warnings.append(
-                    f"{prefix}: timestamp duration ({elapsed:.6g}s) differs from "
-                    f"sample_count/sample_rate ({expected:.6g}s); confirm whether end_time "
-                    "marks the final sample or the end boundary"
-                )
+            try:
+                expected = int(sample_count) / float(sample_rate)
+            except OverflowError:
+                errors.append(f"{prefix}: sample_count exceeds the supported duration calculation range")
+            else:
+                tolerance = max(2.0 / float(sample_rate), 0.005 * expected)
+                if abs(elapsed - expected) > tolerance:
+                    warnings.append(
+                        f"{prefix}: timestamp duration ({elapsed:.6g}s) differs from "
+                        f"sample_count/sample_rate ({expected:.6g}s); confirm whether end_time "
+                        "marks the final sample or the end boundary"
+                    )
 
 
         channels = dataset.get("channels")
