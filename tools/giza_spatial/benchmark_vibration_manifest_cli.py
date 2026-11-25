@@ -14,6 +14,7 @@ import importlib.metadata
 import json
 import os
 import platform
+import psutil
 import statistics
 import subprocess
 import sys
@@ -145,6 +146,7 @@ def _run_one(
     verify_files: bool,
     seed: str,
     timeout_seconds: int,
+    memory_sample_interval_ms: int,
 ) -> dict[str, Any]:
     command = [sys.executable, str(VALIDATOR), "--manifest", str(manifest_path)]
     if verify_files:
@@ -153,24 +155,57 @@ def _run_one(
     environment = os.environ.copy()
     environment["PYTHONHASHSEED"] = seed
     started = time.perf_counter()
-    completed = subprocess.run(
+    process = subprocess.Popen(
         command,
         cwd=REPOSITORY_ROOT,
         env=environment,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
-        check=False,
-        timeout=timeout_seconds,
     )
+    monitored_process = psutil.Process(process.pid)
+    rss_samples: list[int] = []
+    sample_interval = memory_sample_interval_ms / 1000.0
+
+    try:
+        while True:
+            try:
+                rss_samples.append(int(monitored_process.memory_info().rss))
+            except psutil.NoSuchProcess:
+                pass
+
+            if process.poll() is not None:
+                break
+
+            elapsed = time.perf_counter() - started
+            if elapsed >= timeout_seconds:
+                process.kill()
+                stdout, stderr = process.communicate()
+                raise subprocess.TimeoutExpired(
+                    command,
+                    timeout_seconds,
+                    output=stdout,
+                    stderr=stderr,
+                )
+            time.sleep(min(sample_interval, max(0.001, timeout_seconds - elapsed)))
+        stdout, stderr = process.communicate()
+    except BaseException:
+        if process.poll() is None:
+            process.kill()
+        process.communicate()
+        raise
+
     elapsed = time.perf_counter() - started
     return {
         "hash_seed": seed,
         "elapsed_seconds": elapsed,
-        "return_code": completed.returncode,
-        "stdout": completed.stdout,
-        "stderr": completed.stderr,
-        "stdout_sha256": sha256_bytes(completed.stdout),
-        "stderr_sha256": sha256_bytes(completed.stderr),
+        "return_code": process.returncode,
+        "stdout": stdout,
+        "stderr": stderr,
+        "stdout_sha256": sha256_bytes(stdout),
+        "stderr_sha256": sha256_bytes(stderr),
+        "rss_peak_sampled_bytes": max(rss_samples) if rss_samples else None,
+        "rss_first_sample_bytes": rss_samples[0] if rss_samples else None,
+        "rss_sample_count": len(rss_samples),
     }
 
 
@@ -180,13 +215,20 @@ def _run_batch(
     concurrency: int,
     iteration: int,
     timeout_seconds: int,
+    memory_sample_interval_ms: int,
 ) -> tuple[dict[str, Any], list[dict[str, Any]]]:
     seeds = [HASH_SEEDS[(iteration * concurrency + offset) % len(HASH_SEEDS)] for offset in range(concurrency)]
     started = time.perf_counter()
     with ThreadPoolExecutor(max_workers=concurrency) as executor:
         results = list(
             executor.map(
-                lambda seed: _run_one(manifest_path, verify_files, seed, timeout_seconds),
+                lambda seed: _run_one(
+                    manifest_path,
+                    verify_files,
+                    seed,
+                    timeout_seconds,
+                    memory_sample_interval_ms,
+                ),
                 seeds,
             )
         )
@@ -260,6 +302,8 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
         raise ValueError("--warmup must be between 0 and 10")
     if args.timeout_seconds < 1 or args.timeout_seconds > 3600:
         raise ValueError("--timeout-seconds must be between 1 and 3600")
+    if args.memory_sample_interval_ms < 1 or args.memory_sample_interval_ms > 1000:
+        raise ValueError("--memory-sample-interval-ms must be between 1 and 1000")
     if not VALIDATOR.is_file() or not SCHEMA.is_file():
         raise FileNotFoundError("validator or default JSON Schema is missing from this repository checkout")
 
@@ -296,6 +340,7 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
                 args.concurrency,
                 warmup_index,
                 args.timeout_seconds,
+                args.memory_sample_interval_ms,
             )
             _validate_results(results, args.datasets)
 
@@ -338,6 +383,13 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
                 "jsonschema": _version("jsonschema"),
                 "revision": os.environ.get("GITHUB_SHA"),
             },
+            "memory_measurement": {
+                "metric": "RSS bytes",
+                "source": "psutil.Process.memory_info().rss",
+                "sampling_interval_ms": args.memory_sample_interval_ms,
+                "peak_definition": "maximum sampled RSS for each CLI process; a peak between samples may be missed",
+                "shared_memory_note": "RSS includes shared memory mapped by the process; per-process peaks must not be summed as unique physical memory",
+            },
             "artifacts": {
                 "validator_sha256": validator_hash,
                 "schema_sha256": schema_hash,
@@ -371,6 +423,17 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
                 "batch_wall_seconds_min": min(batch_times),
                 "batch_wall_seconds_median": statistics.median(batch_times),
                 "batch_wall_seconds_max": max(batch_times),
+                "max_rss_sampled_bytes_across_processes": max(
+                    item["rss_peak_sampled_bytes"]
+                    for batch in measurements
+                    for item in batch["processes"]
+                    if item["rss_peak_sampled_bytes"] is not None
+                ),
+                "rss_samples_total": sum(
+                    item["rss_sample_count"]
+                    for batch in measurements
+                    for item in batch["processes"]
+                ),
                 "validated_stdout_sha256": sha256_bytes(baseline[1]) if baseline else None,
                 "validated_stderr_sha256": sha256_bytes(baseline[2]) if baseline else None,
             },
@@ -379,7 +442,9 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
                 "All inputs are synthetic and do not represent Giza field measurements.",
                 "Elapsed times include Python process startup, imports, schema loading and validation.",
                 "The process timing is an end-to-end CLI measurement, not an isolated function benchmark.",
-                "Memory usage and storage-device cache state are not measured by this tool.",
+                "RSS is sampled, not captured as an OS-maintained lifetime peak; peaks between samples may be missed.",
+                "Per-process RSS includes shared pages and must not be summed as unique physical memory.",
+                "Storage-device cache state is not measured by this tool.",
                 "The results do not establish an upper capacity limit or a production performance target.",
             ],
         }
@@ -395,6 +460,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--repeat", type=int, default=3, help="Measured batches (1..100)")
     parser.add_argument("--warmup", type=int, default=1, help="Unrecorded warm-up batches (0..10)")
     parser.add_argument("--timeout-seconds", type=int, default=120, help="Timeout for each CLI process (1..3600)")
+    parser.add_argument("--memory-sample-interval-ms", type=int, default=10, help="RSS polling interval in milliseconds (1..1000)")
     parser.add_argument("--output", type=Path, default=None, help="Optional path for a JSON report copy")
     return parser
 
