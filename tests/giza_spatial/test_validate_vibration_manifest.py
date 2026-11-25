@@ -10,6 +10,14 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "tools" / "giza_spatial"))
 from validate_vibration_manifest import (
+    ALLOWED_COMPONENTS,
+    ALLOWED_FILE_FORMATS,
+    ALLOWED_FILE_ROLES,
+    ALLOWED_QUALITY_VALUES,
+    ALLOWED_SENSOR_TYPES,
+    ALLOWED_SOURCE_ORIGINS,
+    ALLOWED_TIME_STANDARDS,
+    ALLOWED_UNITS,
     DEFAULT_SCHEMA_PATH,
     main,
     validate_json_schema_payload,
@@ -205,6 +213,28 @@ class VibrationManifestTests(unittest.TestCase):
         payload["datasets"][0]["acquisition"]["start_time"] = "2026-02-30T00:00:00Z"
         errors = validate_json_schema_payload(payload, DEFAULT_SCHEMA_PATH)
         self.assertTrue(any("start_time" in error for error in errors))
+
+    def test_python_enum_contracts_match_json_schema(self):
+        schema = json.loads(DEFAULT_SCHEMA_PATH.read_text(encoding="utf-8"))
+        defs = schema["$defs"]
+
+        enum_bindings = {
+            "source.origin": (defs["source"]["properties"]["origin"]["enum"], ALLOWED_SOURCE_ORIGINS),
+            "instrument.sensor_type": (defs["instrument"]["properties"]["sensor_type"]["enum"], ALLOWED_SENSOR_TYPES),
+            "channel.component": (defs["channel"]["properties"]["component"]["enum"], ALLOWED_COMPONENTS),
+            "channel.unit": (defs["channel"]["properties"]["unit"]["enum"], ALLOWED_UNITS),
+            "acquisition.time_standard": (defs["acquisition"]["properties"]["time_standard"]["enum"], ALLOWED_TIME_STANDARDS),
+            "file.role": (defs["file"]["properties"]["role"]["enum"], ALLOWED_FILE_ROLES),
+            "file.file_format": (defs["file"]["properties"]["file_format"]["enum"], ALLOWED_FILE_FORMATS),
+        }
+        for field, (schema_values, python_values) in enum_bindings.items():
+            with self.subTest(field=field):
+                self.assertEqual(set(schema_values), python_values)
+
+        for field, python_values in ALLOWED_QUALITY_VALUES.items():
+            with self.subTest(field=f"quality.{field}"):
+                schema_values = defs["quality"]["properties"][field]["enum"]
+                self.assertEqual(set(schema_values), python_values)
 
     def test_schema_requires_all_quality_status_fields(self):
         payload = make_manifest("a" * 64)
