@@ -30,8 +30,13 @@ permissions:
 
 jobs:
   coordinate-transform-and-vibration-intake-tests:
-    name: Coordinate transform and vibration intake tests
-    runs-on: ubuntu-latest
+    name: GIZA spatial tools / ${{ matrix.os }} / Python ${{ matrix.python-version }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python-version: ["3.11"]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -39,7 +44,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: ${{ matrix.python-version }}
 
       - name: Install signal processing dependency
         run: python -m pip install -r requirements-giza-signal.txt
