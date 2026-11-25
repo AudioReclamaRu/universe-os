@@ -559,6 +559,28 @@ class VibrationManifestTests(unittest.TestCase):
                     stderr.getvalue(),
                 )
 
+    def test_schema_reference_failure_order_is_deterministic(self):
+        schema = {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "type": "object",
+            "$defs": {
+                "first_definition": {"$ref": "https://example.invalid/definition.json"}
+            },
+            "properties": {
+                "payload": {"$ref": "https://example.invalid/property.json"}
+            },
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            schema_path = Path(tmp) / "schema.json"
+            schema_path.write_text(json.dumps(schema), encoding="utf-8")
+            messages = []
+            for _ in range(3):
+                with self.assertRaises(ValueError) as caught:
+                    validate_json_schema_payload({}, schema_path)
+                messages.append(str(caught.exception))
+        self.assertEqual(messages, [messages[0]] * 3)
+        self.assertIn("$.$defs.first_definition.$ref", messages[0])
+
     def test_schema_reference_in_const_is_treated_as_literal_data(self):
         schema = {
             "$schema": "https://json-schema.org/draft/2020-12/schema",
