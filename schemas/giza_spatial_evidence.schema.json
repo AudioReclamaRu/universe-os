@@ -1,0 +1,276 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/AudioReclamaRu/universe-os/blob/research/universe-3-semantic-atlas-001/schemas/giza_spatial_evidence.schema.json",
+  "title": "GIZA PRIME Spatial Evidence Manifest",
+  "description": "Machine-readable register for spatial datasets, features and assertions. The total Beyond-Observation register is the Universe itself and is not a per-record data category.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "project", "records", "relations"],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "title": { "type": "string", "minLength": 1 },
+        "branch": { "type": "string" },
+        "description": { "type": "string" }
+      }
+    },
+    "records": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/record" }
+    },
+    "relations": {
+      "type": "array",
+      "description": "Explicit claims linking records. Relations are not inferred from proximity or shape alone.",
+      "items": { "$ref": "#/$defs/relation" }
+    }
+  },
+  "$defs": {
+    "coordinateSystem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["system_name", "system_kind", "status"],
+      "properties": {
+        "system_name": { "type": "string", "minLength": 1 },
+        "system_kind": {
+          "enum": ["local_grid", "projected", "geographic", "engineering", "image_pixel", "unknown", "other"]
+        },
+        "authority": { "type": ["string", "null"] },
+        "code": { "type": ["string", "null"] },
+        "axis_order": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2
+        },
+        "axis_direction": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2
+        },
+        "horizontal_unit": { "type": ["string", "null"] },
+        "origin_description": { "type": ["string", "null"] },
+        "orientation_reference": { "type": ["string", "null"] },
+        "orientation_epoch": { "type": ["string", "null"] },
+        "horizontal_datum": { "type": ["string", "null"] },
+        "vertical_datum": { "type": ["string", "null"] },
+        "height_type": {
+          "enum": ["local", "orthometric", "ellipsoidal", "depth", "unknown", "not_applicable"]
+        },
+        "vertical_unit": { "type": ["string", "null"] },
+        "notes": { "type": "string" },
+        "status": {
+          "enum": ["documented", "partially_documented", "unknown", "reconstructed"]
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["origin", "title"],
+      "properties": {
+        "origin": {
+          "enum": ["primary_archive", "primary_fieldwork", "official_publication", "secondary_publication", "secondary_model", "user_derived", "unknown"]
+        },
+        "organization": { "type": ["string", "null"] },
+        "creator": { "type": ["string", "null"] },
+        "title": { "type": "string", "minLength": 1 },
+        "source_record_id": { "type": ["string", "null"] },
+        "source_uris": {
+          "type": "array",
+          "items": { "type": "string", "format": "uri" }
+        },
+        "citation": { "type": ["string", "null"] },
+        "license": { "type": ["string", "null"] },
+        "retrieved_at": { "type": ["string", "null"], "format": "date-time" }
+      }
+    },
+    "file": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "path", "sha256"],
+      "properties": {
+        "role": {
+          "enum": ["raw", "processed", "derived", "metadata", "visualization", "report"]
+        },
+        "path": { "type": "string", "minLength": 1 },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{64}$"
+        },
+        "media_type": { "type": ["string", "null"] },
+        "size_bytes": { "type": ["integer", "null"], "minimum": 0 },
+        "license": { "type": ["string", "null"] }
+      }
+    },
+    "quality": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "horizontal_accuracy_m": { "type": ["number", "null"], "minimum": 0 },
+        "vertical_accuracy_m": { "type": ["number", "null"], "minimum": 0 },
+        "resolution_m": { "type": ["number", "null"], "minimum": 0 },
+        "rmse_check_m": { "type": ["number", "null"], "minimum": 0 },
+        "control_point_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "independent_check_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "uncertainty_note": { "type": "string" }
+      }
+    },
+    "geometry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["representation", "native_coordinate_system"],
+      "properties": {
+        "representation": {
+          "enum": ["point", "line", "polygon", "surface", "volume", "point_cloud", "raster", "plan", "image", "document", "model", "unknown"]
+        },
+        "native_coordinate_system": {
+          "oneOf": [
+            { "$ref": "#/$defs/coordinateSystem" },
+            { "type": "null" }
+          ]
+        },
+        "normalized_coordinate_system": {
+          "oneOf": [
+            { "$ref": "#/$defs/coordinateSystem" },
+            { "type": "null" }
+          ]
+        },
+        "native_extent": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "required": ["min_x", "min_y", "max_x", "max_y"],
+          "properties": {
+            "min_x": { "type": "number" },
+            "min_y": { "type": "number" },
+            "max_x": { "type": "number" },
+            "max_y": { "type": "number" },
+            "min_z": { "type": ["number", "null"] },
+            "max_z": { "type": ["number", "null"] }
+          }
+        },
+        "normalized_extent": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "required": ["min_x", "min_y", "max_x", "max_y"],
+          "properties": {
+            "min_x": { "type": "number" },
+            "min_y": { "type": "number" },
+            "max_x": { "type": "number" },
+            "max_y": { "type": "number" },
+            "min_z": { "type": ["number", "null"] },
+            "max_z": { "type": ["number", "null"] }
+          }
+        },
+        "geometry_file_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "transform_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "notes": { "type": "string" }
+      }
+    },
+    "record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id", "title", "record_type", "knowledge_register",
+        "epistemic_status", "source", "geometry", "quality",
+        "files", "derived_from"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Z0-9][A-Z0-9._:-]*$"
+        },
+        "title": { "type": "string", "minLength": 1 },
+        "description": { "type": "string" },
+        "feature_or_dataset": {
+          "enum": ["dataset", "feature", "survey_station", "control_point", "reconstructed_state", "claim_support", "other"]
+        },
+        "record_type": {
+          "enum": ["measurement", "derived", "reconstruction", "model", "hypothesis", "unknown", "visualization"]
+        },
+        "knowledge_register": {
+          "description": "Human-understanding register only. The total Beyond-Observation is the Universe itself and must not be assigned to an individual data record.",
+          "enum": ["observed", "unobserved"]
+        },
+        "epistemic_status": {
+          "enum": ["measured", "registered", "derived", "reconstructed", "modeled", "hypothetical", "unknown", "rejected", "visualized"]
+        },
+        "referent_id": { "type": ["string", "null"] },
+        "feature_name": { "type": ["string", "null"] },
+        "time_start": { "type": ["string", "null"], "format": "date-time" },
+        "time_end": { "type": ["string", "null"], "format": "date-time" },
+        "source": { "$ref": "#/$defs/source" },
+        "geometry": { "$ref": "#/$defs/geometry" },
+        "quality": { "$ref": "#/$defs/quality" },
+        "files": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/file" }
+        },
+        "derived_from": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "transform_history": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "method": { "type": ["string", "null"] },
+        "instrument": { "type": ["string", "null"] },
+        "operator": { "type": ["string", "null"] },
+        "acquisition_date": { "type": ["string", "null"], "format": "date-time" },
+        "notes": { "type": "string" }
+      }
+    },
+    "relation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "subject_id", "predicate", "object_id", "claim_status", "evidence_record_ids"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[A-Z0-9][A-Z0-9._:-]*$" },
+        "subject_id": { "type": "string" },
+        "predicate": {
+          "enum": [
+            "located_relative_to", "adjacent_to", "touches", "inside",
+            "contains", "part_of", "structurally_connected_to",
+            "functionally_participates_in", "exchanges_with",
+            "transmits_to", "interacts_with", "causally_affects",
+            "same_referent_as", "derived_from", "other"
+          ]
+        },
+        "object_id": { "type": "string" },
+        "claim_status": {
+          "enum": ["observed", "derived", "reconstructed", "modeled", "hypothesis", "rejected", "unknown"]
+        },
+        "knowledge_register": {
+          "enum": ["observed", "unobserved"]
+        },
+        "evidence_record_ids": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "method": { "type": ["string", "null"] },
+        "confidence": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+        "uncertainty_note": { "type": "string" },
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}
