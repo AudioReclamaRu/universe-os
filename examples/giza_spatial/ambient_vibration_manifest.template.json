@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0",
+  "project": {
+    "id": "GIZA-PRIME-AMBIENT-VIBRATION",
+    "title": "GIZA PRIME ambient vibration intake",
+    "branch": "research/universe-3-semantic-atlas-001",
+    "description": "Empty intake template. No station coordinates, instrument settings, time series, spectra or physical parameters have been fabricated."
+  },
+  "datasets": []
+}
