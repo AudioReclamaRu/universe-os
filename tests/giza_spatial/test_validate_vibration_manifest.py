@@ -457,6 +457,77 @@ class VibrationManifestTests(unittest.TestCase):
                 self.assertEqual(exit_code, 2)
                 self.assertIn("duplicate JSON object key", stderr.getvalue())
 
+    def test_cli_rejects_invalid_top_level_manifest_shapes(self):
+        cases = {
+            "root_array": "[]",
+            "project_array": '{"schema_version":"1.0","project":[],"datasets":[]}',
+            "datasets_object": '{"schema_version":"1.0","project":{"id":"P","title":"T"},"datasets":{}}',
+        }
+        for name, raw in cases.items():
+            with self.subTest(name=name), tempfile.TemporaryDirectory() as tmp:
+                manifest_path = Path(tmp) / "manifest.json"
+                manifest_path.write_text(raw, encoding="utf-8")
+                stderr = io.StringIO()
+                with redirect_stderr(stderr):
+                    exit_code = main(["--manifest", str(manifest_path)])
+                self.assertEqual(exit_code, 2)
+                self.assertTrue(
+                    "JSON Schema" in stderr.getvalue() or "ERROR:" in stderr.getvalue(),
+                    stderr.getvalue(),
+                )
+
+    def test_cli_rejects_schema_that_is_invalid_under_draft_2020_12(self):
+        payload = make_manifest("a" * 64)
+        invalid_schema = {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "type": "not-a-valid-schema-type",
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            manifest_path = root / "manifest.json"
+            schema_path = root / "schema.json"
+            manifest_path.write_text(json.dumps(payload), encoding="utf-8")
+            schema_path.write_text(json.dumps(invalid_schema), encoding="utf-8")
+            stderr = io.StringIO()
+            with redirect_stderr(stderr):
+                exit_code = main([
+                    "--manifest", str(manifest_path),
+                    "--schema", str(schema_path)
+                ])
+        self.assertEqual(exit_code, 2)
+        self.assertIn("JSON Schema validation could not run", stderr.getvalue())
+
+    def test_cli_rejects_external_and_unresolved_schema_references(self):
+        schemas = {
+            "external": {
+                "$schema": "https://json-schema.org/draft/2020-12/schema",
+                "$ref": "https://example.invalid/external-schema.json",
+            },
+            "unresolved_local": {
+                "$schema": "https://json-schema.org/draft/2020-12/schema",
+                "$ref": "#/$defs/not_present",
+                "$defs": {},
+            },
+        }
+        payload = make_manifest("a" * 64)
+        for name, schema in schemas.items():
+            with self.subTest(name=name), tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp)
+                manifest_path = root / "manifest.json"
+                schema_path = root / "schema.json"
+                manifest_path.write_text(json.dumps(payload), encoding="utf-8")
+                schema_path.write_text(json.dumps(schema), encoding="utf-8")
+                stderr = io.StringIO()
+                with redirect_stderr(stderr):
+                    exit_code = main([
+                        "--manifest", str(manifest_path),
+                        "--schema", str(schema_path)
+                    ])
+                self.assertEqual(exit_code, 2)
+                self.assertIn("JSON Schema validation could not run", stderr.getvalue())
+                expected = "external schema references are not allowed" if name == "external" else "unresolved local JSON Pointer"
+                self.assertIn(expected, stderr.getvalue())
+
     def test_cli_rejects_duplicate_keys_inside_schema(self):
         payload = {
             "schema_version": "1.0",
