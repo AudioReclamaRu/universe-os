@@ -380,8 +380,8 @@ class CliDeterminismTests(unittest.TestCase):
                 verify_files=True,
                 protected_paths=(raw_path,),
             )
+            self.assertEqual(raw_path.stat().st_size, 4 * 1024 * 1024)
 
-        self.assertEqual(raw_path.stat().st_size, 4 * 1024 * 1024)
         self.assertEqual(returncode, 0)
         self.assertIn(b"VALID: 1 dataset(s)", stdout)
         self.assertEqual(stderr, b"")
