@@ -133,5 +133,44 @@ class VibrationManifestTests(unittest.TestCase):
         self.assertTrue(any("sample_rate_hz must be" in error for error in errors))
 
 
+    def test_rejects_unsupported_file_format(self):
+        payload = make_manifest("a" * 64)
+        payload["datasets"][0]["files"][0]["file_format"] = "invented"
+        errors, _ = validate_manifest_payload(payload)
+        self.assertTrue(any("unsupported file_format" in error for error in errors))
+
+    def test_rejects_derived_reference_to_missing_file(self):
+        payload = make_manifest("a" * 64)
+        payload["datasets"][0]["files"][0]["derived_from_file_ids"] = ["MISSING-RAW"]
+        errors, _ = validate_manifest_payload(payload)
+        self.assertTrue(any("does not exist in this dataset" in error for error in errors))
+
+    def test_warns_on_sample_duration_mismatch(self):
+        payload = make_manifest("a" * 64)
+        payload["datasets"][0]["acquisition"]["end_time"] = "2026-01-01T00:02:00Z"
+        errors, warnings = validate_manifest_payload(payload)
+        self.assertEqual(errors, [])
+        self.assertTrue(any("timestamp duration" in warning for warning in warnings))
+
+    def test_rejects_invalid_quality_status(self):
+        payload = make_manifest("a" * 64)
+        payload["datasets"][0]["quality"]["status"] = "looks-good"
+        errors, _ = validate_manifest_payload(payload)
+        self.assertTrue(any("unsupported quality.status" in error for error in errors))
+
+    def test_rejects_declared_file_size_mismatch(self):
+        raw_bytes = b"synthetic waveform bytes, not a real field record"
+        digest = hashlib.sha256(raw_bytes).hexdigest()
+        payload = make_manifest(digest)
+        payload["datasets"][0]["files"][0]["size_bytes"] = 1
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            raw_dir = root / "raw"
+            raw_dir.mkdir()
+            (raw_dir / "station01.mseed").write_bytes(raw_bytes)
+            errors, _ = validate_manifest_payload(payload, root=root, verify_files=True)
+        self.assertTrue(any("size_bytes mismatch" in error for error in errors))
+
+
 if __name__ == "__main__":
     unittest.main()
