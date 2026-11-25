@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import copy
+from concurrent.futures import ThreadPoolExecutor
 import hashlib
 import json
 import os
@@ -327,6 +328,116 @@ class CliDeterminismTests(unittest.TestCase):
         self.assertEqual(stdout, b"")
         self.assertIn(b"file does not exist: raw/missing.mseed", stderr)
         self.assertIn(b"SHA-256 mismatch for raw/wronghash.mseed", stderr)
+
+    def test_large_manifest_is_byte_stable_across_hash_seeds(self):
+        base_payload = make_manifest("a" * 64)
+        base_dataset = base_payload["datasets"][0]
+        datasets = []
+
+        for index in range(256):
+            dataset = copy.deepcopy(base_dataset)
+            dataset["dataset_id"] = f"VIB-BULK-{index:04d}"
+            dataset["title"] = f"Synthetic bulk dataset {index:04d}"
+            dataset["station"]["station_id"] = f"ST-BULK-{index:04d}"
+            dataset["files"][0]["file_id"] = f"RAW-BULK-{index:04d}"
+            dataset["files"][0]["path"] = f"raw/station-{index:04d}.mseed"
+            datasets.append(dataset)
+
+        payload = {
+            "schema_version": "1.0",
+            "project": {"id": "GIZA-BULK-TEST", "title": "Synthetic bulk manifest"},
+            "datasets": datasets,
+        }
+
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            manifest_path = Path(temporary_directory) / "manifest.json"
+            raw_manifest = write_json(manifest_path, payload)
+            self.assertGreater(len(raw_manifest), 100_000)
+
+            returncode, stdout, stderr = run_cli_across_hash_seeds(manifest_path)
+
+        self.assertEqual(returncode, 0)
+        self.assertIn(b"VALID: 256 dataset(s)", stdout)
+        self.assertEqual(stderr, b"")
+
+    def test_large_raw_file_hash_is_byte_stable_and_input_is_unchanged(self):
+        raw_bytes = bytes(range(256)) * 16_384
+        digest = hashlib.sha256(raw_bytes).hexdigest()
+        payload = make_manifest(digest)
+        payload["datasets"][0]["files"][0]["size_bytes"] = len(raw_bytes)
+
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            raw_directory = root / "raw"
+            raw_directory.mkdir()
+            raw_path = raw_directory / "station01.mseed"
+            raw_path.write_bytes(raw_bytes)
+            manifest_path = root / "manifest.json"
+            write_json(manifest_path, payload)
+
+            returncode, stdout, stderr = run_cli_across_hash_seeds(
+                manifest_path,
+                verify_files=True,
+                protected_paths=(raw_path,),
+            )
+
+        self.assertEqual(raw_path.stat().st_size, 4 * 1024 * 1024)
+        self.assertEqual(returncode, 0)
+        self.assertIn(b"VALID: 1 dataset(s)", stdout)
+        self.assertEqual(stderr, b"")
+
+    def test_parallel_cli_processes_produce_identical_results(self):
+        raw_bytes = b"parallel read-only CLI fixture" * 8192
+        digest = hashlib.sha256(raw_bytes).hexdigest()
+        payload = make_manifest(digest)
+
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            raw_directory = root / "raw"
+            raw_directory.mkdir()
+            raw_path = raw_directory / "station01.mseed"
+            raw_path.write_bytes(raw_bytes)
+            manifest_path = root / "manifest.json"
+            write_json(manifest_path, payload)
+
+            tracked_hashes = {
+                manifest_path: hashlib.sha256(manifest_path.read_bytes()).hexdigest(),
+                raw_path: hashlib.sha256(raw_path.read_bytes()).hexdigest(),
+            }
+            command = [
+                sys.executable,
+                str(VALIDATOR),
+                "--manifest",
+                str(manifest_path),
+                "--verify-files",
+            ]
+            seeds = ("1", "73", "987654321", "314159", "42", "2026")
+
+            def invoke(seed: str) -> tuple[int, bytes, bytes]:
+                environment = os.environ.copy()
+                environment["PYTHONHASHSEED"] = seed
+                completed = subprocess.run(
+                    command,
+                    cwd=REPOSITORY_ROOT,
+                    env=environment,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE,
+                    check=False,
+                    timeout=120,
+                )
+                return completed.returncode, completed.stdout, completed.stderr
+
+            with ThreadPoolExecutor(max_workers=4) as executor:
+                results = list(executor.map(invoke, seeds))
+
+            for path, digest_before in tracked_hashes.items():
+                digest_after = hashlib.sha256(path.read_bytes()).hexdigest()
+                self.assertEqual(digest_after, digest_before, f"CLI changed {path.name}")
+
+        self.assertTrue(all(result == results[0] for result in results[1:]))
+        self.assertEqual(results[0][0], 0)
+        self.assertIn(b"VALID: 1 dataset(s)", results[0][1])
+        self.assertEqual(results[0][2], b"")
 
 
 if __name__ == "__main__":
