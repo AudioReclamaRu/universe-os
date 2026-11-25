@@ -163,7 +163,16 @@ s
 4. Отказ от молчаливого принятия отражения за обычное вращение.
 5. Полный цикл чтения CSV, разделения fit/check, записи JSON-преобразования, контрольной суммы и CSV-остатков.
 
-**Результат локального запуска: 5 тестов пройдены.**
+**Результат GitHub Actions: 5 тестовых сценариев пройдены; job завершился со статусом SUCCESS.**
+
+- Workflow: [GIZA PRIME spatial tools](https://github.com/AudioReclamaRu/universe-os/actions/runs/45625887450)
+- Run: 1
+- Job: Coordinate transform unit tests
+- Tested commit: \`48736ef69fae15c3b1f51de97b9db6c64c0accba\`
+- Runtime: GitHub-hosted Ubuntu runner, Python 3.11
+- Step \`Run unit tests\`: completed / success
+
+Это не локальный запуск в среде разработчика, а фактическое выполнение тестов в GitHub Actions.
 
 Все тестовые координаты синтетические. Они проверяют математическую реализацию и обработку данных, но ничего не утверждают о реальной точности Sphinx grid, GPMP или любого объекта Гизы.
 
