@@ -76,18 +76,58 @@ def _strict_json_loads(raw: str) -> Any:
     )
 
 
-def _iter_schema_references(value: Any, path: str = "$"):
-    if isinstance(value, dict):
-        for key, child in value.items():
-            child_path = f"{path}.{key}"
-            if key in {"$ref", "$dynamicRef", "$recursiveRef"}:
-                yield child_path, child
-            if isinstance(child, (dict, list)):
-                yield from _iter_schema_references(child, child_path)
-    elif isinstance(value, list):
-        for index, child in enumerate(value):
-            if isinstance(child, (dict, list)):
-                yield from _iter_schema_references(child, f"{path}[{index}]")
+_SINGLE_SCHEMA_KEYWORDS = {
+    "additionalItems",
+    "additionalProperties",
+    "unevaluatedItems",
+    "unevaluatedProperties",
+    "propertyNames",
+    "contains",
+    "items",
+    "not",
+    "if",
+    "then",
+    "else",
+    "contentSchema",
+}
+_SCHEMA_ARRAY_KEYWORDS = {"allOf", "anyOf", "oneOf", "prefixItems"}
+_SCHEMA_MAP_KEYWORDS = {
+    "$defs",
+    "definitions",
+    "properties",
+    "patternProperties",
+    "dependentSchemas",
+}
+
+
+def _iter_schema_references(schema: Any, path: str = "$"):
+    """Walk only schema-bearing keywords, not literal const/default/example data."""
+    if not isinstance(schema, dict):
+        return
+
+    for key in ("$ref", "$dynamicRef", "$recursiveRef"):
+        if key in schema:
+            yield f"{path}.{key}", schema[key]
+
+    for key in _SINGLE_SCHEMA_KEYWORDS:
+        child = schema.get(key)
+        if isinstance(child, (dict, bool)):
+            yield from _iter_schema_references(child, f"{path}.{key}")
+        elif key == "items" and isinstance(child, list):
+            for index, item in enumerate(child):
+                yield from _iter_schema_references(item, f"{path}.{key}[{index}]")
+
+    for key in _SCHEMA_ARRAY_KEYWORDS:
+        children = schema.get(key)
+        if isinstance(children, list):
+            for index, child in enumerate(children):
+                yield from _iter_schema_references(child, f"{path}.{key}[{index}]")
+
+    for key in _SCHEMA_MAP_KEYWORDS:
+        children = schema.get(key)
+        if isinstance(children, dict):
+            for name, child in children.items():
+                yield from _iter_schema_references(child, f"{path}.{key}.{name}")
 
 
 def _validate_local_schema_references(schema: Any) -> None:
