@@ -23,9 +23,9 @@
 
 **Связь с UNIVERSE 3.0:** документы 00, 05, 06, 25, 70 и будущая работа над уровнями и основаниями. Гартмана нужно сопоставлять с другими онтологиями, а не принимать его категориальную систему как готовый канон.
 
-**Библиографическое уточнение:** английское издание — авторизованный перевод работы *Neue Wege der Ontologie*, впервые вышедшей в 1949 году; английская публикация Routledge 2012 года включает новое введение Предрага Чичовацки. Это не самостоятельное произведение, впервые написанное в 2012 году.
+**Библиографическое уточнение:** *Neue Wege der Ontologie* опубликована в 1943 году в составе *Systematische Philosophie*. Английская версия *New Ways of Ontology* вышла в 1953 году (Henry Regnery); позднее она переиздавалась, в том числе Transaction Publishers в 2012 году. Не следует смешивать исходную дату работы, дату английского перевода и дату переиздания.
 
-Издание и описание: [Routledge — New Ways of Ontology](https://www.routledge.com/New-Ways-of-Ontology/Hartmann/p/book/9781412842860).
+Библиографическая хронология: [Stanford Encyclopedia of Philosophy — Nicolai Hartmann](https://plato.stanford.edu/entries/nicolai-hartmann/). Каталожная карточка переиздания: [New Ways of Ontology](https://www.routledge.com/New-Ways-of-Ontology/Hartmann/p/book/9781412842860).
 
 ### 2. Жильбер Симондон — «Индивидуация в свете понятий формы и информации» (Individuation in Light of Notions of Form and Information)
 
