@@ -432,7 +432,7 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
                 "batch_wall_seconds_min": min(batch_times),
                 "batch_wall_seconds_median": statistics.median(batch_times),
                 "batch_wall_seconds_max": max(batch_times),
-"max_rss_sampled_bytes_across_processes": max(rss_peaks) if rss_peaks else None,
+                "max_rss_sampled_bytes_across_processes": max(rss_peaks) if rss_peaks else None,
                 "rss_samples_total": sum(
                     item["rss_sample_count"]
                     for batch in measurements
@@ -446,6 +446,7 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
                 "All inputs are synthetic and do not represent Giza field measurements.",
                 "Elapsed times include Python process startup, imports, schema loading and validation.",
                 "The process timing is an end-to-end CLI measurement, not an isolated function benchmark.",
+                "RSS polling runs in the benchmark controller and contributes a small observer overhead to wall time.",
                 "RSS is sampled, not captured as an OS-maintained lifetime peak; peaks between samples may be missed.",
                 "Per-process RSS includes shared pages and must not be summed as unique physical memory.",
                 "Storage-device cache state is not measured by this tool.",
