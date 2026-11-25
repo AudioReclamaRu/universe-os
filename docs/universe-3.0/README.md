@@ -84,6 +84,10 @@
 | 39 | [Информация, сигнал, код и смысл](39_INFORMATION_SIGNAL_CODE_AND_MEANING_RU.md) | Количественная, физическая, формальная и семантическая информация; сигнал, данные, код, значение и передача | Зафиксирован |
 
 ## 5. Машинно-читаемые артефакты
+- [JSON Schema паспорта фоновых колебаний](../../schemas/giza_ambient_vibration_manifest.schema.json)
+- [Пустой манифест фоновых колебаний](../../examples/giza_spatial/ambient_vibration_manifest.template.json)
+- [Валидатор манифеста фоновых колебаний](../../tools/giza_spatial/validate_vibration_manifest.py)
+- [Тесты валидатора фоновых колебаний](../../tests/giza_spatial/test_validate_vibration_manifest.py)
 
 - [JSON Schema пространственного реестра](../../schemas/giza_spatial_evidence.schema.json)
 - [Пустой шаблон реестра](../../examples/giza_spatial/evidence_manifest.template.json)
@@ -127,5 +131,8 @@
 | 48 | [Сопряжённые процессы и мультифизические системы](48_COUPLED_PROCESSES_AND_MULTIPHYSICS_SYSTEMS_RU.md) | Одностороннее и двустороннее сопряжение, интерфейсы, балансы и временные масштабы | Зафиксирован |
 | 49 | [Построение и проверка физических моделей](49_MODEL_VERIFICATION_VALIDATION_AND_UNCERTAINTY_RU.md) | Верификация, валидация, калибровка, идентифицируемость, чувствительность и неопределённость | Стандарт проверки |
 | 50 | [Первый эмпирический якорь GIZA PRIME](50_FIRST_EMPIRICAL_ANCHOR_PRESENT_DAY_DYNAMIC_RESPONSE_RU.md) | Современный динамический отклик системы «сооружение — основание — среда» как первый контрольный кейс | Выбран; исходные файлы ещё не импортированы |
+
+| 51 | [Протокол приёма данных фоновых колебаний](51_GIZA_AMBIENT_VIBRATION_DATA_INTAKE_PROTOCOL_RU.md) | Исходные временные ряды, калибровка, ориентация, время, координаты, обработка, HVSR и критерии допуска | Зафиксирован |
+| 52 | [Машинно-читаемый паспорт и валидатор динамических данных](52_AMBIENT_VIBRATION_INTAKE_TOOL_AND_TESTS_RU.md) | JSON Schema, пустой шаблон, проверка метаданных, трёх компонент, путей и SHA-256; ограничения валидатора | Реализован; CI-проверка ожидается |
 
 **БЫТЬ И Ё.**
