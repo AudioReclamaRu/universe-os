@@ -241,6 +241,121 @@ class VibrationManifestTests(unittest.TestCase):
         self.assertIn("JSON Schema $", stderr.getvalue())
 
 
+    def test_rejects_duplicate_channel_ids_and_primary_components(self):
+        payload = make_manifest("a" * 64)
+        duplicate = copy.deepcopy(payload["datasets"][0]["channels"][0])
+        payload["datasets"][0]["channels"].append(duplicate)
+        errors, _ = validate_manifest_payload(payload)
+        self.assertTrue(any("duplicate channel_id" in error for error in errors))
+        self.assertTrue(any("duplicate component" in error for error in errors))
+
+    def test_rejects_channel_axis_and_sensitivity_bounds(self):
+        payload = make_manifest("a" * 64)
+        channel = payload["datasets"][0]["channels"][0]
+        channel["azimuth_deg"] = 361
+        channel["dip_deg"] = -91
+        channel["sensitivity"] = 0
+        errors, _ = validate_manifest_payload(payload)
+        self.assertTrue(any("azimuth_deg" in error for error in errors))
+        self.assertTrue(any("dip_deg" in error for error in errors))
+        self.assertTrue(any("sensitivity must be positive" in error for error in errors))
+
+    def test_rejects_duplicate_file_ids_and_paths(self):
+        payload = make_manifest("a" * 64)
+        duplicate = copy.deepcopy(payload["datasets"][0]["files"][0])
+        payload["datasets"][0]["files"].append(duplicate)
+        errors, _ = validate_manifest_payload(payload)
+        self.assertTrue(any("duplicate file_id" in error for error in errors))
+        self.assertTrue(any("duplicate path" in error for error in errors))
+
+    def test_rejects_end_time_equal_to_or_before_start_time(self):
+        for end_time in ("2026-01-01T00:00:00Z", "2025-12-31T23:59:59Z"):
+            with self.subTest(end_time=end_time):
+                payload = make_manifest("a" * 64)
+                payload["datasets"][0]["acquisition"]["end_time"] = end_time
+                errors, _ = validate_manifest_payload(payload)
+                self.assertTrue(any("end_time must be later" in error for error in errors))
+
+    def test_rejects_symlink_escape_during_file_verification(self):
+        raw_bytes = b"outside file reached through a symlink"
+        digest = hashlib.sha256(raw_bytes).hexdigest()
+        payload = make_manifest(digest)
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            root = base / "data"
+            raw_dir = root / "raw"
+            raw_dir.mkdir(parents=True)
+            outside = base / "outside.mseed"
+            outside.write_bytes(raw_bytes)
+            link = raw_dir / "escape.mseed"
+            try:
+                link.symlink_to(outside)
+            except (OSError, NotImplementedError) as exc:
+                self.skipTest(f"symlinks unavailable in this environment: {exc}")
+            payload["datasets"][0]["files"][0]["path"] = "raw/escape.mseed"
+            errors, _ = validate_manifest_payload(payload, root=root, verify_files=True)
+        self.assertTrue(any("path escapes" in error for error in errors))
+
+    def test_warns_for_unknown_and_partial_quality_states(self):
+        payload = make_manifest("a" * 64)
+        quality = payload["datasets"][0]["quality"]
+        quality["calibration_status"] = "unknown"
+        quality["orientation_status"] = "partial"
+        quality["timing_status"] = "unknown"
+        quality["coordinate_status"] = "partial"
+        errors, warnings = validate_manifest_payload(payload)
+        self.assertEqual(errors, [])
+        self.assertEqual(len(warnings), 4)
+
+    def test_cli_reports_missing_and_invalid_schema_files(self):
+        payload = {
+            "schema_version": "1.0",
+            "project": {"id": "CLI-SCHEMA", "title": "Schema failure test"},
+            "datasets": []
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            manifest_path = root / "manifest.json"
+            manifest_path.write_text(json.dumps(payload), encoding="utf-8")
+            schema_path = root / "missing-schema.json"
+            for schema_content in (None, "{ invalid json"):
+                with self.subTest(schema_content=schema_content):
+                    if schema_content is not None:
+                        schema_path.write_text(schema_content, encoding="utf-8")
+                    stderr = io.StringIO()
+                    with redirect_stderr(stderr):
+                        exit_code = main([
+                            "--manifest", str(manifest_path),
+                            "--schema", str(schema_path)
+                        ])
+                    self.assertEqual(exit_code, 2)
+                    self.assertIn("JSON Schema validation could not run", stderr.getvalue())
+                    if schema_content is None and schema_path.exists():
+                        schema_path.unlink()
+
+    def test_cli_verifies_complete_manifest_and_actual_file_hash(self):
+        raw_bytes = b"synthetic file used for end-to-end CLI verification"
+        digest = hashlib.sha256(raw_bytes).hexdigest()
+        payload = make_manifest(digest)
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            raw_dir = root / "raw"
+            raw_dir.mkdir()
+            (raw_dir / "station01.mseed").write_bytes(raw_bytes)
+            manifest_path = root / "manifest.json"
+            manifest_path.write_text(json.dumps(payload), encoding="utf-8")
+            stdout = io.StringIO()
+            stderr = io.StringIO()
+            with redirect_stderr(stderr):
+                with redirect_stdout(stdout):
+                    exit_code = main([
+                        "--manifest", str(manifest_path),
+                        "--root", str(root),
+                        "--verify-files"
+                    ])
+        self.assertEqual(exit_code, 0, stderr.getvalue())
+        self.assertIn("VALID: 1 dataset(s)", stdout.getvalue())
+
     def test_semantic_validator_handles_unhashable_enum_values(self):
         payload = make_manifest("a" * 64)
         dataset = payload["datasets"][0]
