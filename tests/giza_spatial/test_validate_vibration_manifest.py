@@ -236,6 +236,55 @@ class VibrationManifestTests(unittest.TestCase):
                 schema_values = defs["quality"]["properties"][field]["enum"]
                 self.assertEqual(set(schema_values), python_values)
 
+    def test_required_schema_fields_are_declared_at_each_level(self):
+        schema = json.loads(DEFAULT_SCHEMA_PATH.read_text(encoding="utf-8"))
+        required_contracts = {
+            "root": (schema, {"schema_version", "project", "datasets"}),
+            "project": (schema["properties"]["project"], {"id", "title"}),
+            "source": (schema["$defs"]["source"], {"origin", "title"}),
+            "coordinates": (schema["$defs"]["coordinates"], {"x", "y", "coordinate_system"}),
+            "station": (schema["$defs"]["station"], {"station_id", "location"}),
+            "instrument": (schema["$defs"]["instrument"], {"sensor_type", "manufacturer", "model"}),
+            "acquisition": (
+                schema["$defs"]["acquisition"],
+                {"start_time", "end_time", "time_standard", "sample_rate_hz", "sample_count"},
+            ),
+            "channel": (schema["$defs"]["channel"], {"channel_id", "component", "unit"}),
+            "file": (schema["$defs"]["file"], {"file_id", "role", "path", "file_format", "sha256"}),
+            "quality": (
+                schema["$defs"]["quality"],
+                {"status", "calibration_status", "orientation_status", "timing_status", "coordinate_status"},
+            ),
+            "dataset": (
+                schema["$defs"]["dataset"],
+                {"dataset_id", "title", "source", "station", "instrument", "acquisition", "channels", "files", "quality"},
+            ),
+        }
+        for name, (definition, expected) in required_contracts.items():
+            with self.subTest(definition=name):
+                self.assertEqual(set(definition.get("required", [])), expected)
+
+    def test_three_component_default_is_explicitly_applied_by_semantic_validator(self):
+        schema = json.loads(DEFAULT_SCHEMA_PATH.read_text(encoding="utf-8"))
+        self.assertIs(
+            schema["$defs"]["dataset"]["properties"]["require_three_components"]["default"],
+            True,
+        )
+
+        payload = make_manifest("a" * 64)
+        dataset = payload["datasets"][0]
+        dataset.pop("require_three_components")
+        dataset["channels"] = dataset["channels"][:2]
+
+        self.assertEqual(validate_json_schema_payload(payload, DEFAULT_SCHEMA_PATH), [])
+        self.assertNotIn("require_three_components", dataset)
+        errors, _ = validate_manifest_payload(payload)
+        self.assertTrue(any("three-component dataset is missing" in error for error in errors))
+
+        dataset["require_three_components"] = False
+        errors, _ = validate_manifest_payload(payload)
+        self.assertFalse(any("three-component dataset is missing" in error for error in errors))
+
     def test_schema_requires_all_quality_status_fields(self):
         payload = make_manifest("a" * 64)
         payload["datasets"][0]["quality"].pop("coordinate_status")
