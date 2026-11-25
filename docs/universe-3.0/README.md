@@ -149,7 +149,7 @@
 | 58 | [Исправление валидатора и подтверждённый результат CI](58_AMBIENT_VIBRATION_VALIDATOR_CI_FIX_AND_SUCCESS_RU.md) | Диагностика ZeroDivisionError, исправление защитного условия, тест отрицательной частоты и успешный прогон 19 тестов | Проверен CI success |
 | 59 | [Исполнение JSON Schema Draft 2020-12 в приёмнике динамических данных](59_JSON_SCHEMA_INTEGRATION_AND_CI_RU.md) | Реальное исполнение схемы через CLI, FormatChecker, согласование обязательных полей, автоматическая синхронизация enum и успешный общий прогон 55 тестов | Проверен CI success |
 | 60 | [Матрица покрытия проверки манифеста](60_VALIDATION_COVERAGE_MATRIX_RU.md) | Разделение ответственности схемы, семантического валидатора и проверки байтов; граничные сценарии, enum-паритет, required/default, вложенные CLI-отказы и проверка ссылок Schema | Составлена; тестовое покрытие подтверждено CI |
-
-| 61 | [Строгий разбор JSON и отклонение дублирующихся ключей](61_STRICT_JSON_INPUT_AND_DUPLICATE_KEY_REJECTION_RU.md) | Отказ от NaN/Infinity, повторных ключей в манифесте и Schema; общий парсер и тесты RFC-поведения | Реализован; CI success |
+| 61 | [Строгий разбор JSON и отклонение дублирующихся ключей](61_STRICT_JSON_INPUT_AND_DUPLICATE_KEY_REJECTION_RU.md) | Отказ от NaN/Infinity, повторных ключей в манифесте и Schema; общий строгий парсер | Реализован; CI success |
+| 62 | [Политика ссылок Schema и CLI-проверки структуры](62_SCHEMA_REFERENCE_POLICY_AND_CLI_STRUCTURE_TESTS_RU.md) | Только локальные JSON Pointer; отказ от внешних и неразрешимых ссылок; проверка Draft 2020-12, корневых типов и контекста subschema | Реализовано; CI success |
 
 **БЫТЬ И Ё.**
