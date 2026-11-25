@@ -421,6 +421,68 @@ class VibrationManifestTests(unittest.TestCase):
         self.assertEqual(errors, [])
         self.assertEqual(len(warnings), 4)
 
+    def test_cli_rejects_nonstandard_numeric_constants(self):
+        for constant in ("NaN", "Infinity", "-Infinity"):
+            with self.subTest(constant=constant), tempfile.TemporaryDirectory() as tmp:
+                raw = (
+                    '{"schema_version":"1.0","project":{"id":"STRICT","title":"Strict JSON"},'
+                    f'"datasets":[],"extra":{constant}' + "}"
+                )
+                manifest_path = Path(tmp) / "manifest.json"
+                manifest_path.write_text(raw, encoding="utf-8")
+                stderr = io.StringIO()
+                with redirect_stderr(stderr):
+                    exit_code = main(["--manifest", str(manifest_path)])
+                self.assertEqual(exit_code, 2)
+                self.assertIn("non-standard JSON numeric constant", stderr.getvalue())
+
+    def test_cli_rejects_duplicate_json_object_keys(self):
+        cases = {
+            "root": (
+                '{"schema_version":"1.0","schema_version":"1.0",'
+                '"project":{"id":"STRICT","title":"Strict JSON"},"datasets":[]}'
+            ),
+            "nested": (
+                '{"schema_version":"1.0","project":{"id":"STRICT","id":"OVERRIDE",'
+                '"title":"Strict JSON"},"datasets":[]}'
+            ),
+        }
+        for name, raw in cases.items():
+            with self.subTest(name=name), tempfile.TemporaryDirectory() as tmp:
+                manifest_path = Path(tmp) / "manifest.json"
+                manifest_path.write_text(raw, encoding="utf-8")
+                stderr = io.StringIO()
+                with redirect_stderr(stderr):
+                    exit_code = main(["--manifest", str(manifest_path)])
+                self.assertEqual(exit_code, 2)
+                self.assertIn("duplicate JSON object key", stderr.getvalue())
+
+    def test_cli_rejects_duplicate_keys_inside_schema(self):
+        payload = {
+            "schema_version": "1.0",
+            "project": {"id": "SCHEMA-DUP", "title": "Duplicate schema key"},
+            "datasets": []
+        }
+        duplicate_schema = (
+            '{"$schema":"https://json-schema.org/draft/2020-12/schema",'
+            '"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object"}'
+        )
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            manifest_path = root / "manifest.json"
+            schema_path = root / "schema.json"
+            manifest_path.write_text(json.dumps(payload), encoding="utf-8")
+            schema_path.write_text(duplicate_schema, encoding="utf-8")
+            stderr = io.StringIO()
+            with redirect_stderr(stderr):
+                exit_code = main([
+                    "--manifest", str(manifest_path),
+                    "--schema", str(schema_path)
+                ])
+        self.assertEqual(exit_code, 2)
+        self.assertIn("JSON Schema validation could not run", stderr.getvalue())
+        self.assertIn("duplicate JSON object key", stderr.getvalue())
+
     def test_cli_reports_missing_and_invalid_schema_files(self):
         payload = {
             "schema_version": "1.0",
