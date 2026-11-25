@@ -42,6 +42,14 @@ ALLOWED_FILE_ROLES = {
     "derived", "metadata", "report", "field_photo"
 }
 ALLOWED_FILE_FORMATS = {"mseed", "sac", "csv", "ascii", "wav", "seg2", "other"}
+ALLOWED_TIME_STANDARDS = {"UTC", "GPS", "local_with_offset", "unknown"}
+ALLOWED_QUALITY_VALUES = {
+    "status": {"received_unchecked", "metadata_checked", "integrity_checked", "processed", "validated", "quarantined"},
+    "calibration_status": {"documented", "partial", "unknown", "not_applicable"},
+    "orientation_status": {"documented", "partial", "unknown", "not_applicable"},
+    "timing_status": {"documented", "partial", "unknown"},
+    "coordinate_status": {"documented", "partial", "unknown"},
+}
 DATASET_ID_RE = re.compile(r"^[A-Z0-9][A-Z0-9._:-]*$")
 
 
@@ -181,7 +189,7 @@ def validate_manifest_payload(
         sample_count = acquisition.get("sample_count")
         if not isinstance(sample_count, int) or isinstance(sample_count, bool) or sample_count < 1:
             errors.append(f"{prefix}: sample_count must be a positive integer")
-        if not _is_allowed_string(acquisition.get("time_standard"), {"UTC", "GPS", "local_with_offset", "unknown"}):
+        if not _is_allowed_string(acquisition.get("time_standard"), ALLOWED_TIME_STANDARDS):
             errors.append(f"{prefix}: unsupported time_standard {acquisition.get('time_standard')!r}")
         if acquisition.get("time_standard") == "unknown":
             warnings.append(f"{prefix}: time standard is unknown")
@@ -332,13 +340,7 @@ def validate_manifest_payload(
         if not isinstance(quality, dict):
             errors.append(f"{prefix}: quality object is required")
         else:
-            allowed_quality = {
-                "status": {"received_unchecked", "metadata_checked", "integrity_checked", "processed", "validated", "quarantined"},
-                "calibration_status": {"documented", "partial", "unknown", "not_applicable"},
-                "orientation_status": {"documented", "partial", "unknown", "not_applicable"},
-                "timing_status": {"documented", "partial", "unknown"},
-                "coordinate_status": {"documented", "partial", "unknown"}
-            }
+            allowed_quality = ALLOWED_QUALITY_VALUES
             for field, allowed in allowed_quality.items():
                 if not _is_allowed_string(quality.get(field), allowed):
                     errors.append(f"{prefix}: unsupported quality.{field} value {quality.get(field)!r}")
