@@ -452,6 +452,32 @@ class VibrationManifestTests(unittest.TestCase):
         self.assertEqual(exit_code, 2)
         self.assertIn("station.location.x must be finite", stderr.getvalue())
 
+    def test_cli_diagnostics_are_repeatable_for_unchanged_manifest(self):
+        payload = make_manifest("a" * 64)
+        dataset = payload["datasets"][0]
+        dataset["acquisition"]["time_standard"] = "UNRECOGNIZED"
+        dataset["channels"][0]["component"] = "UNRECOGNIZED"
+        dataset["quality"]["calibration_status"] = "unknown"
+        dataset["quality"]["orientation_status"] = "partial"
+
+        with tempfile.TemporaryDirectory() as tmp:
+            manifest_path = Path(tmp) / "manifest.json"
+            manifest_path.write_text(json.dumps(payload), encoding="utf-8")
+            results = []
+            for _ in range(3):
+                stdout = io.StringIO()
+                stderr = io.StringIO()
+                with redirect_stdout(stdout), redirect_stderr(stderr):
+                    exit_code = main(["--manifest", str(manifest_path)])
+                results.append((exit_code, stdout.getvalue(), stderr.getvalue()))
+
+        self.assertEqual(results[0], results[1])
+        self.assertEqual(results[1], results[2])
+        self.assertEqual(results[0][0], 2)
+        self.assertIn("quality.calibration_status is 'unknown'", results[0][1])
+        self.assertIn("quality.orientation_status is 'partial'", results[0][1])
+        self.assertIn("JSON Schema", results[0][2])
+
     def test_cli_reports_oversized_sample_count_without_overflow(self):
         payload = make_manifest("a" * 64)
         payload["datasets"][0]["acquisition"]["sample_count"] = 10 ** 1000
