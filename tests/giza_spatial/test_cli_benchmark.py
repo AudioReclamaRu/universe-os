@@ -47,7 +47,7 @@ class CliBenchmarkTests(unittest.TestCase):
         self.assertEqual(report["runtime"]["psutil"], "7.2.2")
         self.assertEqual(report["memory_measurement"]["source"], "psutil.Process.memory_info().rss")
         self.assertEqual(report["memory_measurement"]["sampling_interval_ms"], 10)
-        self.assertGreater(report["summary"]["max_rss_sampled_bytes_across_processes"], 0)
+        self.assertGreater(report["summary"]["max_per_process_rss_sampled_bytes"], 0)
         self.assertEqual(len(report["measurements"]), 1)
         self.assertEqual(len(report["measurements"][0]["processes"]), 2)
         for process in report["measurements"][0]["processes"]:
