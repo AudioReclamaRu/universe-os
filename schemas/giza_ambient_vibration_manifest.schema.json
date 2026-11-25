@@ -88,7 +88,7 @@
           "enum": ["seismometer", "geophone", "accelerometer", "velocity_sensor", "other", "unknown"]
         },
         "manufacturer": { "type": ["string", "null"] },
-        "model": { "type": ["string", "null"] },
+        "model": { "type": "string", "minLength": 1 },
         "serial_number": { "type": ["string", "null"] },
         "firmware": { "type": ["string", "null"] },
         "calibration_date": { "type": ["string", "null"], "format": "date" },
@@ -180,6 +180,13 @@
     "quality": {
       "type": "object",
       "additionalProperties": false,
+      "required": [
+        "status",
+        "calibration_status",
+        "orientation_status",
+        "timing_status",
+        "coordinate_status"
+      ],
       "properties": {
         "status": {
           "enum": ["received_unchecked", "metadata_checked", "integrity_checked", "processed", "validated", "quarantined"]
