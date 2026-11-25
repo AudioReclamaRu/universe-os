@@ -1,0 +1,241 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/AudioReclamaRu/universe-os/blob/research/universe-3-semantic-atlas-001/schemas/giza_ambient_vibration_manifest.schema.json",
+  "title": "GIZA PRIME Ambient Vibration Data Manifest",
+  "description": "Provenance-preserving manifest for ambient vibration measurements. It records station, instrument, timing, channel orientation, source files, processing and quality. It does not classify spectral peaks as structural modes.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "project", "datasets"],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "title": { "type": "string", "minLength": 1 },
+        "branch": { "type": "string" },
+        "description": { "type": "string" }
+      }
+    },
+    "datasets": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/dataset" }
+    }
+  },
+  "$defs": {
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["origin", "title"],
+      "properties": {
+        "origin": {
+          "enum": ["primary_fieldwork", "primary_archive", "official_publication", "secondary_publication", "user_supplied", "derived", "unknown"]
+        },
+        "organization": { "type": ["string", "null"] },
+        "creator": { "type": ["string", "null"] },
+        "title": { "type": "string", "minLength": 1 },
+        "source_record_id": { "type": ["string", "null"] },
+        "source_uris": {
+          "type": "array",
+          "items": { "type": "string", "format": "uri" }
+        },
+        "license": { "type": ["string", "null"] },
+        "citation": { "type": ["string", "null"] },
+        "retrieved_at": { "type": ["string", "null"], "format": "date-time" }
+      }
+    },
+    "coordinates": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["x", "y", "coordinate_system"],
+      "properties": {
+        "x": { "type": "number" },
+        "y": { "type": "number" },
+        "z": { "type": ["number", "null"] },
+        "coordinate_system": { "type": "string", "minLength": 1 },
+        "horizontal_unit": { "type": ["string", "null"] },
+        "vertical_datum": { "type": ["string", "null"] },
+        "horizontal_uncertainty_m": { "type": ["number", "null"], "minimum": 0 },
+        "vertical_uncertainty_m": { "type": ["number", "null"], "minimum": 0 },
+        "notes": { "type": "string" }
+      }
+    },
+    "station": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["station_id", "location"],
+      "properties": {
+        "station_id": { "type": "string", "minLength": 1 },
+        "name": { "type": ["string", "null"] },
+        "location": { "$ref": "#/$defs/coordinates" },
+        "surface_or_floor": { "type": ["string", "null"] },
+        "installation_description": { "type": "string" },
+        "contact_or_coupling": { "type": ["string", "null"] },
+        "photos_or_field_notes": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "instrument": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sensor_type", "manufacturer", "model"],
+      "properties": {
+        "sensor_type": {
+          "enum": ["seismometer", "geophone", "accelerometer", "velocity_sensor", "other", "unknown"]
+        },
+        "manufacturer": { "type": ["string", "null"] },
+        "model": { "type": ["string", "null"] },
+        "serial_number": { "type": ["string", "null"] },
+        "firmware": { "type": ["string", "null"] },
+        "calibration_date": { "type": ["string", "null"], "format": "date" },
+        "calibration_source": { "type": ["string", "null"] },
+        "instrument_response_file_id": { "type": ["string", "null"] },
+        "notes": { "type": "string" }
+      }
+    },
+    "channel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["channel_id", "component", "unit"],
+      "properties": {
+        "channel_id": { "type": "string", "minLength": 1 },
+        "component": {
+          "enum": ["vertical", "north", "east", "other", "unknown"]
+        },
+        "unit": {
+          "enum": ["counts", "m/s", "m/s2", "m", "unknown"]
+        },
+        "azimuth_deg": { "type": ["number", "null"], "minimum": 0, "maximum": 360 },
+        "dip_deg": { "type": ["number", "null"], "minimum": -90, "maximum": 90 },
+        "sensitivity": { "type": ["number", "null"], "exclusiveMinimum": 0 },
+        "sensitivity_unit": { "type": ["string", "null"] },
+        "response_description": { "type": ["string", "null"] },
+        "notes": { "type": "string" }
+      }
+    },
+    "acquisition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["start_time", "end_time", "time_standard", "sample_rate_hz", "sample_count"],
+      "properties": {
+        "start_time": { "type": "string", "format": "date-time" },
+        "end_time": { "type": "string", "format": "date-time" },
+        "time_standard": { "enum": ["UTC", "GPS", "local_with_offset", "unknown"] },
+        "clock_uncertainty_ms": { "type": ["number", "null"], "minimum": 0 },
+        "sample_rate_hz": { "type": "number", "exclusiveMinimum": 0 },
+        "sample_count": { "type": "integer", "minimum": 1 },
+        "nominal_duration_s": { "type": ["number", "null"], "exclusiveMinimum": 0 },
+        "gap_count": { "type": ["integer", "null"], "minimum": 0 },
+        "clipped_samples": { "type": ["integer", "null"], "minimum": 0 },
+        "environmental_conditions": { "type": "string" }
+      }
+    },
+    "file": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["file_id", "role", "path", "file_format", "sha256"],
+      "properties": {
+        "file_id": { "type": "string", "minLength": 1 },
+        "role": {
+          "enum": ["raw", "calibrated", "oriented", "segmented", "processed", "derived", "metadata", "report", "field_photo"]
+        },
+        "path": { "type": "string", "minLength": 1 },
+        "file_format": {
+          "enum": ["mseed", "sac", "csv", "ascii", "wav", "seg2", "other"]
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{64}$"
+        },
+        "size_bytes": { "type": ["integer", "null"], "minimum": 0 },
+        "media_type": { "type": ["string", "null"] },
+        "license": { "type": ["string", "null"] },
+        "derived_from_file_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "processing_version": { "type": ["string", "null"] },
+        "processing_parameters": { "type": "string" }
+      }
+    },
+    "processing": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "software": { "type": ["string", "null"] },
+        "software_version": { "type": ["string", "null"] },
+        "filtering": { "type": "string" },
+        "windowing": { "type": "string" },
+        "spectral_method": { "type": ["string", "null"] },
+        "smoothing": { "type": "string" },
+        "hvsr_method": { "type": ["string", "null"] },
+        "rejected_windows": { "type": "string" },
+        "uncertainty_method": { "type": "string" }
+      }
+    },
+    "quality": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "enum": ["received_unchecked", "metadata_checked", "integrity_checked", "processed", "validated", "quarantined"]
+        },
+        "calibration_status": {
+          "enum": ["documented", "partial", "unknown", "not_applicable"]
+        },
+        "orientation_status": {
+          "enum": ["documented", "partial", "unknown", "not_applicable"]
+        },
+        "timing_status": {
+          "enum": ["documented", "partial", "unknown"]
+        },
+        "coordinate_status": {
+          "enum": ["documented", "partial", "unknown"]
+        },
+        "known_issues": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "uncertainty_note": { "type": "string" }
+      }
+    },
+    "dataset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dataset_id", "title", "source", "station", "instrument",
+        "acquisition", "channels", "files", "quality"
+      ],
+      "properties": {
+        "dataset_id": {
+          "type": "string",
+          "pattern": "^[A-Z0-9][A-Z0-9._:-]*$"
+        },
+        "title": { "type": "string", "minLength": 1 },
+        "description": { "type": "string" },
+        "source": { "$ref": "#/$defs/source" },
+        "station": { "$ref": "#/$defs/station" },
+        "instrument": { "$ref": "#/$defs/instrument" },
+        "acquisition": { "$ref": "#/$defs/acquisition" },
+        "channels": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/channel" }
+        },
+        "require_three_components": { "type": "boolean", "default": true },
+        "files": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/file" }
+        },
+        "processing": { "$ref": "#/$defs/processing" },
+        "quality": { "$ref": "#/$defs/quality" },
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}
