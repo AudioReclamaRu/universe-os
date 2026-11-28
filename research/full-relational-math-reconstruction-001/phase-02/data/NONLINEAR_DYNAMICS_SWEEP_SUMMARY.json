@@ -1,0 +1,54 @@
+{
+  "status": "PARAMETER_SWEEP_COMPLETED",
+  "baseline": {
+    "p": 1.0136432647705078,
+    "theta": 0.013551033378355417,
+    "amplitude": 0.15,
+    "reset_multiplier": 0.013551033378355417,
+    "threshold": 1.0136432647705078,
+    "dt": 1,
+    "steps": 100000,
+    "events": 1344,
+    "first_event_times": [
+      75,
+      148,
+      221,
+      295,
+      370,
+      446,
+      522,
+      597,
+      671,
+      743,
+      816,
+      890
+    ],
+    "mean_gap_tail": 74.379,
+    "std_gap_tail": 1.245535627752181,
+    "min_gap_tail": 72,
+    "max_gap_tail": 76,
+    "period_one_fraction_tail": 0,
+    "event_rate": 0.01344,
+    "psi_end": 0.5619838475654341,
+    "psi_pre_event_max_observed": 1.0281440145318783,
+    "regime_diagnostic": "MULTI_INTERVAL_BORDER_OR_QUASIPERIODIC"
+  },
+  "pi_128": 3.13378027278999,
+  "forcing_period_model_time": 85.21190138113674,
+  "constant_increment_event_lock_r": 0.9866313585367497,
+  "sufficient_minimum_increment_r": 0.9886366547562372,
+  "sweep_rows": 315,
+  "border_rows": 404,
+  "sensitivity_rows": 7,
+  "log_elasticities": {
+    "alpha_inverse": 5,
+    "omega_lambda": 26.86470704278384,
+    "dm_to_baryon": 125
+  },
+  "limits": [
+    "Scalar recurrence only; GUI not run.",
+    "Conditional contraction assumes fixed event itinerary.",
+    "Event changes are discontinuous near threshold.",
+    "Time/stress/energy lack physical calibration."
+  ]
+}

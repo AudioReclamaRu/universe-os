@@ -1,0 +1,40 @@
+RELATION_ID,RELATION,DERIVATION_OR_DEFINITION,DOMAIN,STATUS,INTERPRETATION_LIMIT
+R001,2^7=128,Seven independent binary coordinates,Q7,EXACT_IDENTITY,No physical interpretation follows by itself
+R002,3^7=2187,Seven independent ternary coordinate statuses,Q7 face lattice,EXACT_IDENTITY,Ternary symbols mean fixed-low/free/fixed-high
+R003,f_d=C(7,d)*2^(7-d),Choose d free coordinates and assign the rest to 0/1,Q7 faces,COMBINATORIAL_THEOREM,Face count not a physical count outside the model
+R004,sum(f_d)=3^7,Binomial theorem (2+1)^7,Q7 face lattice,EXACT_IDENTITY,Distinct from arbitrary 3^7 interpretations
+R005,pi(s)_i=1 iff s_i!=0,Two signs map to fixed binary coordinate and center maps to free coordinate,Ternary-to-binary map,MODEL_DEFINITION,Candidate comparator not a physical law
+R006,fiber(b)=2^wt(b),Every fixed coordinate has two possible signs,Ternary-to-binary map,EXACT_IDENTITY,Depends on declared map
+R007,128=3*42+2,Integer division by three,Gate arithmetic,EXACT_IDENTITY,42 is quotient and 2 is remainder
+R008,256=3*85+1,Integer division by three,Gate arithmetic,EXACT_IDENTITY,85 is quotient and 1 is remainder
+R009,85=2*42+1,Exact relation between quotients,Gate arithmetic,EXACT_IDENTITY,No physical meaning by arithmetic alone
+R010,2^7 mod 3=2 and 2^8 mod 3=1,2 congruent -1 mod 3,Modular arithmetic,EXACT_IDENTITY,Residues alternate with parity
+R011,42 XOR 85=127,0101010 XOR 1010101=1111111,Q7 gates,EXACT_IDENTITY,Antipodal pair
+R012,dH(42,85)=7,All seven bits differ,Q7 gates,EXACT_IDENTITY,Maximum graph distance
+R013,nearest-gate shells 2 14 42 70,2*C(7,d) for d=0..3,Q7 gates,COMBINATORIAL_THEOREM,42 is combined d=2 shell; 21 around each gate
+R014,shortest paths=5040,7! bit-flip orders,Q7 gates,COMBINATORIAL_THEOREM,All shortest routes have seven edges
+R015,42=2*C(7,2),42=2*21,Q7 shells,EXACT_IDENTITY,Matches combined gate shell d=2
+R016,28=dim so(8),8*7/2,Lie algebra so(8),ESTABLISHED_MATH,Source label does not implement algebra
+R017,42=10*2^2+2,Mackay shell formula at n=2,Icosahedral clusters,ESTABLISHED_MATH,Shell-only occupancy not cumulative cluster size
+R018,42/28=3/2,42 divided by 28,Cross-structure arithmetic,CROSS_STRUCTURE_CORRESPONDENCE,Shared physical origin unknown
+R019,28+42=70,28 plus 42,Q7 nearest-gate d=3 shell count,CROSS_STRUCTURE_CORRESPONDENCE,Arithmetic match not causal
+R020,42*16=672,Mass coefficient at octave 5 equals Q7 2-face count,Legacy mass table and Q7,CROSS_STRUCTURE_CORRESPONDENCE,Mass units/calibration not validated
+R021,28*8=224,Mass coefficient at octave 4 equals half Q7 edge count,Legacy mass table and Q7,CROSS_STRUCTURE_CORRESPONDENCE,Mass units/calibration not validated
+R022,3/2 is a Fibonacci convergent to phi,F4/F3=3/2,Golden ratio,CROSS_STRUCTURE_CORRESPONDENCE,Approximation is not equality
+R023,rmax/rmin=16/9,1.28/0.72 from radial amplitude 0.28,Legacy projector,SOURCE_PARAMETER_CONSEQUENCE,Origin of 0.28 is not derived
+R024,p=3^12/2^19,Pythagorean comma,Legacy parameter,CODE_FACT,No physical units supplied
+R025,theta=ln(p),Logarithmic mismatch,Legacy parameter,CODE_FACT,Dimensionless model parameter
+R026,128*M_mu=theta,M_mu=theta/128,Legacy mass scale,EXACT_IDENTITY,Not an experimentally measured inertia quantum
+R027,beta=2*alpha,Projector angle equations,Legacy projector,EXACT_IDENTITY,Not independently measured natural coupling
+R028,alpha_inverse=128*p^5,Legacy formula,Legacy output,MODEL_FORMULA,Does not match CODATA benchmark within its uncertainty
+R029,Omega_L=1-p^-85,Legacy formula,Legacy output,MODEL_FORMULA,Close to selected Planck benchmark; exponent has no independent derivation
+R030,Omega_DM_over_B=p^125,Legacy formula,Legacy output,MODEL_FORMULA,About 1.50 percent above source code reference 5.36
+R031,PI_128=128-term Leibniz sum,Finite alternating sum,Legacy projector,REPRODUCED_NUMERIC,Relative error about -0.2487 percent
+R032,drive_period=85*pi/PI_128,Period induced by PI_128 approximation,Legacy dynamics,REPRODUCED_NUMERIC,About 85.2119 model time units
+R033,phase_reset scales quadratic energy by theta^2,Energy is quadratic in stress,Legacy dynamics,EXACT_IDENTITY,Current code returns pre-reset energy with post-reset stress
+R034,3 pyramids:2 selected Giza elements,User-defined grouping,Giza archaeology,MODEL_HYPOTHESIS,Khentkaus is not classified as a sculpted sphinx
+R035,Rishat-Giza share EM laws,Same Maxwell equations apply at both sites,Planetary environment,ESTABLISHED_PHYSICS,Does not prove direct coupling between sites
+R036,2^a*3^(7-a),Fixed mixed alphabet placement,Mixed product spaces,EXACT_IDENTITY,Each adjacent term changes by ratio 3/2
+R037,sum C(7,a)*2^a*3^(7-a)=5^7,Binomial theorem,Mixed alphabet union,EXACT_IDENTITY,Distinct from Q7 face lattice
+R038,7-position two-short-interval patterns=21,C(7,2),Heptaphase proposal,EXACT_IDENTITY,Musical combinatorics not galactic evidence
+R039,7-cycle pair-distance classes are 7+7+7,Seven pairs at each minimum cyclic separation 1 2 3,Heptaphase proposal,COMBINATORIAL_THEOREM,No physical coupling established

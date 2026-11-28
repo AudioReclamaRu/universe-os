@@ -1,0 +1,20 @@
+{
+  "variables": [
+    {
+      "name": "dimensionless_parameter_A",
+      "dimension": {},
+      "value": 2,
+      "unit": "1",
+      "source": "synthetic demonstration only",
+      "status": "idealized"
+    },
+    {
+      "name": "dimensionless_parameter_B",
+      "dimension": {},
+      "value": 0.8090169943749475,
+      "unit": "1",
+      "source": "synthetic demonstration only",
+      "status": "idealized"
+    }
+  ]
+}

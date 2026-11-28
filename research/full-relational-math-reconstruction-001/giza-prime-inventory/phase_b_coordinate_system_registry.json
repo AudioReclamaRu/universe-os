@@ -1,0 +1,147 @@
+{
+  "observed_anomalies": {
+    "elevation_absent_records": 68,
+    "kml_z_nonzero_records": 0,
+    "swapped_longitude_label_records": 9315
+  },
+  "provenance_states": {
+    "COORDINATE_SYSTEM_DOCUMENTED": true,
+    "COORDINATE_SYSTEM_VERIFIED": false,
+    "VERTICAL_REFERENCE_DOCUMENTED": true,
+    "VERTICAL_REFERENCE_VERIFIED": false
+  },
+  "report_id": "PHASE_B_COORDINATE_SYSTEM_REGISTRY",
+  "schema_version": "phase_b_crs_v1",
+  "separation": {
+    "gdfs_2012_vs_2015_vs_2016_vs_2018": "separately registered; numeric-range similarity is not proof of a shared mathematical system",
+    "gpmp_to_arce_transform": "not_performed",
+    "gpmp_vs_arce_sphinx_grid": "separate",
+    "local_grid_vs_geographic_pair": "relation_unresolved",
+    "petrie_historical_vs_local_grid": "relation_unresolved"
+  },
+  "systems": {
+    "ARCE_Sphinx_GRID_SEPARATE": {
+      "axis_order": "historical SRI 1978 axes",
+      "campaigns": [],
+      "common_control_points": 0,
+      "confirmation_status": "HISTORICAL_DESCRIPTION_ONLY_NO_TRANSFORM",
+      "coordinate_type": "local archaeological grid",
+      "datum": "unverified",
+      "documentation": "archival methodological description; NOT present as coordinates here",
+      "ellipsoid": "unknown",
+      "epoch": null,
+      "known_transformations": [],
+      "local_origin": "described historically as a point near the front paws of the Sphinx",
+      "orientation": "described historically as related to magnetic north",
+      "projection": "unknown",
+      "system_name": "ARCE Sphinx Grid (SRI 1978 historical methodology)",
+      "transform_to_other_system": "not_performed",
+      "units": "unverified",
+      "vertical_system": "historical transfer procedure described; not recomputed"
+    },
+    "GPMP_CONTROL_GRID": {
+      "axis_order": "X=Easting, Y=Northing, Z=description Elevation",
+      "campaigns": [
+        "GPMP"
+      ],
+      "common_control_points": 0,
+      "confirmation_status": "DOCUMENTED_IN_DESCRIPTION_ONLY",
+      "coordinate_type": "geodetic control network local grid",
+      "datum": "unverified",
+      "documentation": "GPMP source description; existing Phase A layer",
+      "ellipsoid": "unknown",
+      "epoch": null,
+      "known_transformations": [],
+      "local_origin": "unknown",
+      "orientation": "unknown",
+      "projection": "unknown",
+      "system_name": "GPMP Control Monuments local Northing/Easting",
+      "transform_to_other_system": "not_performed",
+      "units": "source units (metres claimed, unverified)",
+      "vertical_system": "description Elevation; reference unknown"
+    },
+    "KML_GEOGRAPHIC_PAIR": {
+      "axis_order": "[longitude, latitude, Z]",
+      "campaigns": [
+        "GDFS-2012",
+        "GDFS-2015",
+        "GDFS-2016",
+        "GDFS-2018",
+        "GPMP",
+        "GIZA_CORNER",
+        "PETRIE"
+      ],
+      "common_control_points": 0,
+      "confirmation_status": "AXIS_ORDER_OBSERVED_DATUM_UNVERIFIED",
+      "coordinate_type": "geographic longitude/latitude",
+      "datum": "unverified",
+      "documentation": "KML coordinate tuple in every source KMZ",
+      "ellipsoid": "unknown",
+      "epoch": null,
+      "known_transformations": [],
+      "local_origin": "not applicable",
+      "orientation": "not applicable",
+      "projection": "not applicable",
+      "system_name": "KML coordinates[0][0:2] geographic pair",
+      "transform_to_other_system": "not_performed",
+      "units": "decimal degrees",
+      "vertical_system": "KML Z is NOT elevation (all observed Z = 0.0)"
+    },
+    "LOCAL_GRID_UNVERIFIED": {
+      "axis_order": "X=Easting, Y=Northing, Z=description Elevation",
+      "campaigns": [
+        "GDFS-2012",
+        "GDFS-2015",
+        "GDFS-2016",
+        "GDFS-2018",
+        "GIZA_CORNER"
+      ],
+      "common_control_points": 0,
+      "confirmation_status": "DOCUMENTED_IN_DESCRIPTION_ONLY",
+      "coordinate_type": "local projected-like planar grid",
+      "datum": "unverified",
+      "documentation": "campaign KML descriptions only; no CRS document in archive",
+      "ellipsoid": "unknown / not declared",
+      "epoch": null,
+      "known_transformations": [],
+      "local_origin": "unknown",
+      "orientation": "unknown",
+      "projection": "unknown / not declared",
+      "system_name": "Dash Foundation local Easting/Northing grid",
+      "transform_to_other_system": "not_performed",
+      "units": "source units (metres claimed by publication, unverified)",
+      "vertical_system": "description Elevation; reference unknown"
+    },
+    "PETRIE_LOCAL_GRID_UNRESOLVED": {
+      "axis_order": "N-S, E-W as printed in source; GPMP pair given separately",
+      "campaigns": [
+        "PETRIE"
+      ],
+      "common_control_points": 0,
+      "confirmation_status": "UNRESOLVED_HISTORICAL_GRID",
+      "coordinate_type": "historical local station grid",
+      "datum": "unverified",
+      "documentation": "Petrie Stations source description",
+      "ellipsoid": "unknown",
+      "epoch": null,
+      "known_transformations": [],
+      "local_origin": "unknown",
+      "orientation": "unknown",
+      "projection": "unknown",
+      "system_name": "Petrie N-S / E-W historical station grid",
+      "transform_to_other_system": "not_performed",
+      "units": "source units (unverified)",
+      "vertical_system": "UNKNOWN — no elevation in source"
+    }
+  },
+  "transformations": {
+    "performed": [],
+    "reason": "no verified common control points with documented coordinate compatibility; 2D/3D similarity, Helmert and affine fits are withheld to avoid fabricating a datum relationship",
+    "required_for_future_transform": [
+      "documented common control points in both systems",
+      "declared units and datum for each system",
+      "residual analysis on withheld control points",
+      "explicit vertical transformation if heights are involved"
+    ]
+  }
+}

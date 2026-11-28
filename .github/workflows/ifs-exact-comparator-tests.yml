@@ -1,0 +1,145 @@
+name: Affine IFS exact-comparator tests
+
+on:
+  push:
+    branches:
+      - research/full-relational-math-reconstruction-001
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "research/full-relational-math-reconstruction-001/phase-16/**"
+      - "research/full-relational-math-reconstruction-001/phase-17/**"
+      - "research/full-relational-math-reconstruction-001/phase-18/**"
+      - "research/full-relational-math-reconstruction-001/phase-19/**"
+      - "research/full-relational-math-reconstruction-001/phase-20/**"
+      - "research/full-relational-math-reconstruction-001/phase-21/**"
+      - "research/full-relational-math-reconstruction-001/phase-22/**"
+      - "research/full-relational-math-reconstruction-001/phase-23/**"
+      - "research/full-relational-math-reconstruction-001/phase-24/**"
+      - "research/full-relational-math-reconstruction-001/phase-25/**"
+      - "research/full-relational-math-reconstruction-001/phase-26/**"
+      - "research/full-relational-math-reconstruction-001/phase-27/**"
+      - "research/full-relational-math-reconstruction-001/phase-28/**"
+      - "research/full-relational-math-reconstruction-001/phase-29/**"
+      - "research/full-relational-math-reconstruction-001/phase-30/**"
+      - "research/full-relational-math-reconstruction-001/phase-31/**"
+      - "research/full-relational-math-reconstruction-001/phase-32/**"
+      - "research/full-relational-math-reconstruction-001/phase-33/**"
+      - "research/full-relational-math-reconstruction-001/giza-prime-multiscale/**"
+      - "research/full-relational-math-reconstruction-001/giza-prime-inventory/**"
+      - "research/full-relational-math-reconstruction-001/giza-system-cockpit/**"
+      - "research/full-relational-math-reconstruction-001/universe-os-epistemic-core/**"
+      - "research/full-relational-math-reconstruction-001/README.md"
+      - ".github/workflows/ifs-exact-comparator-tests.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  phase-tests:
+    name: Phase ${{ matrix.phase }} unit tests
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        phase: [16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33]
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run phase unit tests
+        working-directory: research/full-relational-math-reconstruction-001/phase-${{ matrix.phase }}
+        run: python -m unittest discover -v -p "test_*.py"
+
+  giza-multiscale-tests:
+    name: GIZA PRIME multiscale model tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run GIZA multiscale model unit tests
+        working-directory: research/full-relational-math-reconstruction-001/giza-prime-multiscale
+        run: python -m unittest discover -v -p "test_*.py"
+
+  giza-inventory-tests:
+    name: GIZA PRIME real landscape inventory tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Report source mount status
+        working-directory: research/full-relational-math-reconstruction-001/giza-prime-inventory
+        env:
+          GIZA_PRIME_REQUIRE_FULL_SOURCE: "0"
+        run: python -c "import phase_b_source_catalog as pbc; print('SOURCE DATA MOUNTED' if pbc.sources_mounted() else pbc.SOURCE_NOT_MOUNTED); print(pbc.source_status())"
+
+      # Portable contour always runs.  The full-source contour is skipped with
+      # an explicit status unless the two nominated source trees are mounted.
+      # Set GIZA_PRIME_REQUIRE_FULL_SOURCE=1 to make absence a hard error.
+      - name: Run portable inventory tests and optional full-source integration
+        working-directory: research/full-relational-math-reconstruction-001/giza-prime-inventory
+        env:
+          GIZA_PRIME_REQUIRE_FULL_SOURCE: "0"
+        run: python -m unittest discover -v -p "test_*.py"
+
+  system-cockpit-tests:
+    name: Integrated system cockpit contract tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run cockpit contract unit tests
+        working-directory: research/full-relational-math-reconstruction-001/giza-system-cockpit
+        run: python -m unittest discover -v -p "test_*.py"
+
+      - name: Verify generated cockpit payload is current
+        working-directory: research/full-relational-math-reconstruction-001/giza-system-cockpit
+        run: |
+          python -c "import cockpit_engine as ce; ce.write_cockpit_data('cockpit_data.js')"
+          git diff --exit-code -- cockpit_data.js
+
+  epistemic-core-tests:
+    name: UNIVERSE OS epistemic core tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run epistemic core acceptance and invariant tests
+        working-directory: research/full-relational-math-reconstruction-001/universe-os-epistemic-core
+        run: python -m unittest discover -v -p "test_*.py"
+
+      - name: Verify generated epistemic manifest is current
+        working-directory: research/full-relational-math-reconstruction-001/universe-os-epistemic-core
+        run: |
+          python -c "import epistemic_core as ec; ec.write_epistemic_manifest('epistemic_manifest.json')"
+          git diff --exit-code -- epistemic_manifest.json

@@ -1,0 +1,64 @@
+{
+  "campaign_extents": {
+    "REL-EXTENT-GDFS-2012": {
+      "easting_max": 500413.537,
+      "easting_min": 499321.76,
+      "northing_max": 100121.278,
+      "northing_min": 99106.136,
+      "sample_count": 1539
+    },
+    "REL-EXTENT-GDFS-2015": {
+      "easting_max": 500169.681,
+      "easting_min": 499871.512,
+      "northing_max": 100171.924,
+      "northing_min": 99871.081,
+      "sample_count": 1100
+    },
+    "REL-EXTENT-GDFS-2016": {
+      "easting_max": 500202.345,
+      "easting_min": 499836.759,
+      "northing_max": 100208.552,
+      "northing_min": 99830.999,
+      "sample_count": 4746
+    },
+    "REL-EXTENT-GDFS-2018": {
+      "easting_max": 500406.896,
+      "easting_min": 500275.547,
+      "northing_max": 99644.865,
+      "northing_min": 99532.934,
+      "sample_count": 4569
+    },
+    "REL-EXTENT-GIZA_CORNER": {
+      "easting_max": 500115.32,
+      "easting_min": 499373.47,
+      "northing_max": 100115.278,
+      "northing_min": 99206.931,
+      "sample_count": 15
+    },
+    "REL-EXTENT-GPMP": {
+      "easting_max": 500634.775,
+      "easting_min": 498718.109,
+      "northing_max": 100154.421,
+      "northing_min": 98399.708,
+      "sample_count": 41
+    },
+    "REL-EXTENT-PETRIE": {
+      "easting_max": 500288.822,
+      "easting_min": 499250.449,
+      "northing_max": 100362.353,
+      "northing_min": 99044.321,
+      "sample_count": 68
+    }
+  },
+  "campaigns": {
+    "GDFS-2012": 1539,
+    "GDFS-2015": 1100,
+    "GDFS-2016": 4746,
+    "GDFS-2018": 4569,
+    "GIZA_CORNER": 15,
+    "GPMP": 41,
+    "PETRIE": 68
+  },
+  "coverage_note": "extents describe where observations were taken, not the boundaries of monuments, sites or geological bodies",
+  "report_id": "PHASE_B_SPATIAL_COVERAGE"
+}

@@ -1,0 +1,43 @@
+{
+  "map_id": "GIZA_REAL_LANDSCAPE_INCOMPLETENESS_MAP",
+  "architecture_version": "real_landscape_inventory_revision_1",
+  "external_citations_attached": false,
+  "coverage_completeness": "incomplete_unknown",
+  "states": [
+    "surveyed",
+    "source_known",
+    "indirectly_detected",
+    "hidden_or_destroyed",
+    "unknown"
+  ],
+  "state_definitions": {
+    "surveyed": "Directly observed in a datum-controlled survey with recorded detection limits.",
+    "source_known": "Documented in a verified source but not independently re-surveyed.",
+    "indirectly_detected": "Inferred from indirect evidence; not directly observed.",
+    "hidden_or_destroyed": "Known or expected to be buried, destroyed or no longer visible.",
+    "unknown": "No verified information; unresolved and kept symbolic."
+  },
+  "coverage_by_slot": [
+    {"slot_id": "large_pyramid_complexes", "state": "unknown", "verified_object_count": 0, "required_next_step": "datum-controlled survey"},
+    {"slot_id": "small_satellite_unfinished_pyramids", "state": "unknown", "verified_object_count": 0, "required_next_step": "complete pyramid inventory"},
+    {"slot_id": "mastabas_necropolis_fields", "state": "unknown", "verified_object_count": 0, "required_next_step": "systematic cemetery survey"},
+    {"slot_id": "mortuary_valley_temples", "state": "unknown", "verified_object_count": 0, "required_next_step": "architectural survey"},
+    {"slot_id": "platforms_enclosures_walls", "state": "unknown", "verified_object_count": 0, "required_next_step": "connected-feature mapping"},
+    {"slot_id": "sphinx_and_temple_complex", "state": "unknown", "verified_object_count": 0, "required_next_step": "datum-controlled carved-massif survey"},
+    {"slot_id": "causeways_roads_ramps_passages", "state": "unknown", "verified_object_count": 0, "required_next_step": "linear connectivity survey"},
+    {"slot_id": "boat_pits_shafts_wells_chambers_galleries", "state": "unknown", "verified_object_count": 0, "required_next_step": "subsurface imaging"},
+    {"slot_id": "quarries_workshops_settlements_storage", "state": "unknown", "verified_object_count": 0, "required_next_step": "settlement and quarry survey"},
+    {"slot_id": "ancient_channels_hydrogeology", "state": "unknown", "verified_object_count": 0, "required_next_step": "hydrogeological survey"},
+    {"slot_id": "bedrock_massifs_fractures_faults", "state": "unknown", "verified_object_count": 0, "required_next_step": "geological mapping"},
+    {"slot_id": "natural_processes", "state": "unknown", "verified_object_count": 0, "required_next_step": "calibrated forcing monitoring"},
+    {"slot_id": "destroyed_buried_ambiguous", "state": "unknown", "verified_object_count": 0, "required_next_step": "survey with detection limits"},
+    {"slot_id": "interfaces_boundaries", "state": "unknown", "verified_object_count": 0, "required_next_step": "source-path-receiver measurement"}
+  ],
+  "rules": {
+    "absence_from_catalogue_is_not_absence_from_system": true,
+    "unknown_must_not_be_replaced_by_plausible_number": true,
+    "destroyed_or_buried_remains_in_scope": true,
+    "no_completeness_claim_without_verified_sources": true
+  },
+  "note": "Every slot is currently unknown. This is a map of what is missing, not a claim that anything is absent from the ancient landscape."
+}

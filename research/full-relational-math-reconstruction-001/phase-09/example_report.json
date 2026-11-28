@@ -1,0 +1,101 @@
+{
+  "schema": "universe.buckingham-pi.v1",
+  "rank": "<11_2|10_3>",
+  "nullity": "<1_2|1_3>",
+  "variable_count": "<100_2|11_3>",
+  "dimension_matrix": [
+    [
+      "-3",
+      "1",
+      "1",
+      "-1"
+    ],
+    [
+      "1",
+      "0",
+      "0",
+      "1"
+    ],
+    [
+      "0",
+      "-1",
+      "0",
+      "-1"
+    ],
+    [
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "0",
+      "0",
+      "0",
+      "0"
+    ]
+  ],
+  "pivot_variables": [
+    "density",
+    "velocity",
+    "length"
+  ],
+  "free_variables": [
+    "dynamic_viscosity"
+  ],
+  "canonical_basis": [
+    {
+      "basis_id": "<1_2|1_3>",
+      "expression": "density * velocity * length * dynamic_viscosity^-1",
+      "exponents": {
+        "density": "1",
+        "velocity": "1",
+        "length": "1",
+        "dynamic_viscosity": "-1"
+      },
+      "numeric_value_secondary": 1000000,
+      "status": "dimensionless_group_candidate",
+      "interpretation_guard": "dimensionless_does_not_mean_universal_or_causal"
+    }
+  ],
+  "alternative_basis_examples": [],
+  "basis_note": "A null-space basis is not unique. Every listed alternative is a complete basis spanning the same dimensionless exponent subspace.",
+  "input_provenance": [
+    {
+      "name": "density",
+      "unit": "kg/m^3",
+      "source": "synthetic example",
+      "status": "idealized"
+    },
+    {
+      "name": "velocity",
+      "unit": "m/s",
+      "source": "synthetic example",
+      "status": "idealized"
+    },
+    {
+      "name": "length",
+      "unit": "m",
+      "source": "synthetic example",
+      "status": "idealized"
+    },
+    {
+      "name": "dynamic_viscosity",
+      "unit": "Pa*s",
+      "source": "synthetic example",
+      "status": "idealized"
+    }
+  ]
+}

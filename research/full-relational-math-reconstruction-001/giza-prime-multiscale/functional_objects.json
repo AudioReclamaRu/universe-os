@@ -1,0 +1,155 @@
+{
+  "schema_version": "1.0",
+  "registry_id": "GIZA_FUNCTIONAL_OBJECT_REGISTRY_SYNTHETIC",
+  "external_citations_attached": false,
+  "default_source_id": "synthetic_reference_fixture",
+  "scope_statement": "OPEN functional-object ensemble. The model is deliberately NOT limited to three tall pyramids and one selected stump. Pyramids, queens' pyramids, temple/causeway chains, a parent massif, a temple complex and two active substrate domains are represented as functional objects; arbitrary further objects and combinations can be added through this registry. Every numeric value is synthetic and idealized; no historical function is asserted.",
+  "non_bridge_rule": "Representation of an object is not evidence of a physical bridge, a historical role or a communication path. Roles remain candidates; conservation and missing-data rules are unchanged.",
+  "object_classes": [
+    "pyramid", "pyramid_group", "temple_causeway_complex", "parent_massif",
+    "temple_complex", "active_bedrock", "plateau_substrate"
+  ],
+  "objects": [
+    {
+      "id": "khufu", "object_class": "pyramid", "layer": 3,
+      "mass_parameter": "khufu_mass_kg", "stiffness_parameter": "khufu_vertical_stiffness_N_per_m",
+      "evidence_class": "idealized_design",
+      "role_candidates": ["source", "resonator", "waveguide", "filter", "transducer", "receiver", "indicator", "passive_boundary"],
+      "description": "Synthetic reduced-order DOF for one monumental functional object. No internal cavity structure is implied."
+    },
+    {
+      "id": "khafre", "object_class": "pyramid", "layer": 3,
+      "mass_parameter": "khafre_mass_kg", "stiffness_parameter": "khafre_vertical_stiffness_N_per_m",
+      "evidence_class": "idealized_design",
+      "role_candidates": ["source", "resonator", "waveguide", "filter", "transducer", "receiver", "indicator", "passive_boundary"],
+      "description": "Synthetic reduced-order DOF for one monumental functional object."
+    },
+    {
+      "id": "menkaure", "object_class": "pyramid", "layer": 3,
+      "mass_parameter": "menkaure_mass_kg", "stiffness_parameter": "menkaure_vertical_stiffness_N_per_m",
+      "evidence_class": "idealized_design",
+      "role_candidates": ["source", "resonator", "waveguide", "filter", "transducer", "receiver", "indicator", "passive_boundary"],
+      "description": "Synthetic reduced-order DOF for one monumental functional object."
+    },
+    {
+      "id": "queens_pyramids", "object_class": "pyramid_group", "layer": 3,
+      "mass_parameter": "queens_pyramids_mass_kg", "stiffness_parameter": "queens_pyramids_vertical_stiffness_N_per_m",
+      "evidence_class": "idealized_design",
+      "role_candidates": ["receiver", "filter", "passive_boundary", "resonator"],
+      "description": "Synthetic lumped group of subsidiary monumental objects. Small objects are part of the ensemble, not noise to be discarded."
+    },
+    {
+      "id": "khafre_temple_causeway", "object_class": "temple_causeway_complex", "layer": 3,
+      "mass_parameter": "khafre_temple_causeway_mass_kg", "stiffness_parameter": "khafre_temple_causeway_vertical_stiffness_N_per_m",
+      "evidence_class": "idealized_design",
+      "role_candidates": ["waveguide", "filter", "receiver", "passive_boundary"],
+      "description": "Synthetic functional chain: mortuary temple, causeway and valley temple lumped as one interacting object; no original form claimed."
+    },
+    {
+      "id": "sphinx_parent_massif", "object_class": "parent_massif", "layer": 3,
+      "mass_parameter": "sphinx_parent_massif_mass_kg", "stiffness_parameter": "sphinx_parent_massif_vertical_stiffness_N_per_m",
+      "evidence_class": "idealized_design",
+      "role_candidates": ["source", "resonator", "waveguide", "filter", "receiver", "indicator", "passive_boundary"],
+      "description": "Synthetic parent-massif placeholder. Present head/body profile is NOT assumed original; no cavity, neck, chamber or missing component is invented."
+    },
+    {
+      "id": "sphinx_temple_complex", "object_class": "temple_complex", "layer": 3,
+      "mass_parameter": "sphinx_temple_complex_mass_kg", "stiffness_parameter": "sphinx_temple_complex_vertical_stiffness_N_per_m",
+      "evidence_class": "idealized_design",
+      "role_candidates": ["receiver", "filter", "waveguide", "passive_boundary"],
+      "description": "Synthetic adjacent functional complex. Added so the ensemble is not judged by one selected object."
+    },
+    {
+      "id": "bedrock", "object_class": "active_bedrock", "layer": 7,
+      "mass_parameter": "bedrock_fragment_mass_kg", "stiffness_parameter": "bedrock_vertical_stiffness_N_per_m",
+      "evidence_class": "idealized_design",
+      "role_candidates": ["source", "waveguide", "filter", "receiver", "passive_boundary"],
+      "description": "Active dynamic medium, never a rigid platform. Synthetic truncated domain; no real boundary impedance asserted."
+    },
+    {
+      "id": "plateau_substrate", "object_class": "plateau_substrate", "layer": 7,
+      "mass_parameter": "plateau_substrate_mass_kg", "stiffness_parameter": "plateau_substrate_vertical_stiffness_N_per_m",
+      "evidence_class": "idealized_design",
+      "role_candidates": ["source", "waveguide", "filter", "receiver", "passive_boundary"],
+      "description": "Second synthetic substrate domain so lateral site response is not collapsed into a single block."
+    }
+  ],
+  "contacts": [
+    {"id": "C_KHUFU_KHAFRE", "source": "khufu", "target": "khafre", "spring_parameter": "contact_khufu_khafre_N_per_m", "bridge_id": "B_IN_SEISMIC_SUBSTRATE_TO_MONUMENTS", "evidence_class": "assumption_for_sensitivity"},
+    {"id": "C_KHAFRE_MENKAURE", "source": "khafre", "target": "menkaure", "spring_parameter": "contact_khafre_menkaure_N_per_m", "bridge_id": "B_IN_SEISMIC_SUBSTRATE_TO_MONUMENTS", "evidence_class": "assumption_for_sensitivity"},
+    {"id": "C_KHUFU_QUEENS", "source": "khufu", "target": "queens_pyramids", "spring_parameter": "contact_khufu_queens_N_per_m", "bridge_id": "B_OUT_QUEENS_TO_ENSEMBLE_ELASTIC", "evidence_class": "assumption_for_sensitivity"},
+    {"id": "C_KHAFRE_TEMPLE_CAUSEWAY", "source": "khafre", "target": "khafre_temple_causeway", "spring_parameter": "contact_khafre_temple_causeway_N_per_m", "bridge_id": "B_OUT_TEMPLE_CAUSEWAY_TO_ENSEMBLE_ELASTIC", "evidence_class": "assumption_for_sensitivity"},
+    {"id": "C_SPHINX_PARENT_TEMPLE", "source": "sphinx_parent_massif", "target": "sphinx_temple_complex", "spring_parameter": "contact_sphinx_parent_temple_N_per_m", "bridge_id": "B_OUT_SPHINX_TEMPLE_TO_PARENT_ELASTIC", "evidence_class": "assumption_for_sensitivity"},
+    {"id": "C_SPHINX_BEDROCK", "source": "sphinx_parent_massif", "target": "bedrock", "spring_parameter": "contact_sphinx_bedrock_N_per_m", "bridge_id": "B_OUT_SPHINX_PARENT_TO_BEDROCK_ELASTIC", "evidence_class": "idealized_design"},
+    {"id": "C_KHUFU_BEDROCK", "source": "khufu", "target": "bedrock", "spring_parameter": "contact_khufu_bedrock_N_per_m", "bridge_id": "B_OUT_KHUFU_TO_BEDROCK_ELASTIC", "evidence_class": "assumption_for_sensitivity"},
+    {"id": "C_KHAFRE_BEDROCK", "source": "khafre", "target": "bedrock", "spring_parameter": "contact_khafre_bedrock_N_per_m", "bridge_id": "B_OUT_KHUFU_TO_BEDROCK_ELASTIC", "evidence_class": "assumption_for_sensitivity"},
+    {"id": "C_MENKAURE_BEDROCK", "source": "menkaure", "target": "bedrock", "spring_parameter": "contact_menkaure_bedrock_N_per_m", "bridge_id": "B_OUT_KHUFU_TO_BEDROCK_ELASTIC", "evidence_class": "assumption_for_sensitivity"},
+    {"id": "C_BEDROCK_PLATEAU", "source": "bedrock", "target": "plateau_substrate", "spring_parameter": "contact_bedrock_plateau_N_per_m", "bridge_id": "B_OUT_PLATEAU_SUBSTRATE_ELASTIC", "evidence_class": "assumption_for_sensitivity"},
+    {"id": "C_KHUFU_PLATEAU", "source": "khufu", "target": "plateau_substrate", "spring_parameter": "contact_khufu_plateau_N_per_m", "bridge_id": "B_IN_SEISMIC_SUBSTRATE_TO_MONUMENTS", "evidence_class": "assumption_for_sensitivity"},
+    {"id": "C_KHAFRE_PLATEAU", "source": "khafre", "target": "plateau_substrate", "spring_parameter": "contact_khafre_plateau_N_per_m", "bridge_id": "B_IN_SEISMIC_SUBSTRATE_TO_MONUMENTS", "evidence_class": "assumption_for_sensitivity"},
+    {"id": "C_MENKAURE_PLATEAU", "source": "menkaure", "target": "plateau_substrate", "spring_parameter": "contact_menkaure_plateau_N_per_m", "bridge_id": "B_IN_SEISMIC_SUBSTRATE_TO_MONUMENTS", "evidence_class": "assumption_for_sensitivity"}
+  ],
+  "hypothesis_couplings": [
+    {
+      "family": "elastic", "source": "khufu", "target": "sphinx_parent_massif",
+      "spring_parameter": "contact_khufu_sphinx_N_per_m", "coefficient_parameter": null,
+      "evaluable": true, "transfer_model": "grounded_two_node_spring",
+      "status": "hypothesis_unverified", "bridge_id": "B_OUT_KHUFU_TO_SPHINX_PARENT_ELASTIC",
+      "reason": "Synthetic elastic candidate; N/m spring with signed two-node element."
+    },
+    {
+      "family": "acoustic", "source": "khufu", "target": "sphinx_parent_massif",
+      "spring_parameter": null, "coefficient_parameter": "dashpot_acoustic_khufu_sphinx_N_s_per_m",
+      "evaluable": true, "transfer_model": "signed_two_node_viscous_dashpot_N_s_per_m",
+      "status": "hypothesis_unverified", "bridge_id": "B_OUT_ACOUSTIC_CAVITY_HYPOTHESIS",
+      "reason": "Synthetic viscous analogue only. No cavity geometry is invented and no acoustic resonance is computed."
+    },
+    {
+      "family": "gas_thermal", "source": "khafre", "target": "sphinx_parent_massif",
+      "spring_parameter": null, "coefficient_parameter": "dashpot_gas_thermal_khafre_sphinx_N_s_per_m",
+      "evaluable": true, "transfer_model": "signed_two_node_viscous_dashpot_N_s_per_m",
+      "status": "hypothesis_unverified", "bridge_id": "B_OUT_GAS_THERMAL_HYPOTHESIS",
+      "reason": "Synthetic viscous analogue only; no temperature field or passage geometry is attached."
+    },
+    {
+      "family": "hydrologic", "source": "menkaure", "target": "bedrock",
+      "spring_parameter": null, "coefficient_parameter": null,
+      "evaluable": false, "transfer_model": "incomputable_missing_pressure_coupling_law",
+      "status": "not_evaluable_missing_data", "bridge_id": "B_OUT_HYDRAULIC_PATH_HYPOTHESIS",
+      "reason": "No pressure-coupling constitutive equation, no measured hydraulic parameter and no N s/m coefficient; no operator term is added."
+    },
+    {
+      "family": "electromagnetic", "source": "khufu", "target": "khafre",
+      "spring_parameter": null, "coefficient_parameter": null,
+      "evaluable": false, "transfer_model": "incomputable_missing_em_constitutive_law",
+      "status": "not_evaluable_missing_data", "bridge_id": "B_OUT_EM_TRANSDUCER_HYPOTHESIS",
+      "reason": "An N/m quantity cannot be inserted into C (N s/m). No constitutive EM damping law, circuit or N s/m coefficient is attached; no operator term is added."
+    },
+    {
+      "family": "mixed", "source": "khufu", "target": "sphinx_parent_massif",
+      "spring_parameter": null, "coefficient_parameter": "dashpot_mixed_khufu_sphinx_N_s_per_m",
+      "evaluable": true, "transfer_model": "signed_two_node_viscous_dashpot_N_s_per_m",
+      "status": "hypothesis_unverified", "bridge_id": "B_OUT_ACOUSTIC_CAVITY_HYPOTHESIS",
+      "reason": "Synthetic combined-control dashpot in N s/m; not a historical mechanism."
+    }
+  ],
+  "radiating_ports": [
+    {
+      "object_id": "bedrock",
+      "medium_label": "synthetic_elastic_half_space",
+      "model": "low_ka_baffled_piston_monopole_approximation",
+      "formula": "R_rad = 0.5 * rho * c * A * (omega * sqrt(A/pi) / c)^2 [N s/m]",
+      "validity": "ka <= radiation_ka_validity_max; outside validity the exported power is not_evaluable_missing_data",
+      "note": "Radiated power is computed from the declared port DOF velocity. It is NOT a fixed fraction of structural damping and NOT a measured site impedance."
+    }
+  ],
+  "symbolic_objects": [
+    {"id": "material_domain", "layer": 1, "status": "represented_not_computed"},
+    {"id": "interfaces_domain", "layer": 2, "status": "represented_not_computed"},
+    {"id": "acoustic_domain", "layer": 4, "status": "represented_not_computed_no_cavity_geometry"},
+    {"id": "hydrology_domain", "layer": 5, "status": "represented_not_computed_water_table_unresolved"},
+    {"id": "em_domain", "layer": 6, "status": "represented_not_computed_conductivity_unresolved"},
+    {"id": "earth_domain", "layer": 8, "status": "context_only"},
+    {"id": "cosmic_domain", "layer": 9, "status": "context_only_no_outbound_bridge"}
+  ]
+}

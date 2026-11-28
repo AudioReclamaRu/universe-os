@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "scenario_id": "S2_IDEALIZED_REFERENCE_COMPLEX",
+  "label": "Synthetic idealized functional-object ensemble (software control)",
+  "description": "Declared synthetic coherent layout used only to exercise the reduced-order equations and software controls. It is not a claim that any historical design, completion state or function existed. Revision 2 removes the arbitrary radiation_export_fraction: export is computed from the radiation-impedance port.",
+  "synthetic": true,
+  "evidence_basis": ["idealized_design", "assumption_for_sensitivity", "unknown"],
+  "geometry_state": "idealized",
+  "active_layers": [1, 2, 3, 4, 7],
+  "enabled_modules": ["L1_HOMOGENIZED_MATERIAL", "L2_LUMPED_INTERFACES", "L3_REDUCED_ORDER_MECHANICS", "L4_IDEALIZED_ACOUSTIC_PLACEHOLDER", "L7_SUBSTRATE_ENVIRONMENT", "RADIATION_IMPEDANCE_EXPORT_PORT"],
+  "enabled_hypotheses": [],
+  "coupling_families": ["elastic"],
+  "driver_node": "khufu",
+  "receiver_node": "bedrock",
+  "parameter_overrides": {},
+  "coupling_scale": 1.0,
+  "falsifiers": [
+    "Measured transfer function inconsistent with the declared synthetic stiffness/damping set.",
+    "Positive contact off-diagonal in K or C, or an N/m quantity found inside C.",
+    "Energy residual outside the declared relative tolerance, or a frequency-independent export efficiency."
+  ],
+  "notes": "Synthetic reference fixture only; no external citation, datum, coordinate or historical claim. Layer 4 is represented, not computed: no cavity volume is specified.",
+  "natural_background_comparator_required": false,
+  "outbound_communication_claim": false
+}

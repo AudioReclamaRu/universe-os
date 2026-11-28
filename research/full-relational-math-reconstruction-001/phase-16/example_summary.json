@@ -1,0 +1,36 @@
+{
+  "schema": "universe.ifs-affine-conjugacy.v1",
+  "pair_count": "<1_2|1_3>",
+  "results": [
+    {
+      "name": "Sierpinski gasket: synthetic affine coordinate-frame transformation",
+      "status": "affine_conjugacy_verified",
+      "source_coordinate_system": "barycentric_triangle",
+      "target_coordinate_system": "affine_demo_coordinates",
+      "exact_field": "Q(√3)",
+      "affine_coordinate_change": {
+        "convention": "y = P*x + t",
+        "matrix_P": [
+          ["<10_2|2_3>", "<1_2|1_3>"],
+          ["<1_2|1_3>", "<10_2|2_3>"]
+        ],
+        "translation_t": ["<11_2|10_3>", "-<1_2|1_3>"],
+        "determinant_P": "<11_2|10_3>"
+      },
+      "map_permutation_target_index_for_each_source": [
+        "<0_2|0_3>", "<1_2|1_3>", "<10_2|2_3>"
+      ],
+      "search": {
+        "permutations_tested": "<1_2|1_3>",
+        "total_permutations": "<110_2|20_3>",
+        "search_complete": false,
+        "stopped_on_verified_match": true,
+        "linear_system_rank": "<110_2|20_3>"
+      },
+      "verification": "Every affine map was checked exactly under H∘F_i = G_pi(i)∘H; det(P) is exactly nonzero.",
+      "interpretation": "The finite IFS map families are the same generator up to the reported invertible affine coordinate change and map permutation. This is structural equivalence, not evidence of common physical origin."
+    }
+  ],
+  "scope": "Exact finite affine IFS conjugacy in dimensions 1–3 over a common squarefree real quadratic field; permutation search is bounded.",
+  "global_guard": "Verified affine conjugacy is mathematical structural equivalence; it does not prove shared physical origin or causal transmission."
+}

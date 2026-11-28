@@ -1,0 +1,43 @@
+{
+  "definition": "Q7 face poset; -/0/+ = fixed-low/free/fixed-high; nonempty geometric faces only",
+  "bits": 7,
+  "vertices": 128,
+  "edges": 448,
+  "faces_total": 2187,
+  "face_vector_dimension_0_to_7": [
+    128,
+    448,
+    672,
+    560,
+    280,
+    84,
+    14,
+    1
+  ],
+  "formal_empty_face_extra_element": true,
+  "abstract_face_lattice_elements_including_empty": 2188,
+  "face_cover_relations_total": 10206,
+  "face_cover_relations_by_lower_dimension": [
+    896,
+    2688,
+    3360,
+    2240,
+    840,
+    168,
+    14
+  ],
+  "same_dimension_face_adjacencies_total": 20412,
+  "same_dimension_face_adjacencies_by_dimension": [
+    0,
+    2688,
+    6720,
+    6720,
+    3360,
+    840,
+    84,
+    0
+  ],
+  "vertex_face_incidences": 16384,
+  "strict_nonempty_inclusion_pairs": 75938,
+  "all_assertions_passed": true
+}

@@ -1,0 +1,189 @@
+{
+  "schema": "universe.affine-ifs-adaptive-conjugacy.batch.v3",
+  "pair_count": "<1_2|1_3>",
+  "results": [
+    {
+      "name": "Adaptive routing: coincident fixed points require exact characteristic partition and affine-family fallback",
+      "selected_method": "phase21_joint_trace_profiles_plus_phase20_and_phase18_exact_solver",
+      "status": "affine_conjugacy_verified",
+      "decision": "Phase 17's fixed-point-frame assumptions did not hold. Phase 21 compared exact joint word-trace profiles; Phase 20 applied characteristic-polynomial compatibility; Phase 18 recovered and verified an invertible affine witness.",
+      "attempt_count": "<10_2|2_3>",
+      "attempts": [
+        {
+          "method": "phase17_exact_fixed_point_frames",
+          "status": "source_fixed_points_do_not_span_ambient_space",
+          "result": {
+            "status": "source_fixed_points_do_not_span_ambient_space",
+            "interpretation": "The source fixed-point cloud has affine rank below the ambient dimension. The frame method is inconclusive; no non-conjugacy is inferred."
+          }
+        },
+        {
+          "method": "phase21_joint_trace_profiles_plus_phase20_and_phase18_exact_solver",
+          "trigger": "source_fixed_points_do_not_span_ambient_space",
+          "status": "affine_conjugacy_verified",
+          "result": {
+            "status": "affine_conjugacy_verified",
+            "source_coordinate_system": "same_fixed_point_at_origin",
+            "target_coordinate_system": "affine_transformed_same_fixed_point_cloud",
+            "exact_field": "Q(√3)",
+            "filter": "exact_characteristic_polynomial_of_each_linear_part",
+            "candidate_edge_count": "<10_2|2_3>",
+            "unrestricted_permutation_count": "<10_2|2_3>",
+            "candidate_map_indices": [
+              [
+                "<0_2|0_3>"
+              ],
+              [
+                "<1_2|1_3>"
+              ]
+            ],
+            "affine_coordinate_change": {
+              "convention": "y = P*x + t",
+              "matrix_P": [
+                [
+                  "<10_2|2_3>",
+                  "<1_2|1_3>/<10_2|2_3>"
+                ],
+                [
+                  "<1_2|1_3>",
+                  "<1_2|1_3>"
+                ]
+              ],
+              "translation_t": [
+                "<11_2|10_3>",
+                "-<1_2|1_3>"
+              ],
+              "determinant_P": "<11_2|10_3>/<10_2|2_3>"
+            },
+            "map_permutation_target_index_for_each_source": [
+              "<0_2|0_3>",
+              "<1_2|1_3>"
+            ],
+            "linear_solution_family": {
+              "rank": "<100_2|11_3>",
+              "free_parameter_count": "<10_2|2_3>",
+              "parameter_assignment": [
+                "<1_2|1_3>",
+                "<1_2|1_3>"
+              ],
+              "determinant_polynomial_term_count": "<1_2|1_3>"
+            },
+            "search": {
+              "candidate_matchings_tested": "<1_2|1_3>",
+              "affine_families_solved": "<1_2|1_3>",
+              "search_complete": false,
+              "stopped_on_verified_match": true,
+              "candidate_matching_cap": "<11000011010100000_2|12002011201_3>"
+            },
+            "verification": "Every affine map equation and det(P) ≠ 0 were checked exactly.",
+            "interpretation": "The exact characteristic-polynomial filter removed impossible pairings; a remaining candidate produced a verified invertible affine conjugacy.",
+            "candidate_filter": {
+              "characteristic_polynomial_edges": "<10_2|2_3>",
+              "edges_after_refinement": "<10_2|2_3>",
+              "additional_filter": "exact_joint_pairwise_word-trace_profiles"
+            },
+            "joint_relational_trace_filter": {
+              "word_trace_invariants": [
+                "tr(A_i A_j)",
+                "tr(A_i^2 A_j)",
+                "tr(A_i A_j^2)",
+                "tr(A_i A_j A_i A_j)",
+                "tr(A_i^2 A_j^2)",
+                "tr([A_i,A_j]^2)"
+              ],
+              "candidate_edges_after_relational_filter": "<10_2|2_3>",
+              "source_profile_class_count": "<10_2|2_3>",
+              "target_profile_class_count": "<10_2|2_3>",
+              "profile_definition": "For each map A_i, the sorted multiset over all A_j of six exact trace words. It preserves map multiplicity and is invariant to map-label permutation.",
+              "logical_status": "Necessary condition for a common simultaneous affine conjugacy, not sufficient; complete affine equations and determinant remain decisive."
+            },
+            "schema": "universe.ifs-joint-trace-partitioned-conjugacy.v1"
+          }
+        }
+      ],
+      "method_order": [
+        "phase17_exact_fixed_point_frames",
+        "phase21_joint_trace_profiles_plus_phase20_and_phase18_exact_solver"
+      ],
+      "final_result": {
+        "status": "affine_conjugacy_verified",
+        "source_coordinate_system": "same_fixed_point_at_origin",
+        "target_coordinate_system": "affine_transformed_same_fixed_point_cloud",
+        "exact_field": "Q(√3)",
+        "filter": "exact_characteristic_polynomial_of_each_linear_part",
+        "candidate_edge_count": "<10_2|2_3>",
+        "unrestricted_permutation_count": "<10_2|2_3>",
+        "candidate_map_indices": [
+          [
+            "<0_2|0_3>"
+          ],
+          [
+            "<1_2|1_3>"
+          ]
+        ],
+        "affine_coordinate_change": {
+          "convention": "y = P*x + t",
+          "matrix_P": [
+            [
+              "<10_2|2_3>",
+              "<1_2|1_3>/<10_2|2_3>"
+            ],
+            [
+              "<1_2|1_3>",
+              "<1_2|1_3>"
+            ]
+          ],
+          "translation_t": [
+            "<11_2|10_3>",
+            "-<1_2|1_3>"
+          ],
+          "determinant_P": "<11_2|10_3>/<10_2|2_3>"
+        },
+        "map_permutation_target_index_for_each_source": [
+          "<0_2|0_3>",
+          "<1_2|1_3>"
+        ],
+        "linear_solution_family": {
+          "rank": "<100_2|11_3>",
+          "free_parameter_count": "<10_2|2_3>",
+          "parameter_assignment": [
+            "<1_2|1_3>",
+            "<1_2|1_3>"
+          ],
+          "determinant_polynomial_term_count": "<1_2|1_3>"
+        },
+        "search": {
+          "candidate_matchings_tested": "<1_2|1_3>",
+          "affine_families_solved": "<1_2|1_3>",
+          "search_complete": false,
+          "stopped_on_verified_match": true,
+          "candidate_matching_cap": "<11000011010100000_2|12002011201_3>"
+        },
+        "verification": "Every affine map equation and det(P) ≠ 0 were checked exactly.",
+        "interpretation": "The exact characteristic-polynomial filter removed impossible pairings; a remaining candidate produced a verified invertible affine conjugacy.",
+        "candidate_filter": {
+          "characteristic_polynomial_edges": "<10_2|2_3>",
+          "edges_after_refinement": "<10_2|2_3>",
+          "additional_filter": "exact_joint_pairwise_word-trace_profiles"
+        },
+        "joint_relational_trace_filter": {
+          "word_trace_invariants": [
+            "tr(A_i A_j)",
+            "tr(A_i^2 A_j)",
+            "tr(A_i A_j^2)",
+            "tr(A_i A_j A_i A_j)",
+            "tr(A_i^2 A_j^2)",
+            "tr([A_i,A_j]^2)"
+          ],
+          "candidate_edges_after_relational_filter": "<10_2|2_3>",
+          "source_profile_class_count": "<10_2|2_3>",
+          "target_profile_class_count": "<10_2|2_3>",
+          "profile_definition": "For each map A_i, the sorted multiset over all A_j of six exact trace words. It preserves map multiplicity and is invariant to map-label permutation.",
+          "logical_status": "Necessary condition for a common simultaneous affine conjugacy, not sufficient; complete affine equations and determinant remain decisive."
+        },
+        "schema": "universe.ifs-joint-trace-partitioned-conjugacy.v1"
+      }
+    }
+  ],
+  "method_policy": "Fixed-point frames first. If their explicit applicability assumptions fail, compare joint pairwise word-trace profiles, then apply exact characteristic-polynomial partitions and the underdetermined affine-family solver. Search caps remain unresolved."
+}

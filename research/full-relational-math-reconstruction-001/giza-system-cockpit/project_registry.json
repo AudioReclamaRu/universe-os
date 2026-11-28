@@ -1,0 +1,193 @@
+{
+  "registry_id": "UNIVERSE_OS_INTEGRATED_PROJECT_REGISTRY",
+  "architecture_version": "integrated_system_cockpit_stage_a_revision_1",
+  "human_owner": "chief_engineer_architect",
+  "coordination_layer": "MEGABRAIN",
+  "status_vocabulary": ["available", "partial", "conceptual", "not_implemented", "unavailable"],
+  "nodes": [
+    {
+      "node_id": "MEGABRAIN",
+      "name": "MEGABRAIN",
+      "domain": "orchestration",
+      "status": "conceptual",
+      "responsibility": "Project/agent/task/dependency registry, approval gates, audit trail; coordinates execution within user-defined permissions.",
+      "owner": "chief_engineer_architect",
+      "data_contract": "system_contract.json",
+      "integration_points": [
+        {"id": "project_registry", "status": "not_implemented", "direction": "read/write"},
+        {"id": "dependency_graph", "status": "not_implemented", "direction": "read/write"},
+        {"id": "approval_gates", "status": "not_implemented", "direction": "read/write"},
+        {"id": "audit_trail", "status": "not_implemented", "direction": "read"}
+      ],
+      "constraint": "Coordination layer only; never an autonomous owner of architectural goals."
+    },
+    {
+      "node_id": "UNIVERSE_OS",
+      "name": "UNIVERSE OS",
+      "domain": "mathematics",
+      "status": "partial",
+      "responsibility": "Typed ontology, quantities/units/frames/time/uncertainty, provenance graph, model contracts, inter-scale operators.",
+      "owner": "chief_engineer_architect",
+      "data_contract": "system_contract.json",
+      "integration_points": [
+        {"id": "system_event_contract", "status": "available", "direction": "read"},
+        {"id": "evidence_registry", "status": "partial", "direction": "read"},
+        {"id": "theory_of_everything_program", "status": "conceptual", "direction": "read"}
+      ],
+      "constraint": "Research programme and formal language, not a completed general physical theory."
+    },
+    {
+      "node_id": "UNIVERSE_2_0",
+      "name": "UNIVERSE 2.0",
+      "domain": "compute_legacy",
+      "status": "unavailable",
+      "responsibility": "Existing protected legacy computational system; accessible only through read-only snapshots or an isolated adapter.",
+      "owner": "legacy_guard",
+      "data_contract": "read_only_snapshot_contract_pending",
+      "integration_points": [
+        {"id": "legacy_readonly_snapshot", "status": "not_implemented", "direction": "read"},
+        {"id": "legacy_runtime_import", "status": "forbidden", "direction": "none"}
+      ],
+      "constraint": "Legacy runtime/GUI and protected files must not be modified, launched or imported."
+    },
+    {
+      "node_id": "UNIVERSE_3_0",
+      "name": "UNIVERSE 3.0",
+      "domain": "compute_future",
+      "status": "conceptual",
+      "responsibility": "Future computational direction; actual artefacts and API must be established from repository/archive before integration.",
+      "owner": "unassigned",
+      "data_contract": "future_adapter_contract_pending",
+      "integration_points": [
+        {"id": "future_adapter", "status": "not_implemented", "direction": "read"},
+        {"id": "capability_discovery", "status": "not_implemented", "direction": "read"}
+      ],
+      "constraint": "No invented API, interface or computational capability."
+    },
+    {
+      "node_id": "GIZA_PRIME",
+      "name": "GIZA PRIME",
+      "domain": "spatial_physical_research",
+      "status": "partial",
+      "responsibility": "Geodetic atlas, full object/natural-structure registry, typed relation graph, overlapping ensembles, physics projections.",
+      "owner": "giza_research",
+      "data_contract": "inventory_source_contract.json",
+      "integration_points": [
+        {"id": "landscape_graph", "status": "available", "direction": "read"},
+        {"id": "real_inventory_framework", "status": "available", "direction": "read/write"},
+        {"id": "verified_objects", "status": "empty", "direction": "read"},
+        {"id": "geodetic_sheets", "status": "not_implemented", "direction": "read"}
+      ],
+      "constraint": "Zero verified sources; no real geometry, no preselected core, no cosmic bridge."
+    },
+    {
+      "node_id": "ASTRAEA",
+      "name": "ASTRAEA",
+      "domain": "market_energy_observation",
+      "status": "partial",
+      "responsibility": "Market/energy sector observation, time-series alignment, spectral/coherence and lag tests against alternatives and null models.",
+      "owner": "astraea_trading_owner",
+      "data_contract": "external_astraea_contract_pending",
+      "integration_points": [
+        {"id": "instrument_registry", "status": "not_implemented", "direction": "read"},
+        {"id": "time_series_feed", "status": "not_implemented", "direction": "read"},
+        {"id": "cross_domain_test_results", "status": "not_implemented", "direction": "read"},
+        {"id": "live_trading_link", "status": "forbidden", "direction": "none"}
+      ],
+      "constraint": "Research signal only; correlation never becomes causality or an automatic trade."
+    },
+    {
+      "node_id": "EARTH_EAR",
+      "name": "УХО ПЛАНЕТЫ",
+      "domain": "information_observation",
+      "status": "conceptual",
+      "responsibility": "Permitted observation intake, quality/provenance control, time/spectral overviews, activity maps, signal events, intent vector 42.",
+      "owner": "chief_engineer_architect",
+      "data_contract": "system_contract.json",
+      "integration_points": [
+        {"id": "observation_intake", "status": "not_implemented", "direction": "read"},
+        {"id": "signal_quality_report", "status": "not_implemented", "direction": "read"},
+        {"id": "vector_42_specification", "status": "not_implemented", "direction": "read"}
+      ],
+      "constraint": "Information characteristics are not physical energy; vector 42 stays conceptual/project-defined."
+    }
+  ],
+  "business_sectors": [
+    {
+      "sector_id": "WEB_SITES",
+      "name": "Сайты и web-проекты",
+      "parent_node": "EARTH_EAR",
+      "status": "not_implemented",
+      "metrics_domain": "informational",
+      "allowed_signals": ["publications", "inbound_requests", "search_interests", "feedback"],
+      "permission": "public_only_no_personal_data"
+    },
+    {
+      "sector_id": "TG_CULTURE_OF_VOICE",
+      "name": "Telegram «Культура Голоса»",
+      "parent_node": "EARTH_EAR",
+      "status": "not_implemented",
+      "metrics_domain": "informational",
+      "allowed_signals": ["content", "interaction", "community_growth", "audience_questions"],
+      "permission": "public_channel_only"
+    },
+    {
+      "sector_id": "TG_PRIMARY_SOURCE",
+      "name": "Telegram «Первоисточник»",
+      "parent_node": "EARTH_EAR",
+      "status": "not_implemented",
+      "metrics_domain": "informational",
+      "allowed_signals": ["publications", "discussions", "interest_signals", "feedback"],
+      "permission": "public_channel_only"
+    },
+    {
+      "sector_id": "SOCIAL_NETWORKS",
+      "name": "Социальные сети",
+      "parent_node": "EARTH_EAR",
+      "status": "not_implemented",
+      "metrics_domain": "informational",
+      "allowed_signals": ["reach", "reactions", "public_responses"],
+      "permission": "public_only_official_apis"
+    },
+    {
+      "sector_id": "BUSINESS_ASSISTANT",
+      "name": "Бизнес-ассистент",
+      "parent_node": "EARTH_EAR",
+      "status": "not_implemented",
+      "metrics_domain": "informational",
+      "allowed_signals": ["requests", "meetings", "deals", "follow_ups"],
+      "permission": "approval_required_no_personal_data_in_repository"
+    }
+  ],
+  "intent_vector_42": {
+    "id": "VECTOR_42",
+    "type": "conceptual_project_defined",
+    "physical_dimension": null,
+    "units": "conceptual",
+    "state_space": "not_defined",
+    "normalization": "not_defined",
+    "sources": [],
+    "validation": "not_validated",
+    "permitted_transformations": [],
+    "display_label": "VECTOR 42 / INTENT / CONCEPTUAL",
+    "warning": "Not a measured physical quantity. Do not display in J, W or any other physical unit."
+  },
+  "energy_domain_separation": {
+    "physical_channels": [
+      {"id": "MECHANICAL", "unit_class": "physical", "unit": "W", "node": "GIZA_PRIME", "status": "synthetic_projection_only"},
+      {"id": "ACOUSTIC", "unit_class": "physical", "unit": "Pa", "node": "GIZA_PRIME", "status": "not_measured"},
+      {"id": "HYDRAULIC", "unit_class": "physical", "unit": "m3/s", "node": "GIZA_PRIME", "status": "not_inventoried"},
+      {"id": "THERMAL", "unit_class": "physical", "unit": "W/m2", "node": "GIZA_PRIME", "status": "not_measured"},
+      {"id": "GAS_DYNAMIC", "unit_class": "physical", "unit": "kg/s", "node": "GIZA_PRIME", "status": "not_measured"},
+      {"id": "ELECTROMAGNETIC", "unit_class": "physical", "unit": "V/m", "node": "GIZA_PRIME", "status": "not_measured"}
+    ],
+    "informational_channels": [
+      {"id": "DATA_FLOW", "unit_class": "informational", "unit": "bit/s", "node": "EARTH_EAR", "status": "not_implemented"},
+      {"id": "SIGNAL_EVENTS", "unit_class": "informational", "unit": "count", "node": "EARTH_EAR", "status": "not_implemented"},
+      {"id": "BUSINESS_SECTORS", "unit_class": "informational", "unit": "count", "node": "EARTH_EAR", "status": "not_implemented"},
+      {"id": "VECTOR_42", "unit_class": "conceptual", "unit": "conceptual", "node": "EARTH_EAR", "status": "not_defined"}
+    ],
+    "mixing_forbidden": true
+  },
+  "note": "Statuses are declarations of what exists. unavailable/not_implemented/conceptual are not simulated integrations."
+}

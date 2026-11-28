@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "register_id": "GIZA_SOURCE_REGISTER_SYNTHETIC",
+  "purpose": "Provenance register for the idealized GIZA PRIME multiscale reference model.",
+  "external_citations_attached": false,
+  "sources": [],
+  "statement": "No external citation is attached to this package. The identifier synthetic_reference_fixture is an internal placeholder for synthetic idealized values and is NOT a publication, survey, dataset or citation. No survey values, coordinates, elevations, published measurements, URLs, authors or page numbers are asserted here.",
+  "synthetic_fixture_id": "synthetic_reference_fixture",
+  "synthetic_fixture_definition": "Internal deterministic fixture: all numeric parameters in parameter_registry.json are round synthetic values chosen only to exercise the equations and software controls. They carry evidence class idealized_design or assumption_for_sensitivity (or unknown where the value is null). They are not measurements and not reconstructed historical facts.",
+  "missing_data_policy": "Where a value is unavailable it is stored as null with evidence class unknown, status not_evaluable_missing_data and a discriminating measurement is named. Missing values are never filled with unmarked averages.",
+  "evidence_classes_allowed": [
+    "measured_current",
+    "published_measurement",
+    "historical_record",
+    "geologically_inferred",
+    "reconstructed_uncertain",
+    "idealized_design",
+    "assumption_for_sensitivity",
+    "speculative_hypothesis",
+    "unknown"
+  ],
+  "restricted_evidence_classes_without_sources": [
+    "measured_current",
+    "published_measurement",
+    "historical_record",
+    "geologically_inferred",
+    "reconstructed_uncertain"
+  ],
+  "restricted_class_rule": "With external_citations_attached=false no artifact may use a provenance-bearing class. Synthetic sphinx values are idealized_design and synthetic contacts are idealized_design or assumption_for_sensitivity, never geologically_inferred or reconstructed_uncertain.",
+  "real_source_layer_contract": "real_source_ingestion_contract.json",
+  "provenance_layers_distinguished": [
+    "survey_grid_control_points_vs_map_derived_proxies",
+    "present_visible_surface_vs_latent_parent_mass_boundary",
+    "measured_roughness_concavity_vs_ideal_planar_simplification",
+    "current_damaged_structure_vs_reconstructed_intact_candidate"
+  ],
+  "frame_policy": "No real coordinate frame, vertical datum or epoch is claimed. All synthetic geometry lives in a declared synthetic local Cartesian frame with an ideal datum z=0; combining heterogeneous real frames is explicitly deferred until common control points are derived.",
+  "generated_by": "giza_multiscale_model.py (standard library only)"
+}

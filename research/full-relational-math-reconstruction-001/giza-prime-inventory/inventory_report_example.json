@@ -1,0 +1,447 @@
+{
+  "adaptive_modeling": {
+    "by_slot": [
+      {
+        "reason": "no_verified_source",
+        "slot_id": "large_pyramid_complexes",
+        "tier": "symbolic"
+      },
+      {
+        "reason": "no_verified_source",
+        "slot_id": "small_satellite_unfinished_pyramids",
+        "tier": "symbolic"
+      },
+      {
+        "reason": "no_verified_source",
+        "slot_id": "mastabas_necropolis_fields",
+        "tier": "symbolic"
+      },
+      {
+        "reason": "no_verified_source",
+        "slot_id": "mortuary_valley_temples",
+        "tier": "symbolic"
+      },
+      {
+        "reason": "no_verified_source",
+        "slot_id": "platforms_enclosures_walls",
+        "tier": "symbolic"
+      },
+      {
+        "reason": "no_verified_source",
+        "slot_id": "sphinx_and_temple_complex",
+        "tier": "symbolic"
+      },
+      {
+        "reason": "no_verified_source",
+        "slot_id": "causeways_roads_ramps_passages",
+        "tier": "symbolic"
+      },
+      {
+        "reason": "no_verified_source",
+        "slot_id": "boat_pits_shafts_wells_chambers_galleries",
+        "tier": "symbolic"
+      },
+      {
+        "reason": "no_verified_source",
+        "slot_id": "quarries_workshops_settlements_storage",
+        "tier": "symbolic"
+      },
+      {
+        "reason": "no_verified_source",
+        "slot_id": "ancient_channels_hydrogeology",
+        "tier": "symbolic"
+      },
+      {
+        "reason": "no_verified_source",
+        "slot_id": "bedrock_massifs_fractures_faults",
+        "tier": "symbolic"
+      },
+      {
+        "reason": "no_verified_source",
+        "slot_id": "natural_processes",
+        "tier": "symbolic"
+      },
+      {
+        "reason": "no_verified_source",
+        "slot_id": "destroyed_buried_ambiguous",
+        "tier": "symbolic"
+      },
+      {
+        "reason": "no_verified_source",
+        "slot_id": "interfaces_boundaries",
+        "tier": "symbolic"
+      }
+    ],
+    "counts": {
+      "interval": 0,
+      "numeric": 0,
+      "symbolic": 14
+    },
+    "fabricated_parameters": 0,
+    "real_interval_records": 0,
+    "real_numeric_records": 0,
+    "rule": "Numeric tier is unreachable without a complete verified record.",
+    "tiers": [
+      "numeric",
+      "interval",
+      "symbolic"
+    ]
+  },
+  "architecture_version": "real_landscape_inventory_revision_1",
+  "capability_demonstration": {
+    "caveat": "Demonstrates capability only; no relation here is Giza evidence.",
+    "discovery_basis": "declared_relation_topology_only",
+    "no_preselected_core": true,
+    "overlap_count": 6,
+    "overlapping_members": {
+      "bedrock_fracture_B": [
+        {
+          "ensemble_index": 0,
+          "feature": "geological"
+        },
+        {
+          "ensemble_index": 0,
+          "feature": "hydraulic"
+        },
+        {
+          "ensemble_index": 0,
+          "feature": "mechanical"
+        }
+      ],
+      "drainage_channel_A": [
+        {
+          "ensemble_index": 0,
+          "feature": "hydraulic"
+        },
+        {
+          "ensemble_index": 0,
+          "feature": "spatial"
+        }
+      ],
+      "major_pyramid_D": [
+        {
+          "ensemble_index": 0,
+          "feature": "geological"
+        },
+        {
+          "ensemble_index": 1,
+          "feature": "spatial"
+        }
+      ],
+      "quarry_G": [
+        {
+          "ensemble_index": 0,
+          "feature": "geological"
+        },
+        {
+          "ensemble_index": 1,
+          "feature": "mechanical"
+        }
+      ],
+      "small_pyramid_C": [
+        {
+          "ensemble_index": 1,
+          "feature": "mechanical"
+        },
+        {
+          "ensemble_index": 1,
+          "feature": "spatial"
+        }
+      ],
+      "well_F": [
+        {
+          "ensemble_index": 0,
+          "feature": "hydraulic"
+        },
+        {
+          "ensemble_index": 0,
+          "feature": "spatial"
+        }
+      ]
+    },
+    "per_feature": {
+      "geological": {
+        "candidates": [
+          [
+            "bedrock_fracture_B",
+            "major_pyramid_D",
+            "quarry_G"
+          ]
+        ],
+        "feature": "geological",
+        "no_preselected_core": true,
+        "physical_claim": false,
+        "ranking_by_size_fame_tradition": false,
+        "relations_by_epistemic_status": {
+          "established_documented": [],
+          "hypothesized_unverified": [],
+          "inferred_indirect": [
+            "r3",
+            "r4"
+          ]
+        },
+        "status": "structural_candidate_only"
+      },
+      "hydraulic": {
+        "candidates": [
+          [
+            "bedrock_fracture_B",
+            "drainage_channel_A",
+            "well_F"
+          ]
+        ],
+        "feature": "hydraulic",
+        "no_preselected_core": true,
+        "physical_claim": false,
+        "ranking_by_size_fame_tradition": false,
+        "relations_by_epistemic_status": {
+          "established_documented": [],
+          "hypothesized_unverified": [
+            "r1",
+            "r2"
+          ],
+          "inferred_indirect": []
+        },
+        "status": "structural_candidate_only"
+      },
+      "mechanical": {
+        "candidates": [
+          [
+            "bedrock_fracture_B",
+            "sphinx_E"
+          ],
+          [
+            "quarry_G",
+            "small_pyramid_C"
+          ]
+        ],
+        "feature": "mechanical",
+        "no_preselected_core": true,
+        "physical_claim": false,
+        "ranking_by_size_fame_tradition": false,
+        "relations_by_epistemic_status": {
+          "established_documented": [],
+          "hypothesized_unverified": [
+            "r6",
+            "r7"
+          ],
+          "inferred_indirect": []
+        },
+        "status": "structural_candidate_only"
+      },
+      "spatial": {
+        "candidates": [
+          [
+            "drainage_channel_A",
+            "well_F"
+          ],
+          [
+            "major_pyramid_D",
+            "small_pyramid_C"
+          ]
+        ],
+        "feature": "spatial",
+        "no_preselected_core": true,
+        "physical_claim": false,
+        "ranking_by_size_fame_tradition": false,
+        "relations_by_epistemic_status": {
+          "established_documented": [],
+          "hypothesized_unverified": [],
+          "inferred_indirect": [
+            "r5",
+            "r8"
+          ]
+        },
+        "status": "structural_candidate_only"
+      }
+    },
+    "physical_claim": false,
+    "synthetic": true
+  },
+  "external_citations_attached": false,
+  "five_results": {
+    "1_object_registry": {
+      "registry_id": "GIZA_REAL_LANDSCAPE_OBJECT_REGISTRY",
+      "required_fields": [
+        "object_id",
+        "category",
+        "coordinates",
+        "coordinate_system",
+        "geometry",
+        "elevations",
+        "material",
+        "preservation_state",
+        "temporal_intervals",
+        "source_ids"
+      ],
+      "slot_count": 14,
+      "verified_objects": 0
+    },
+    "2_natural_structures_registry": {
+      "natural_structure_slots": [
+        "ancient_channels_hydrogeology",
+        "bedrock_massifs_fractures_faults",
+        "natural_processes",
+        "interfaces_boundaries"
+      ],
+      "verified_natural_structures": 0
+    },
+    "3_relation_graph": {
+      "epistemic_statuses": [
+        "established_documented",
+        "inferred_indirect",
+        "hypothesized_unverified"
+      ],
+      "graph_id": "GIZA_REAL_LANDSCAPE_RELATION_GRAPH",
+      "relation_classes": [
+        "spatial",
+        "geological",
+        "mechanical",
+        "acoustic",
+        "hydraulic",
+        "thermal",
+        "gas_dynamic",
+        "electromagnetic",
+        "functional"
+      ],
+      "separation_rule": "Relations are reported separately by relation_class and by epistemic_status. An established_documented relation must never be merged with inferred_indirect or hypothesized_unverified.",
+      "verified_relations": 0
+    },
+    "4_automatic_ensemble_discovery": {
+      "ensembles_discovered": 0,
+      "no_preselected_core": true,
+      "per_feature": {
+        "acoustic": [],
+        "electromagnetic": [],
+        "functional": [],
+        "gas_dynamic": [],
+        "geological": [],
+        "hydraulic": [],
+        "mechanical": [],
+        "spatial": [],
+        "thermal": []
+      },
+      "status": "no_verified_data_no_discovery",
+      "verified_objects": 0,
+      "verified_relations": 0
+    },
+    "5_incompleteness_map": {
+      "absence_rule": true,
+      "coverage_completeness": "incomplete_unknown",
+      "rows": [
+        {
+          "required_next_step": "datum-controlled survey",
+          "slot_id": "large_pyramid_complexes",
+          "state": "unknown",
+          "verified_object_count": 0
+        },
+        {
+          "required_next_step": "complete pyramid inventory",
+          "slot_id": "small_satellite_unfinished_pyramids",
+          "state": "unknown",
+          "verified_object_count": 0
+        },
+        {
+          "required_next_step": "systematic cemetery survey",
+          "slot_id": "mastabas_necropolis_fields",
+          "state": "unknown",
+          "verified_object_count": 0
+        },
+        {
+          "required_next_step": "architectural survey",
+          "slot_id": "mortuary_valley_temples",
+          "state": "unknown",
+          "verified_object_count": 0
+        },
+        {
+          "required_next_step": "connected-feature mapping",
+          "slot_id": "platforms_enclosures_walls",
+          "state": "unknown",
+          "verified_object_count": 0
+        },
+        {
+          "required_next_step": "datum-controlled carved-massif survey",
+          "slot_id": "sphinx_and_temple_complex",
+          "state": "unknown",
+          "verified_object_count": 0
+        },
+        {
+          "required_next_step": "linear connectivity survey",
+          "slot_id": "causeways_roads_ramps_passages",
+          "state": "unknown",
+          "verified_object_count": 0
+        },
+        {
+          "required_next_step": "subsurface imaging",
+          "slot_id": "boat_pits_shafts_wells_chambers_galleries",
+          "state": "unknown",
+          "verified_object_count": 0
+        },
+        {
+          "required_next_step": "settlement and quarry survey",
+          "slot_id": "quarries_workshops_settlements_storage",
+          "state": "unknown",
+          "verified_object_count": 0
+        },
+        {
+          "required_next_step": "hydrogeological survey",
+          "slot_id": "ancient_channels_hydrogeology",
+          "state": "unknown",
+          "verified_object_count": 0
+        },
+        {
+          "required_next_step": "geological mapping",
+          "slot_id": "bedrock_massifs_fractures_faults",
+          "state": "unknown",
+          "verified_object_count": 0
+        },
+        {
+          "required_next_step": "calibrated forcing monitoring",
+          "slot_id": "natural_processes",
+          "state": "unknown",
+          "verified_object_count": 0
+        },
+        {
+          "required_next_step": "survey with detection limits",
+          "slot_id": "destroyed_buried_ambiguous",
+          "state": "unknown",
+          "verified_object_count": 0
+        },
+        {
+          "required_next_step": "source-path-receiver measurement",
+          "slot_id": "interfaces_boundaries",
+          "state": "unknown",
+          "verified_object_count": 0
+        }
+      ],
+      "slot_counts": {
+        "hidden_or_destroyed": 0,
+        "indirectly_detected": 0,
+        "source_known": 0,
+        "surveyed": 0,
+        "unknown": 14
+      },
+      "states": [
+        "surveyed",
+        "source_known",
+        "indirectly_detected",
+        "hidden_or_destroyed",
+        "unknown"
+      ]
+    }
+  },
+  "giza_cosmos_claim": false,
+  "no_fabricated_parameters": true,
+  "no_preselected_core": true,
+  "report_id": "GIZA_REAL_LANDSCAPE_INVENTORY_FRAMEWORK_REPORT",
+  "schema_version": "1.0",
+  "scientific_status": "ingestion_framework_not_a_reconstruction",
+  "stage": "REAL_LANDSCAPE_INVENTORY_AND_RELATION_DISCOVERY",
+  "validation": {
+    "incompleteness_map": true,
+    "inventory_honesty": true,
+    "object_registry": true,
+    "relation_graph": true,
+    "source_contract": true
+  }
+}

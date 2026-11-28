@@ -1,0 +1,71 @@
+{
+  "schema": "universe.structural-pattern-comparison-summary.v1",
+  "synthetic_only": true,
+  "graph_results": [
+    {
+      "label": "synthetic_Q3_candidate",
+      "reference_match": "Q3",
+      "spectral_fingerprint_equal": true,
+      "exact_isomorphic": true,
+      "vertex_count": "<1000_2|22_3>",
+      "edge_count": "<1100_2|110_3>"
+    },
+    {
+      "label": "relabelled_cycle5_candidate",
+      "reference_match": "C5",
+      "spectral_fingerprint_equal": true,
+      "exact_isomorphic": true,
+      "vertex_count": "<101_2|12_3>",
+      "edge_count": "<101_2|12_3>"
+    }
+  ],
+  "recurrence_results": [
+    {
+      "name": "fibonacci_terms",
+      "order": "<10_2|2_3>",
+      "operator_matches": [
+        "fibonacci_operator",
+        "lucas_operator"
+      ],
+      "exact_initial_state_matches": [
+        "fibonacci_operator"
+      ]
+    },
+    {
+      "name": "scaled_fibonacci_terms",
+      "order": "<10_2|2_3>",
+      "operator_matches": [
+        "fibonacci_operator",
+        "lucas_operator"
+      ],
+      "projective_initial_state_matches": [
+        {
+          "reference": "fibonacci_operator",
+          "initial_state_scale_factor": "<11_2|10_3>"
+        }
+      ]
+    },
+    {
+      "name": "lucas_terms",
+      "order": "<10_2|2_3>",
+      "operator_matches": [
+        "fibonacci_operator",
+        "lucas_operator"
+      ],
+      "exact_initial_state_matches": [
+        "lucas_operator"
+      ]
+    },
+    {
+      "name": "tribonacci_terms",
+      "order": "<11_2|10_3>",
+      "operator_matches": [
+        "tribonacci_operator"
+      ],
+      "exact_initial_state_matches": [
+        "tribonacci_operator"
+      ]
+    }
+  ],
+  "guard": "These are finite synthetic structures and sequences. Structural resemblance does not establish common physical origin, causal coupling or a universal law."
+}

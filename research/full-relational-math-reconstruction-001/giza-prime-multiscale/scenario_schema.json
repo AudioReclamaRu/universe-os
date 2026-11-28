@@ -1,0 +1,114 @@
+{
+  "schema_version": "1.0",
+  "schema_id": "GIZA_SCENARIO_SCHEMA",
+  "description": "Machine-readable contract for GIZA PRIME scenario JSON files. Validation is implemented without third-party dependencies in giza_multiscale_model.py (validate_scenario). Revision 2 removes the arbitrary radiation_export_fraction and enforces physical units.",
+  "evidence_classes": [
+    "measured_current",
+    "published_measurement",
+    "historical_record",
+    "geologically_inferred",
+    "reconstructed_uncertain",
+    "idealized_design",
+    "assumption_for_sensitivity",
+    "speculative_hypothesis",
+    "unknown"
+  ],
+  "provenance_restricted_classes_without_sources": [
+    "measured_current",
+    "published_measurement",
+    "historical_record",
+    "geologically_inferred",
+    "reconstructed_uncertain"
+  ],
+  "bridge_statuses": [
+    "measured",
+    "literature_supported",
+    "model_supported",
+    "idealized_model_only",
+    "conservation_bounded_not_attributed",
+    "bounded_negligible",
+    "analogy_only",
+    "hypothesis_unverified",
+    "not_evaluable_missing_data"
+  ],
+  "bounded_negligible_rule": "bounded_negligible is forbidden while external_citations_attached is false; a measured co-located background is required. Use conservation_bounded_not_attributed instead.",
+  "layer_taxonomy": {
+    "1": "material_and_microscopic_response",
+    "2": "blocks_masonry_interfaces_cavities",
+    "3": "monument_and_ensemble_mechanics",
+    "4": "acoustics_infrasound_gas_thermal",
+    "5": "hydrology_and_hydraulic_coupling",
+    "6": "electromagnetic_and_electrical_response",
+    "7": "site_environment_and_geosphere",
+    "8": "earth_scale_response",
+    "9": "planetary_solar_cosmic_context"
+  },
+  "role_hypotheses": [
+    "source",
+    "resonator",
+    "waveguide",
+    "filter",
+    "transducer",
+    "receiver",
+    "indicator",
+    "passive_boundary"
+  ],
+  "coupling_families": [
+    "none",
+    "elastic",
+    "acoustic",
+    "gas_thermal",
+    "hydrologic",
+    "electromagnetic",
+    "mixed"
+  ],
+  "functional_objects": [
+    "khufu", "khafre", "menkaure", "queens_pyramids",
+    "khafre_temple_causeway", "sphinx_parent_massif", "sphinx_temple_complex",
+    "bedrock", "plateau_substrate"
+  ],
+  "functional_object_registry_file": "functional_objects.json",
+  "open_ensemble_note": "The object set is an OPEN registry. Arbitrary further functional objects and combinations may be added; the ensemble is not limited to three pyramids and one stump.",
+  "scenario_id_pattern": "^S[0-5](?:_[A-Z0-9_]+)?$",
+  "required_fields": [
+    "schema_version", "scenario_id", "label", "description", "synthetic",
+    "evidence_basis", "geometry_state", "active_layers", "enabled_modules",
+    "enabled_hypotheses", "coupling_families", "driver_node", "receiver_node",
+    "parameter_overrides", "coupling_scale", "falsifiers", "notes",
+    "natural_background_comparator_required", "outbound_communication_claim"
+  ],
+  "properties": {
+    "schema_version": {"type": "string", "const": "1.0"},
+    "scenario_id": {"type": "string", "pattern": "^S[0-5](?:_[A-Z0-9_]+)?$"},
+    "label": {"type": "string", "minLength": 1},
+    "description": {"type": "string", "minLength": 1},
+    "synthetic": {"type": "boolean", "const": true, "note": "All bundled scenarios are synthetic reference fixtures; no historical claim."},
+    "evidence_basis": {"type": "array", "items": {"enum": "evidence_classes"}, "minItems": 1},
+    "geometry_state": {"type": "string", "enum": ["observed", "reconstructed", "idealized", "passive_null", "hypothesis"]},
+    "active_layers": {"type": "array", "items": {"type": "integer", "minimum": 1, "maximum": 9}, "minItems": 1},
+    "enabled_modules": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "enabled_hypotheses": {"type": "array", "items": {"type": "string"}, "uniqueItems": true, "maxItems": 1, "note": "One hypothesis at a time; S4 requires exactly one."},
+    "coupling_families": {"type": "array", "items": {"enum": "coupling_families"}, "minItems": 1},
+    "driver_node": {"type": "string", "enum": "functional_objects"},
+    "receiver_node": {"type": "string", "enum": "functional_objects"},
+    "parameter_overrides": {"type": "object", "additionalProperties": {"type": "number"}, "note": "Keys must be declared numeric parameters; radiation_export_fraction is NOT a valid key (removed in revision 2)."},
+    "coupling_scale": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+    "falsifiers": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "notes": {"type": "string"},
+    "natural_background_comparator_required": {"type": "boolean"},
+    "outbound_communication_claim": {"type": "boolean", "const": false}
+  },
+  "conditional_rules": [
+    {"if": {"scenario_id_prefix": "S4"}, "then": {"enabled_hypotheses_min_items": 1, "coupling_families_excludes": ["none"]}},
+    {"if": {"scenario_id_prefix": "S3"}, "then": {"coupling_scale": 0.0, "coupling_families": ["none"]}},
+    {"if": {"scenario_id_prefix": "S5"}, "then": {"natural_background_comparator_required": true}}
+  ],
+  "example_file": "example_scenario_synthetic.json",
+  "honesty_rules": [
+    "A synthetic scenario is a declared design/reference or software control, never a historical reconstruction claim.",
+    "No scenario enables an outbound Giza-to-cosmos communication claim; conservation bounds and non-bridges are used instead.",
+    "S4 variants must be evaluated one hypothesis at a time against S3_PASSIVE_NULL.",
+    "Contact springs are signed k[[1,-1],[-1,1]]; N/m may never be injected into C (N s/m).",
+    "Radiated power comes from a radiation-impedance port, never from a fixed fraction of structural damping."
+  ]
+}
